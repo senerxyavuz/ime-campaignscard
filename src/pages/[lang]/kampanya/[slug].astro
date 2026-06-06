@@ -149,8 +149,8 @@ const faqRight = content.faq.slice(half);
         </div>
       </section>
 
-      <!-- KRİTİK KURALLAR -->
-      <section class="info-card">
+      <!-- KRİTİK KURALLAR (tam genişlik) -->
+      <section class="info-card full">
         <div class="ic-head amber-head">{t("detail.rules")}</div>
         <div class="ic-body">
           <ul class="rule-list">
@@ -163,39 +163,6 @@ const faqRight = content.faq.slice(half);
               ))
             }
           </ul>
-        </div>
-      </section>
-
-      <!-- WHATSAPP (tam genişlik — aksiyon aracı, içerik kartlarından ayrı) -->
-      <section class="info-card full">
-        <div class="ic-head wa-head">
-          <span>💬 {t("detail.whatsapp")}</span>
-          <button
-            class="copy-btn"
-            data-copy
-            data-label-copy={t("detail.copy")}
-            data-label-copied={t("detail.copied")}
-          >
-            {t("detail.copy")}
-          </button>
-        </div>
-        <div class="ic-body">
-          <p class="wa-hint">{t("detail.whatsapp.hint")}</p>
-          <blockquote class="wa-text" data-wa-text>{content.whatsapp}</blockquote>
-          {
-            content.whatsappNotes && (
-              <ul class="wa-notes">
-                {content.whatsappNotes.map((note) => (
-                  <li>
-                    <span class:list={["wa-icon", `wa-${note.type}`]} aria-hidden="true">
-                      {note.type === "yes" ? "✓" : note.type === "no" ? "✗" : "⚠"}
-                    </span>
-                    <span set:html={note.text} />
-                  </li>
-                ))}
-              </ul>
-            )
-          }
         </div>
       </section>
 
@@ -283,28 +250,6 @@ const faqRight = content.faq.slice(half);
   document.querySelectorAll("[data-faq-toggle]").forEach((btn) => {
     btn.addEventListener("click", () => {
       btn.closest(".faq-item")?.classList.toggle("open");
-    });
-  });
-
-  // WhatsApp şablonunu kopyala
-  document.querySelectorAll("[data-copy]").forEach((btn) => {
-    btn.addEventListener("click", async () => {
-      const b = btn as HTMLButtonElement;
-      const text =
-        b.closest(".info-card")?.querySelector("[data-wa-text]")?.textContent ?? "";
-      try {
-        await navigator.clipboard.writeText(text.trim());
-        const copied = b.dataset.labelCopied ?? "✓";
-        const original = b.dataset.labelCopy ?? "Copy";
-        b.textContent = copied;
-        b.classList.add("copied");
-        setTimeout(() => {
-          b.textContent = original;
-          b.classList.remove("copied");
-        }, 1800);
-      } catch {
-        /* clipboard erişimi yoksa sessiz geç */
-      }
     });
   });
 </script>

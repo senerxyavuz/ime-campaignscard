@@ -1,5 +1,5 @@
-# ── Astro static build ──
-FROM node:20-alpine AS build
+# ── Astro static build (Astro 6 Node >=22.12 ister) ──
+FROM node:22-alpine AS build
 WORKDIR /app
 COPY package.json package-lock.json ./
 RUN npm ci

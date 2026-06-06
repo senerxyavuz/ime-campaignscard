@@ -7,16 +7,18 @@ import tailwindcss from "@tailwindcss/vite";
 export default defineConfig({
   // Yayın: imeclinic.com/campaignscard
   site: "https://imeclinic.com",
-  base: "/campaignscard",
+  base: "/campaignscard/",
 
   i18n: {
     // Desteklenen diller: İngilizce (varsayılan açılış), Türkçe, Rusça, İspanyolca, İtalyanca
     locales: ["tr", "en", "ru", "es", "it"],
     defaultLocale: "en",
     routing: {
-      // Tüm diller URL'de prefix'li olsun (/tr/, /en/ ...) — tutarlı dil değişimi
+      // Tüm diller URL'de prefix'li olsun (/en/, /tr/ ...) — tutarlı dil değişimi
       prefixDefaultLocale: true,
-      redirectToDefaultLocale: true,
+      // Kök yönlendirmeyi Astro'nun yavaş (2sn) otomatik sayfası yerine
+      // kendi index.astro'muz (anında JS redirect) ile yapıyoruz.
+      redirectToDefaultLocale: false,
     },
   },
 

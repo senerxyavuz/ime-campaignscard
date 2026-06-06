@@ -1,21 +1,23 @@
 ---
-/* Kök / — varsayılan dile (TR) yönlendir.
-   Astro i18n (redirectToDefaultLocale) kök redirect üretmek için bu dosyanın
-   varlığını zorunlu kılar; içerik aşağıdaki meta-refresh ile de güvenceye alınır. */
+/* Kök / — varsayılan dile (EN) anında yönlendir.
+   Astro i18n redirectToDefaultLocale kapalı; bu sayfa anında JS + meta(0) ile
+   yönlendirir, kullanıcı "Redirecting..." metni görmez/beklemez. */
 import { defaultLang } from "@/i18n/ui";
-const base = import.meta.env.BASE_URL;
-const target = `${base}${defaultLang}/`;
+// BASE_URL'in trailing slash'ı garantili değil; normalize et
+const base = import.meta.env.BASE_URL.replace(/\/+$/, "");
+const target = `${base}/${defaultLang}/`;
 ---
 
 <!doctype html>
 <html lang={defaultLang}>
   <head>
     <meta charset="utf-8" />
-    <meta http-equiv="refresh" content={`0; url=${target}`} />
+    <meta http-equiv="refresh" content={`0;url=${target}`} />
     <link rel="canonical" href={target} />
-    <title>IME Clinic — Satış Portalı</title>
+    <title>IME Clinic · Sales Portal</title>
+    <script is:inline define:vars={{ target }}>
+      window.location.replace(target);
+    </script>
   </head>
-  <body>
-    <a href={target}>IME Clinic Satış Portalı</a>
-  </body>
+  <body></body>
 </html>

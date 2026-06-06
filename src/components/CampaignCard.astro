@@ -19,7 +19,7 @@ const { content, isFallback } = getCampaignContent(campaign, lang);
 // İçerik hiç yoksa (TR bile yoksa) kartı render etme
 if (!content) return Astro.redirect("/");
 
-const href = `${base}${lang}/kampanya/${campaign.slug}`;
+const href = `${base}${lang}/kampanya/${campaign.slug}/`;
 ---
 
 <article class="campaign-card" data-theme={campaign.theme}>

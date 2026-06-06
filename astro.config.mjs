@@ -25,6 +25,10 @@ export default defineConfig({
   // Statik site üretimi — her yere (alt dizin, subdomain, Vercel/Netlify) taşınır
   output: "static",
 
+  // Tüm URL'ler trailing slash'lı olsun — Traefik path-strip + nginx dizin
+  // 301 redirect'inin base prefix'i kaybetmesini (redirect loop) önler.
+  trailingSlash: "always",
+
   // Geliştirme araç çubuğunu (alt köşedeki Astro toolbar) gizle
   devToolbar: { enabled: false },
 

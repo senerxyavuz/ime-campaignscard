@@ -7,8 +7,10 @@ COPY . .
 RUN npm run build
 
 # ── nginx serve ──
-# Astro base path "/campaignscard" ile derlendiği için dosyalar
-# nginx kök altında /campaignscard/ klasörüne kopyalanır → URL ile birebir eşleşir.
+# Coolify/Traefik "/campaignscard" path prefix'ini strip eder → container kök (/) alır.
+# Bu yüzden dist doğrudan nginx kök dizinine kopyalanır (alt klasör YOK).
+# Astro base path "/campaignscard" ise sadece tarayıcı tarafı URL/linklerde kalır.
 FROM nginx:alpine
-COPY --from=build /app/dist /usr/share/nginx/html/campaignscard
+RUN rm -rf /usr/share/nginx/html/*
+COPY --from=build /app/dist /usr/share/nginx/html
 EXPOSE 80

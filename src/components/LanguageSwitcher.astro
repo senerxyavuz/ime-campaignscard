@@ -1,0 +1,159 @@
+---
+/* Dil seçici — native <details> dropdown (JS'siz, erişilebilir).
+   Gerçek SVG bayrak görselleri kullanılır → tüm tarayıcı/OS'ta görünür. */
+import { langOrder, languages, type Lang } from "@/i18n/ui";
+import { localizePath } from "@/i18n/utils";
+
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+const currentPath = Astro.url.pathname;
+const base = import.meta.env.BASE_URL;
+---
+
+<details class="lang-dd">
+  <summary aria-label="Dil seçimi">
+    <img
+      class="flag"
+      src={`${base}flags/${lang}.svg`}
+      alt=""
+      width="20"
+      height="14"
+    />
+    <span class="current-code">{lang.toUpperCase()}</span>
+    <span class="caret" aria-hidden="true">▾</span>
+  </summary>
+  <ul class="lang-menu">
+    {
+      langOrder.map((code) => (
+        <li>
+          <a
+            href={localizePath(currentPath, code)}
+            class:list={["lang-item", { active: code === lang }]}
+            aria-current={code === lang ? "true" : undefined}
+            hreflang={code}
+            lang={code}
+          >
+            <img
+              class="flag"
+              src={`${base}flags/${code}.svg`}
+              alt=""
+              width="20"
+              height="14"
+            />
+            <span class="item-name">{languages[code]}</span>
+            {code === lang && (
+              <span class="check" aria-hidden="true">
+                ✓
+              </span>
+            )}
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+</details>
+
+<style>
+  .lang-dd {
+    position: relative;
+  }
+  summary {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    padding: 0.4rem 0.7rem;
+    border-radius: 0.6rem;
+    font-size: 0.82rem;
+    font-weight: 700;
+    color: var(--color-brand-navy);
+    background: rgba(45, 75, 107, 0.06);
+    border: 1px solid rgba(45, 75, 107, 0.1);
+    cursor: pointer;
+    list-style: none;
+    user-select: none;
+    transition: background 0.15s;
+  }
+  summary::-webkit-details-marker {
+    display: none;
+  }
+  summary:hover {
+    background: rgba(45, 75, 107, 0.11);
+  }
+  .flag {
+    width: 20px;
+    height: 14px;
+    border-radius: 2px;
+    object-fit: cover;
+    box-shadow: 0 0 0 1px rgba(45, 75, 107, 0.12);
+    flex-shrink: 0;
+    display: block;
+  }
+  .caret {
+    font-size: 0.65rem;
+    opacity: 0.6;
+    transition: transform 0.18s;
+  }
+  .lang-dd[open] .caret {
+    transform: rotate(180deg);
+  }
+
+  .lang-menu {
+    position: absolute;
+    top: calc(100% + 0.4rem);
+    right: 0;
+    min-width: 11.5rem;
+    list-style: none;
+    background: #fff;
+    border: 1px solid rgba(45, 75, 107, 0.12);
+    border-radius: 0.75rem;
+    box-shadow: 0 12px 32px -8px rgb(45 75 107 / 0.25);
+    padding: 0.35rem;
+    z-index: 60;
+    animation: dd-in 0.14s ease;
+  }
+  @keyframes dd-in {
+    from {
+      opacity: 0;
+      transform: translateY(-4px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  .lang-item {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.5rem 0.6rem;
+    border-radius: 0.5rem;
+    text-decoration: none;
+    color: var(--color-brand-ink);
+    font-size: 0.85rem;
+    transition: background 0.12s;
+  }
+  .lang-item:hover {
+    background: rgba(45, 75, 107, 0.06);
+  }
+  .lang-item.active {
+    background: var(--color-brand-navy);
+    color: #fff;
+  }
+  .item-name {
+    flex: 1;
+  }
+  .check {
+    font-size: 0.75rem;
+  }
+</style>
+
+<script>
+  // Dışarı tıklayınca açık dropdown'ı kapat
+  document.addEventListener("click", (e) => {
+    document.querySelectorAll<HTMLDetailsElement>(".lang-dd[open]").forEach((dd) => {
+      if (!dd.contains(e.target as Node)) dd.removeAttribute("open");
+    });
+  });
+</script>

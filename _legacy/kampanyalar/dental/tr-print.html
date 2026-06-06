@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<title>IME Clinic Satış Kartı</title>
+<style>
+  @page { size: A4; margin: 9mm; }
+  * { box-sizing: border-box; margin: 0; padding: 0; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  body { font-family: "Segoe UI", Calibri, Arial, sans-serif; font-size: 8.4pt; line-height: 1.34; color: #1f2937; }
+
+  .head {
+    background: linear-gradient(135deg,#0f766e,#115e59); color:#fff;
+    padding: 11px 16px; border-radius: 7px; display:flex; justify-content:space-between; align-items:center;
+  }
+  .head .t1 { font-size: 8pt; letter-spacing:1.5px; text-transform:uppercase; opacity:.8; }
+  .head .t2 { font-size: 16pt; font-weight:700; }
+  .head .t3 { font-size: 9pt; opacity:.9; }
+  .head .badge { background:rgba(255,255,255,.16); border:1px solid rgba(255,255,255,.35);
+    padding:8px 12px; border-radius:6px; text-align:right; font-size:8.2pt; }
+  .head .badge b { font-size:9pt; }
+
+  .dates { display:flex; gap:6px; margin:7px 0; }
+  .dates div { flex:1; background:#f0fdfa; border:1px solid #99f6e4; border-radius:5px;
+    padding:5px 8px; text-align:center; }
+  .dates .lbl { font-size:7pt; text-transform:uppercase; letter-spacing:.5px; color:#0f766e; }
+  .dates .val { font-size:9.5pt; font-weight:700; color:#115e59; }
+
+  .cols { display:flex; gap:8px; }
+  .col { flex:1; }
+
+  .card { border:1px solid #d1d5db; border-radius:6px; margin-bottom:7px; overflow:hidden; }
+  .card h3 { background:#0f766e; color:#fff; font-size:8.8pt; padding:4px 9px; font-weight:600; }
+  .card.warn h3 { background:#b45309; }
+  .card.win h3 { background:#15803d; }
+  .card .body { padding:6px 9px; }
+
+  .price { text-align:center; padding:7px; background:#ecfdf5; }
+  .price .big { font-size:19pt; font-weight:800; color:#0f766e; }
+  .price .sub { font-size:7.6pt; color:#475569; }
+
+  ul { list-style:none; }
+  li { padding:1.5px 0 1.5px 13px; position:relative; }
+  li:before { content:"•"; position:absolute; left:2px; color:#0f766e; font-weight:700; }
+  li.no:before { content:"✗"; color:#dc2626; }
+  li.yes:before { content:"✓"; color:#15803d; }
+  .koz { padding:2.5px 0 2.5px 15px; position:relative; }
+  .koz:before { content:"★"; position:absolute; left:0; color:#d97706; }
+  .koz b { color:#0f172a; }
+
+  table { width:100%; border-collapse:collapse; }
+  td { border-bottom:1px solid #e5e7eb; padding:3px 5px; vertical-align:top; }
+  td.q { width:38%; font-weight:600; color:#115e59; }
+  tr:last-child td { border-bottom:none; }
+
+  .rule { padding:2px 0 2px 13px; position:relative; }
+  .rule:before { content:attr(data-r); position:absolute; left:0; font-weight:700; color:#b45309; font-size:7pt; }
+
+  .foot {
+    margin-top:7px; background:#fffbeb; border:1px solid #fcd34d; border-radius:6px;
+    padding:6px 12px; font-size:8.2pt; text-align:center;
+  }
+  .foot b { color:#b45309; }
+  .tiny { font-size:7pt; color:#6b7280; text-align:center; margin-top:5px; }
+  .hl { background:#fef9c3; padding:0 2px; font-weight:600; }
+</style>
+</head>
+<body>
+
+<div class="head">
+  <div>
+    <div class="t1">IME Clinic · Satış Kartı</div>
+    <div class="t2">The All-Inclusive Smile</div>
+    <div class="t3">Yaz Kampanyası 2026 — Satış &amp; Kampanya Detayları</div>
+  </div>
+  <div class="badge">
+    <b>IME Clinic</b><br>BHT Clinic hastanesi<br>bünyesinde
+  </div>
+</div>
+
+<div class="dates">
+  <div><div class="lbl">Reklam Yayını</div><div class="val">1–30 Haziran</div></div>
+  <div><div class="lbl">Kapora Son Tarih</div><div class="val">30 Haziran</div></div>
+  <div><div class="lbl">Tedavi En Geç</div><div class="val">31 Ağustos</div></div>
+  <div><div class="lbl">Eylül</div><div class="val">Rezervasyon Yok</div></div>
+</div>
+
+<div class="cols">
+
+  <!-- SOL KOLON -->
+  <div class="col">
+
+    <div class="card">
+      <h3>TEKLİF — PAKET</h3>
+      <div class="price">
+        <div class="big">€2.990</div>
+        <div class="sub">her şey dahil · UK için ~£2.590 · yerel para biriminde sunulur</div>
+      </div>
+      <div class="body">
+        <ul>
+          <li class="yes">20 zirkonyum crown — <b>Ivoclar</b> premium malzeme</li>
+          <li class="yes">Diş çekimi / kanal tedavisi (gerekirse)</li>
+          <li class="yes">Tüm röntgenler + ücretsiz konsültasyon</li>
+          <li class="yes">Gelmeden önce online doktor görüşmesi + tedavi planı</li>
+          <li class="yes">Gidiş-dönüş uçak bileti</li>
+          <li class="yes">7 gece konaklama — min. 4 yıldız otel</li>
+          <li class="yes">1 refakatçi konaklaması</li>
+          <li class="yes">Tüm havalimanı + klinik transferleri</li>
+          <li class="yes">Tedavi tam teşekküllü <b>hastane ortamında</b></li>
+          <li class="yes"><b>15 YIL GARANTİ</b></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>PAKETE DAHİL DEĞİL</h3>
+      <div class="body">
+        <ul>
+          <li class="no">İmplant tedavisi — gerekirse ayrı fiyat</li>
+          <li class="no">Uçak biletinin €300'u aşan kısmı</li>
+          <li class="no">Vize, seyahat sigortası, kişisel harcamalar</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="card warn">
+      <h3>KRİTİK SATIŞ KURALLARI</h3>
+      <div class="body">
+        <div class="rule" data-r="R2">&nbsp;&nbsp;Fiyat yalnızca <span class="hl">30 Haziran'a kadar ≥€300 kapora</span> ile kilitlenir.</div>
+        <div class="rule" data-r="R3">&nbsp;&nbsp;Tedavi <span class="hl">en geç 31 Ağustos</span>'ta tamamlanmalı.</div>
+        <div class="rule" data-r="R4">&nbsp;&nbsp;<span class="hl">Eylül ve sonrası rezervasyon alınmaz.</span></div>
+        <div class="rule" data-r="R5">&nbsp;&nbsp;Uçak €300'a kadar; aşan kısmı hasta öder — görüşmede <b>net söyle</b>.</div>
+        <div class="rule" data-r="R6">&nbsp;&nbsp;İmplant gerekirse ayrı fiyat — hastaya <b>önceden bildir</b>.</div>
+        <div class="rule" data-r="!">&nbsp;&nbsp;Kapora öncesi fiyat = "tahmini". "Kesin fiyat" sadece kapora sonrası.</div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- SAĞ KOLON -->
+  <div class="col">
+
+    <div class="card win">
+      <h3>SATIŞ KOZLARI — Müşteriye Vurgula</h3>
+      <div class="body">
+        <div class="koz"><b>Hastane içinde klinik:</b> IME Clinic, tam teşekküllü BHT Clinic hastanesi bünyesinde; tedavi hastane ortamında yapılır. "Ya komplikasyon olursa?" korkusunu yok eder — en güçlü koz.</div>
+        <div class="koz"><b>15.000+ uluslararası hasta</b> — kanıtlanmış ölçek ve güven.</div>
+        <div class="koz"><b>Ivoclar premium malzeme</b> — crown'larda uluslararası standartta dental materyal.</div>
+        <div class="koz"><b>15 yıl garanti</b> — sektör standardı 5 yıl; biz 3 katı.</div>
+        <div class="koz"><b>Gerçek "her şey dahil"</b> — çekim, kanal, röntgen dahil; gizli ücret yok.</div>
+        <div class="koz"><b>Risksiz başlangıç:</b> gelmeden önce ücretsiz online doktor görüşmesi + tedavi planı.</div>
+        <div class="koz"><b>JCI · TEMOS · ISO</b> akreditasyonu — uluslararası kalite standardı.</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>İTİRAZ &amp; SORU CEVAPLARI</h3>
+      <div class="body">
+        <table>
+          <tr><td class="q">"Eylül'de gelebilir miyim?"</td><td>Hayır — yaz kampanyası, tedavi 31 Ağustos'a kadar. Eylül ayrı görüşülür (kampanya dışı).</td></tr>
+          <tr><td class="q">"Uçağım €300'dan pahalı?"</td><td>Paket €300'a kadar karşılar; aşan kısmı siz tamamlarsınız.</td></tr>
+          <tr><td class="q">"Şimdi kapora vermesem fiyat geçerli mi?"</td><td>Hayır — fiyat kapora ile kilitlenir. 30 Haziran'a kadar kapora yoksa garanti edilmez.</td></tr>
+          <tr><td class="q">"Hangi malzeme kullanılıyor?"</td><td>Crown'larda premium Ivoclar dental malzeme — uluslararası standartta kalite.</td></tr>
+          <tr><td class="q">"Yurtdışında tedavi güvenli mi?"</td><td>Tam teşekküllü hastane içindeyiz, tedavi hastane ortamında; JCI/TEMOS/ISO akrediteli; 15.000+ hasta.</td></tr>
+          <tr><td class="q">"İmplant gerekirse?"</td><td>20 crown fiyata dahil; implant ayrı fiyatlandırılır, önceden bildirilir.</td></tr>
+          <tr><td class="q">"Memnun kalmazsam?"</td><td>Zirkonyum crown'lar 15 yıl garantilidir.</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <div class="card warn">
+      <h3>UÇAK BİLETİ — Nasıl Anlatılır</h3>
+      <div class="body">
+        <ul>
+          <li class="yes">Reklam/ilk temas: "uçak biletiniz <b>hediye</b> / dahil" — rakam yok.</li>
+          <li class="yes">Hasta görüşmesi: €300 tavanı ve aşımın hastada olduğunu <b>net</b> söyle.</li>
+          <li class="no">Asla kapora sonrası sürpriz ücret çıkarma — güveni bozar.</li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+
+<div class="foot">
+  <b>ACİLİYET MESAJI:</b> &nbsp;"30 Haziran'a kadar kapora ile fiyatınızı kilitleyin — yaz kontenjanı sınırlı, Eylül kapalı."
+  &nbsp;Aciliyet gerçek; tarihleri net söylemek yeterli, abartı gerekmez.
+</div>
+
+<div class="tiny">
+  IME Clinic — Yaz Kampanyası 2026 · "The All-Inclusive Smile" Satış Kartı · v1.1 — 21.05.2026 ·
+  Tam kural seti: Kullanım &amp; Bilgilendirme Kılavuzu
+</div>
+
+</body>
+</html>

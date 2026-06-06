@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>IME Clinic Sales Card</title>
+<style>
+  @page { size: A4; margin: 8mm; }
+  * { box-sizing: border-box; margin: 0; padding: 0; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  body { font-family: "Segoe UI", Calibri, Arial, sans-serif; font-size: 7.3pt; line-height: 1.23; color: #1f2937; }
+  .head { background: linear-gradient(135deg,#0f766e,#115e59); color:#fff; padding: 9px 14px; border-radius: 7px; display:flex; justify-content:space-between; align-items:center; }
+  .head .t1 { font-size: 7.4pt; letter-spacing:1.5px; text-transform:uppercase; opacity:.8; }
+  .head .t2 { font-size: 14pt; font-weight:700; }
+  .head .t3 { font-size: 8.2pt; opacity:.9; }
+  .head .badge { background:rgba(255,255,255,.16); border:1px solid rgba(255,255,255,.35); padding:6px 10px; border-radius:6px; text-align:right; font-size:7.6pt; }
+  .head .badge b { font-size:8.4pt; }
+  .dates { display:flex; gap:6px; margin:5px 0; }
+  .dates div { flex:1; background:#f0fdfa; border:1px solid #99f6e4; border-radius:5px; padding:4px 6px; text-align:center; }
+  .dates .lbl { font-size:6.4pt; text-transform:uppercase; letter-spacing:.5px; color:#0f766e; }
+  .dates .val { font-size:8.4pt; font-weight:700; color:#115e59; }
+  .cols { display:flex; gap:8px; }
+  .col { flex:1; }
+  .card { border:1px solid #d1d5db; border-radius:6px; margin-bottom:5px; overflow:hidden; }
+  .card h3 { background:#0f766e; color:#fff; font-size:8pt; padding:3px 8px; font-weight:600; }
+  .card.warn h3 { background:#b45309; }
+  .card.win h3 { background:#15803d; }
+  .card .body { padding:4px 8px; }
+  .price { text-align:center; padding:5px; background:#ecfdf5; }
+  .price .big { font-size:16pt; font-weight:800; color:#0f766e; }
+  .price .sub { font-size:6.8pt; color:#475569; }
+  ul { list-style:none; }
+  li { padding:1px 0 1px 12px; position:relative; }
+  li:before { content:"•"; position:absolute; left:2px; color:#0f766e; font-weight:700; }
+  li.no:before { content:"✗"; color:#dc2626; }
+  li.yes:before { content:"✓"; color:#15803d; }
+  .koz { padding:1.6px 0 1.6px 14px; position:relative; }
+  .koz:before { content:"★"; position:absolute; left:0; color:#d97706; }
+  .koz b { color:#0f172a; }
+  table { width:100%; border-collapse:collapse; }
+  td { border-bottom:1px solid #e5e7eb; padding:2px 5px; vertical-align:top; }
+  td.q { width:38%; font-weight:600; color:#115e59; }
+  tr:last-child td { border-bottom:none; }
+  .rule { padding:1.4px 0 1.4px 13px; position:relative; }
+  .rule:before { content:attr(data-r); position:absolute; left:0; font-weight:700; color:#b45309; font-size:7pt; }
+  .foot { margin-top:5px; background:#fffbeb; border:1px solid #fcd34d; border-radius:6px; padding:5px 11px; font-size:7.4pt; text-align:center; }
+  .foot b { color:#b45309; }
+  .tiny { font-size:6.4pt; color:#6b7280; text-align:center; margin-top:4px; }
+  .hl { background:#fef9c3; padding:0 2px; font-weight:600; }
+</style>
+</head>
+<body>
+
+<div class="head">
+  <div>
+    <div class="t1">IME Clinic · Sales Card</div>
+    <div class="t2">The All-Inclusive Smile</div>
+    <div class="t3">Summer Campaign 2026 — Sales &amp; Campaign Details</div>
+  </div>
+  <div class="badge"><b>IME Clinic</b><br>inside BHT Clinic<br>hospital</div>
+</div>
+
+<div class="dates">
+  <div><div class="lbl">Ad Period</div><div class="val">1–30 June</div></div>
+  <div><div class="lbl">Deposit Deadline</div><div class="val">30 June</div></div>
+  <div><div class="lbl">Treatment By</div><div class="val">31 August</div></div>
+  <div><div class="lbl">September</div><div class="val">No Bookings</div></div>
+</div>
+
+<div class="cols">
+  <div class="col">
+
+    <div class="card">
+      <h3>OFFER — PACKAGE</h3>
+      <div class="price">
+        <div class="big">€2,990</div>
+        <div class="sub">all-inclusive · approx. £2,590 for the UK · shown in local currency</div>
+      </div>
+      <div class="body">
+        <ul>
+          <li class="yes">20 zirconia crowns — <b>Ivoclar</b> premium material</li>
+          <li class="yes">Tooth extraction / root canal (if needed)</li>
+          <li class="yes">All X-rays + free consultation</li>
+          <li class="yes">Online doctor consultation + treatment plan before arrival</li>
+          <li class="yes">Return flights</li>
+          <li class="yes">7 nights accommodation — min. 4-star hotel</li>
+          <li class="yes">Accommodation for 1 companion</li>
+          <li class="yes">All airport + clinic transfers</li>
+          <li class="yes">Treatment in a full-service <b>hospital environment</b></li>
+          <li class="yes"><b>15-YEAR GUARANTEE</b></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>NOT INCLUDED</h3>
+      <div class="body">
+        <ul>
+          <li class="no">Implant treatment — priced separately if needed</li>
+          <li class="no">Any flight cost above €300</li>
+          <li class="no">Visa, travel insurance, personal expenses</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="card warn">
+      <h3>KEY SALES RULES</h3>
+      <div class="body">
+        <div class="rule" data-r="R2">&nbsp;&nbsp;The price is locked only with a <span class="hl">deposit of ≥€300 by 30 June</span>.</div>
+        <div class="rule" data-r="R3">&nbsp;&nbsp;Treatment must be completed <span class="hl">by 31 August</span> at the latest.</div>
+        <div class="rule" data-r="R4">&nbsp;&nbsp;<span class="hl">No bookings for September or later.</span></div>
+        <div class="rule" data-r="R5">&nbsp;&nbsp;Flights covered up to €300; the patient pays any excess — <b>state this clearly</b>.</div>
+        <div class="rule" data-r="R6">&nbsp;&nbsp;If an implant is needed, it is priced separately — <b>inform the patient in advance</b>.</div>
+        <div class="rule" data-r="!">&nbsp;&nbsp;Before the deposit the price is an "estimate". "Final price" only after the deposit.</div>
+      </div>
+    </div>
+
+  </div>
+  <div class="col">
+
+    <div class="card win">
+      <h3>SALES ARGUMENTS — Emphasise to the Customer</h3>
+      <div class="body">
+        <div class="koz"><b>Clinic inside a hospital:</b> IME Clinic is located within the full-service BHT Clinic hospital; treatment takes place in a hospital environment. Removes the "what if something goes wrong?" fear — the strongest argument.</div>
+        <div class="koz"><b>15,000+ international patients</b> — proven scale and trust.</div>
+        <div class="koz"><b>Ivoclar premium material</b> — internationally recognised dental material for the crowns.</div>
+        <div class="koz"><b>15-year guarantee</b> — industry standard is 5 years; ours is triple that.</div>
+        <div class="koz"><b>Genuine "all-inclusive"</b> — extraction, root canal, X-rays included; no hidden fees.</div>
+        <div class="koz"><b>Risk-free start:</b> free online doctor consultation + treatment plan before arrival.</div>
+        <div class="koz"><b>JCI · TEMOS · ISO</b> accreditation — international quality standard.</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>OBJECTIONS &amp; ANSWERS</h3>
+      <div class="body">
+        <table>
+          <tr><td class="q">"Can I come in September?"</td><td>No — this is a summer campaign, treatment must be completed by 31 August. September is discussed separately (outside the campaign).</td></tr>
+          <tr><td class="q">"My flight costs more than €300?"</td><td>The package covers up to €300; you cover the difference.</td></tr>
+          <tr><td class="q">"Is the price valid without a deposit now?"</td><td>No — the price is locked with a deposit. Without one by 30 June it is not guaranteed.</td></tr>
+          <tr><td class="q">"What material is used?"</td><td>Premium Ivoclar dental material for the crowns — internationally recognised quality.</td></tr>
+          <tr><td class="q">"Is treatment abroad safe?"</td><td>We are inside a full-service hospital, treatment is in a hospital environment; JCI/TEMOS/ISO accredited; 15,000+ patients.</td></tr>
+          <tr><td class="q">"What if I need an implant?"</td><td>The 20 crowns are included in the price; an implant is priced separately and notified in advance.</td></tr>
+          <tr><td class="q">"What if I'm not satisfied?"</td><td>The zirconia crowns carry a 15-year guarantee.</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <div class="card warn">
+      <h3>FLIGHTS — How to Present</h3>
+      <div class="body">
+        <ul>
+          <li class="yes">Ad / first contact: "your flights are a <b>gift</b> / included" — no figure.</li>
+          <li class="yes">Patient conversation: clearly state the €300 cap and that the excess is on the patient.</li>
+          <li class="no">Never reveal a surprise cost after the deposit — it breaks trust.</li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div class="foot">
+  <b>URGENCY MESSAGE:</b> &nbsp;"Lock in your price with a deposit by 30 June — summer capacity is limited, September is closed."
+  &nbsp;The urgency is real; stating the dates clearly is enough, no exaggeration needed.
+</div>
+
+<div class="tiny">
+  IME Clinic — Summer Campaign 2026 · "The All-Inclusive Smile" Sales Card · v1.1 — 21.05.2026 ·
+  Full rule set: Usage &amp; Information Guide
+</div>
+
+</body>
+</html>

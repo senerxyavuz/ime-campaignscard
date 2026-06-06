@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<title>IME Clinic Scheda di Vendita</title>
+<style>
+  @page { size: A4; margin: 8mm; }
+  * { box-sizing: border-box; margin: 0; padding: 0; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  body { font-family: "Segoe UI", Calibri, Arial, sans-serif; font-size: 7.3pt; line-height: 1.23; color: #1f2937; }
+  .head { background: linear-gradient(135deg,#0f766e,#115e59); color:#fff; padding: 9px 14px; border-radius: 7px; display:flex; justify-content:space-between; align-items:center; }
+  .head .t1 { font-size: 7.4pt; letter-spacing:1.5px; text-transform:uppercase; opacity:.8; }
+  .head .t2 { font-size: 14pt; font-weight:700; }
+  .head .t3 { font-size: 8.2pt; opacity:.9; }
+  .head .badge { background:rgba(255,255,255,.16); border:1px solid rgba(255,255,255,.35); padding:6px 10px; border-radius:6px; text-align:right; font-size:7.6pt; }
+  .head .badge b { font-size:8.4pt; }
+  .dates { display:flex; gap:6px; margin:5px 0; }
+  .dates div { flex:1; background:#f0fdfa; border:1px solid #99f6e4; border-radius:5px; padding:4px 6px; text-align:center; }
+  .dates .lbl { font-size:6.4pt; text-transform:uppercase; letter-spacing:.5px; color:#0f766e; }
+  .dates .val { font-size:8.4pt; font-weight:700; color:#115e59; }
+  .cols { display:flex; gap:8px; }
+  .col { flex:1; }
+  .card { border:1px solid #d1d5db; border-radius:6px; margin-bottom:5px; overflow:hidden; }
+  .card h3 { background:#0f766e; color:#fff; font-size:8pt; padding:3px 8px; font-weight:600; }
+  .card.warn h3 { background:#b45309; }
+  .card.win h3 { background:#15803d; }
+  .card .body { padding:4px 8px; }
+  .price { text-align:center; padding:5px; background:#ecfdf5; }
+  .price .big { font-size:16pt; font-weight:800; color:#0f766e; }
+  .price .sub { font-size:6.8pt; color:#475569; }
+  ul { list-style:none; }
+  li { padding:1px 0 1px 12px; position:relative; }
+  li:before { content:"•"; position:absolute; left:2px; color:#0f766e; font-weight:700; }
+  li.no:before { content:"✗"; color:#dc2626; }
+  li.yes:before { content:"✓"; color:#15803d; }
+  .koz { padding:1.6px 0 1.6px 14px; position:relative; }
+  .koz:before { content:"★"; position:absolute; left:0; color:#d97706; }
+  .koz b { color:#0f172a; }
+  table { width:100%; border-collapse:collapse; }
+  td { border-bottom:1px solid #e5e7eb; padding:2px 5px; vertical-align:top; }
+  td.q { width:38%; font-weight:600; color:#115e59; }
+  tr:last-child td { border-bottom:none; }
+  .rule { padding:1.4px 0 1.4px 13px; position:relative; }
+  .rule:before { content:attr(data-r); position:absolute; left:0; font-weight:700; color:#b45309; font-size:7pt; }
+  .foot { margin-top:5px; background:#fffbeb; border:1px solid #fcd34d; border-radius:6px; padding:5px 11px; font-size:7.4pt; text-align:center; }
+  .foot b { color:#b45309; }
+  .tiny { font-size:6.4pt; color:#6b7280; text-align:center; margin-top:4px; }
+  .hl { background:#fef9c3; padding:0 2px; font-weight:600; }
+</style>
+</head>
+<body>
+
+<div class="head">
+  <div>
+    <div class="t1">IME Clinic · Scheda di Vendita</div>
+    <div class="t2">The All-Inclusive Smile</div>
+    <div class="t3">Campagna Estiva 2026 — Dettagli Vendita e Campagna</div>
+  </div>
+  <div class="badge"><b>IME Clinic</b><br>all'interno dell'ospedale<br>BHT Clinic</div>
+</div>
+
+<div class="dates">
+  <div><div class="lbl">Periodo Pubblicità</div><div class="val">1–30 giugno</div></div>
+  <div><div class="lbl">Scadenza Acconto</div><div class="val">30 giugno</div></div>
+  <div><div class="lbl">Trattamento Entro</div><div class="val">31 agosto</div></div>
+  <div><div class="lbl">Settembre</div><div class="val">Nessuna Prenotazione</div></div>
+</div>
+
+<div class="cols">
+  <div class="col">
+
+    <div class="card">
+      <h3>OFFERTA — PACCHETTO</h3>
+      <div class="price">
+        <div class="big">€2.990</div>
+        <div class="sub">tutto incluso · circa £2.590 per il R.U. · in valuta locale</div>
+      </div>
+      <div class="body">
+        <ul>
+          <li class="yes">20 corone in zirconio — materiale premium <b>Ivoclar</b></li>
+          <li class="yes">Estrazione dentale / devitalizzazione (se necessario)</li>
+          <li class="yes">Tutte le radiografie + consulto gratuito</li>
+          <li class="yes">Consulto medico online + piano di trattamento prima dell'arrivo</li>
+          <li class="yes">Voli andata e ritorno</li>
+          <li class="yes">7 notti di soggiorno — hotel min. 4 stelle</li>
+          <li class="yes">Soggiorno per 1 accompagnatore</li>
+          <li class="yes">Tutti i transfer aeroporto + clinica</li>
+          <li class="yes">Trattamento in <b>ambiente ospedaliero</b> completo</li>
+          <li class="yes"><b>GARANZIA DI 15 ANNI</b></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>NON INCLUSO</h3>
+      <div class="body">
+        <ul>
+          <li class="no">Trattamento implantare — quotato a parte se necessario</li>
+          <li class="no">Costo del volo eccedente i €300</li>
+          <li class="no">Visto, assicurazione di viaggio, spese personali</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="card warn">
+      <h3>REGOLE DI VENDITA CHIAVE</h3>
+      <div class="body">
+        <div class="rule" data-r="R2">&nbsp;&nbsp;Il prezzo si blocca solo con un <span class="hl">acconto ≥€300 entro il 30 giugno</span>.</div>
+        <div class="rule" data-r="R3">&nbsp;&nbsp;Il trattamento deve essere completato <span class="hl">entro il 31 agosto</span> al più tardi.</div>
+        <div class="rule" data-r="R4">&nbsp;&nbsp;<span class="hl">Nessuna prenotazione per settembre o oltre.</span></div>
+        <div class="rule" data-r="R5">&nbsp;&nbsp;Voli coperti fino a €300; il paziente paga l'eccedenza — <b>dirlo chiaramente</b>.</div>
+        <div class="rule" data-r="R6">&nbsp;&nbsp;Se serve un impianto, è quotato a parte — <b>informare il paziente in anticipo</b>.</div>
+        <div class="rule" data-r="!">&nbsp;&nbsp;Prima dell'acconto il prezzo è «indicativo». «Prezzo finale» solo dopo l'acconto.</div>
+      </div>
+    </div>
+
+  </div>
+  <div class="col">
+
+    <div class="card win">
+      <h3>ARGOMENTI DI VENDITA — Da Sottolineare al Cliente</h3>
+      <div class="body">
+        <div class="koz"><b>Clinica all'interno di un ospedale:</b> IME Clinic si trova all'interno dell'ospedale completo BHT Clinic; il trattamento avviene in ambiente ospedaliero. Elimina la paura «e se qualcosa va storto?» — l'argomento più forte.</div>
+        <div class="koz"><b>15.000+ pazienti internazionali</b> — dimensione e fiducia comprovate.</div>
+        <div class="koz"><b>Materiale premium Ivoclar</b> — materiale dentale di standard internazionale per le corone.</div>
+        <div class="koz"><b>Garanzia di 15 anni</b> — lo standard del settore è 5 anni; la nostra è il triplo.</div>
+        <div class="koz"><b>«Tutto incluso» autentico</b> — estrazione, devitalizzazione, radiografie incluse; nessun costo nascosto.</div>
+        <div class="koz"><b>Avvio senza rischi:</b> consulto medico online gratuito + piano di trattamento prima dell'arrivo.</div>
+        <div class="koz"><b>Accreditamento JCI · TEMOS · ISO</b> — standard di qualità internazionale.</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>OBIEZIONI E RISPOSTE</h3>
+      <div class="body">
+        <table>
+          <tr><td class="q">«Posso venire a settembre?»</td><td>No — è una campagna estiva, il trattamento deve concludersi entro il 31 agosto. Settembre si discute a parte (fuori campagna).</td></tr>
+          <tr><td class="q">«Il mio volo costa più di €300?»</td><td>Il pacchetto copre fino a €300; lei paga la differenza.</td></tr>
+          <tr><td class="q">«Il prezzo è valido senza acconto ora?»</td><td>No — il prezzo si blocca con un acconto. Senza acconto entro il 30 giugno non è garantito.</td></tr>
+          <tr><td class="q">«Quale materiale viene usato?»</td><td>Materiale dentale premium Ivoclar per le corone — qualità di standard internazionale.</td></tr>
+          <tr><td class="q">«Il trattamento all'estero è sicuro?»</td><td>Siamo all'interno di un ospedale completo, il trattamento avviene in ambiente ospedaliero; accreditamento JCI/TEMOS/ISO; 15.000+ pazienti.</td></tr>
+          <tr><td class="q">«E se mi serve un impianto?»</td><td>Le 20 corone sono incluse nel prezzo; l'impianto è quotato a parte e comunicato in anticipo.</td></tr>
+          <tr><td class="q">«E se non sono soddisfatto?»</td><td>Le corone in zirconio hanno una garanzia di 15 anni.</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <div class="card warn">
+      <h3>VOLO — Come Presentarlo</h3>
+      <div class="body">
+        <ul>
+          <li class="yes">Pubblicità / primo contatto: «il suo volo è in <b>omaggio</b> / incluso» — senza cifre.</li>
+          <li class="yes">Colloquio con il paziente: indicare chiaramente il limite di €300 e che l'eccedenza è a carico del paziente.</li>
+          <li class="no">Non rivelare mai un costo a sorpresa dopo l'acconto — distrugge la fiducia.</li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div class="foot">
+  <b>MESSAGGIO DI URGENZA:</b> &nbsp;«Blocca il tuo prezzo con un acconto entro il 30 giugno — la capacità estiva è limitata, settembre è chiuso.»
+  &nbsp;L'urgenza è reale; basta indicare chiaramente le date, senza esagerare.
+</div>
+
+<div class="tiny">
+  IME Clinic — Campagna Estiva 2026 · Scheda di Vendita «The All-Inclusive Smile» · v1.1 — 21.05.2026 ·
+  Set completo di regole: Guida all'Uso e alle Informazioni
+</div>
+
+</body>
+</html>

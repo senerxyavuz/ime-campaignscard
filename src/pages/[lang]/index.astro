@@ -1,0 +1,75 @@
+---
+/* Dil ana sayfası — hero + kampanya grid */
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import CampaignCard from "@/components/CampaignCard.astro";
+import { campaigns } from "@/data/campaigns";
+import { langOrder, type Lang } from "@/i18n/ui";
+import { useTranslations } from "@/i18n/utils";
+
+export function getStaticPaths() {
+  return langOrder.map((lang) => ({ params: { lang } }));
+}
+
+const { lang } = Astro.params as { lang: Lang };
+const t = useTranslations(lang);
+---
+
+<BaseLayout
+  lang={lang}
+  title={`${t("hero.title")} — IME Clinic ${t("site.sub")}`}
+  description={t("hero.subtitle")}
+  compact
+>
+  <section class="hero">
+    <span class="hero-badge">{t("hero.badge")}</span>
+    <h1 class="hero-title">{t("hero.title")}</h1>
+    <p class="hero-subtitle">{t("hero.subtitle")}</p>
+  </section>
+
+  <section class="campaign-grid">
+    {campaigns.map((c) => <CampaignCard campaign={c} lang={lang} />)}
+  </section>
+</BaseLayout>
+
+<style>
+  .hero {
+    text-align: center;
+    margin-bottom: 1.75rem;
+  }
+  .hero-badge {
+    display: inline-block;
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--color-brand-orange);
+    background: #fff7ed;
+    border: 1px solid #fed7aa;
+    padding: 0.3rem 0.85rem;
+    border-radius: 999px;
+    margin-bottom: 1rem;
+  }
+  .hero-title {
+    font-size: clamp(1.6rem, 5vw, 2.4rem);
+    font-weight: 800;
+    color: var(--color-brand-navy);
+    line-height: 1.12;
+    letter-spacing: -0.02em;
+  }
+  .hero-subtitle {
+    max-width: 36rem;
+    margin: 0.75rem auto 0;
+    font-size: clamp(0.92rem, 2.4vw, 1.05rem);
+    line-height: 1.6;
+    color: var(--color-brand-ink);
+  }
+
+  .campaign-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 17rem), 1fr));
+    gap: 1.25rem;
+    align-items: stretch;
+    max-width: 80rem;
+    margin-inline: auto;
+  }
+</style>

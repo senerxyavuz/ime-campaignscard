@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IME Clinic · Satış Portalı</title>
+<style>
+  :root {
+    --teal-600: #0d9488;
+    --teal-700: #0f766e;
+    --teal-800: #115e59;
+    --teal-50:  #f0fdfa;
+    --teal-100: #ccfbf1;
+    --green-600: #16a34a;
+    --green-700: #15803d;
+    --green-50:  #f0fdf4;
+    --amber-600: #d97706;
+    --amber-700: #b45309;
+    --amber-50:  #fffbeb;
+    --sky-600:   #0284c7;
+    --sky-50:    #f0f9ff;
+    --red-600:   #dc2626;
+    --red-50:    #fef2f2;
+    --gray-100:  #f1f5f9;
+    --gray-200:  #e2e8f0;
+    --gray-400:  #94a3b8;
+    --gray-500:  #64748b;
+    --gray-700:  #374151;
+    --gray-900:  #0f172a;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+    background: var(--gray-100);
+    color: var(--gray-700);
+    min-height: 100vh;
+  }
+
+  /* HEADER */
+  .site-header {
+    background: linear-gradient(135deg, var(--teal-800), var(--teal-700));
+    color: #fff;
+    padding: 0 24px;
+    display: flex; align-items: center; justify-content: space-between;
+    height: 64px; position: sticky; top: 0; z-index: 100;
+    box-shadow: 0 2px 8px rgba(0,0,0,.2);
+  }
+  .site-logo { display: flex; align-items: center; gap: 10px; }
+  .site-logo .logo-mark {
+    width: 36px; height: 36px; background: rgba(255,255,255,.15);
+    border: 1px solid rgba(255,255,255,.3); border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px;
+  }
+  .site-logo .logo-text { font-size: 17px; font-weight: 700; }
+  .site-logo .logo-sub { font-size: 11px; opacity: .7; margin-top: 1px; }
+  .lang-switcher { display: flex; gap: 4px; }
+  .lang-btn {
+    background: rgba(255,255,255,.12); border: 1px solid rgba(255,255,255,.25);
+    color: rgba(255,255,255,.8); font-size: 12px; font-weight: 600;
+    padding: 5px 10px; border-radius: 6px; cursor: pointer;
+    transition: all .15s;
+  }
+  .lang-btn:hover { background: rgba(255,255,255,.22); color: #fff; }
+  .lang-btn.active { background: #fff; color: var(--teal-800); }
+
+  /* HERO */
+  .hero {
+    background: linear-gradient(135deg, var(--teal-700), var(--teal-600));
+    color: #fff; text-align: center; padding: 48px 24px 40px;
+  }
+  .hero h1 { font-size: 28px; font-weight: 800; margin-bottom: 8px; }
+  .hero p { font-size: 15px; opacity: .85; max-width: 520px; margin: 0 auto; }
+  .hero .internal-badge {
+    display: inline-block; margin-top: 14px;
+    background: rgba(255,255,255,.15); border: 1px solid rgba(255,255,255,.3);
+    font-size: 11px; padding: 4px 12px; border-radius: 20px; letter-spacing: .5px;
+    text-transform: uppercase;
+  }
+
+  /* STATS BAR */
+  .stats-bar {
+    background: #fff; border-bottom: 1px solid var(--gray-200);
+    display: flex; justify-content: center; gap: 0;
+  }
+  .stat {
+    padding: 14px 32px; text-align: center;
+    border-right: 1px solid var(--gray-200);
+  }
+  .stat:last-child { border-right: none; }
+  .stat .val { font-size: 20px; font-weight: 700; color: var(--teal-700); }
+  .stat .lbl { font-size: 11px; color: var(--gray-500); margin-top: 2px; }
+
+  /* MAIN */
+  .main { max-width: 1100px; margin: 0 auto; padding: 32px 20px 60px; }
+  .section-title {
+    font-size: 13px; font-weight: 700; text-transform: uppercase;
+    letter-spacing: 1px; color: var(--gray-500); margin-bottom: 16px;
+  }
+
+  /* CAMPAIGN GRID */
+  .campaign-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 20px;
+  }
+
+  .campaign-card {
+    background: #fff; border-radius: 14px;
+    border: 1px solid var(--gray-200);
+    overflow: hidden;
+    display: flex; flex-direction: column;
+    transition: box-shadow .2s, transform .15s;
+  }
+  .campaign-card:hover { box-shadow: 0 8px 24px rgba(0,0,0,.1); transform: translateY(-2px); }
+
+  .card-banner {
+    height: 8px;
+  }
+  .banner-dental { background: linear-gradient(90deg, #0891b2, #0f766e); }
+  .banner-lens   { background: linear-gradient(90deg, #7c3aed, #0f766e); }
+  .banner-rino   { background: linear-gradient(90deg, #0f766e, #15803d); }
+
+  .card-top { padding: 18px 18px 0; display: flex; justify-content: space-between; align-items: flex-start; }
+  .card-icon {
+    width: 46px; height: 46px; border-radius: 12px;
+    display: flex; align-items: center; justify-content: center; font-size: 22px;
+    flex-shrink: 0;
+  }
+  .icon-dental { background: #ecfeff; }
+  .icon-lens   { background: #f5f3ff; }
+  .icon-rino   { background: var(--teal-50); }
+
+  .card-badges { display: flex; gap: 5px; flex-wrap: wrap; justify-content: flex-end; }
+  .badge {
+    font-size: 10px; font-weight: 700; padding: 3px 8px; border-radius: 20px;
+    text-transform: uppercase; letter-spacing: .3px;
+  }
+  .badge-active  { background: #dcfce7; color: var(--green-700); }
+  .badge-coming  { background: #fef3c7; color: var(--amber-700); }
+  .badge-paused  { background: var(--gray-200); color: var(--gray-500); }
+  .badge-market  { background: var(--teal-50); color: var(--teal-800); }
+
+  .card-body { padding: 14px 18px; flex: 1; }
+  .card-campaign-name { font-size: 18px; font-weight: 800; color: var(--gray-900); line-height: 1.2; }
+  .card-specialty { font-size: 12px; color: var(--gray-500); margin-top: 3px; }
+  .card-desc { font-size: 13px; color: var(--gray-700); margin-top: 8px; line-height: 1.5; }
+
+  .card-meta { display: flex; gap: 12px; margin-top: 12px; flex-wrap: wrap; }
+  .meta-item { display: flex; flex-direction: column; }
+  .meta-lbl { font-size: 10px; text-transform: uppercase; color: var(--gray-400); letter-spacing: .5px; }
+  .meta-val { font-size: 14px; font-weight: 700; color: var(--teal-700); }
+
+  .card-langs {
+    padding: 12px 18px;
+    border-top: 1px solid var(--gray-200);
+    display: flex; gap: 6px; flex-wrap: wrap;
+  }
+  .lang-pill {
+    font-size: 11px; font-weight: 600; padding: 4px 10px; border-radius: 6px;
+    cursor: pointer; text-decoration: none; transition: all .15s;
+    display: inline-flex; align-items: center; gap: 4px;
+  }
+  .lang-pill.available {
+    background: var(--teal-50); color: var(--teal-800);
+    border: 1px solid var(--teal-100);
+  }
+  .lang-pill.available:hover {
+    background: var(--teal-700); color: #fff; border-color: var(--teal-700);
+  }
+  .lang-pill.active-lang {
+    background: var(--teal-700); color: #fff;
+    border: 1px solid var(--teal-700);
+  }
+  .lang-pill.soon {
+    background: var(--gray-100); color: var(--gray-400);
+    border: 1px dashed var(--gray-300); cursor: default;
+  }
+  .lang-pill .pill-flag { font-size: 13px; }
+
+  .card-footer { padding: 14px 18px; border-top: 1px solid var(--gray-200); }
+  .view-btn {
+    display: block; width: 100%; padding: 10px; border-radius: 8px;
+    background: var(--teal-700); color: #fff; text-align: center;
+    text-decoration: none; font-size: 13px; font-weight: 700;
+    transition: background .15s;
+  }
+  .view-btn:hover { background: var(--teal-800); }
+  .view-btn.disabled {
+    background: var(--gray-200); color: var(--gray-400); cursor: not-allowed;
+    pointer-events: none;
+  }
+
+  /* QUICK LINKS */
+  .quick-links {
+    display: flex; gap: 10px; flex-wrap: wrap; margin-top: 28px;
+  }
+  .ql {
+    display: flex; align-items: center; gap: 8px;
+    background: #fff; border: 1px solid var(--gray-200);
+    border-radius: 10px; padding: 10px 16px;
+    text-decoration: none; font-size: 13px; color: var(--gray-700);
+    transition: all .15s;
+  }
+  .ql:hover { border-color: var(--teal-600); color: var(--teal-700); background: var(--teal-50); }
+  .ql .ql-icon { font-size: 16px; }
+
+  /* FOOTER */
+  .site-footer {
+    background: var(--gray-900); color: rgba(255,255,255,.5);
+    text-align: center; padding: 20px; font-size: 12px;
+  }
+
+  @media (max-width: 640px) {
+    .stats-bar { display: none; }
+    .hero h1 { font-size: 22px; }
+    .campaign-grid { grid-template-columns: 1fr; }
+    .lang-switcher .lang-btn { padding: 5px 7px; font-size: 11px; }
+  }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="site-logo">
+    <div class="logo-mark">🏥</div>
+    <div>
+      <div class="logo-text">IME Clinic</div>
+      <div class="logo-sub" data-i18n="portal_subtitle">Satış Portalı</div>
+    </div>
+  </div>
+  <div class="lang-switcher">
+    <button class="lang-btn active" onclick="setLang('TR')">TR</button>
+    <button class="lang-btn" onclick="setLang('EN')">EN</button>
+    <button class="lang-btn" onclick="setLang('ES')">ES</button>
+    <button class="lang-btn" onclick="setLang('IT')">IT</button>
+  </div>
+</header>
+
+<div class="hero">
+  <h1 data-i18n="hero_title">Kampanya Satış Kartları</h1>
+  <p data-i18n="hero_desc">Danışman ekibi için güncel kampanya bilgileri, satış kozları ve hazır WhatsApp şablonları.</p>
+  <div class="internal-badge" data-i18n="internal_badge">Ekip İçi Kullanım</div>
+</div>
+
+<div class="stats-bar">
+  <div class="stat"><div class="val">3</div><div class="lbl" data-i18n="stat_campaigns">Aktif Kampanya</div></div>
+  <div class="stat"><div class="val">4</div><div class="lbl" data-i18n="stat_languages">Dil</div></div>
+  <div class="stat"><div class="val">ES · IT · EN</div><div class="lbl" data-i18n="stat_markets">Hedef Pazarlar</div></div>
+  <div class="stat"><div class="val">JCI · TEMOS · ISO</div><div class="lbl" data-i18n="stat_accred">Akreditasyon</div></div>
+</div>
+
+<main class="main">
+  <div class="section-title" data-i18n="section_campaigns">Kampanyalar</div>
+
+  <div class="campaign-grid" id="campaignGrid">
+    <!-- JS ile render edilir -->
+  </div>
+
+  <div class="quick-links">
+    <a href="kampanyalar/dental/tr-print.html" class="ql"><span class="ql-icon">🖨️</span> <span data-i18n="ql_dental_print">Dental Kartı Yazdır (TR)</span></a>
+    <a href="kampanyalar/rinoplasti/tr.html" class="ql"><span class="ql-icon">📋</span> <span data-i18n="ql_rino_card">Rinoplasti Satış Kartı</span></a>
+    <a href="kampanyalar/smart-lens/tr.html" class="ql"><span class="ql-icon">📋</span> <span data-i18n="ql_lens_card">Smart Lens Satış Kartı</span></a>
+  </div>
+</main>
+
+<footer class="site-footer">
+  IME Clinic · Sales Portal · <span data-i18n="footer_internal">Ekip İçi Kullanım</span> · 2026
+</footer>
+
+<script>
+// ── Kampanya verisi ──────────────────────────────────────────────────
+const campaigns = [
+  {
+    id: 'dental',
+    icon: '🦷',
+    bannerClass: 'banner-dental',
+    iconClass: 'icon-dental',
+    status: 'active',
+    markets: ['ES', 'IT', 'EN', 'FR'],
+    name: {
+      TR: 'The All-Inclusive Smile',
+      EN: 'The All-Inclusive Smile',
+      ES: 'La Sonrisa Todo Incluido',
+      IT: 'Il Sorriso All-Inclusive',
+    },
+    specialty: {
+      TR: 'Diş Hekimliği · Dental Turizm',
+      EN: 'Dentistry · Dental Tourism',
+      ES: 'Odontología · Turismo Dental',
+      IT: 'Odontoiatria · Turismo Dentale',
+    },
+    desc: {
+      TR: 'Komple dental tedavi + İstanbul konaklaması. Beyazlatma, implant, veneer, zirkonyum.',
+      EN: 'Complete dental treatment + Istanbul stay. Whitening, implants, veneers, zirconium.',
+      ES: 'Tratamiento dental completo + estancia en Estambul. Blanqueamiento, implantes, carillas.',
+      IT: 'Trattamento dentale completo + soggiorno a Istanbul. Sbiancamento, impianti, faccette.',
+    },
+    doctor: 'Uzm. Dr. Önder',
+    price: { TR: '€2.990', EN: '€2,990', ES: '€2.990', IT: '€2.990' },
+    deadline: { TR: '31 Temmuz 2026', EN: 'Jul 31, 2026', ES: '31 Jul 2026', IT: '31 Lug 2026' },
+    files: {
+      TR: 'kampanyalar/dental/tr-print.html',
+      EN: 'kampanyalar/dental/en-print.html',
+      ES: 'kampanyalar/dental/es-print.html',
+      IT: 'kampanyalar/dental/it-print.html',
+    },
+  },
+  {
+    id: 'smart-lens',
+    icon: '👁️',
+    bannerClass: 'banner-lens',
+    iconClass: 'icon-lens',
+    status: 'active',
+    markets: ['ES', 'IT'],
+    name: {
+      TR: 'Smart Lens',
+      EN: 'Smart Lens',
+      ES: 'Lente Inteligente',
+      IT: 'Lente Smart',
+    },
+    specialty: {
+      TR: 'Göz Hastalıkları · Göz İçi Lens',
+      EN: 'Ophthalmology · IOL Surgery',
+      ES: 'Oftalmología · Cirugía de Lente',
+      IT: 'Oculistica · Chirurgia IOL',
+    },
+    desc: {
+      TR: 'Çift göz göz içi lens ameliyatı. 3 gece İstanbul, Ramada Encore otel, tüm transferler dahil.',
+      EN: 'Bilateral intraocular lens surgery. 3 nights Istanbul, Ramada Encore hotel, all transfers included.',
+      ES: 'Cirugía bilateral de lente intraocular. 3 noches Estambul, hotel Ramada Encore, traslados incluidos.',
+      IT: 'Intervento bilaterale di lente intraoculare. 3 notti Istanbul, hotel Ramada Encore, tutti i transfer inclusi.',
+    },
+    doctor: 'Uzm. Dr. Önder',
+    price: { TR: '€2.600', EN: '€2,600', ES: '€2.600', IT: '€2.600' },
+    deadline: { TR: '31 Temmuz 2026', EN: 'Jul 31, 2026', ES: '31 Jul 2026', IT: '31 Lug 2026' },
+    files: {
+      TR: 'kampanyalar/smart-lens/tr.html',
+      EN: null,
+      ES: null,
+      IT: null,
+    },
+  },
+  {
+    id: 'rinoplasti',
+    icon: '✨',
+    bannerClass: 'banner-rino',
+    iconClass: 'icon-rino',
+    status: 'active',
+    markets: ['ES', 'IT'],
+    name: {
+      TR: 'The Confident Profile',
+      EN: 'The Confident Profile',
+      ES: 'El Perfil Seguro',
+      IT: 'Il Profilo Sicuro',
+    },
+    specialty: {
+      TR: 'Plastik Cerrahi · Rinoplasti',
+      EN: 'Plastic Surgery · Rhinoplasty',
+      ES: 'Cirugía Plástica · Rinoplastia',
+      IT: 'Chirurgia Plastica · Rinoplastica',
+    },
+    desc: {
+      TR: 'Rinoplasti, Op. Dr. Hasan. 5 gece İstanbul, 1 gece hastane gözlemi, akrediteli hastane ortamı.',
+      EN: 'Rhinoplasty by Op. Dr. Hasan. 5 nights Istanbul, 1 night hospital observation, accredited hospital.',
+      ES: 'Rinoplastia por Op. Dr. Hasan. 5 noches Estambul, 1 noche observación hospitalaria.',
+      IT: 'Rinoplastica di Op. Dr. Hasan. 5 notti Istanbul, 1 notte osservazione ospedaliera.',
+    },
+    doctor: 'Op. Dr. Hasan',
+    price: { TR: '€2.600\'dan', EN: 'from €2,600', ES: 'desde €2.600', IT: 'da €2.600' },
+    deadline: { TR: '30 Haziran 2026', EN: 'Jun 30, 2026', ES: '30 Jun 2026', IT: '30 Giu 2026' },
+    files: {
+      TR: 'kampanyalar/rinoplasti/tr.html',
+      EN: null,
+      ES: null,
+      IT: null,
+    },
+  },
+];
+
+// ── i18n ─────────────────────────────────────────────────────────────
+const i18n = {
+  TR: {
+    portal_subtitle: 'Satış Portalı',
+    hero_title: 'Kampanya Satış Kartları',
+    hero_desc: 'Danışman ekibi için güncel kampanya bilgileri, satış kozları ve hazır WhatsApp şablonları.',
+    internal_badge: 'Ekip İçi Kullanım',
+    stat_campaigns: 'Aktif Kampanya',
+    stat_languages: 'Dil',
+    stat_markets: 'Hedef Pazarlar',
+    stat_accred: 'Akreditasyon',
+    section_campaigns: 'Kampanyalar',
+    ql_dental_print: 'Dental Kartı Yazdır (TR)',
+    ql_rino_card: 'Rinoplasti Satış Kartı',
+    ql_lens_card: 'Smart Lens Satış Kartı',
+    footer_internal: 'Ekip İçi Kullanım',
+    badge_active: 'Aktif',
+    badge_coming: 'Yakında',
+    lbl_price: 'Paket Fiyatı',
+    lbl_deadline: 'Kapora Son',
+    lbl_doctor: 'Doktor',
+    lbl_langs: 'Dil Versiyonları',
+    btn_view: 'Satış Kartını Görüntüle',
+    btn_select_lang: 'Dil seçin',
+    btn_soon: 'Yakında',
+  },
+  EN: {
+    portal_subtitle: 'Sales Portal',
+    hero_title: 'Campaign Sales Cards',
+    hero_desc: 'Up-to-date campaign information, sales arguments and ready WhatsApp templates for the advisor team.',
+    internal_badge: 'Internal Use Only',
+    stat_campaigns: 'Active Campaigns',
+    stat_languages: 'Languages',
+    stat_markets: 'Target Markets',
+    stat_accred: 'Accreditation',
+    section_campaigns: 'Campaigns',
+    ql_dental_print: 'Print Dental Card (TR)',
+    ql_rino_card: 'Rhinoplasty Sales Card',
+    ql_lens_card: 'Smart Lens Sales Card',
+    footer_internal: 'Internal Use Only',
+    badge_active: 'Active',
+    badge_coming: 'Coming Soon',
+    lbl_price: 'Package Price',
+    lbl_deadline: 'Deposit Deadline',
+    lbl_doctor: 'Doctor',
+    lbl_langs: 'Language Versions',
+    btn_view: 'View Sales Card',
+    btn_select_lang: 'Select language',
+    btn_soon: 'Coming Soon',
+  },
+  ES: {
+    portal_subtitle: 'Portal de Ventas',
+    hero_title: 'Fichas de Ventas de Campaña',
+    hero_desc: 'Información actualizada de campañas, argumentos de venta y plantillas WhatsApp listas para el equipo.',
+    internal_badge: 'Uso Interno',
+    stat_campaigns: 'Campañas Activas',
+    stat_languages: 'Idiomas',
+    stat_markets: 'Mercados Objetivo',
+    stat_accred: 'Acreditación',
+    section_campaigns: 'Campañas',
+    ql_dental_print: 'Imprimir Ficha Dental (TR)',
+    ql_rino_card: 'Ficha de Ventas Rinoplastia',
+    ql_lens_card: 'Ficha de Ventas Smart Lens',
+    footer_internal: 'Uso Interno',
+    badge_active: 'Activa',
+    badge_coming: 'Próximamente',
+    lbl_price: 'Precio del Paquete',
+    lbl_deadline: 'Fecha Límite Depósito',
+    lbl_doctor: 'Doctor',
+    lbl_langs: 'Versiones de Idioma',
+    btn_view: 'Ver Ficha de Ventas',
+    btn_select_lang: 'Seleccione idioma',
+    btn_soon: 'Próximamente',
+  },
+  IT: {
+    portal_subtitle: 'Portale Vendite',
+    hero_title: 'Schede di Vendita Campagna',
+    hero_desc: 'Informazioni aggiornate sulle campagne, argomenti di vendita e template WhatsApp pronti per il team.',
+    internal_badge: 'Solo Uso Interno',
+    stat_campaigns: 'Campagne Attive',
+    stat_languages: 'Lingue',
+    stat_markets: 'Mercati Target',
+    stat_accred: 'Accreditamento',
+    section_campaigns: 'Campagne',
+    ql_dental_print: 'Stampa Scheda Dentale (TR)',
+    ql_rino_card: 'Scheda Vendite Rinoplastica',
+    ql_lens_card: 'Scheda Vendite Smart Lens',
+    footer_internal: 'Solo Uso Interno',
+    badge_active: 'Attiva',
+    badge_coming: 'Prossimamente',
+    lbl_price: 'Prezzo Pacchetto',
+    lbl_deadline: 'Scadenza Acconto',
+    lbl_doctor: 'Medico',
+    lbl_langs: 'Versioni Lingua',
+    btn_view: 'Visualizza Scheda Vendite',
+    btn_select_lang: 'Seleziona lingua',
+    btn_soon: 'Prossimamente',
+  },
+};
+
+const langFlags = { TR: '🇹🇷', EN: '🇬🇧', ES: '🇪🇸', IT: '🇮🇹', FR: '🇫🇷', RU: '🇷🇺' };
+
+// ── State ─────────────────────────────────────────────────────────────
+let currentLang = localStorage.getItem('imeLang') || 'TR';
+let selectedLangs = {}; // kampanya id → seçili dil
+
+function setLang(lang) {
+  currentLang = lang;
+  localStorage.setItem('imeLang', lang);
+  // Header butonları güncelle
+  document.querySelectorAll('.lang-btn').forEach(b => {
+    b.classList.toggle('active', b.textContent === lang);
+  });
+  // i18n elementleri güncelle
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.dataset.i18n;
+    if (i18n[lang] && i18n[lang][key]) el.textContent = i18n[lang][key];
+  });
+  // Kartları yeniden render et
+  renderCampaigns();
+}
+
+function renderCampaigns() {
+  const t = i18n[currentLang];
+  const grid = document.getElementById('campaignGrid');
+  grid.innerHTML = campaigns.map(c => {
+    const selLang = selectedLangs[c.id] || currentLang;
+    const file = c.files[selLang];
+    const name = c.name[currentLang] || c.name.EN;
+    const specialty = c.specialty[currentLang] || c.specialty.EN;
+    const desc = c.desc[currentLang] || c.desc.EN;
+    const price = c.price[currentLang] || c.price.EN;
+    const deadline = c.deadline[currentLang] || c.deadline.EN;
+
+    // Dil pilleri
+    const allLangs = ['TR', 'EN', 'ES', 'IT'];
+    const langPills = allLangs.map(lg => {
+      const hasFile = !!c.files[lg];
+      const isSelected = selLang === lg;
+      const cls = !hasFile ? 'soon' : isSelected ? 'active-lang' : 'available';
+      const label = hasFile ? `${langFlags[lg] || ''} ${lg}` : `${lg}`;
+      return `<span class="lang-pill ${cls}" ${hasFile ? `onclick="selectLang('${c.id}','${lg}')"` : ''}>${label}${!hasFile ? ` <span style="font-size:9px">✦</span>` : ''}</span>`;
+    }).join('');
+
+    return `
+    <div class="campaign-card">
+      <div class="card-banner ${c.bannerClass}"></div>
+      <div class="card-top">
+        <div class="card-icon ${c.iconClass}">${c.icon}</div>
+        <div class="card-badges">
+          <span class="badge badge-active">${t.badge_active}</span>
+          ${c.markets.map(m => `<span class="badge badge-market">${m}</span>`).join('')}
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="card-campaign-name">${name}</div>
+        <div class="card-specialty">${specialty}</div>
+        <div class="card-desc">${desc}</div>
+        <div class="card-meta">
+          <div class="meta-item">
+            <span class="meta-lbl">${t.lbl_price}</span>
+            <span class="meta-val">${price}</span>
+          </div>
+          <div class="meta-item">
+            <span class="meta-lbl">${t.lbl_deadline}</span>
+            <span class="meta-val">${deadline}</span>
+          </div>
+          <div class="meta-item">
+            <span class="meta-lbl">${t.lbl_doctor}</span>
+            <span class="meta-val" style="font-size:12px;">${c.doctor}</span>
+          </div>
+        </div>
+      </div>
+      <div class="card-langs">
+        <span style="font-size:10px;color:var(--gray-400);margin-right:4px;align-self:center;">${t.lbl_langs}:</span>
+        ${langPills}
+      </div>
+      <div class="card-footer">
+        ${file
+          ? `<a href="${file}" class="view-btn">${t.btn_view} — ${selLang}</a>`
+          : `<span class="view-btn disabled">${t.btn_soon}</span>`
+        }
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function selectLang(campaignId, lang) {
+  selectedLangs[campaignId] = lang;
+  renderCampaigns();
+}
+
+// ── Init ──────────────────────────────────────────────────────────────
+setLang(currentLang);
+</script>
+</body>
+</html>

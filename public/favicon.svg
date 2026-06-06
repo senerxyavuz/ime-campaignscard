@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <!-- IME Clinic favicon: yuvarlak köşeli kare + sağlık (kalp/plus) -->
+  <rect width="64" height="64" rx="14" fill="#2563eb"/>
+  <path d="M32 50C32 50 14 39 14 27.5C14 21 19 17 24.5 17C28 17 31 19 32 21.5C33 19 36 17 39.5 17C45 17 50 21 50 27.5C50 39 32 50 32 50Z" fill="#fff" opacity="0.18"/>
+  <path d="M28 22h8v6h6v8h-6v6h-8v-6h-6v-8h6z" fill="#fff"/>
+  <circle cx="46" cy="20" r="6" fill="#ea580c"/>
+</svg>

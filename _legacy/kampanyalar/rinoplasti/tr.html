@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Confident Profile — Rhinoplasty · IME Clinic Satış Kartı</title>
+<style>
+  :root {
+    --teal-700: #0f766e;
+    --teal-800: #115e59;
+    --green-700: #15803d;
+    --amber-700: #b45309;
+    --gray-100: #f1f5f9;
+    --gray-200: #e2e8f0;
+    --gray-500: #64748b;
+    --gray-700: #374151;
+    --gray-900: #0f172a;
+    --teal-50: #f0fdfa;
+    --teal-100: #ccfbf1;
+    --amber-50: #fffbeb;
+    --amber-100: #fef3c7;
+    --green-50: #f0fdf4;
+    --green-100: #dcfce7;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+    font-size: 14px; line-height: 1.5;
+    color: var(--gray-700);
+    background: var(--gray-100);
+    padding: 16px;
+  }
+  .wrap { max-width: 960px; margin: 0 auto; }
+
+  .header {
+    background: linear-gradient(135deg, var(--teal-700), var(--teal-800));
+    color: #fff; border-radius: 10px;
+    padding: 20px 24px; margin-bottom: 12px;
+    display: flex; justify-content: space-between; align-items: center;
+    gap: 16px;
+  }
+  .header-left .label { font-size: 11px; letter-spacing: 2px; text-transform: uppercase; opacity: .75; }
+  .header-left .title { font-size: 26px; font-weight: 800; line-height: 1.1; margin: 2px 0; }
+  .header-left .subtitle { font-size: 14px; opacity: .88; }
+  .header-badge {
+    background: rgba(255,255,255,.15); border: 1px solid rgba(255,255,255,.3);
+    border-radius: 8px; padding: 10px 16px; text-align: center; min-width: 160px; flex-shrink: 0;
+  }
+  .header-badge .clinic { font-size: 16px; font-weight: 700; }
+  .header-badge .env { font-size: 11px; opacity: .82; margin: 2px 0; }
+  .header-badge .certs {
+    display: inline-block; background: #fff; color: var(--teal-700);
+    padding: 3px 8px; border-radius: 4px; font-weight: 700; font-size: 11px; margin-top: 4px;
+  }
+
+  .dates {
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-bottom: 12px;
+  }
+  .date-box {
+    background: var(--teal-50); border: 1px solid var(--teal-100);
+    border-radius: 8px; padding: 8px 12px; text-align: center;
+  }
+  .date-box .lbl { font-size: 10px; text-transform: uppercase; letter-spacing: .5px; color: var(--teal-700); font-weight: 600; }
+  .date-box .val { font-size: 16px; font-weight: 700; color: var(--teal-800); margin-top: 2px; }
+
+  .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .full { grid-column: 1 / -1; }
+
+  .card {
+    background: #fff; border: 1px solid var(--gray-200);
+    border-radius: 10px; overflow: hidden;
+  }
+  .card-head {
+    background: var(--teal-700); color: #fff;
+    padding: 8px 14px; font-size: 12px; font-weight: 700;
+    letter-spacing: .5px; text-transform: uppercase;
+  }
+  .card-head.warn { background: var(--amber-700); }
+  .card-head.green { background: var(--green-700); }
+  .card-body { padding: 14px; }
+
+  .price-hero { text-align: center; padding: 14px; background: var(--green-50); }
+  .price-big { font-size: 32px; font-weight: 800; color: var(--teal-700); line-height: 1; }
+  .price-note { font-size: 11px; color: var(--gray-500); margin-top: 4px; }
+
+  .check-list { list-style: none; }
+  .check-list li { padding: 4px 0 4px 22px; position: relative; font-size: 13px; }
+  .check-list li::before { position: absolute; left: 0; font-weight: 700; }
+  .check-list li.yes::before { content: "✓"; color: var(--green-700); }
+  .check-list li.no::before { content: "✗"; color: #dc2626; }
+
+  .not-included {
+    margin-top: 10px; padding-top: 10px; border-top: 1px solid var(--gray-200);
+  }
+  .not-included .lbl { font-size: 10px; font-weight: 700; text-transform: uppercase; color: #dc2626; margin-bottom: 5px; }
+  .not-included .items { display: flex; flex-wrap: wrap; gap: 5px; }
+  .not-included .item {
+    font-size: 11px; background: #fef2f2; border: 1px solid #fecaca;
+    color: #991b1b; border-radius: 4px; padding: 2px 7px;
+  }
+
+  .koz-list { display: flex; flex-direction: column; gap: 8px; }
+  .koz {
+    padding: 8px 12px 8px 28px; position: relative;
+    background: var(--green-50); border-left: 3px solid var(--green-700);
+    border-radius: 0 6px 6px 0; font-size: 13px;
+  }
+  .koz::before { content: "★"; position: absolute; left: 8px; color: #d97706; font-size: 13px; }
+  .koz strong { color: var(--gray-900); font-size: 13px; }
+
+  .rules-list { display: flex; flex-direction: column; gap: 6px; }
+  .rule {
+    padding: 7px 10px 7px 38px; position: relative;
+    background: var(--amber-50); border-left: 3px solid var(--amber-700);
+    border-radius: 0 6px 6px 0; font-size: 13px;
+  }
+  .rule .r-badge {
+    position: absolute; left: 8px; top: 7px;
+    background: var(--amber-700); color: #fff;
+    font-size: 9px; font-weight: 700; padding: 1px 4px; border-radius: 3px;
+    min-width: 20px; text-align: center;
+  }
+  .rule .hl { background: #fef3c7; padding: 0 3px; border-radius: 2px; font-weight: 600; }
+
+  /* WhatsApp kart */
+  .wa-card {
+    background: #fff; border: 1px solid var(--gray-200); border-radius: 10px; overflow: hidden;
+  }
+  .wa-head {
+    background: #25d366; color: #fff; padding: 8px 14px;
+    font-size: 12px; font-weight: 700; letter-spacing: .5px; text-transform: uppercase;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .wa-bubble {
+    background: #e7fce8; border-radius: 0 10px 10px 10px;
+    padding: 12px 14px; margin: 12px; font-size: 13px; line-height: 1.6;
+    border: 1px solid #bbf7d0; position: relative;
+  }
+  .wa-bubble::before {
+    content: ""; position: absolute; left: -7px; top: 10px;
+    border-right: 7px solid #e7fce8; border-top: 7px solid transparent;
+  }
+  .wa-lang { font-size: 10px; color: var(--gray-500); margin: 0 12px 8px; font-style: italic; }
+
+  /* Q&A */
+  .qa-columns { display: grid; grid-template-columns: 1fr 1fr; }
+  .qa-col:first-child { border-right: 1px solid var(--gray-200); }
+  .qa-item { border-bottom: 1px solid var(--gray-200); }
+  .qa-item:last-child { border-bottom: none; }
+  .qa-q {
+    width: 100%; text-align: left; background: none; border: none; cursor: pointer;
+    padding: 10px 36px 10px 14px; font-size: 13px; font-weight: 600;
+    color: var(--teal-800); position: relative; line-height: 1.4;
+  }
+  .qa-q::after {
+    content: "+"; position: absolute; right: 12px; top: 50%; transform: translateY(-50%);
+    font-size: 18px; font-weight: 300; color: var(--teal-700);
+    transition: transform .2s;
+  }
+  .qa-item.open .qa-q::after { transform: translateY(-50%) rotate(45deg); }
+  .qa-a {
+    display: none; padding: 0 14px 10px; font-size: 13px;
+    color: var(--gray-700); line-height: 1.55;
+  }
+  .qa-item.open .qa-a { display: block; }
+
+  .footer-banners {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 12px;
+  }
+  .banner {
+    border-radius: 10px; padding: 14px 18px; font-size: 13px; text-align: center;
+  }
+  .banner.urgency { background: var(--amber-50); border: 1px solid #fcd34d; }
+  .banner.main { background: var(--green-50); border: 1px solid #86efac; }
+  .banner strong { color: var(--amber-700); }
+  .banner.main strong { color: var(--green-700); }
+
+  .internal-note {
+    text-align: center; font-size: 11px; color: var(--gray-500);
+    margin-top: 14px; padding: 8px;
+    border-top: 1px dashed var(--gray-200);
+  }
+
+  @media (max-width: 700px) {
+    .grid { grid-template-columns: 1fr; }
+    .full { grid-column: 1; }
+    .dates { grid-template-columns: repeat(2, 1fr); }
+    .qa-columns { grid-template-columns: 1fr; }
+    .qa-col:first-child { border-right: none; border-bottom: 1px solid var(--gray-200); }
+    .footer-banners { grid-template-columns: 1fr; }
+    .header { flex-direction: column; }
+    .header-badge { min-width: unset; width: 100%; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="header">
+    <div class="header-left">
+      <div class="label">IME Clinic · Satış Kartı · Yaz 2026</div>
+      <div class="title">The Confident Profile</div>
+      <div class="subtitle">Rhinoplasty — Op. Dr. Hasan</div>
+    </div>
+    <div class="header-badge">
+      <div class="clinic">IME Clinic</div>
+      <div class="env">akrediteli hastane ortamında</div>
+      <div class="certs">JCI · TEMOS · ISO</div>
+    </div>
+  </div>
+
+  <div class="dates">
+    <div class="date-box"><div class="lbl">Reklam Yayını</div><div class="val">1–30 Haziran</div></div>
+    <div class="date-box"><div class="lbl">Kapora Son</div><div class="val">30 Haziran</div></div>
+    <div class="date-box"><div class="lbl">Tedavi En Geç</div><div class="val">1 Eylül 2026</div></div>
+    <div class="date-box"><div class="lbl">Toplam Kalış</div><div class="val">5 gece İstanbul</div></div>
+  </div>
+
+  <div class="grid">
+
+    <!-- PAKET -->
+    <div class="card">
+      <div class="card-head">Paket</div>
+      <div class="price-hero">
+        <div class="price-big">€2.600'dan başlayan</div>
+        <div class="price-note">vakaya göre kesin fiyat · yerel para biriminde sunulur</div>
+      </div>
+      <div class="card-body">
+        <ul class="check-list">
+          <li class="yes">Rinoplasti operasyonu — <strong>Op. Dr. Hasan</strong></li>
+          <li class="yes">Operasyon <strong>akrediteli hastane ortamında</strong> — genel anestezi + anestezi uzmanı</li>
+          <li class="yes"><strong>1 gece hastane yatışı</strong> (postop gözlem)</li>
+          <li class="yes"><strong>4 gece otel konaklama</strong> + <strong>1 refakatçi dahil</strong></li>
+          <li class="yes">Operasyon öncesi tetkikler (kan + EKG) + doktor değerlendirmesi</li>
+          <li class="yes">Online ön değerlendirme — fotoğraf bazlı uygunluk</li>
+          <li class="yes">Ameliyat sonrası kontrol + tampon / atel çıkarımı</li>
+          <li class="yes">Havalimanı + otel ↔ hastane tüm transferleri</li>
+          <li class="yes">Hasta danışmanı — süreç boyunca tek temas noktası</li>
+        </ul>
+        <div class="not-included">
+          <div class="lbl">Dahil Değil</div>
+          <div class="items">
+            <span class="item">✗ Uçak bileti</span>
+            <span class="item">✗ Ekstra gece konaklama</span>
+            <span class="item">✗ 2. refakatçi</span>
+            <span class="item">✗ Revizyon (1 yıl sonrası)</span>
+            <span class="item">✗ Vize / seyahat sigortası</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SATIŞ KOZLARI -->
+    <div class="card">
+      <div class="card-head green">Satış Kozları — Müşteriye Vurgula</div>
+      <div class="card-body">
+        <div class="koz-list">
+          <div class="koz"><strong>JCI · TEMOS · ISO akreditasyonu:</strong> IME Clinic, uluslararası hasta güvenliği standartlarına sahip akrediteli hastane ortamında operasyon yapar. Sıradan klinikler bu belgelere sahip değildir. <strong>En güçlü güven kozu.</strong></div>
+          <div class="koz"><strong>Hastane içinde operasyon:</strong> Otelde değil, tam teşekküllü hastane ortamında — anestezi uzmanı, yoğun bakım, acil müdahale her an hazır. "Ya komplikasyon olursa?" korkusunu yok eder.</div>
+          <div class="koz"><strong>1 gece hastane gözlemi:</strong> Postop ilk 24 saat en kritik. Çoğu rakip aynı gün taburcu eder; biz hastane gözleminde tutarız.</div>
+          <div class="koz"><strong>Online ön değerlendirme ücretsiz:</strong> Fotoğraf gönder, doktor uygun mu söylesin — uçağa atlamadan netleşir.</div>
+          <div class="koz"><strong>Tek temas — hasta danışmanı:</strong> Transfer, dil, randevu, soru — hepsi tek kişi üzerinden.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- KRİTİK KURALLAR -->
+    <div class="card">
+      <div class="card-head warn">Kritik Satış Kuralları</div>
+      <div class="card-body">
+        <div class="rules-list">
+          <div class="rule"><span class="r-badge">R1</span>Fiyat <span class="hl">"€2.600'dan başlayan"</span> — kesin fiyat fotoğraf + değerlendirme sonrası.</div>
+          <div class="rule"><span class="r-badge">R2</span>Uçak bileti <strong>dahil değil</strong> — ilk mesajdan söyle, sürpriz çıkarma.</div>
+          <div class="rule"><span class="r-badge">R3</span>5 gece kalış zorunlu. <strong>Daha az kalış kabul edilmez</strong> (tampon/kontrol nedeniyle).</div>
+          <div class="rule"><span class="r-badge">R4</span>Operasyon uygunluğu <strong>doktor onayına bağlı</strong> — uygun bulunmayabilir.</div>
+          <div class="rule"><span class="r-badge">R5</span>Fiyat kilidi: <span class="hl">€250 kapora</span> ile, <strong>30 Haziran'a kadar</strong>.</div>
+          <div class="rule"><span class="r-badge">R6</span>Tedavi <span class="hl">en geç 1 Eylül</span>. Eylül sonrası rezervasyon alınmaz.</div>
+          <div class="rule"><span class="r-badge">!</span>Revizyon talebi gelirse: "1 yıl sonra ayrı değerlendirme" — şimdiden söz verme.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- WHATSAPP ŞABLONU -->
+    <div class="wa-card">
+      <div class="wa-head">
+        <span>💬</span> WhatsApp İlk Mesaj Şablonu
+      </div>
+      <div class="wa-lang">Kendi dilinizde yazın (ES / IT / EN / TR)</div>
+      <div class="wa-bubble">
+        Merhaba [İsim],<br><br>
+        IME Clinic'te rinoplasti kampanyamızla ilgilendiğiniz için teşekkürler.<br><br>
+        <strong>Paketimiz:</strong> €2.600'dan başlayan fiyatlarla; burun ameliyatı + 5 gece İstanbul (1 gece hastane gözlemi + 4 gece otel, 1 refakatçi dahil) + tüm transferler. Operasyonu <strong>Op. Dr. Hasan</strong>, JCI-TEMOS-ISO akrediteli hastane ortamında gerçekleştiriyor.<br><br>
+        Kesin fiyat için 4 açıdan fotoğraf yeterli: <strong>ön, sağ profil, sol profil, alttan</strong> (burun delikleri görünsün). WhatsApp'a gönderebilirsiniz, 24 saat içinde doktor değerlendirmesi yapıyoruz.<br><br>
+        <strong>30 Haziran'a kadar €250 kapora</strong> ile fiyat ve tarih kilitleniyor, tedavi en geç 1 Eylül.<br><br>
+        Sizi ne zaman uygun görürüz? 🤝
+      </div>
+    </div>
+
+    <!-- SORU CEVAPLAR -->
+    <div class="card full">
+      <div class="card-head">Sıkça Sorulan Sorular</div>
+      <div class="qa-columns">
+        <div class="qa-col">
+          <div class="qa-item">
+            <button class="qa-q" onclick="toggle(this)">"Yurtdışında ameliyat güvenli mi?"</button>
+            <div class="qa-a">IME Clinic, <strong>JCI · TEMOS · ISO</strong> akrediteli hastane ortamında operasyon yapar — uluslararası hasta güvenliği standartlarına sahip. Klinikte değil, tam teşekküllü hastanede.</div>
+          </div>
+          <div class="qa-item">
+            <button class="qa-q" onclick="toggle(this)">"Fiyat kesin değil mi?"</button>
+            <div class="qa-a">"€2.600'dan başlıyor" — burun yapısına, ek işlem ihtiyacına (septum, konka) göre değişir. Fotoğraflar sonrası kesin teklif verilir.</div>
+          </div>
+          <div class="qa-item">
+            <button class="qa-q" onclick="toggle(this)">"Uçak dahil değil mi?"</button>
+            <div class="qa-a">Hayır — uçak hariç. Otel, hastane, transferler dahil. Bu ayrımı baştan söylüyoruz, sürpriz çıkmasın.</div>
+          </div>
+          <div class="qa-item">
+            <button class="qa-q" onclick="toggle(this)">"5 gece neden zorunlu?"</button>
+            <div class="qa-a">1 gece hastane gözlemi + 3–4 gün şişlik takibi + tampon/atel çıkarımı. Daha erken dönüş tıbben uygun değil.</div>
+          </div>
+          <div class="qa-item">
+            <button class="qa-q" onclick="toggle(this)">"Ne zaman uçabilirim?"</button>
+            <div class="qa-a">Tipik olarak 5. gün uçuş uygundur. Doktor kontrolü sonrası kesin onay verilir.</div>
+          </div>
+          <div class="qa-item">
+            <button class="qa-q" onclick="toggle(this)">"Ameliyat ağrılı mı?"</button>
+            <div class="qa-a">Genel anestezi altında — operasyon sırasında ağrı yok. Sonrası şişlik & basınç hissi olur, ağrı kesici ile yönetilir.</div>
+          </div>
+        </div>
+        <div class="qa-col">
+          <div class="qa-item">
+            <button class="qa-q" onclick="toggle(this)">"Refakatçim gelebilir mi?"</button>
+            <div class="qa-a">Tabii. 1 refakatçi otelde dahil (aynı oda). Hastane yatışı sadece hastaya dahil. 2. refakatçi için ek ücret çıkar.</div>
+          </div>
+          <div class="qa-item">
+            <button class="qa-q" onclick="toggle(this)">"Revizyon gerekirse?"</button>
+            <div class="qa-a">Şişlik 6–12 ay sürer; revizyon değerlendirmesi 1 yıl sonra yapılır, ayrı fiyatlandırılır. Şimdiden söz verme.</div>
+          </div>
+          <div class="qa-item">
+            <button class="qa-q" onclick="toggle(this)">"Fotoğraf nasıl göndereceğim?"</button>
+            <div class="qa-a">WhatsApp'a 4 açı: ön, sağ profil, sol profil, alttan (burun delikleri görünür). Sonra doktor değerlendirme yapar.</div>
+          </div>
+          <div class="qa-item">
+            <button class="qa-q" onclick="toggle(this)">"Kapora ne kadar?"</button>
+            <div class="qa-a"><strong>€250</strong> — 30 Haziran'a kadar yatırılırsa fiyat ve tarih kilitlenir. Ameliyat fiyatından düşülür.</div>
+          </div>
+          <div class="qa-item">
+            <button class="qa-q" onclick="toggle(this)">"Eylül'de gelebilir miyim?"</button>
+            <div class="qa-a">Hayır — tedavi en geç 1 Eylül'e kadar. Eylül sonrası bu kampanya kapsamında rezervasyon alınmaz.</div>
+          </div>
+          <div class="qa-item">
+            <button class="qa-q" onclick="toggle(this)">"Hangi hastanede operasyon yapılıyor?"</button>
+            <div class="qa-a">IME Clinic, JCI · TEMOS · ISO akrediteli hastane bünyesinde faaliyet göstermektedir. Tam teşekküllü hastane ortamı, sıradan klinik değil.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /grid -->
+
+  <div class="footer-banners">
+    <div class="banner urgency">
+      <strong>ACİLİYET:</strong> "30 Haziran'a kadar <strong>€250 kapora</strong> ile fiyatınızı kilitleyin — tedavi en geç 1 Eylül, sonrası kapalı."
+    </div>
+    <div class="banner main">
+      <strong>ANA CÜMLE:</strong> "Rinoplastiniz <strong>IME Clinic</strong>'te <strong>Op. Dr. Hasan</strong> tarafından, <strong>JCI · TEMOS · ISO akrediteli hastane ortamında</strong> planlanır — paket <strong>€2.600'dan başlıyor</strong>. Uçak hariç."
+    </div>
+  </div>
+
+  <div class="internal-note">
+    IME Clinic — The Confident Profile · Rhinoplasty · Satış Kartı · Ekip İçi Kullanım · 2026
+  </div>
+
+</div><!-- /wrap -->
+<script>
+function toggle(btn) {
+  btn.closest('.qa-item').classList.toggle('open');
+}
+</script>
+</body>
+</html>

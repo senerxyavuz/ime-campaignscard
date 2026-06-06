@@ -1,0 +1,55 @@
+---
+/* Alt bilgi — telif + ekip içi kullanım rozeti */
+import { useTranslations } from "@/i18n/utils";
+import type { Lang } from "@/i18n/ui";
+
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+const year = 2026;
+---
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <span class="footer-badge">{t("hero.badge")}</span>
+    <span class="footer-text">
+      © {year} IME Hayat Sağlık Turizmi A.Ş. — {t("footer.rights")}
+    </span>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    border-top: 1px solid rgba(45, 75, 107, 0.08);
+    background: rgba(255, 255, 255, 0.5);
+  }
+  .footer-inner {
+    max-width: 1120px;
+    margin: 0 auto;
+    padding: 1.25rem 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+    text-align: center;
+  }
+  .footer-badge {
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--color-brand-orange);
+    background: #fff7ed;
+    border: 1px solid #fed7aa;
+    padding: 0.2rem 0.6rem;
+    border-radius: 999px;
+  }
+  .footer-text {
+    font-size: 0.78rem;
+    color: var(--color-brand-ink);
+    opacity: 0.75;
+  }
+</style>

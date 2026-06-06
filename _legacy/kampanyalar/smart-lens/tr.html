@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IME Clinic — Smart Lens Satış Kartı</title>
+<style>
+  :root {
+    --blue-900: #1e3a8a;
+    --blue-800: #1e40af;
+    --blue-600: #2563eb;
+    --blue-100: #dbeafe;
+    --blue-50:  #eff6ff;
+    --green-700: #15803d;
+    --amber-700: #b45309;
+    --amber-50:  #fffbeb;
+    --amber-200: #fde68a;
+    --indigo-700: #4338ca;
+    --indigo-50:  #eef2ff;
+    --red-600:  #dc2626;
+    --teal-700: #0f766e;
+    --teal-50:  #f0fdfa;
+    --gray-900: #111827;
+    --gray-700: #374151;
+    --gray-500: #6b7280;
+    --gray-300: #d1d5db;
+    --gray-200: #e5e7eb;
+    --gray-100: #f3f4f6;
+    --radius: 10px;
+    --shadow: 0 1px 4px rgba(0,0,0,.07), 0 4px 16px rgba(0,0,0,.05);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+    font-size: 14px;
+    line-height: 1.5;
+    color: var(--gray-900);
+    background: #f1f5f9;
+    min-height: 100vh;
+  }
+
+  .container { max-width: 960px; margin: 0 auto; padding: 16px 12px 48px; }
+
+  /* ── HERO ── */
+  .hero {
+    background: linear-gradient(135deg, var(--blue-600), var(--blue-900));
+    border-radius: var(--radius);
+    padding: 20px 20px 16px;
+    color: #fff;
+    margin-bottom: 12px;
+    box-shadow: var(--shadow);
+  }
+  .hero-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; flex-wrap: wrap; }
+  .hero-label { font-size: 10px; letter-spacing: 1.6px; text-transform: uppercase; opacity: .75; margin-bottom: 4px; }
+  .hero-title { font-size: clamp(18px, 5vw, 26px); font-weight: 800; line-height: 1.15; }
+  .hero-sub   { font-size: 13px; opacity: .85; margin-top: 3px; }
+  .hero-badge {
+    background: rgba(255,255,255,.15);
+    border: 1px solid rgba(255,255,255,.3);
+    border-radius: 8px;
+    padding: 8px 12px;
+    text-align: center;
+    font-size: 12px;
+    flex-shrink: 0;
+  }
+  .hero-badge strong { display: block; font-size: 15px; margin-bottom: 3px; }
+  .accred {
+    display: inline-block;
+    background: #fff;
+    color: var(--blue-800);
+    border-radius: 4px;
+    padding: 2px 8px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: .5px;
+    margin-top: 4px;
+  }
+
+  /* ── DATE PILLS ── */
+  .dates {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
+    margin-bottom: 16px;
+  }
+  .date-pill {
+    background: #fff;
+    border: 1px solid var(--blue-100);
+    border-radius: 8px;
+    padding: 8px 10px;
+    text-align: center;
+    box-shadow: 0 1px 3px rgba(0,0,0,.05);
+  }
+  .date-pill .dl { font-size: 9px; text-transform: uppercase; letter-spacing: .8px; color: var(--blue-600); font-weight: 600; margin-bottom: 2px; }
+  .date-pill .dv { font-size: 13px; font-weight: 800; color: var(--blue-900); }
+
+  /* ── MAIN GRID ── */
+  .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .full { grid-column: 1 / -1; }
+
+  /* ── CARD ── */
+  .card { background: #fff; border: 1px solid var(--gray-200); border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow); }
+  .card-head {
+    padding: 8px 14px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: .5px;
+    text-transform: uppercase;
+    color: #fff;
+    background: var(--blue-600);
+  }
+  .card-head.green  { background: var(--green-700); }
+  .card-head.amber  { background: var(--amber-700); }
+  .card-head.indigo { background: var(--indigo-700); }
+  .card-head.teal   { background: var(--teal-700); }
+  .card-body { padding: 12px 14px; }
+
+  /* ── PRICE BLOCK ── */
+  .price-block { text-align: center; padding: 14px 10px; background: var(--blue-50); border-bottom: 1px solid var(--blue-100); }
+  .price-main { font-size: 36px; font-weight: 900; color: var(--blue-800); line-height: 1; }
+  .price-sub  { font-size: 11px; color: var(--gray-500); margin-top: 4px; }
+
+  /* ── LISTS ── */
+  .check-list { list-style: none; display: flex; flex-direction: column; gap: 5px; }
+  .check-list li { display: flex; align-items: flex-start; gap: 8px; font-size: 13px; }
+  .check-list li .icon { flex-shrink: 0; margin-top: 1px; font-size: 13px; }
+  .check-list li .icon.yes { color: var(--green-700); }
+  .check-list li .icon.no  { color: var(--red-600); }
+  .check-list li .icon.warn { color: var(--amber-700); }
+
+  /* ── KOZLAR ── */
+  .koz-list { display: flex; flex-direction: column; gap: 8px; }
+  .koz-item { display: flex; align-items: flex-start; gap: 8px; font-size: 13px; line-height: 1.45; }
+  .koz-star { color: #d97706; font-size: 14px; flex-shrink: 0; margin-top: 1px; }
+
+  /* ── RULES ── */
+  .rule-list { display: flex; flex-direction: column; gap: 7px; }
+  .rule-item { display: flex; align-items: flex-start; gap: 8px; font-size: 13px; line-height: 1.4; }
+  .rule-badge {
+    background: var(--amber-200);
+    color: var(--amber-700);
+    font-size: 10px;
+    font-weight: 800;
+    border-radius: 4px;
+    padding: 1px 5px;
+    flex-shrink: 0;
+    margin-top: 2px;
+    white-space: nowrap;
+  }
+  .hl { background: #fef9c3; padding: 1px 3px; border-radius: 3px; font-weight: 600; }
+
+  /* ── Q&A 2-COLUMN ── */
+  .qa-columns { display: grid; grid-template-columns: 1fr 1fr; gap: 0; }
+  .qa-col { padding: 0 14px; }
+  .qa-col:first-child { border-right: 1px solid var(--gray-200); }
+  .qa-list { display: flex; flex-direction: column; }
+  .qa-item { border-bottom: 1px solid var(--gray-200); }
+  .qa-item:last-child { border-bottom: none; }
+  .qa-question {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 0;
+    background: none;
+    border: none;
+    cursor: pointer;
+    text-align: left;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--blue-900);
+    line-height: 1.3;
+  }
+  .qa-arrow { font-size: 10px; color: var(--gray-500); flex-shrink: 0; transition: transform .2s; }
+  .qa-item.open .qa-arrow { transform: rotate(180deg); }
+  .qa-answer { font-size: 13px; color: var(--gray-700); line-height: 1.5; padding-bottom: 10px; display: none; }
+  .qa-item.open .qa-answer { display: block; }
+
+  /* ── PRICE TABLE ── */
+  .table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+  .price-table { width: 100%; border-collapse: collapse; font-size: 13px; min-width: 400px; }
+  .price-table th {
+    background: var(--indigo-50);
+    color: var(--indigo-700);
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: .5px;
+    padding: 7px 12px;
+    border-bottom: 1px solid #c7d2fe;
+    white-space: nowrap;
+    text-align: left;
+  }
+  .price-table th.right { text-align: right; }
+  .price-table td { padding: 8px 12px; border-bottom: 1px solid var(--gray-200); vertical-align: middle; font-size: 13px; }
+  .price-table tr:last-child td { border-bottom: none; }
+  .price-table .camp td { background: var(--blue-50); }
+  .pv { text-align: right; font-weight: 700; color: var(--blue-800); white-space: nowrap; }
+  .camp .pv { color: var(--blue-900); font-size: 14px; }
+  .note-cell { font-size: 11px; color: var(--gray-500); }
+  .camp .note-cell { color: var(--blue-700, var(--blue-800)); font-size: 12px; font-weight: 600; }
+  .table-note { font-size: 10px; color: var(--gray-500); font-style: italic; margin-top: 6px; }
+
+  /* ── WA SCRIPT ── */
+  .wa-script {
+    background: var(--teal-50);
+    border-left: 3px solid var(--teal-700);
+    border-radius: 6px;
+    padding: 10px 12px;
+    font-size: 13px;
+    line-height: 1.5;
+    color: var(--gray-700);
+    margin-bottom: 10px;
+    font-style: italic;
+  }
+
+  /* ── FOOTER BANNERS ── */
+  .footer-banners { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 16px; }
+  .banner { border-radius: 8px; padding: 12px 14px; font-size: 13px; line-height: 1.5; text-align: center; }
+  .banner.amber { background: var(--amber-50); border: 1px solid #fcd34d; }
+  .banner.blue  { background: var(--blue-50);  border: 1px solid var(--blue-100); }
+  .banner strong.label { display: block; font-size: 10px; text-transform: uppercase; letter-spacing: .6px; margin-bottom: 5px; }
+  .banner.amber strong.label { color: var(--amber-700); }
+  .banner.blue  strong.label { color: var(--blue-800); }
+
+  .doc-footer { text-align: center; font-size: 10px; color: var(--gray-500); margin-top: 20px; }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 700px) {
+    .container { padding: 10px 8px 32px; }
+    .hero-title { font-size: 20px; }
+    .hero-badge { width: 100%; display: flex; align-items: center; gap: 10px; padding: 8px 10px; }
+    .hero-badge strong { font-size: 14px; margin-bottom: 0; }
+    .dates { grid-template-columns: repeat(2, 1fr); }
+    .grid { grid-template-columns: 1fr; }
+    .full { grid-column: 1; }
+    .qa-columns { grid-template-columns: 1fr; }
+    .qa-col:first-child { border-right: none; border-bottom: 1px solid var(--gray-200); padding-bottom: 4px; margin-bottom: 4px; }
+    .footer-banners { grid-template-columns: 1fr; }
+    .price-main { font-size: 28px; }
+  }
+
+  @media print {
+    body { background: #fff; }
+    .container { padding: 0; max-width: 100%; }
+    .qa-answer { display: block !important; }
+    .qa-arrow { display: none; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-top">
+      <div>
+        <div class="hero-label">IME Clinic · Satış Kartı · Satış Ekibi İç Kullanım</div>
+        <div class="hero-title">Smart Lens <span style="font-weight:400;opacity:.8;font-size:.7em;">— Göz İçi Lens Tedavisi</span></div>
+        <div class="hero-sub">Uzm. Dr. Önder · Göz Hastalıkları · Yaz Kampanyası 2026</div>
+      </div>
+      <div class="hero-badge">
+        <strong>IME Clinic</strong>
+        <span style="font-size:11px;opacity:.85;">akrediteli hastane ortamında</span>
+        <div><span class="accred">JCI · TEMOS · ISO</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DATE PILLS -->
+  <div class="dates">
+    <div class="date-pill"><div class="dl">Reklam Yayını</div><div class="dv">Haz–Tem 2026</div></div>
+    <div class="date-pill"><div class="dl">Kapora Son Tarih</div><div class="dv">31 Temmuz</div></div>
+    <div class="date-pill"><div class="dl">Tedavi En Geç</div><div class="dv">30 Eylül</div></div>
+    <div class="date-pill"><div class="dl">Toplam Kalış</div><div class="dv">3 gece İstanbul</div></div>
+  </div>
+
+  <div class="grid">
+
+    <!-- PAKET -->
+    <div class="card">
+      <div class="card-head">Teklif — Paket</div>
+      <div class="price-block">
+        <div class="price-main">2.600€</div>
+        <div class="price-sub">her iki göz dahil · Alman teknolojisi premium trifokal göz içi lens</div>
+      </div>
+      <div class="card-body">
+        <ul class="check-list">
+          <li><span class="icon yes">✓</span><span>Smart Lens tedavisi — <strong>her iki göz</strong></span></li>
+          <li><span class="icon yes">✓</span><span>Alman teknolojisi premium trifokal göz içi lens (yakın + orta + uzak)</span></li>
+          <li><span class="icon yes">✓</span><span>Uzm. Dr. Önder, Göz Hastalıkları Uzmanı — <strong>IME Clinic</strong></span></li>
+          <li><span class="icon yes">✓</span><span><strong>3 gece Ramada Encore Basınexpress</strong> otel konaklama</span></li>
+          <li><span class="icon yes">✓</span><span>Havalimanı ↔ otel ↔ klinik tüm transferleri</span></li>
+          <li><span class="icon yes">✓</span><span>Online ön değerlendirme (reçete bazlı)</span></li>
+          <li><span class="icon yes">✓</span><span>Operasyon öncesi tam göz muayenesi</span></li>
+          <li><span class="icon yes">✓</span><span>Ameliyat sonrası kontrol</span></li>
+          <li><span class="icon yes">✓</span><span>Hasta danışmanı — süreç boyunca tek temas</span></li>
+        </ul>
+        <div style="margin-top:10px;padding-top:8px;border-top:1px solid var(--gray-200);">
+          <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--gray-500);margin-bottom:5px;">Dahil Değil</div>
+          <div style="display:flex;flex-wrap:wrap;gap:5px;">
+            <span style="display:flex;align-items:center;gap:4px;font-size:12px;color:var(--gray-700);"><span style="color:var(--red-600);font-weight:700;">✗</span> Uçak bileti</span>
+            <span style="color:var(--gray-300);">·</span>
+            <span style="display:flex;align-items:center;gap:4px;font-size:12px;color:var(--gray-700);"><span style="color:var(--red-600);font-weight:700;">✗</span> Ekstra gece konaklama</span>
+            <span style="color:var(--gray-300);">·</span>
+            <span style="display:flex;align-items:center;gap:4px;font-size:12px;color:var(--gray-700);"><span style="color:var(--red-600);font-weight:700;">✗</span> Vize / seyahat sigortası</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SATIŞ KOZLARI -->
+    <div class="card">
+      <div class="card-head green">Satış Kozları — Müşteriye Vurgula</div>
+      <div class="card-body">
+        <div class="koz-list">
+          <div class="koz-item"><span class="koz-star">★</span><span><strong>Hastane ortamında operasyon:</strong> "Göz merkezi" değil — akrediteli tam hastane içinde cerrahi. Anestezi uzmanı, yoğun bakım, acil altyapı hazır. "Ya bir şey olursa?" korkusunu yok eder. <strong>En güçlü güven kozu.</strong></span></div>
+          <div class="koz-item"><span class="koz-star">★</span><span><strong>JCI · TEMOS · ISO akreditasyonu:</strong> Uluslararası hasta güvenliği standartları. Çoğu rakip bu belgelerden birini bile taşımaz.</span></div>
+          <div class="koz-item"><span class="koz-star">★</span><span><strong>Uzm. Dr. Önder ile birebir:</strong> Ön değerlendirme, operasyon ve kontrol aynı doktorla. Asistan değil, uzman.</span></div>
+          <div class="koz-item"><span class="koz-star">★</span><span><strong>Alman teknolojisi premium trifokal lens:</strong> Yakın (okuma), orta (ekran) ve uzak mesafeyi tek lensle hedefler.</span></div>
+          <div class="koz-item"><span class="koz-star">★</span><span><strong>Ramada Encore Basınexpress + transferler dahil:</strong> Hasta sadece uçağını alır, gerisini biz yönetiriz.</span></div>
+          <div class="koz-item"><span class="koz-star">★</span><span><strong>Ücretsiz online ön değerlendirme:</strong> Reçetesini gönderir, uygun mu öğrenir — uçağa atlamadan karar verir.</span></div>
+          <div class="koz-item"><span class="koz-star">★</span><span><strong>Hızlı iyileşme, kısa konaklama:</strong> Genellikle ertesi gün belirgin görüş iyileşmesi.</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- KRİTİK KURALLAR -->
+    <div class="card">
+      <div class="card-head amber">Kritik Satış Kuralları</div>
+      <div class="card-body">
+        <div class="rule-list">
+          <div class="rule-item"><span class="rule-badge">R1</span><span><span class="hl">2.600€ her iki göz için</span> — fiyat ön değerlendirme sonrası kesinleşir.</span></div>
+          <div class="rule-item"><span class="rule-badge">R2</span><span>Uçak <strong>dahil değil</strong> — ilk mesajdan söyle, sürpriz çıkarma.</span></div>
+          <div class="rule-item"><span class="rule-badge">R3</span><span>Uygunluk <strong>doktor değerlendirmesine bağlı</strong> — herkes Smart Lens adayı değil.</span></div>
+          <div class="rule-item"><span class="rule-badge">R4</span><span><strong>40 yaş altı sağlıklı miyop → LASIK'e yönlendir.</strong></span></div>
+          <div class="rule-item"><span class="rule-badge">R5</span><span>"Gözlük tamamen bitecek mi?" → <span class="hl">Garantili yanıt verme.</span> "Büyük ölçüde azalır" de.</span></div>
+          <div class="rule-item"><span class="rule-badge">R6</span><span>Fiyat kilidi: <span class="hl">€250 kapora</span> — 31 Temmuz'a kadar. Tedavi en geç 30 Eylül.</span></div>
+          <div class="rule-item"><span class="rule-badge">!</span><span>Tanıtımda lens marka adı yazılmaz — <strong>"Alman teknolojisi"</strong> de.</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- WHATSAPP ŞABLONU -->
+    <div class="card">
+      <div class="card-head teal">WhatsApp — İlk Mesaj Şablonu</div>
+      <div class="card-body">
+        <div class="wa-script">
+          "Merhaba [Ad]! IME Clinic'ten [Koordinatör Adı]. Smart Lens tedavisi için yazdığınız için teşekkürler. Size özel değerlendirme yapabilmem için: kaç yaşındasınız ve okuma, uzak görüş ya da her ikisi için mi gözlük kullanıyorsunuz? Reçeteniz varsa bir fotoğrafını WhatsApp'tan gönderin, hemen inceleyelim. Bağlayıcı değil."
+        </div>
+        <ul class="check-list">
+          <li><span class="icon yes">✓</span><span><strong>Reçete gönderenler</strong> → konsültasyon için öncelikli sıraya al</span></li>
+          <li><span class="icon warn">⚠</span><span><strong>40 yaş altı sağlıklı miyop</strong> → "LASIK'i de değerlendirelim" de, LASIK funnelına aktar</span></li>
+          <li><span class="icon warn">⚠</span><span><strong>Katarakt / glokom belirtisi</strong> → doktora ilet, özel değerlendirme</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Q&A — 2 SÜTUN -->
+    <div class="card full">
+      <div class="card-head">Soru — Cevap</div>
+      <div class="qa-columns">
+
+        <!-- SOL SÜTUN -->
+        <div class="qa-col">
+          <div class="qa-list">
+
+            <div class="qa-item">
+              <button class="qa-question" onclick="toggle(this)">"Yurtdışında göz ameliyatı güvenli mi?"<span class="qa-arrow">▼</span></button>
+              <div class="qa-answer">IME Clinic, <strong>JCI · TEMOS · ISO</strong> akrediteli hastane ortamında çalışır. Klinik değil, tam hastane güvencesi.</div>
+            </div>
+
+            <div class="qa-item">
+              <button class="qa-question" onclick="toggle(this)">"Hangi lens kullanılıyor?"<span class="qa-arrow">▼</span></button>
+              <div class="qa-answer">Premium trifokal göz içi lens — yakın, orta ve uzağı tek lensle hedefler. Marka ve model detayı değerlendirmede doktor açıklar.</div>
+            </div>
+
+            <div class="qa-item">
+              <button class="qa-question" onclick="toggle(this)">"Çift göz mü tek göz mü?"<span class="qa-arrow">▼</span></button>
+              <div class="qa-answer"><strong>Her iki göz dahil.</strong> 2.600€ iki göz içindir.</div>
+            </div>
+
+            <div class="qa-item">
+              <button class="qa-question" onclick="toggle(this)">"Ben uygun muyum?"<span class="qa-arrow">▼</span></button>
+              <div class="qa-answer">Reçete + doktor değerlendirmesiyle netleşir. Reçeteni WhatsApp'tan gönder, ilk adımı atalım.</div>
+            </div>
+
+            <div class="qa-item">
+              <button class="qa-question" onclick="toggle(this)">"Uçak dahil değil mi?"<span class="qa-arrow">▼</span></button>
+              <div class="qa-answer">Hayır — uçak hariç. Otel (3 gece Ramada Encore Basınexpress) ve tüm transferler dahil. Bu ayrımı baştan söylüyoruz.</div>
+            </div>
+
+            <div class="qa-item">
+              <button class="qa-question" onclick="toggle(this)">"Gözlük tamamen bitecek mi?"<span class="qa-arrow">▼</span></button>
+              <div class="qa-answer">Smart Lens gözlük ihtiyacını büyük ölçüde azaltır ya da ortadan kaldırır. Kesin sonuç vakaya göre değişir; doktor değerlendirmesi sonrası netleşir.</div>
+            </div>
+
+            <div class="qa-item">
+              <button class="qa-question" onclick="toggle(this)">"Ameliyat ağrılı mı?"<span class="qa-arrow">▼</span></button>
+              <div class="qa-answer">Damla anestezi ile gerçekleştirilir — operasyon sırasında ağrı yok. Sonrasında kısa süreli yabancı cisim hissi olabilir, geçer.</div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- SAĞ SÜTUN -->
+        <div class="qa-col">
+          <div class="qa-list">
+
+            <div class="qa-item">
+              <button class="qa-question" onclick="toggle(this)">"Ne zaman görmeye başlarım?"<span class="qa-arrow">▼</span></button>
+              <div class="qa-answer">Genellikle ertesi gün belirgin iyileşme. Tam stabil görmek birkaç hafta alabilir.</div>
+            </div>
+
+            <div class="qa-item">
+              <button class="qa-question" onclick="toggle(this)">"40 yaşın altındayım, uygun muyum?"<span class="qa-arrow">▼</span></button>
+              <div class="qa-answer">Smart Lens genellikle 45+ presbiyopi/katarakt vakası için idealdir. 40 altı sağlıklı miyoplar için önce LASIK değerlendiririz.</div>
+            </div>
+
+            <div class="qa-item">
+              <button class="qa-question" onclick="toggle(this)">"Reçetemi nasıl göndereceğim?"<span class="qa-arrow">▼</span></button>
+              <div class="qa-answer">WhatsApp'tan fotoğraf veya yazılı reçete. Yaşınızı ve kullanım sürenizi de ekleyin.</div>
+            </div>
+
+            <div class="qa-item">
+              <button class="qa-question" onclick="toggle(this)">"Kapora ne kadar?"<span class="qa-arrow">▼</span></button>
+              <div class="qa-answer"><strong>€250</strong> — yatırınca fiyat ve tarih kilitlenir. Tedavi fiyatından düşülür.</div>
+            </div>
+
+            <div class="qa-item">
+              <button class="qa-question" onclick="toggle(this)">"3 gece neden zorunlu?"<span class="qa-arrow">▼</span></button>
+              <div class="qa-answer">Operasyon günü + ertesi gün postop kontrol + güvenli uçuş onayı. Daha erken dönüş tıbben önerilmez.</div>
+            </div>
+
+            <div class="qa-item">
+              <button class="qa-question" onclick="toggle(this)">"Eylül'de gelebilir miyim?"<span class="qa-arrow">▼</span></button>
+              <div class="qa-answer">Evet — tedavi son tarihi <strong>30 Eylül</strong>. Bu tarihten sonra kampanya kapsamında rezervasyon alınmaz.</div>
+            </div>
+
+          </div>
+        </div>
+
+      </div><!-- /qa-columns -->
+    </div>
+
+    <!-- FİYAT LİSTESİ — EN ALTA -->
+    <div class="card full">
+      <div class="card-head indigo">Göz Tedavileri Fiyat Listesi — Satış Ekibi · Yayımlanmaz</div>
+      <div class="card-body">
+        <div class="table-wrap">
+          <table class="price-table">
+            <thead>
+              <tr>
+                <th>Tedavi</th>
+                <th class="right">Fiyat</th>
+                <th>Not</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="camp">
+                <td><strong>Smart Lens / Alsanza (2 göz)</strong></td>
+                <td class="pv">~3.222€</td>
+                <td class="note-cell">Kampanya paketi: <strong>2.600€</strong> (otel + transfer dahil)</td>
+              </tr>
+              <tr>
+                <td>Smart Lens / Rayner (2 göz)</td>
+                <td class="pv">~3.778€</td>
+                <td class="note-cell">—</td>
+              </tr>
+              <tr>
+                <td>Smart Lens / Alcon (2 göz)</td>
+                <td class="pv">~4.444€</td>
+                <td class="note-cell">—</td>
+              </tr>
+              <tr>
+                <td>Transepithelial PRK (2 göz)</td>
+                <td class="pv">~1.222€</td>
+                <td class="note-cell">40 yaş altı miyop adayı</td>
+              </tr>
+              <tr>
+                <td>Wavefront Femto LASIK (2 göz)</td>
+                <td class="pv">~1.333€</td>
+                <td class="note-cell">40 yaş altı miyop adayı</td>
+              </tr>
+              <tr>
+                <td>Toric Lens (2 göz)</td>
+                <td class="pv">~2.667€</td>
+                <td class="note-cell">Astigmat + presbiyopi</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="table-note">Fiyatlar liste fiyatıdır. Marka adı tanıtımda kullanılmaz.</p>
+      </div>
+    </div>
+
+  </div><!-- /grid -->
+
+  <!-- FOOTER BANNERS -->
+  <div class="footer-banners">
+    <div class="banner amber">
+      <strong class="label">Aciliyet</strong>
+      "31 Temmuz'a kadar <strong>€250 kapora</strong> ile fiyatınızı kilitleyin — tedavi en geç 30 Eylül, sonrası kapalı."
+    </div>
+    <div class="banner blue">
+      <strong class="label">Ana Cümle</strong>
+      "Smart Lens tedaviniz <strong>IME Clinic</strong>'te <strong>Uzm. Dr. Önder</strong> tarafından planlanır — her iki göz dahil, <strong>3 gece Ramada Encore otel + transferlerle 2.600€</strong>. Uçak hariç."
+    </div>
+  </div>
+
+  <div class="doc-footer">
+    IME Clinic · Smart Lens · Göz İçi Lens Tedavisi · Satış Kartı · v1.2 · 05.06.2026 · Satış Ekibi İç Kullanım
+  </div>
+
+</div><!-- /container -->
+
+<script>
+  function toggle(btn) {
+    btn.closest('.qa-item').classList.toggle('open');
+  }
+</script>
+</body>
+</html>

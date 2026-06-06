@@ -1,0 +1,31 @@
+# build çıktısı
+dist/
+.output/
+
+# bağımlılıklar
+node_modules/
+
+# Astro
+.astro/
+
+# ortam değişkenleri
+.env
+.env.production
+.env.*.local
+
+# log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# editör / OS
+.DS_Store
+Thumbs.db
+.vscode/*
+!.vscode/extensions.json
+.idea/
+
+# Playwright geçici
+.playwright-mcp/
+test-results/

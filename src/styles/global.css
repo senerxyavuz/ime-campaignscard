@@ -1,0 +1,216 @@
+/* ============================================================
+   IME Clinic Satış Portalı — Global Tasarım Sistemi
+   imeclinic.com/link/ marka diline sadık: Plus Jakarta Sans,
+   soft mavi blob arka plan, beyaz yuvarlak kartlar, IME renk paleti.
+   ============================================================ */
+
+@import "tailwindcss";
+@import "@fontsource-variable/plus-jakarta-sans";
+
+/* ---- Tasarım token'ları (Tailwind v4 @theme) ---- */
+@theme {
+  --font-sans: "Plus Jakarta Sans Variable", "Segoe UI", system-ui,
+    -apple-system, sans-serif;
+
+  /* IME marka renkleri (imeclinic.com paletinden) */
+  --color-brand-navy: #2d4b6b; /* başlık lacivert */
+  --color-brand-ink: #445566; /* gövde metni */
+  --color-brand-orange: #ea580c; /* accent / section başlık */
+  --color-brand-orange-soft: #fb923c;
+
+  /* Kampanya tema renkleri (link sayfasındaki gradient kartlar) */
+  --color-theme-blue: #2563eb;
+  --color-theme-purple: #a21caf;
+  --color-theme-cyan: #06b6d4;
+  --color-theme-orange: #ea580c;
+  --color-theme-green: #16a34a;
+  --color-theme-sky: #0ea5e9;
+  --color-theme-teal: #0f766e;
+  --color-theme-amber: #d97706;
+
+  /* Arka plan */
+  --color-page: #eaf3fc; /* soft mavi sayfa zemini */
+
+  /* Yumuşatılmış gölge ve köşe */
+  --radius-card: 1.25rem; /* 20px */
+  --shadow-card: 0 10px 40px -12px rgb(45 75 107 / 0.18);
+  --shadow-soft: 0 4px 16px -6px rgb(45 75 107 / 0.12);
+
+  /* Tipografi ölçeği (modüler — tutarlı boyut ritmi) */
+  --text-2xs: 0.6875rem;
+  --text-xs: 0.75rem;
+  --text-sm: 0.875rem;
+  --text-base: 1rem;
+  --text-lg: 1.125rem;
+  --text-xl: 1.375rem;
+  --text-2xl: 1.75rem;
+
+  /* Boşluk ölçeği (4px tabanlı — kurumsal "derli toplu" ritim) */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.25rem;
+  --space-6: 1.5rem;
+}
+
+/* ---- Temel reset & gövde ---- */
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  font-family: var(--font-sans);
+  font-size: var(--text-sm);
+  line-height: 1.55;
+  color: var(--color-brand-ink);
+  background-color: var(--color-page);
+  min-height: 100dvh;
+  position: relative;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* ---- Dekoratif blob arka plan (imeclinic.com/link/ stili) ---- */
+.blob-bg {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  overflow: hidden;
+  pointer-events: none;
+}
+.blob-bg span {
+  position: absolute;
+  border-radius: 9999px;
+  filter: blur(70px);
+  opacity: 0.5;
+}
+.blob-bg span:nth-child(1) {
+  width: 340px;
+  height: 340px;
+  background: #bfdbfe;
+  top: -80px;
+  left: -60px;
+}
+.blob-bg span:nth-child(2) {
+  width: 300px;
+  height: 300px;
+  background: #fed7aa;
+  top: 40px;
+  right: -70px;
+}
+.blob-bg span:nth-child(3) {
+  width: 380px;
+  height: 380px;
+  background: #c7d2fe;
+  bottom: -120px;
+  left: 30%;
+}
+.blob-bg span:nth-child(4) {
+  width: 260px;
+  height: 260px;
+  background: #fbcfe8;
+  bottom: 60px;
+  right: 10%;
+  opacity: 0.4;
+}
+
+/* ---- Kampanya tema haritası ----
+   Her kampanya köküne data-theme="blue|teal|..." verilir; içerideki
+   öğeler var(--theme), var(--theme-dark), var(--theme-soft) kullanır. */
+[data-theme="blue"] {
+  --theme: #2563eb;
+  --theme-dark: #1e40af;
+  --theme-soft: #eff6ff;
+  --theme-border: #bfdbfe;
+}
+[data-theme="purple"] {
+  --theme: #a21caf;
+  --theme-dark: #86198f;
+  --theme-soft: #fdf4ff;
+  --theme-border: #f5d0fe;
+}
+[data-theme="cyan"] {
+  --theme: #0891b2;
+  --theme-dark: #0e7490;
+  --theme-soft: #ecfeff;
+  --theme-border: #a5f3fc;
+}
+[data-theme="orange"] {
+  --theme: #ea580c;
+  --theme-dark: #c2410c;
+  --theme-soft: #fff7ed;
+  --theme-border: #fed7aa;
+}
+[data-theme="green"] {
+  --theme: #16a34a;
+  --theme-dark: #15803d;
+  --theme-soft: #f0fdf4;
+  --theme-border: #bbf7d0;
+}
+[data-theme="sky"] {
+  --theme: #0ea5e9;
+  --theme-dark: #0284c7;
+  --theme-soft: #f0f9ff;
+  --theme-border: #bae6fd;
+}
+[data-theme="teal"] {
+  --theme: #0f766e;
+  --theme-dark: #115e59;
+  --theme-soft: #f0fdfa;
+  --theme-border: #99f6e4;
+}
+[data-theme="amber"] {
+  --theme: #d97706;
+  --theme-dark: #b45309;
+  --theme-soft: #fffbeb;
+  --theme-border: #fde68a;
+}
+
+/* ---- Section başlık (turuncu, altı çizili — link sayfası stili) ---- */
+.section-title {
+  text-align: center;
+  font-size: clamp(1.125rem, 1rem + 1vw, 1.375rem);
+  font-weight: 800;
+  color: var(--color-brand-orange);
+  letter-spacing: -0.01em;
+  line-height: 1.2;
+  margin: 0 auto 1.75rem;
+}
+.section-title::after {
+  content: "";
+  display: block;
+  width: 56px;
+  height: 3px;
+  margin: 6px auto 0;
+  border-radius: 9999px;
+  background: var(--color-brand-orange);
+}
+
+/* ---- Dinamik içerikte (set:html) kullanılan vurgu ---- */
+.hl {
+  background: #fef9c3;
+  padding: 0 0.2em;
+  border-radius: 3px;
+  font-weight: 600;
+}
+
+/* ---- Erişilebilirlik: focus görünürlüğü ---- */
+:where(a, button, [tabindex]):focus-visible {
+  outline: 2px solid var(--color-brand-orange);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* ---- Hareket azaltma tercihi ---- */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

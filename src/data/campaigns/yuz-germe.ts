@@ -16,8 +16,8 @@ export const yuzGerme: Campaign = {
     // TÜRKÇE (master)
     // ──────────────────────────────────────────────────────────
     tr: {
-      name: "The Timeless Lift",
-      specialtyTag: "Yüz + Boyun Germe — Deep Plane",
+      name: "Yüz ve Boyun Germe",
+      specialtyTag: "Deep Plane Tekniği",
       hospitalNote: "Erdem Hastanesi'nde",
       cardHospital: "Erdem Hastanesi",
       tagline:
@@ -172,8 +172,8 @@ export const yuzGerme: Campaign = {
     // ENGLISH
     // ──────────────────────────────────────────────────────────
     en: {
-      name: "The Timeless Lift",
-      specialtyTag: "Face & Neck Lift — Deep Plane",
+      name: "Face & Neck Lift",
+      specialtyTag: "Deep Plane Technique",
       hospitalNote: "at Erdem Hospital",
       cardHospital: "Erdem Hospital",
       tagline:
@@ -328,8 +328,8 @@ export const yuzGerme: Campaign = {
     // РУССКИЙ
     // ──────────────────────────────────────────────────────────
     ru: {
-      name: "The Timeless Lift",
-      specialtyTag: "Подтяжка лица и шеи — Deep Plane",
+      name: "Подтяжка лица и шеи",
+      specialtyTag: "Техника Deep Plane",
       hospitalNote: "в больнице Erdem",
       cardHospital: "больница Erdem",
       tagline:
@@ -485,8 +485,8 @@ export const yuzGerme: Campaign = {
     // ESPAÑOL
     // ──────────────────────────────────────────────────────────
     es: {
-      name: "The Timeless Lift",
-      specialtyTag: "Lifting Facial y de Cuello — Deep Plane",
+      name: "Lifting Facial y de Cuello",
+      specialtyTag: "Técnica Deep Plane",
       hospitalNote: "en el Hospital Erdem",
       cardHospital: "Hospital Erdem",
       tagline:
@@ -642,8 +642,8 @@ export const yuzGerme: Campaign = {
     // ITALIANO
     // ──────────────────────────────────────────────────────────
     it: {
-      name: "The Timeless Lift",
-      specialtyTag: "Lifting Viso e Collo — Deep Plane",
+      name: "Lifting Viso e Collo",
+      specialtyTag: "Tecnica Deep Plane",
       hospitalNote: "presso l'ospedale Erdem",
       cardHospital: "ospedale Erdem",
       tagline:

@@ -6,12 +6,19 @@
 
 import type { Campaign } from "./types";
 import type { Lang } from "@/i18n/ui";
+import { yuzGerme } from "./campaigns/yuz-germe";
 import { smartLens } from "./campaigns/smart-lens";
 import { rinoplasti } from "./campaigns/rinoplasti";
 import { dental } from "./campaigns/dental";
 import { implant } from "./campaigns/implant";
 
-export const campaigns: Campaign[] = [smartLens, rinoplasti, dental, implant];
+export const campaigns: Campaign[] = [
+  yuzGerme,
+  smartLens,
+  rinoplasti,
+  dental,
+  implant,
+];
 
 /** Slug ile kampanya bul */
 export function getCampaign(slug: string): Campaign | undefined {

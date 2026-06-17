@@ -59,6 +59,7 @@ export interface CampaignContent {
   name: string;
   specialtyTag: string; // branş / tedavi etiketi
   hospitalNote?: string; // "akrediteli hastane ortamında" — dile göre çevrilir
+  cardHospital?: string; // kart hastane etiketi — varsa t("card.atBht") yerine geçer (örn. "Erdem Hastanesi")
   tagline: string; // kartta görünen kısa açıklama
   price: string; // "2.600€"
   priceNote: string;

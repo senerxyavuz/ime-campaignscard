@@ -1,7 +1,7 @@
 import type { Campaign } from "../types";
 
 // Yüz + Boyun Germe — The Timeless Lift kampanyası (5 dil)
-// Doktor: Prof. Dr. A. Emre Koçman (EBOPRAS) · Deep Plane tekniği · Erdem Hastanesi
+// Doktor: Prof. Dr. Emre (EBOPRAS) · Deep Plane tekniği · Erdem Hastanesi
 // Fiyat: 3.900€ sabit (her şey dahil, uçak hariç) · Kapora €300 / 31 Temmuz · Tedavi en geç 30 Eylül 2026
 export const yuzGerme: Campaign = {
   slug: "yuz-germe",
@@ -9,7 +9,7 @@ export const yuzGerme: Campaign = {
   icon: "💎",
   status: "active",
   markets: ["EN", "RU", "ES", "IT"],
-  doctor: "Prof. Dr. A. Emre Koçman",
+  doctor: "Prof. Dr. Emre",
   // accreditation yok — Erdem Hastanesi için doğrulanmış sertifika bilgisi yok
   content: {
     // ──────────────────────────────────────────────────────────
@@ -19,8 +19,9 @@ export const yuzGerme: Campaign = {
       name: "The Timeless Lift",
       specialtyTag: "Yüz + Boyun Germe — Deep Plane",
       hospitalNote: "Erdem Hastanesi'nde",
+      cardHospital: "Erdem Hastanesi",
       tagline:
-        "Yüz + boyun germe, Prof. Dr. A. Emre Koçman. Deep Plane tekniği, Erdem Hastanesi'nde 2 gece + Ramada Encore'da 4 gece. Transfer dahil.",
+        "Yüz + boyun germe, Prof. Dr. Emre. Deep Plane tekniği, Erdem Hastanesi'nde 2 gece + Ramada Encore'da 4 gece. Transfer dahil.",
       price: "3.900€",
       priceNote: "her şey dahil sabit paket · yerel para biriminde sunulur",
       dates: {
@@ -30,7 +31,7 @@ export const yuzGerme: Campaign = {
         stay: "6 gece İstanbul",
       },
       packageItems: [
-        "Yüz + boyun germe ameliyatı — <strong>Prof. Dr. A. Emre Koçman</strong> (Deep Plane / SMAS tekniği)",
+        "Yüz + boyun germe ameliyatı — <strong>Prof. Dr. Emre</strong> (Deep Plane / SMAS tekniği)",
         "Operasyon <strong>Erdem Hastanesi'nde</strong> — genel anestezi + anestezi uzmanı",
         "<strong>2 gece hastane yatışı</strong> (postop gözlem)",
         "<strong>4 gece otel konaklama</strong> — Ramada Encore Basın Ekspres + <strong>1 refakatçi dahil</strong>",
@@ -100,7 +101,7 @@ export const yuzGerme: Campaign = {
         },
       ],
       whatsapp:
-        "Merhaba [İsim], IME Clinic'te yüz + boyun germe kampanyamızla ilgilendiğiniz için teşekkürler. Paketimiz: Deep Plane yüz + boyun germe + 6 gece İstanbul (2 gece Erdem Hastanesi gözlem + 4 gece Ramada Encore otel, 1 refakatçi dahil) + tüm transferler — her şey dahil sabit €3.900 (uçak hariç). Operasyonu EBOPRAS sertifikalı Prof. Dr. A. Emre Koçman gerçekleştiriyor. Uygunluk için 4 açıdan fotoğraf yeterli: ön, sağ profil, sol profil, hafif yukarıdan (çene-boyun görünür). WhatsApp'a gönderin, doktor ücretsiz değerlendirme yapıp kendi dilinizde tedavi planınızı çıkarsın. 31 Temmuz'a kadar €300 kapora ile fiyat ve tarih kilitleniyor, tedavi en geç 30 Eylül.",
+        "Merhaba [İsim], IME Clinic'te yüz + boyun germe kampanyamızla ilgilendiğiniz için teşekkürler. Paketimiz: Deep Plane yüz + boyun germe + 6 gece İstanbul (2 gece Erdem Hastanesi gözlem + 4 gece Ramada Encore otel, 1 refakatçi dahil) + tüm transferler — her şey dahil sabit €3.900 (uçak hariç). Operasyonu EBOPRAS sertifikalı Prof. Dr. Emre gerçekleştiriyor. Uygunluk için 4 açıdan fotoğraf yeterli: ön, sağ profil, sol profil, hafif yukarıdan (çene-boyun görünür). WhatsApp'a gönderin, doktor ücretsiz değerlendirme yapıp kendi dilinizde tedavi planınızı çıkarsın. 31 Temmuz'a kadar €300 kapora ile fiyat ve tarih kilitleniyor, tedavi en geç 30 Eylül.",
       whatsappNotes: [
         {
           type: "yes",
@@ -164,7 +165,7 @@ export const yuzGerme: Campaign = {
       urgency:
         '"31 Temmuz\'a kadar <strong>€300 kapora</strong> ile fiyatınızı kilitleyin — tedavi en geç 30 Eylül, sonrası kapalı."',
       pitch:
-        '"Yüz + boyun germeniz <strong>IME Clinic</strong>\'te <strong>Prof. Dr. A. Emre Koçman</strong> tarafından, <strong>Erdem Hastanesi\'nde Deep Plane tekniğiyle</strong> planlanır — her şey dahil paket <strong>€3.900</strong>. Uçak hariç."',
+        '"Yüz + boyun germeniz <strong>IME Clinic</strong>\'te <strong>Prof. Dr. Emre</strong> tarafından, <strong>Erdem Hastanesi\'nde Deep Plane tekniğiyle</strong> planlanır — her şey dahil paket <strong>€3.900</strong>. Uçak hariç."',
     },
 
     // ──────────────────────────────────────────────────────────
@@ -174,8 +175,9 @@ export const yuzGerme: Campaign = {
       name: "The Timeless Lift",
       specialtyTag: "Face & Neck Lift — Deep Plane",
       hospitalNote: "at Erdem Hospital",
+      cardHospital: "Erdem Hospital",
       tagline:
-        "Face + neck lift by Prof. Dr. A. Emre Koçman. Deep Plane technique, 2 nights at Erdem Hospital + 4 nights at Ramada Encore. Transfers included.",
+        "Face + neck lift by Prof. Dr. Emre. Deep Plane technique, 2 nights at Erdem Hospital + 4 nights at Ramada Encore. Transfers included.",
       price: "€3,900",
       priceNote: "all-inclusive fixed package · quoted in your local currency",
       dates: {
@@ -185,7 +187,7 @@ export const yuzGerme: Campaign = {
         stay: "6 nights Istanbul",
       },
       packageItems: [
-        "Face + neck lift surgery — <strong>Prof. Dr. A. Emre Koçman</strong> (Deep Plane / SMAS technique)",
+        "Face + neck lift surgery — <strong>Prof. Dr. Emre</strong> (Deep Plane / SMAS technique)",
         "Surgery <strong>at Erdem Hospital</strong> — general anesthesia + anesthesiologist",
         "<strong>2 nights hospital stay</strong> (post-op observation)",
         "<strong>4 nights hotel accommodation</strong> — Ramada Encore Basın Ekspres + <strong>1 companion included</strong>",
@@ -255,7 +257,7 @@ export const yuzGerme: Campaign = {
         },
       ],
       whatsapp:
-        "Hello [Name], thank you for your interest in our face + neck lift campaign at IME Clinic. Our package: Deep Plane face + neck lift + 6 nights in Istanbul (2 nights observation at Erdem Hospital + 4 nights at Ramada Encore hotel, 1 companion included) + all transfers — an all-inclusive fixed €3,900 (flight excluded). The surgery is performed by EBOPRAS-certified Prof. Dr. A. Emre Koçman. For eligibility, 4 photos are enough: front, right profile, left profile, slightly from above (jaw-neck visible). Send them on WhatsApp and the doctor will carry out a free assessment and prepare your treatment plan in your own language. Until Jul 31, a €300 deposit locks the price and date, with treatment by Sep 30 at the latest.",
+        "Hello [Name], thank you for your interest in our face + neck lift campaign at IME Clinic. Our package: Deep Plane face + neck lift + 6 nights in Istanbul (2 nights observation at Erdem Hospital + 4 nights at Ramada Encore hotel, 1 companion included) + all transfers — an all-inclusive fixed €3,900 (flight excluded). The surgery is performed by EBOPRAS-certified Prof. Dr. Emre. For eligibility, 4 photos are enough: front, right profile, left profile, slightly from above (jaw-neck visible). Send them on WhatsApp and the doctor will carry out a free assessment and prepare your treatment plan in your own language. Until Jul 31, a €300 deposit locks the price and date, with treatment by Sep 30 at the latest.",
       whatsappNotes: [
         {
           type: "yes",
@@ -319,7 +321,7 @@ export const yuzGerme: Campaign = {
       urgency:
         '"Lock in your price with a <strong>€300 deposit</strong> until Jul 31 — treatment by Sep 30 at the latest, closed afterwards."',
       pitch:
-        '"Your face + neck lift is planned at <strong>IME Clinic</strong> by <strong>Prof. Dr. A. Emre Koçman</strong>, <strong>at Erdem Hospital with the Deep Plane technique</strong> — an all-inclusive package of <strong>€3,900</strong>. Flight excluded."',
+        '"Your face + neck lift is planned at <strong>IME Clinic</strong> by <strong>Prof. Dr. Emre</strong>, <strong>at Erdem Hospital with the Deep Plane technique</strong> — an all-inclusive package of <strong>€3,900</strong>. Flight excluded."',
     },
 
     // ──────────────────────────────────────────────────────────
@@ -329,8 +331,9 @@ export const yuzGerme: Campaign = {
       name: "The Timeless Lift",
       specialtyTag: "Подтяжка лица и шеи — Deep Plane",
       hospitalNote: "в больнице Erdem",
+      cardHospital: "больница Erdem",
       tagline:
-        "Подтяжка лица и шеи, Prof. Dr. A. Emre Koçman. Техника Deep Plane, 2 ночи в больнице Erdem + 4 ночи в Ramada Encore. Трансферы включены.",
+        "Подтяжка лица и шеи, Prof. Dr. Emre. Техника Deep Plane, 2 ночи в больнице Erdem + 4 ночи в Ramada Encore. Трансферы включены.",
       price: "€3.900",
       priceNote:
         "фиксированный пакет «всё включено» · предоставляется в местной валюте",
@@ -341,7 +344,7 @@ export const yuzGerme: Campaign = {
         stay: "6 ночей Стамбул",
       },
       packageItems: [
-        "Операция подтяжки лица и шеи — <strong>Prof. Dr. A. Emre Koçman</strong> (техника Deep Plane / SMAS)",
+        "Операция подтяжки лица и шеи — <strong>Prof. Dr. Emre</strong> (техника Deep Plane / SMAS)",
         "Операция <strong>в больнице Erdem</strong> — общая анестезия + анестезиолог",
         "<strong>2 ночи в больнице</strong> (послеоперационное наблюдение)",
         "<strong>4 ночи проживания в отеле</strong> — Ramada Encore Basın Ekspres + <strong>1 сопровождающий включён</strong>",
@@ -411,7 +414,7 @@ export const yuzGerme: Campaign = {
         },
       ],
       whatsapp:
-        "Здравствуйте, [Имя], спасибо за интерес к нашей кампании по подтяжке лица и шеи в IME Clinic. Наш пакет: подтяжка лица и шеи Deep Plane + 6 ночей в Стамбуле (2 ночи наблюдения в больнице Erdem + 4 ночи в отеле Ramada Encore, 1 сопровождающий включён) + все трансферы — фиксированная цена «всё включено» €3.900 (без авиабилета). Операцию проводит сертифицированный EBOPRAS Prof. Dr. A. Emre Koçman. Для оценки пригодности достаточно 4 фото: спереди, правый профиль, левый профиль, слегка сверху (видны подбородок и шея). Пришлите в WhatsApp, и врач проведёт бесплатную оценку и составит ваш план лечения на вашем родном языке. До 31 июля депозит €300 фиксирует цену и дату, лечение не позднее 30 сентября.",
+        "Здравствуйте, [Имя], спасибо за интерес к нашей кампании по подтяжке лица и шеи в IME Clinic. Наш пакет: подтяжка лица и шеи Deep Plane + 6 ночей в Стамбуле (2 ночи наблюдения в больнице Erdem + 4 ночи в отеле Ramada Encore, 1 сопровождающий включён) + все трансферы — фиксированная цена «всё включено» €3.900 (без авиабилета). Операцию проводит сертифицированный EBOPRAS Prof. Dr. Emre. Для оценки пригодности достаточно 4 фото: спереди, правый профиль, левый профиль, слегка сверху (видны подбородок и шея). Пришлите в WhatsApp, и врач проведёт бесплатную оценку и составит ваш план лечения на вашем родном языке. До 31 июля депозит €300 фиксирует цену и дату, лечение не позднее 30 сентября.",
       whatsappNotes: [
         {
           type: "yes",
@@ -475,7 +478,7 @@ export const yuzGerme: Campaign = {
       urgency:
         '«Зафиксируйте свою цену с <strong>депозитом €300</strong> до 31 июля — лечение не позднее 30 сентября, после чего закрыто.»',
       pitch:
-        '«Вашу подтяжку лица и шеи планирует <strong>Prof. Dr. A. Emre Koçman</strong> в <strong>IME Clinic</strong>, <strong>в больнице Erdem по технике Deep Plane</strong> — пакет «всё включено» <strong>€3.900</strong>. Авиабилет не включён.»',
+        '«Вашу подтяжку лица и шеи планирует <strong>Prof. Dr. Emre</strong> в <strong>IME Clinic</strong>, <strong>в больнице Erdem по технике Deep Plane</strong> — пакет «всё включено» <strong>€3.900</strong>. Авиабилет не включён.»',
     },
 
     // ──────────────────────────────────────────────────────────
@@ -485,8 +488,9 @@ export const yuzGerme: Campaign = {
       name: "The Timeless Lift",
       specialtyTag: "Lifting Facial y de Cuello — Deep Plane",
       hospitalNote: "en el Hospital Erdem",
+      cardHospital: "Hospital Erdem",
       tagline:
-        "Lifting facial y de cuello, Prof. Dr. A. Emre Koçman. Técnica Deep Plane, 2 noches en el Hospital Erdem + 4 noches en Ramada Encore. Traslados incluidos.",
+        "Lifting facial y de cuello, Prof. Dr. Emre. Técnica Deep Plane, 2 noches en el Hospital Erdem + 4 noches en Ramada Encore. Traslados incluidos.",
       price: "€3.900",
       priceNote:
         "paquete fijo todo incluido · se ofrece en moneda local",
@@ -497,7 +501,7 @@ export const yuzGerme: Campaign = {
         stay: "6 noches Estambul",
       },
       packageItems: [
-        "Operación de lifting facial y de cuello — <strong>Prof. Dr. A. Emre Koçman</strong> (técnica Deep Plane / SMAS)",
+        "Operación de lifting facial y de cuello — <strong>Prof. Dr. Emre</strong> (técnica Deep Plane / SMAS)",
         "Operación <strong>en el Hospital Erdem</strong> — anestesia general + anestesiólogo",
         "<strong>2 noches de ingreso hospitalario</strong> (observación postoperatoria)",
         "<strong>4 noches de alojamiento en hotel</strong> — Ramada Encore Basın Ekspres + <strong>1 acompañante incluido</strong>",
@@ -567,7 +571,7 @@ export const yuzGerme: Campaign = {
         },
       ],
       whatsapp:
-        "Hola [Nombre], gracias por su interés en nuestra campaña de lifting facial y de cuello en IME Clinic. Nuestro paquete: lifting facial y de cuello Deep Plane + 6 noches en Estambul (2 noches de observación en el Hospital Erdem + 4 noches en el hotel Ramada Encore, 1 acompañante incluido) + todos los traslados — un precio fijo todo incluido de €3.900 (vuelo no incluido). La operación la realiza el Prof. Dr. A. Emre Koçman, certificado EBOPRAS. Para la idoneidad bastan 4 fotos: de frente, perfil derecho, perfil izquierdo, ligeramente desde arriba (mandíbula-cuello visible). Envíelas por WhatsApp y el médico realizará una evaluación gratuita y preparará su plan de tratamiento en su propio idioma. Hasta el 31 de julio, un depósito de €300 bloquea el precio y la fecha, con tratamiento a más tardar el 30 de septiembre.",
+        "Hola [Nombre], gracias por su interés en nuestra campaña de lifting facial y de cuello en IME Clinic. Nuestro paquete: lifting facial y de cuello Deep Plane + 6 noches en Estambul (2 noches de observación en el Hospital Erdem + 4 noches en el hotel Ramada Encore, 1 acompañante incluido) + todos los traslados — un precio fijo todo incluido de €3.900 (vuelo no incluido). La operación la realiza el Prof. Dr. Emre, certificado EBOPRAS. Para la idoneidad bastan 4 fotos: de frente, perfil derecho, perfil izquierdo, ligeramente desde arriba (mandíbula-cuello visible). Envíelas por WhatsApp y el médico realizará una evaluación gratuita y preparará su plan de tratamiento en su propio idioma. Hasta el 31 de julio, un depósito de €300 bloquea el precio y la fecha, con tratamiento a más tardar el 30 de septiembre.",
       whatsappNotes: [
         {
           type: "yes",
@@ -631,7 +635,7 @@ export const yuzGerme: Campaign = {
       urgency:
         '"Bloquee su precio con un <strong>depósito de €300</strong> hasta el 31 de julio — tratamiento a más tardar el 30 de septiembre, cerrado después."',
       pitch:
-        '"Su lifting facial y de cuello lo planifica <strong>Prof. Dr. A. Emre Koçman</strong> en <strong>IME Clinic</strong>, <strong>en el Hospital Erdem con la técnica Deep Plane</strong> — un paquete todo incluido de <strong>€3.900</strong>. Vuelo no incluido."',
+        '"Su lifting facial y de cuello lo planifica <strong>Prof. Dr. Emre</strong> en <strong>IME Clinic</strong>, <strong>en el Hospital Erdem con la técnica Deep Plane</strong> — un paquete todo incluido de <strong>€3.900</strong>. Vuelo no incluido."',
     },
 
     // ──────────────────────────────────────────────────────────
@@ -641,8 +645,9 @@ export const yuzGerme: Campaign = {
       name: "The Timeless Lift",
       specialtyTag: "Lifting Viso e Collo — Deep Plane",
       hospitalNote: "presso l'ospedale Erdem",
+      cardHospital: "ospedale Erdem",
       tagline:
-        "Lifting viso e collo, Prof. Dr. A. Emre Koçman. Tecnica Deep Plane, 2 notti presso l'ospedale Erdem + 4 notti al Ramada Encore. Transfer inclusi.",
+        "Lifting viso e collo, Prof. Dr. Emre. Tecnica Deep Plane, 2 notti presso l'ospedale Erdem + 4 notti al Ramada Encore. Transfer inclusi.",
       price: "€3.900",
       priceNote: "pacchetto fisso tutto incluso · offerto in valuta locale",
       dates: {
@@ -652,7 +657,7 @@ export const yuzGerme: Campaign = {
         stay: "6 notti Istanbul",
       },
       packageItems: [
-        "Intervento di lifting viso e collo — <strong>Prof. Dr. A. Emre Koçman</strong> (tecnica Deep Plane / SMAS)",
+        "Intervento di lifting viso e collo — <strong>Prof. Dr. Emre</strong> (tecnica Deep Plane / SMAS)",
         "Intervento <strong>presso l'ospedale Erdem</strong> — anestesia generale + anestesista",
         "<strong>2 notti di ricovero ospedaliero</strong> (osservazione postoperatoria)",
         "<strong>4 notti di soggiorno in hotel</strong> — Ramada Encore Basın Ekspres + <strong>1 accompagnatore incluso</strong>",
@@ -722,7 +727,7 @@ export const yuzGerme: Campaign = {
         },
       ],
       whatsapp:
-        "Salve [Nome], grazie per il suo interesse nella nostra campagna di lifting viso e collo presso IME Clinic. Il nostro pacchetto: lifting viso e collo Deep Plane + 6 notti a Istanbul (2 notti di osservazione presso l'ospedale Erdem + 4 notti all'hotel Ramada Encore, 1 accompagnatore incluso) + tutti i transfer — un prezzo fisso tutto incluso di €3.900 (volo escluso). L'intervento è eseguito dal Prof. Dr. A. Emre Koçman, certificato EBOPRAS. Per l'idoneità bastano 4 foto: frontale, profilo destro, profilo sinistro, leggermente dall'alto (mandibola-collo visibile). Le invii su WhatsApp e il medico effettuerà una valutazione gratuita e preparerà il suo piano di trattamento nella sua lingua. Entro il 31 luglio, un acconto di €300 blocca prezzo e data, con trattamento entro il 30 settembre.",
+        "Salve [Nome], grazie per il suo interesse nella nostra campagna di lifting viso e collo presso IME Clinic. Il nostro pacchetto: lifting viso e collo Deep Plane + 6 notti a Istanbul (2 notti di osservazione presso l'ospedale Erdem + 4 notti all'hotel Ramada Encore, 1 accompagnatore incluso) + tutti i transfer — un prezzo fisso tutto incluso di €3.900 (volo escluso). L'intervento è eseguito dal Prof. Dr. Emre, certificato EBOPRAS. Per l'idoneità bastano 4 foto: frontale, profilo destro, profilo sinistro, leggermente dall'alto (mandibola-collo visibile). Le invii su WhatsApp e il medico effettuerà una valutazione gratuita e preparerà il suo piano di trattamento nella sua lingua. Entro il 31 luglio, un acconto di €300 blocca prezzo e data, con trattamento entro il 30 settembre.",
       whatsappNotes: [
         {
           type: "yes",
@@ -786,7 +791,7 @@ export const yuzGerme: Campaign = {
       urgency:
         '"Blocca il tuo prezzo con un <strong>acconto di €300</strong> entro il 31 luglio — trattamento entro il 30 settembre, poi chiuso."',
       pitch:
-        '"Il tuo lifting viso e collo è pianificato dal <strong>Prof. Dr. A. Emre Koçman</strong> presso <strong>IME Clinic</strong>, <strong>all\'ospedale Erdem con la tecnica Deep Plane</strong> — un pacchetto tutto incluso di <strong>€3.900</strong>. Volo escluso."',
+        '"Il tuo lifting viso e collo è pianificato dal <strong>Prof. Dr. Emre</strong> presso <strong>IME Clinic</strong>, <strong>all\'ospedale Erdem con la tecnica Deep Plane</strong> — un pacchetto tutto incluso di <strong>€3.900</strong>. Volo escluso."',
     },
   },
 };

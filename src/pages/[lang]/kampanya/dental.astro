@@ -1,0 +1,7 @@
+---
+import WinterSmile from '@/components/WinterSmile.astro';
+import { langOrder, type Lang } from '@/i18n/ui';
+export function getStaticPaths() { return langOrder.map(lang=>({params:{lang}})); }
+const lang=Astro.params.lang as Lang;
+---
+<WinterSmile lang={lang}/>

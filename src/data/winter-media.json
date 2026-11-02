@@ -1,0 +1,736 @@
+{
+  "items": [
+    {
+      "id": "clinic-hospital-exterior",
+      "category": 1,
+      "src": "clinic-hospital-exterior.webp",
+      "thumb": "clinic-hospital-exterior.webp",
+      "labels": {},
+      "width": 1200,
+      "height": 849
+    },
+    {
+      "id": "clinic-dental-unit",
+      "category": 1,
+      "src": "clinic-dental-unit.webp",
+      "thumb": "clinic-dental-unit.webp",
+      "labels": {},
+      "width": 1200,
+      "height": 675
+    },
+    {
+      "id": "clinic-dental-unit-green",
+      "category": 1,
+      "src": "clinic-dental-unit-green.webp",
+      "thumb": "clinic-dental-unit-green.webp",
+      "labels": {},
+      "width": 1200,
+      "height": 675
+    },
+    {
+      "id": "clinic-dental-unit-yellow",
+      "category": 1,
+      "src": "clinic-dental-unit-yellow.webp",
+      "thumb": "clinic-dental-unit-yellow.webp",
+      "labels": {},
+      "width": 1200,
+      "height": 675
+    },
+    {
+      "id": "clinic-dental-consultation",
+      "category": 1,
+      "src": "clinic-dental-consultation.webp",
+      "thumb": "clinic-dental-consultation.webp",
+      "labels": {},
+      "width": 1200,
+      "height": 675
+    },
+    {
+      "id": "clinic-lobby-reception",
+      "category": 1,
+      "src": "clinic-lobby-reception.webp",
+      "thumb": "clinic-lobby-reception.webp",
+      "labels": {},
+      "width": 1200,
+      "height": 675
+    },
+    {
+      "id": "clinic-lobby-lounge",
+      "category": 1,
+      "src": "clinic-lobby-lounge.webp",
+      "thumb": "clinic-lobby-lounge.webp",
+      "labels": {},
+      "width": 1200,
+      "height": 675
+    },
+    {
+      "id": "clinic-waiting-lounge",
+      "category": 1,
+      "src": "clinic-waiting-lounge.webp",
+      "thumb": "clinic-waiting-lounge.webp",
+      "labels": {},
+      "width": 1200,
+      "height": 675
+    },
+    {
+      "id": "clinic-restaurant-cafe",
+      "category": 1,
+      "src": "clinic-restaurant-cafe.webp",
+      "thumb": "clinic-restaurant-cafe.webp",
+      "labels": {},
+      "width": 1200,
+      "height": 675
+    },
+    {
+      "id": "clinic-surgery-corridor",
+      "category": 1,
+      "src": "clinic-surgery-corridor.webp",
+      "thumb": "clinic-surgery-corridor.webp",
+      "labels": {},
+      "width": 1200,
+      "height": 675
+    },
+    {
+      "id": "hotel-room",
+      "category": 2,
+      "src": "hotel-room.webp",
+      "thumb": "hotel-room-thumb.webp",
+      "labels": {},
+      "width": 1200,
+      "height": 900
+    },
+    {
+      "id": "hotel-room-2",
+      "category": 2,
+      "src": "hotel-room-2.webp",
+      "thumb": "hotel-room-2-thumb.webp",
+      "labels": {},
+      "width": 1200,
+      "height": 900
+    },
+    {
+      "id": "hotel-entrance",
+      "category": 2,
+      "src": "hotel-entrance.webp",
+      "thumb": "hotel-entrance-thumb.webp",
+      "labels": {},
+      "width": 1200,
+      "height": 900
+    },
+    {
+      "id": "hotel-lobby",
+      "category": 2,
+      "src": "hotel-lobby.webp",
+      "thumb": "hotel-lobby-thumb.webp",
+      "labels": {},
+      "width": 1200,
+      "height": 900
+    },
+    {
+      "id": "hotel-pool",
+      "category": 2,
+      "src": "hotel-pool.webp",
+      "thumb": "hotel-pool-thumb.webp",
+      "labels": {},
+      "width": 1200,
+      "height": 900
+    },
+    {
+      "id": "hotel-restaurant",
+      "category": 2,
+      "src": "hotel-restaurant.webp",
+      "thumb": "hotel-restaurant-thumb.webp",
+      "labels": {},
+      "width": 1200,
+      "height": 900
+    },
+    {
+      "id": "transfer-vehicle",
+      "category": 2,
+      "src": "transfer-vehicle.webp",
+      "thumb": "transfer-vehicle.webp",
+      "labels": {},
+      "width": 600,
+      "height": 400
+    },
+    {
+      "id": "hospital-document-jci",
+      "category": 4,
+      "src": "hospital-document-jci.jpg",
+      "thumb": "hospital-document-jci-thumb.webp",
+      "labels": {
+        "en": {
+          "title": "JCI document",
+          "alt": "Hospital document labelled Joint Commission International"
+        },
+        "ru": {
+          "title": "Документ JCI",
+          "alt": "Документ больницы с указанием Joint Commission International"
+        },
+        "pt": {
+          "title": "Documento JCI",
+          "alt": "Documento do hospital identificado como Joint Commission International"
+        },
+        "es": {
+          "title": "Documento JCI",
+          "alt": "Documento del hospital identificado como Joint Commission International"
+        },
+        "it": {
+          "title": "Documento JCI",
+          "alt": "Documento dell’ospedale con la dicitura Joint Commission International"
+        },
+        "fr": {
+          "title": "Document JCI",
+          "alt": "Document hospitalier portant la mention Joint Commission International"
+        },
+        "de": {
+          "title": "JCI-Dokument",
+          "alt": "Krankenhausdokument mit der Bezeichnung Joint Commission International"
+        },
+        "ar": {
+          "title": "مستند JCI",
+          "alt": "مستند مستشفى يحمل اسم Joint Commission International"
+        },
+        "pl": {
+          "title": "Dokument JCI",
+          "alt": "Dokument szpitala oznaczony Joint Commission International"
+        }
+      },
+      "width": 1035,
+      "height": 1600
+    },
+    {
+      "id": "hospital-document-temos",
+      "category": 4,
+      "src": "hospital-document-temos.jpg",
+      "thumb": "hospital-document-temos-thumb.webp",
+      "labels": {
+        "en": {
+          "title": "TEMOS document",
+          "alt": "Hospital document labelled TEMOS"
+        },
+        "ru": {
+          "title": "Документ TEMOS",
+          "alt": "Документ больницы с указанием TEMOS"
+        },
+        "pt": {
+          "title": "Documento TEMOS",
+          "alt": "Documento do hospital identificado como TEMOS"
+        },
+        "es": {
+          "title": "Documento TEMOS",
+          "alt": "Documento del hospital identificado como TEMOS"
+        },
+        "it": {
+          "title": "Documento TEMOS",
+          "alt": "Documento dell’ospedale con la dicitura TEMOS"
+        },
+        "fr": {
+          "title": "Document TEMOS",
+          "alt": "Document hospitalier portant la mention TEMOS"
+        },
+        "de": {
+          "title": "TEMOS-Dokument",
+          "alt": "Krankenhausdokument mit der Bezeichnung TEMOS"
+        },
+        "ar": {
+          "title": "مستند TEMOS",
+          "alt": "مستند مستشفى يحمل اسم TEMOS"
+        },
+        "pl": {
+          "title": "Dokument TEMOS",
+          "alt": "Dokument szpitala oznaczony TEMOS"
+        }
+      },
+      "width": 1132,
+      "height": 1600
+    },
+    {
+      "id": "hospital-document-iso",
+      "category": 4,
+      "src": "hospital-document-iso.jpg",
+      "thumb": "hospital-document-iso-thumb.webp",
+      "labels": {
+        "en": {
+          "title": "ISO 9001 document",
+          "alt": "Hospital document labelled ISO 9001:2015"
+        },
+        "ru": {
+          "title": "Документ ISO 9001",
+          "alt": "Документ больницы с указанием ISO 9001:2015"
+        },
+        "pt": {
+          "title": "Documento ISO 9001",
+          "alt": "Documento do hospital identificado como ISO 9001:2015"
+        },
+        "es": {
+          "title": "Documento ISO 9001",
+          "alt": "Documento del hospital identificado como ISO 9001:2015"
+        },
+        "it": {
+          "title": "Documento ISO 9001",
+          "alt": "Documento dell’ospedale con la dicitura ISO 9001:2015"
+        },
+        "fr": {
+          "title": "Document ISO 9001",
+          "alt": "Document hospitalier portant la mention ISO 9001:2015"
+        },
+        "de": {
+          "title": "ISO-9001-Dokument",
+          "alt": "Krankenhausdokument mit der Bezeichnung ISO 9001:2015"
+        },
+        "ar": {
+          "title": "مستند ISO 9001",
+          "alt": "مستند مستشفى يحمل اسم ISO 9001:2015"
+        },
+        "pl": {
+          "title": "Dokument ISO 9001",
+          "alt": "Dokument szpitala oznaczony ISO 9001:2015"
+        }
+      },
+      "width": 1131,
+      "height": 1600
+    },
+    {
+      "id": "hospital-document-leedgold",
+      "category": 4,
+      "src": "hospital-document-leedgold.jpg",
+      "thumb": "hospital-document-leedgold-thumb.webp",
+      "labels": {
+        "en": {
+          "title": "LEED Gold document",
+          "alt": "Building document labelled LEED Gold"
+        },
+        "ru": {
+          "title": "Документ LEED Gold",
+          "alt": "Документ здания с указанием LEED Gold"
+        },
+        "pt": {
+          "title": "Documento LEED Gold",
+          "alt": "Documento do edifício identificado como LEED Gold"
+        },
+        "es": {
+          "title": "Documento LEED Gold",
+          "alt": "Documento del edificio identificado como LEED Gold"
+        },
+        "it": {
+          "title": "Documento LEED Gold",
+          "alt": "Documento dell’edificio con la dicitura LEED Gold"
+        },
+        "fr": {
+          "title": "Document LEED Gold",
+          "alt": "Document du bâtiment portant la mention LEED Gold"
+        },
+        "de": {
+          "title": "LEED-Gold-Dokument",
+          "alt": "Gebäudedokument mit der Bezeichnung LEED Gold"
+        },
+        "ar": {
+          "title": "مستند LEED Gold",
+          "alt": "مستند مبنى يحمل اسم LEED Gold"
+        },
+        "pl": {
+          "title": "Dokument LEED Gold",
+          "alt": "Dokument budynku oznaczony LEED Gold"
+        }
+      },
+      "width": 1600,
+      "height": 1130
+    },
+    {
+      "id": "hospital-document-efgm",
+      "category": 4,
+      "src": "hospital-document-efgm.jpg",
+      "thumb": "hospital-document-efgm-thumb.webp",
+      "labels": {
+        "en": {
+          "title": "EFQM document",
+          "alt": "Hospital document labelled EFQM"
+        },
+        "ru": {
+          "title": "Документ EFQM",
+          "alt": "Документ больницы с указанием EFQM"
+        },
+        "pt": {
+          "title": "Documento EFQM",
+          "alt": "Documento do hospital identificado como EFQM"
+        },
+        "es": {
+          "title": "Documento EFQM",
+          "alt": "Documento del hospital identificado como EFQM"
+        },
+        "it": {
+          "title": "Documento EFQM",
+          "alt": "Documento dell’ospedale con la dicitura EFQM"
+        },
+        "fr": {
+          "title": "Document EFQM",
+          "alt": "Document hospitalier portant la mention EFQM"
+        },
+        "de": {
+          "title": "EFQM-Dokument",
+          "alt": "Krankenhausdokument mit der Bezeichnung EFQM"
+        },
+        "ar": {
+          "title": "مستند EFQM",
+          "alt": "مستند مستشفى يحمل اسم EFQM"
+        },
+        "pl": {
+          "title": "Dokument EFQM",
+          "alt": "Dokument szpitala oznaczony EFQM"
+        }
+      },
+      "width": 1131,
+      "height": 1600
+    },
+    {
+      "id": "hospital-document-dc",
+      "category": 4,
+      "src": "hospital-document-dc.jpg",
+      "thumb": "hospital-document-dc-thumb.webp",
+      "labels": {
+        "en": {
+          "title": "Diplomatic Council document",
+          "alt": "Hospital document labelled Diplomatic Council"
+        },
+        "ru": {
+          "title": "Документ Diplomatic Council",
+          "alt": "Документ больницы с указанием Diplomatic Council"
+        },
+        "pt": {
+          "title": "Documento Diplomatic Council",
+          "alt": "Documento do hospital identificado como Diplomatic Council"
+        },
+        "es": {
+          "title": "Documento Diplomatic Council",
+          "alt": "Documento del hospital identificado como Diplomatic Council"
+        },
+        "it": {
+          "title": "Documento Diplomatic Council",
+          "alt": "Documento dell’ospedale con la dicitura Diplomatic Council"
+        },
+        "fr": {
+          "title": "Document Diplomatic Council",
+          "alt": "Document hospitalier portant la mention Diplomatic Council"
+        },
+        "de": {
+          "title": "Diplomatic-Council-Dokument",
+          "alt": "Krankenhausdokument mit der Bezeichnung Diplomatic Council"
+        },
+        "ar": {
+          "title": "مستند Diplomatic Council",
+          "alt": "مستند مستشفى يحمل اسم Diplomatic Council"
+        },
+        "pl": {
+          "title": "Dokument Diplomatic Council",
+          "alt": "Dokument szpitala oznaczony Diplomatic Council"
+        }
+      },
+      "width": 1132,
+      "height": 1600
+    },
+    {
+      "id": "hospital-document-kalder",
+      "category": 4,
+      "src": "hospital-document-kalder.jpg",
+      "thumb": "hospital-document-kalder-thumb.webp",
+      "labels": {
+        "en": {
+          "title": "KalDer document",
+          "alt": "Hospital document labelled KalDer"
+        },
+        "ru": {
+          "title": "Документ KalDer",
+          "alt": "Документ больницы с указанием KalDer"
+        },
+        "pt": {
+          "title": "Documento KalDer",
+          "alt": "Documento do hospital identificado como KalDer"
+        },
+        "es": {
+          "title": "Documento KalDer",
+          "alt": "Documento del hospital identificado como KalDer"
+        },
+        "it": {
+          "title": "Documento KalDer",
+          "alt": "Documento dell’ospedale con la dicitura KalDer"
+        },
+        "fr": {
+          "title": "Document KalDer",
+          "alt": "Document hospitalier portant la mention KalDer"
+        },
+        "de": {
+          "title": "KalDer-Dokument",
+          "alt": "Krankenhausdokument mit der Bezeichnung KalDer"
+        },
+        "ar": {
+          "title": "مستند KalDer",
+          "alt": "مستند مستشفى يحمل اسم KalDer"
+        },
+        "pl": {
+          "title": "Dokument KalDer",
+          "alt": "Dokument szpitala oznaczony KalDer"
+        }
+      },
+      "width": 1600,
+      "height": 1132
+    },
+    {
+      "id": "ime-document-ushas",
+      "category": 4,
+      "src": "ime-document-ushas.webp",
+      "thumb": "ime-document-ushas-thumb.webp",
+      "labels": {},
+      "width": 800,
+      "height": 566
+    },
+    {
+      "id": "ime-document-tursab",
+      "category": 4,
+      "src": "ime-document-tursab.webp",
+      "thumb": "ime-document-tursab.webp",
+      "labels": {},
+      "width": 595,
+      "height": 842
+    },
+    {
+      "id": "ime-document-trademark",
+      "category": 4,
+      "src": "ime-document-trademark.webp",
+      "thumb": "ime-document-trademark-thumb.webp",
+      "labels": {},
+      "width": 800,
+      "height": 1132
+    },
+    {
+      "id": "result-01",
+      "category": 3,
+      "src": "result-01.webp",
+      "thumb": "result-01.webp"
+    },
+    {
+      "id": "result-02",
+      "category": 3,
+      "src": "result-02.webp",
+      "thumb": "result-02.webp"
+    },
+    {
+      "id": "result-03",
+      "category": 3,
+      "src": "result-03.webp",
+      "thumb": "result-03.webp"
+    },
+    {
+      "id": "result-04",
+      "category": 3,
+      "src": "result-04.webp",
+      "thumb": "result-04.webp"
+    },
+    {
+      "id": "result-05",
+      "category": 3,
+      "src": "result-05.webp",
+      "thumb": "result-05.webp"
+    },
+    {
+      "id": "result-06",
+      "category": 3,
+      "src": "result-06.webp",
+      "thumb": "result-06.webp"
+    },
+    {
+      "id": "result-07",
+      "category": 3,
+      "src": "result-07.webp",
+      "thumb": "result-07.webp"
+    },
+    {
+      "id": "result-08",
+      "category": 3,
+      "src": "result-08.webp",
+      "thumb": "result-08.webp"
+    },
+    {
+      "id": "result-09",
+      "category": 3,
+      "src": "result-09.webp",
+      "thumb": "result-09.webp"
+    },
+    {
+      "id": "result-10",
+      "category": 3,
+      "src": "result-10.webp",
+      "thumb": "result-10.webp"
+    },
+    {
+      "id": "guide-front-smile",
+      "category": 5,
+      "src": "guide-front-smile.jpg",
+      "thumb": "guide-front-smile-thumb.webp",
+      "labels": {
+        "en": {
+          "title": "Front smile"
+        },
+        "tr": {
+          "title": "Önden gülüş"
+        },
+        "ru": {
+          "title": "Улыбка спереди"
+        },
+        "es": {
+          "title": "Sonrisa frontal"
+        },
+        "it": {
+          "title": "Sorriso frontale"
+        }
+      }
+    },
+    {
+      "id": "guide-right-bite",
+      "category": 5,
+      "src": "guide-right-bite.jpg",
+      "thumb": "guide-right-bite-thumb.webp",
+      "labels": {
+        "en": {
+          "title": "Right bite"
+        },
+        "tr": {
+          "title": "Sağ kapanış"
+        },
+        "ru": {
+          "title": "Прикус справа"
+        },
+        "es": {
+          "title": "Mordida derecha"
+        },
+        "it": {
+          "title": "Morso destro"
+        }
+      }
+    },
+    {
+      "id": "guide-lower-arch",
+      "category": 5,
+      "src": "guide-lower-arch.jpg",
+      "thumb": "guide-lower-arch-thumb.webp",
+      "labels": {
+        "en": {
+          "title": "Lower teeth, from above"
+        },
+        "tr": {
+          "title": "Alt dişler, üstten"
+        },
+        "ru": {
+          "title": "Нижние зубы сверху"
+        },
+        "es": {
+          "title": "Dientes inferiores desde arriba"
+        },
+        "it": {
+          "title": "Denti inferiori dall’alto"
+        }
+      }
+    },
+    {
+      "id": "guide-upper-arch",
+      "category": 5,
+      "src": "guide-upper-arch.jpg",
+      "thumb": "guide-upper-arch-thumb.webp",
+      "labels": {
+        "en": {
+          "title": "Upper teeth, from below"
+        },
+        "tr": {
+          "title": "Üst dişler, alttan"
+        },
+        "ru": {
+          "title": "Верхние зубы снизу"
+        },
+        "es": {
+          "title": "Dientes superiores desde abajo"
+        },
+        "it": {
+          "title": "Denti superiori dal basso"
+        }
+      }
+    }
+  ],
+  "videos": [
+    {
+      "id": "dental-centre-tour",
+      "titleKey": "dentalCentreTour",
+      "kind": "hospital",
+      "src": "https://www.imeclinic.com/lp-assets/dental/videos/dental-centre-tour-20261028.mp4",
+      "poster": "/lp-assets/dental/videos/dental-centre-tour-20261028.webp",
+      "width": 480,
+      "height": 848,
+      "durationSeconds": 56.033333,
+      "audio": "original",
+      "localPoster": "dental-centre-tour-20261028.webp"
+    },
+    {
+      "id": "doctor-veneers",
+      "titleKey": "doctorVeneers",
+      "kind": "doctor",
+      "variants": {
+        "en": {
+          "src": "https://www.imeclinic.com/lp-assets/dental/videos/doctor-veneers-en.mp4",
+          "poster": "/lp-assets/dental/videos/doctor-veneers-en.webp",
+          "width": 720,
+          "height": 1280,
+          "durationSeconds": 45.2,
+          "audio": "en",
+          "localPoster": "doctor-veneers-en.webp"
+        },
+        "ru": {
+          "src": "https://www.imeclinic.com/lp-assets/dental/videos/doctor-veneers-ru.mp4",
+          "poster": "/lp-assets/dental/videos/doctor-veneers-ru.webp",
+          "width": 720,
+          "height": 1280,
+          "durationSeconds": 48.4,
+          "audio": "ru",
+          "localPoster": "doctor-veneers-ru.webp"
+        },
+        "es": {
+          "src": "https://www.imeclinic.com/lp-assets/dental/videos/doctor-veneers-es.mp4",
+          "poster": "/lp-assets/dental/videos/doctor-veneers-es.webp",
+          "width": 720,
+          "height": 1280,
+          "durationSeconds": 54.4,
+          "audio": "es",
+          "localPoster": "doctor-veneers-es.webp"
+        },
+        "it": {
+          "src": "https://www.imeclinic.com/lp-assets/dental/videos/doctor-veneers-it.mp4",
+          "poster": "/lp-assets/dental/videos/doctor-veneers-it.webp",
+          "width": 720,
+          "height": 1280,
+          "durationSeconds": 47.1,
+          "audio": "it",
+          "localPoster": "doctor-veneers-it.webp"
+        },
+        "pl": {
+          "src": "https://www.imeclinic.com/lp-assets/dental/videos/doctor-veneers-pl.mp4",
+          "poster": "/lp-assets/dental/videos/doctor-veneers-pl.webp",
+          "width": 720,
+          "height": 1280,
+          "durationSeconds": 49.8,
+          "audio": "pl",
+          "localPoster": "doctor-veneers-pl.webp"
+        }
+      }
+    },
+    {
+      "id": "dental-laboratory",
+      "titleKey": "dentalLab",
+      "kind": "hospital",
+      "src": "https://www.imeclinic.com/lp-assets/dental/videos/dental-laboratory.mp4",
+      "poster": "/lp-assets/dental/videos/dental-laboratory.webp",
+      "width": 720,
+      "height": 1280,
+      "durationSeconds": 60.0,
+      "audio": null,
+      "localPoster": "dental-laboratory.webp"
+    }
+  ]
+}

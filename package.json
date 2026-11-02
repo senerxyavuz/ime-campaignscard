@@ -2,22 +2,30 @@
   "name": "ime-clinic-portal",
   "type": "module",
   "version": "1.0.0",
-  "description": "IME Clinic — Ekip içi çok dilli kampanya satış portalı",
+  "description": "IME Clinic \u2014 Ekip i\u00e7i \u00e7ok dilli kampanya sat\u0131\u015f portal\u0131",
   "private": true,
   "scripts": {
     "dev": "astro dev",
     "start": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "check": "astro check",
+    "test": "node --test tests/*.test.mjs",
+    "prepare:winter-art": "node scripts/create-winter-art.mjs"
   },
   "dependencies": {
-    "astro": "^6.3.1"
+    "astro": "^6.3.1",
+    "fflate": "^0.8.3"
   },
   "devDependencies": {
+    "@astrojs/check": "^0.9.12",
+    "@fontsource-variable/plus-jakarta-sans": "^5.1.0",
+    "@resvg/resvg-js": "^2.6.2",
     "@tailwindcss/vite": "^4.1.0",
+    "sharp": "^0.35.5",
     "tailwindcss": "^4.1.0",
-    "@fontsource-variable/plus-jakarta-sans": "^5.1.0"
+    "typescript": "^6.0.3"
   },
   "overrides": {
     "vite": "^7"

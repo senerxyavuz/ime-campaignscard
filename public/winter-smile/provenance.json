@@ -1,0 +1,350 @@
+{
+  "sourceRelease": "20261029T161132Z-cc833b9f5cd9-6a4453b0",
+  "files": [
+    {
+      "source": "/lp-assets/dental/clinic/hospital-exterior.webp",
+      "file": "clinic-hospital-exterior.webp",
+      "sha256": "8f1df639294af7b5c355d1099d522546db458a765f9530e0073bc90899e92e3b"
+    },
+    {
+      "source": "/lp-assets/dental/clinic/dental-unit.webp",
+      "file": "clinic-dental-unit.webp",
+      "sha256": "d12933b769feaa3b67e47b2ed10ce6b1a2a322ef75808c09b9cfd8a6d2173db2"
+    },
+    {
+      "source": "/lp-assets/dental/clinic/dental-unit-green.webp",
+      "file": "clinic-dental-unit-green.webp",
+      "sha256": "e2f8e4448a94a421d9db65b74b0bfb1fd3ef0d0dd339df8b04d31998bed58363"
+    },
+    {
+      "source": "/lp-assets/dental/clinic/dental-unit-yellow.webp",
+      "file": "clinic-dental-unit-yellow.webp",
+      "sha256": "7b8bfe061b70108379a2002904bbef6a9f87f584aac2bb36146f9e5d530e8aa4"
+    },
+    {
+      "source": "/lp-assets/dental/clinic/dental-consultation.webp",
+      "file": "clinic-dental-consultation.webp",
+      "sha256": "5499273f11bb9d998518de048e00ce785b66eb383c360c4f84669fa6c9af9e4a"
+    },
+    {
+      "source": "/lp-assets/dental/clinic/lobby-reception.webp",
+      "file": "clinic-lobby-reception.webp",
+      "sha256": "a7d1109b61020241fa7515f73d4ed24db6f3903281884cfc3db2d05fa64693ff"
+    },
+    {
+      "source": "/lp-assets/dental/clinic/lobby-lounge.webp",
+      "file": "clinic-lobby-lounge.webp",
+      "sha256": "09388efb0d88a853d9464a6980998eda382afe2c8ea0c64624ef9b91ecb80860"
+    },
+    {
+      "source": "/lp-assets/dental/clinic/waiting-lounge.webp",
+      "file": "clinic-waiting-lounge.webp",
+      "sha256": "fb7ab57076e3c16784fc5492e0f4a4348619e80a63199779cbd331e693a0bb24"
+    },
+    {
+      "source": "/lp-assets/dental/clinic/restaurant-cafe.webp",
+      "file": "clinic-restaurant-cafe.webp",
+      "sha256": "550cca8981ef8097a5145840730068ed0734c2a5d4d49e7bfb491c52bb263ce4"
+    },
+    {
+      "source": "/lp-assets/dental/clinic/surgery-corridor.webp",
+      "file": "clinic-surgery-corridor.webp",
+      "sha256": "1cdd903a56d51ac64b43fc5f56a54d035837e759a8cdce87425b9738e04ca418"
+    },
+    {
+      "source": "/lp-assets/img/pullman-room-1200.webp",
+      "file": "hotel-room.webp",
+      "sha256": "89ccd39d6078a8229c1e2ea3ce50a08ceed0a0b9c6a2e27d0b39e50e466ae5ba"
+    },
+    {
+      "source": "/lp-assets/img/pullman-room-480.webp",
+      "file": "hotel-room-thumb.webp",
+      "sha256": "9bdaa84e050dbf710fc1dc3c2975eded98fa1f57a0aeee56289ea1d401480fcd"
+    },
+    {
+      "source": "/lp-assets/img/pullman-room-2-1200.webp",
+      "file": "hotel-room-2.webp",
+      "sha256": "03b49f849db3c6238f65d2ca421b5b3c22048caae39e8b3827bf3406b079008e"
+    },
+    {
+      "source": "/lp-assets/img/pullman-room-2-480.webp",
+      "file": "hotel-room-2-thumb.webp",
+      "sha256": "0385b4f29965add4bf07695816b885503f3cb01716daa39c29bade05c63f7909"
+    },
+    {
+      "source": "/lp-assets/img/pullman-entrance-1200.webp",
+      "file": "hotel-entrance.webp",
+      "sha256": "f8a0fcd0e824c36148779a2cff6c2d9556e0070792f7ebc188a256be50f205ec"
+    },
+    {
+      "source": "/lp-assets/img/pullman-entrance-480.webp",
+      "file": "hotel-entrance-thumb.webp",
+      "sha256": "4182ef6a125f41674095c57f6ed21fc62c575707a022d4dc3571110ab89703a4"
+    },
+    {
+      "source": "/lp-assets/img/pullman-lobby-1200.webp",
+      "file": "hotel-lobby.webp",
+      "sha256": "e0f6fa84bc1ede95f49b6384388413139f5dd7283f9222ffeb6426375da45c73"
+    },
+    {
+      "source": "/lp-assets/img/pullman-lobby-480.webp",
+      "file": "hotel-lobby-thumb.webp",
+      "sha256": "da316b98a1a0055d1db5fa8bd235bb055b32afdb4da3a8c6e8d74ac17ef6d12f"
+    },
+    {
+      "source": "/lp-assets/img/pullman-pool-1200.webp",
+      "file": "hotel-pool.webp",
+      "sha256": "25eabc3c74094e4a2f9506b64192f9d0a716096fdf2a007e0c1093cdf21ffc70"
+    },
+    {
+      "source": "/lp-assets/img/pullman-pool-480.webp",
+      "file": "hotel-pool-thumb.webp",
+      "sha256": "adc61753c27f9809cdbfa75219ca6d2ec6abcf6f100a928967bec9fffc11d4ba"
+    },
+    {
+      "source": "/lp-assets/img/pullman-restaurant-1200.webp",
+      "file": "hotel-restaurant.webp",
+      "sha256": "3d8b4ae187eeec29dc876dd50584ffdc3b6996047e23d80f39e0b2287b3fdc02"
+    },
+    {
+      "source": "/lp-assets/img/pullman-restaurant-480.webp",
+      "file": "hotel-restaurant-thumb.webp",
+      "sha256": "2fe98a7eddf6c82c5937d6223d5f62f7ae27bb10c5f4b44d1869226c53808993"
+    },
+    {
+      "source": "/lp-assets/dental/stay/vip-transfer.webp",
+      "file": "transfer-vehicle.webp",
+      "sha256": "1ca82f03e21cc08adb68d778596bc17f12f6d641c52f051d863cfbe2337e7e71"
+    },
+    {
+      "source": "/lp-assets/dental/docs/jci.jpg",
+      "file": "hospital-document-jci.jpg",
+      "sha256": "d35fc95ebc79548d188971cfba8d345d9502874276998f315e4b79f8cd7e06d2"
+    },
+    {
+      "source": "/lp-assets/dental/docs/jci-400.webp",
+      "file": "hospital-document-jci-thumb.webp",
+      "sha256": "6e5dc852c9459e63c828471e7f7a42460119c37012f5a41f51a5b37e66f91cfc"
+    },
+    {
+      "source": "/lp-assets/dental/docs/temos.jpg",
+      "file": "hospital-document-temos.jpg",
+      "sha256": "3a9099f0a63f48a7d0ff14981ab0b770d4d16196b57aa8b7600a0545f9fab580"
+    },
+    {
+      "source": "/lp-assets/dental/docs/temos-400.webp",
+      "file": "hospital-document-temos-thumb.webp",
+      "sha256": "8c0ef035c4dcabd8c0f7853290eac4d4eefa0579eb8d3885a1e372f9ca6e9515"
+    },
+    {
+      "source": "/lp-assets/dental/docs/iso.jpg",
+      "file": "hospital-document-iso.jpg",
+      "sha256": "b9ee845e7c9bbe7767104ebe270b35ad4311709614002794293ce83872ead9ae"
+    },
+    {
+      "source": "/lp-assets/dental/docs/iso-400.webp",
+      "file": "hospital-document-iso-thumb.webp",
+      "sha256": "d04532229e9ea77cf07a3516dddf9eec03c98f0ebf46a1219bb7338c983824ed"
+    },
+    {
+      "source": "/lp-assets/dental/docs/leedgold.jpg",
+      "file": "hospital-document-leedgold.jpg",
+      "sha256": "032b11f2175b4ce3fa6f5fd5cf9fb0e383f95c66c2145902b9a5c7d17de96cf5"
+    },
+    {
+      "source": "/lp-assets/dental/docs/leedgold-400.webp",
+      "file": "hospital-document-leedgold-thumb.webp",
+      "sha256": "695bd1749c850c8ed25c96d708e7f3c2f732c492a14862476de57e8421c495ce"
+    },
+    {
+      "source": "/lp-assets/dental/docs/efgm.jpg",
+      "file": "hospital-document-efgm.jpg",
+      "sha256": "208e39bfc89670e2ab2f8ca2f2c03a8b050c2e02116d5771e6bd4bef38fa0074"
+    },
+    {
+      "source": "/lp-assets/dental/docs/efgm-400.webp",
+      "file": "hospital-document-efgm-thumb.webp",
+      "sha256": "301fa32ab99fddbfd8916eb4c0eb6ca14a57bff06edf3d5139c5e34fb43f29a6"
+    },
+    {
+      "source": "/lp-assets/dental/docs/dc.jpg",
+      "file": "hospital-document-dc.jpg",
+      "sha256": "2b1c9c50f66d69ee98a4463f948d805328d3090ced5e1516a9df47268b5305ce"
+    },
+    {
+      "source": "/lp-assets/dental/docs/dc-400.webp",
+      "file": "hospital-document-dc-thumb.webp",
+      "sha256": "ccaa78670c13c117a5db38dc732cd2998a2ed17662d83dd6f047d5e7f6afde95"
+    },
+    {
+      "source": "/lp-assets/dental/docs/kalder.jpg",
+      "file": "hospital-document-kalder.jpg",
+      "sha256": "d8d1a3330e55de6cfeb1444a3095036f59fbb58c1d220f1353c6bdd4a1f3c96b"
+    },
+    {
+      "source": "/lp-assets/dental/docs/kalder-400.webp",
+      "file": "hospital-document-kalder-thumb.webp",
+      "sha256": "66ce709647d339bd00746edf66f58b6e313e618484dfc0887f204f33d99525a3"
+    },
+    {
+      "source": "/lp-assets/img/cert-ushas-800.webp",
+      "file": "ime-document-ushas.webp",
+      "sha256": "7fd868e191faf7f1cc4b6106c2a7dc6831faffb228c0e0e936d4345889bd71a4"
+    },
+    {
+      "source": "/lp-assets/img/cert-ushas-400.webp",
+      "file": "ime-document-ushas-thumb.webp",
+      "sha256": "99578faff3553e4ee52d926151e9d0e4df9f4d621892b51f8df6f2026f55232a"
+    },
+    {
+      "source": "/lp-assets/img/cert-tursab-595.webp",
+      "file": "ime-document-tursab.webp",
+      "sha256": "6440bf9debd3e5baeb32aa0de3460ed9f9b454765a2229a8356fe786e5591572"
+    },
+    {
+      "source": "/lp-assets/img/cert-trademark-800.webp",
+      "file": "ime-document-trademark.webp",
+      "sha256": "d7d72a5bb372aa644d5156c1acb24104c81bebe133d032428fbff9d5fa15f618"
+    },
+    {
+      "source": "/lp-assets/img/cert-trademark-400.webp",
+      "file": "ime-document-trademark-thumb.webp",
+      "sha256": "81937effe8d6737d9dca9d51a438e98a6eef17f614eb9dafb49738e7d61bca87"
+    },
+    {
+      "source": "/lp-assets/dental/results/maryna-uvarova.webp",
+      "file": "result-01.webp",
+      "sha256": "f0db5efc7a4e5c8171130b55ab21fc348ee821c5abbe71621b77865b2a4a5e6c"
+    },
+    {
+      "source": "/lp-assets/dental/results/marin-hristov.webp",
+      "file": "result-02.webp",
+      "sha256": "93d11d9234b8c65d6d2a65039f7296c0a35c957f004658fecbcaf79fa052305f"
+    },
+    {
+      "source": "/lp-assets/dental/results/aleksandr-zagonenka.webp",
+      "file": "result-03.webp",
+      "sha256": "dae5641b26da0a3b1d18ff28c1062b76e2742e22857e1de42d4c6d308c5bae24"
+    },
+    {
+      "source": "/lp-assets/dental/results/aleksey-taskinov.webp",
+      "file": "result-04.webp",
+      "sha256": "81c2f48ca8718cca6dad13090a59a2fbacc921f096d9af2251d47776eb3ebe4e"
+    },
+    {
+      "source": "/lp-assets/dental/results/antonella-lo-giudice.webp",
+      "file": "result-05.webp",
+      "sha256": "f9e36a86b551615c7a2a4d15487c98e1b66d0500f53fd1d077327229d0023816"
+    },
+    {
+      "source": "/lp-assets/dental/results/asia-gorunova.webp",
+      "file": "result-06.webp",
+      "sha256": "0a8a10da879f562e98d36a1b510b7662655d1ca494a38e3ac137fa894c775d5c"
+    },
+    {
+      "source": "/lp-assets/dental/results/tomas-kapocius.webp",
+      "file": "result-07.webp",
+      "sha256": "686032a754be64f1c081700a8caf565ee2bb00dec17547cee097aae34143e4ce"
+    },
+    {
+      "source": "/lp-assets/dental/results/calisma-yuzeyi-1.webp",
+      "file": "result-08.webp",
+      "sha256": "10acd0f82824bb38beea613e9005bfd72c185c1242933ab87d78769eed2863f0"
+    },
+    {
+      "source": "/lp-assets/dental/results/calisma-yuzeyi-2.webp",
+      "file": "result-09.webp",
+      "sha256": "43a63e859c119b12022fbfa3791d483a6ada3c8287a2edf2cd6cdd42f6409ccc"
+    },
+    {
+      "source": "/lp-assets/dental/results/calisma-yuzeyi-5.webp",
+      "file": "result-10.webp",
+      "sha256": "9ad318daa7c168641370a8f46d7cbf0d0186335fd493b5e8a6b463a6ef876191"
+    },
+    {
+      "source": "/lp-assets/dental/guides/front-smile.jpg",
+      "file": "guide-front-smile.jpg",
+      "sha256": "048571315814d70489f74dc426b488b39c769f434a1b3e34a3839ef5ee10354f"
+    },
+    {
+      "source": "/lp-assets/dental/guides/front-smile-480.webp",
+      "file": "guide-front-smile-thumb.webp",
+      "sha256": "17d0303291889e80523b95869ebe7a0689e4eadc4f43dc117c5a972e2e72ddfc"
+    },
+    {
+      "source": "/lp-assets/dental/guides/right-bite.jpg",
+      "file": "guide-right-bite.jpg",
+      "sha256": "1fda58d5931d07a38dc2f7b6d7faa94c7e71ad91c3f2c20203247bc28cba75e3"
+    },
+    {
+      "source": "/lp-assets/dental/guides/right-bite-480.webp",
+      "file": "guide-right-bite-thumb.webp",
+      "sha256": "e7d37cc9045952af0b36a015dcfa444cbee52d110d23b6faff2f09c1a67e490e"
+    },
+    {
+      "source": "/lp-assets/dental/guides/lower-arch.jpg",
+      "file": "guide-lower-arch.jpg",
+      "sha256": "ed47c655dd09171b48f6700c3a0f7fcd8d97c1ce59f01af627961d281affb397"
+    },
+    {
+      "source": "/lp-assets/dental/guides/lower-arch-480.webp",
+      "file": "guide-lower-arch-thumb.webp",
+      "sha256": "440bc7b7360ef7faea529a0f873064b0802938c3c2107962ddafa604b5231cd2"
+    },
+    {
+      "source": "/lp-assets/dental/guides/upper-arch.jpg",
+      "file": "guide-upper-arch.jpg",
+      "sha256": "0f5847912b73f885fec29fcac248886f0935243c132b7a896b3dd0acf19ba25f"
+    },
+    {
+      "source": "/lp-assets/dental/guides/upper-arch-480.webp",
+      "file": "guide-upper-arch-thumb.webp",
+      "sha256": "dc38654856d168081dae024f7ab5083434d9658c6bfb00565fad7455bdc7d806"
+    },
+    {
+      "source": "/lp-assets/dental/november/istanbul-bosphorus-1280.webp",
+      "file": "hero-1280.webp",
+      "sha256": "5f692d02c1500982d9df2199026e65b7fbff64668886b843990d7e865e100b8d"
+    },
+    {
+      "source": "/lp-assets/dental/november/istanbul-bosphorus-640.webp",
+      "file": "hero-640.webp",
+      "sha256": "6e02c22c28a686a33746da6449e2775abae6852d5bccf23ec36c329d229fd0b7"
+    },
+    {
+      "source": "/lp-assets/dental/videos/dental-centre-tour-20261028.webp",
+      "file": "dental-centre-tour-20261028.webp",
+      "sha256": "ca6548e7aae7f8cd74adf7f2c8628cac765adbb029be05f3fde391058f547f74"
+    },
+    {
+      "source": "/lp-assets/dental/videos/doctor-veneers-en.webp",
+      "file": "doctor-veneers-en.webp",
+      "sha256": "11b4e39cc519894334d66f55a0b06e01839e9f867765c549312f207c05012ee4"
+    },
+    {
+      "source": "/lp-assets/dental/videos/doctor-veneers-ru.webp",
+      "file": "doctor-veneers-ru.webp",
+      "sha256": "e9b0710f8c0527e19dae666454121ede1025327f98591e93473800f44def5999"
+    },
+    {
+      "source": "/lp-assets/dental/videos/doctor-veneers-es.webp",
+      "file": "doctor-veneers-es.webp",
+      "sha256": "02ac54f6e98af8c48fb35c614432e8695a0b77594723623334655bc37686f1da"
+    },
+    {
+      "source": "/lp-assets/dental/videos/doctor-veneers-it.webp",
+      "file": "doctor-veneers-it.webp",
+      "sha256": "74c3d02b7df76fb824feb66583aaafab2cb180721ab4f5afcc3fc12c6404e643"
+    },
+    {
+      "source": "/lp-assets/dental/videos/doctor-veneers-pl.webp",
+      "file": "doctor-veneers-pl.webp",
+      "sha256": "5679957dbea203f0395e655f426315aad0d4fe17b3d8f940178a90f764839f7b"
+    },
+    {
+      "source": "/lp-assets/dental/videos/dental-laboratory.webp",
+      "file": "dental-laboratory.webp",
+      "sha256": "b46718df200e28fb02eab78247920b4848b3314aaf6a5959b26e1d3ead390a87"
+    }
+  ]
+}

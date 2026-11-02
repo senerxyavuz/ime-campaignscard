@@ -7,7 +7,7 @@ import { useTranslations } from "@/i18n/utils";
 
 export function getStaticPaths() {
   return langOrder.flatMap((lang) =>
-    campaigns.map((c) => ({ params: { lang, slug: c.slug } })),
+    campaigns.filter((c) => c.slug !== 'dental').map((c) => ({ params: { lang, slug: c.slug } })),
   );
 }
 

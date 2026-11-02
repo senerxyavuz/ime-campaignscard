@@ -1,0 +1,34 @@
+{
+  "date": "2026-11-02",
+  "languages": [
+    "en",
+    "tr",
+    "ru",
+    "es",
+    "it"
+  ],
+  "viewports": [
+    320,
+    390,
+    768,
+    1024,
+    1440
+  ],
+  "responsiveCases": 25,
+  "horizontalOverflowCases": 0,
+  "brokenVisibleImages": 0,
+  "browserErrors": 0,
+  "checks": {
+    "astroCheck": "0 errors, 0 warnings, 0 hints",
+    "productionBuild": "31 static pages",
+    "nodeTests": "3 passed",
+    "clinicalMediaByteHashes": "all imported files match the landing source",
+    "browserZip": "2 campaign JPEGs + 1 clinic WebP, contents verified by SHA-256",
+    "clinicVideo": "56.033333 seconds; readyState 4, real playback observed, player removed on close",
+    "keyboardGallery": "ArrowRight changes category and image; close restores opener focus",
+    "advisorView": "query opens advisor desk; current 3000 EUR and 31 December 2026 copy visible",
+    "clipboard": "copy action returned success feedback"
+  },
+  "sharedLandingRelease": "20261029T161132Z-cc833b9f5cd9-6a4453b0",
+  "publicationTarget": "existing campaignscard app 22; no shared landing or PHP-site writes"
+}

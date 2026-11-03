@@ -653,6 +653,31 @@
           "title": "Denti superiori dal basso"
         }
       }
+    },
+    {
+      "id": "airport-flight",
+      "category": 2,
+      "src": "airport-flight-1280.webp",
+      "thumb": "airport-flight-640.webp",
+      "labels": {
+        "en": {
+          "title": "Flight & airport · illustration"
+        },
+        "tr": {
+          "title": "Uçuş ve havalimanı · temsili"
+        },
+        "ru": {
+          "title": "Перелёт и аэропорт · иллюстрация"
+        },
+        "es": {
+          "title": "Vuelo y aeropuerto · ilustración"
+        },
+        "it": {
+          "title": "Volo e aeroporto · illustrazione"
+        }
+      },
+      "width": 1280,
+      "height": 853
     }
   ],
   "videos": [
@@ -731,6 +756,39 @@
       "durationSeconds": 60.0,
       "audio": null,
       "localPoster": "dental-laboratory.webp"
+    },
+    {
+      "id": "patient-usa",
+      "kind": "patient",
+      "src": "https://www.imeclinic.com/lp-assets/dental/videos/patient-usa.mp4",
+      "poster": "/lp-assets/dental/videos/patient-usa.webp",
+      "localPoster": "patient-usa.webp",
+      "audio": "en",
+      "durationSeconds": 46.8,
+      "width": 720,
+      "height": 1280
+    },
+    {
+      "id": "patient-london",
+      "kind": "patient",
+      "src": "https://www.imeclinic.com/lp-assets/dental/videos/patient-london.mp4",
+      "poster": "/lp-assets/dental/videos/patient-london.webp",
+      "localPoster": "patient-london.webp",
+      "audio": "en",
+      "durationSeconds": 39.6,
+      "width": 720,
+      "height": 1280
+    },
+    {
+      "id": "treatment-rooms",
+      "kind": "hospital",
+      "src": "https://www.imeclinic.com/lp-assets/dental/videos/treatment-rooms.mp4",
+      "poster": "/lp-assets/dental/videos/treatment-rooms.webp",
+      "localPoster": "treatment-rooms.webp",
+      "audio": null,
+      "durationSeconds": 10.4,
+      "width": 720,
+      "height": 1280
     }
   ]
 }

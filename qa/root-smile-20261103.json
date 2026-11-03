@@ -1,0 +1,38 @@
+{
+  "date": "2026-11-03",
+  "rootRoutes": [
+    "/all-inclusive-smile/",
+    "/tr/all-inclusive-smile/",
+    "/ru/all-inclusive-smile/",
+    "/es/all-inclusive-smile/",
+    "/it/all-inclusive-smile/"
+  ],
+  "responsiveCases": 25,
+  "widths": [
+    320,
+    390,
+    768,
+    1024,
+    1440
+  ],
+  "overflowCases": 0,
+  "brokenVisibleImages": 0,
+  "visibleVideoCardsPerLanguage": 6,
+  "browserConsoleErrors": 0,
+  "playback": {
+    "patientStory": "46.762 seconds, readyState 4, playing observed, player removed on close"
+  },
+  "browserZip": "two updated campaign JPEGs and airport-flight-1280.webp verified byte-for-byte",
+  "gates": {
+    "astro": "0 errors, warnings and hints",
+    "node": "3 tests passed",
+    "publisher": "5 tests passed"
+  },
+  "commercialTermsUnchanged": {
+    "priceEUR": 3000,
+    "flightAllowanceEUR": 300,
+    "expires": "2026-12-31"
+  },
+  "latestSharedSourceChecked": "20261102T190720Z-b8c7ea78e677-105b5816",
+  "publicationScope": "five root landing routes plus versioned lp-assets/all-inclusive-smile; portal redirects through existing app 22"
+}

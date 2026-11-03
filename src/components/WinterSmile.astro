@@ -4,13 +4,16 @@ import { smileTerms } from '@/data/winter-smile';
 import media from '@/data/winter-media.json';
 import { langOrder,languages,type Lang } from '@/i18n/ui';
 import '@/styles/winter-smile.css';
+import { smilePath, smileOrigin } from '@/data/smile-paths.mjs';
+import { smileVisuals } from '@/data/winter-visuals';
 const {lang}=Astro.props as {lang:Lang};
 const c=smileCopy[lang];
+const visual=smileVisuals[lang];
 const base=import.meta.env.BASE_URL;
 const root=`${base}winter-smile/`;
 const asset=(name:string)=>root+'media/'+name;
-const route=`${base}${lang}/kampanya/dental/`;
-const canonical='https://imeclinic.com'+route;
+const route=smilePath(lang);
+const canonical=smileOrigin+route;
 const price=new Intl.NumberFormat(lang,{style:'currency',currency:'EUR',maximumFractionDigits:0}).format(smileTerms.price);
 const anchors=['package','journey','places','library','questions'];
 const localizedMedia=media.items.map((item:any,index:number)=>({...item,src:asset(item.src),thumb:asset(item.thumb),title:item.labels?.[lang]?.title||`${c.categories[item.category]} · ${String(index+1).padStart(2,'0')}`}));
@@ -19,7 +22,11 @@ const items=[...posters,...localizedMedia];
 const clinicVideo=media.videos[0] as any;
 const doctorVariants=(media.videos[1] as any).variants;
 const doctorVideo=doctorVariants[lang]||doctorVariants.en;
-const videos=[{...clinicVideo,title:c.watch,audio:c.originalAudio},{...doctorVideo,title:c.watchDoctor,audio:c.doctorAudio}];
+const videos=(media.videos as any[]).map((item,index)=>{
+ const video=index===1?doctorVideo:item;
+ const audio=index===0?c.originalAudio:index===1?c.doctorAudio:video.audio==='en'?visual.english:visual.silent;
+ return {...video,title:visual.videoNames[index],audio};
+});
 const client={...c,items,canonical,lang};
 ---
 <!doctype html>
@@ -28,17 +35,17 @@ const client={...c,items,canonical,lang};
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="robots" content="noindex, nofollow"/>
-    <meta name="theme-color" content="#302239"/>
+    <meta name="theme-color" content="#0079bd"/>
     <title>{c.title} · {price} · {c.season} — IME Clinic</title>
     <meta name="description" content={`${c.lead} ${c.deadline}. ${c.flightNote}.`}/>
     <link rel="canonical" href={canonical}/>
-    {langOrder.map(code=><link rel="alternate" hreflang={code} href={`https://imeclinic.com${base}${code}/kampanya/dental/`}/>)}
-    <link rel="alternate" hreflang="x-default" href={`https://imeclinic.com${base}en/kampanya/dental/`}/>
+    {langOrder.map(code=><link rel="alternate" hreflang={code} href={smileOrigin+smilePath(code)}/>)}
+    <link rel="alternate" hreflang="x-default" href={smileOrigin+smilePath('en')}/>
     <meta property="og:title" content={`${c.title} · ${price}`}/>
     <meta property="og:description" content={`${c.lead} ${c.deadline}. ${c.flightNote}.`}/>
     <meta property="og:type" content="website"/>
     <meta property="og:url" content={canonical}/>
-    <meta property="og:image" content={`https://imeclinic.com${root}art/winter-${lang}-1.jpg`}/>
+    <meta property="og:image" content={`${smileOrigin}${root}art/winter-${lang}-1.jpg`}/>
     <meta property="og:image:width" content="1080"/><meta property="og:image:height" content="1350"/>
     <link rel="icon" href={`${base}favicon.svg`}/>
     <link rel="preload" href={asset('manrope-latin.woff2')} as="font" type="font/woff2" crossorigin/>
@@ -49,7 +56,7 @@ const client={...c,items,canonical,lang};
       <div class="winter-wrap header-row">
         <a href="#main" aria-label="IME Clinic" class="winter-logo"><img src={`${base}ime-clinic-logo.svg`} alt="IME Clinic" width="150" height="36"/></a>
         <nav class="desktop-nav" aria-label={c.title}>{anchors.map((id,i)=><a href={`#${id}`}>{c.nav[i]}</a>)}</nav>
-        <details class="winter-language"><summary aria-label={c.language}>{lang.toUpperCase()} <span aria-hidden="true">⌄</span></summary><div>{langOrder.map(code=><a href={`${base}${code}/kampanya/dental/`} lang={code} hreflang={code} aria-current={code===lang?'page':undefined}>{languages[code]}</a>)}</div></details>
+        <details class="winter-language"><summary aria-label={c.language}>{lang.toUpperCase()} <span aria-hidden="true">⌄</span></summary><div>{langOrder.map(code=><a href={smilePath(code)} lang={code} hreflang={code} aria-current={code===lang?'page':undefined}>{languages[code]}</a>)}</div></details>
       </div>
     </header>
     <main id="main" class="winter-wrap">
@@ -58,26 +65,28 @@ const client={...c,items,canonical,lang};
 
       <section class="smile-hero" aria-labelledby="smile-title">
         <div class="hero-copy"><p class="eyebrow">{c.title}</p><h1 id="smile-title">{c.headline}</h1><p class="hero-lead">{c.lead}</p><div class="hero-price"><div><span>{c.priceLabel}</span><strong>{price}</strong></div><p>{c.priceNote}</p></div><a href="#package" class="winter-button light">{c.explore}<span aria-hidden="true">↗</span></a></div>
-        <div class="hero-photo"><img src={asset('hero-1280.webp')} srcset={`${asset('hero-640.webp')} 640w, ${asset('hero-1280.webp')} 1280w`} sizes="(max-width:760px) 100vw, 55vw" alt={lang==='tr'?'İstanbul Boğazı kıyısında temsili gülüş portresi':lang==='ru'?'Иллюстративный портрет у Босфора':lang==='es'?'Retrato ilustrativo junto al Bósforo':lang==='it'?'Ritratto illustrativo sul Bosforo':'Illustrative smile portrait by the Bosphorus'} width="1280" height="721" fetchpriority="high"/>
+        <div class="hero-visual"><div class="hero-photo"><img src={asset('airport-flight-1280.webp')} srcset={`${asset('airport-flight-640.webp')} 640w, ${asset('airport-flight-1280.webp')} 1280w`} sizes="(max-width:760px) 100vw, 55vw" alt={visual.flightAlt} width="1280" height="853" fetchpriority="high"/><span class="airport-label">{visual.illustration}</span>
           <div class="flight-ticket"><div class="ticket-route"><span>{c.flight}</span><span class="plane" aria-hidden="true">✈</span></div><div class="ticket-cities"><strong>{c.ticket[1]}</strong><span aria-hidden="true">··············</span><strong>{c.ticket[2]}</strong></div><div class="ticket-bottom"><div><small>{c.ticket[3]}</small><strong>€300</strong></div><p>{c.flightNote}</p></div></div>
-        </div>
+        </div><div class="hero-mini">{[0,1,2].map(i=><a href="#places"><img src={asset(['clinic-dental-unit.webp','hotel-room.webp','transfer-vehicle.webp'][i])} alt="" width="240" height="130"/><span>{i===2?visual.vip:c.places[i][0]}</span></a>)}</div></div>
       </section>
       <div class="hero-facts">{c.facts.map((text,i)=><div><span class="fact-number">{['20','07','01','↔'][i]}</span><span>{text}</span></div>)}</div>
       <nav class="mobile-nav" aria-label={c.title}>{anchors.map((id,i)=><a href={`#${id}`}>{c.nav[i]}</a>)}</nav>
 
       <section id="package" class="winter-section package-section" aria-labelledby="package-title">
         <div class="section-intro"><p class="eyebrow">{c.packageKicker}</p><h2 id="package-title">{c.packageTitle}</h2><p>{c.packageLead}</p></div>
+        <div class="crown-summary"><div class="crown-picture"><img src={asset('crown-restorations.webp')} alt={visual.crownAlt} width="900" height="600" loading="lazy"/></div><div><p class="eyebrow">{visual.toothLabel}</p><h3>{visual.crownTitle}</h3><p>{visual.crownText}</p></div><strong>20</strong></div>
         <div class="package-grid"><div class="included-box"><h3>{c.included}</h3><ul>{c.includes.map(text=><li><span aria-hidden="true">✓</span>{text}</li>)}</ul></div><div class="scope-box"><h3>{c.scopeTitle}</h3><ul>{c.scope.map(text=><li>{text}</li>)}</ul><details class="material-details"><summary>{c.material}</summary><p>{c.materialText}</p></details></div></div>
       </section>
 
       <section id="journey" class="winter-section journey-section" aria-labelledby="journey-title"><div class="section-intro"><p class="eyebrow">{c.journeyKicker}</p><h2 id="journey-title">{c.journeyTitle}</h2><p>{c.journeyLead}</p></div><ol class="journey-grid">{c.steps.map(([title,text],i)=><li><span class="step-num">0{i+1}</span><h3>{title}</h3><p>{text}</p></li>)}</ol></section>
 
       <section id="places" class="winter-section" aria-labelledby="places-title"><div class="section-intro"><p class="eyebrow">{c.placesKicker}</p><h2 id="places-title">{c.placesTitle}</h2><p>{c.placesLead}</p></div><div class="places-grid">{c.places.map(([title,text],i)=><article><div class="place-photo"><img src={asset(['clinic-dental-unit.webp','hotel-room.webp','transfer-vehicle.webp'][i])} alt={title} width="1200" height="800" loading="lazy"/>{i===0&&<button type="button" data-video={clinicVideo.src} data-poster={asset(clinicVideo.localPoster)} data-video-title={c.videoTitle} class="photo-play" aria-label={c.watch}>▶</button>}</div><div class="place-copy"><span class="eyebrow">0{i+1}</span><h3>{title}</h3><p>{text}</p></div></article>)}</div><p class="fine-print">{c.hotelNote}</p>
-        <div class="video-row">{videos.map(video=><button type="button" class="video-card" data-video={video.src} data-poster={asset(video.localPoster)} data-video-title={video.title}><img src={asset(video.localPoster)} alt="" width="72" height="100" loading="lazy"/><span><strong>{video.title}</strong><small>{video.audio}</small></span><span class="play-icon" aria-hidden="true">▶</span></button>)}</div>
       </section>
 
+      <section id="videos" class="winter-section video-section" aria-labelledby="videos-title"><div class="section-intro"><p class="eyebrow">IME CLINIC · VIDEO</p><h2 id="videos-title">{visual.videosTitle}</h2><p>{visual.videosLead}</p></div><div class="video-showcase">{videos.map(video=><button type="button" class="showcase-video" data-video={video.src} data-poster={asset(video.localPoster)} data-video-title={video.title}><div><img src={asset(video.localPoster)} alt="" width="360" height="640" loading="lazy"/><span class="showcase-play" aria-hidden="true">▶</span><span class="video-duration">{Math.floor(video.durationSeconds/60)}:{String(Math.floor(video.durationSeconds%60)).padStart(2,'0')}</span></div><strong>{video.title}</strong><small>{video.audio}</small></button>)}</div></section>
+
       <section id="library" class="winter-section media-section" aria-labelledby="media-title"><div class="section-intro"><p class="eyebrow">{c.mediaKicker}</p><h2 id="media-title">{c.mediaTitle}</h2><p>{c.mediaLead}</p></div>
-        <div class="category-tabs" role="tablist" aria-label={c.nav[3]}>{c.categories.map((name,i)=><button type="button" role="tab" id={`category-${i}`} aria-selected={i===0?'true':'false'} aria-controls={`gallery-${i}`} tabindex={i===0?0:-1} data-category={i}>{name}<span>{items.filter(item=>item.category===i).length}</span></button>)}</div>
+        <div class="category-tabs" role="tablist" aria-label={c.nav[3]}>{c.categories.map((name,i)=><button type="button" role="tab" id={`category-${i}`} aria-selected={i===0?'true':'false'} aria-controls={`gallery-${i}`} tabindex={i===0?0:-1} data-category={i}>{i===2?visual.travel:name}<span>{items.filter(item=>item.category===i).length}</span></button>)}</div>
         {c.categories.map((_,category)=><div role="tabpanel" id={`gallery-${category}`} aria-labelledby={`category-${category}`} hidden={category!==0} tabindex="0"><div class:list={['media-rail',{'poster-rail':category===0}]}>{items.filter(item=>item.category===category).map((item)=><article class="media-card"><button type="button" data-image={item.id} class="media-image" aria-label={`${c.openImage}: ${item.title}`}><img src={item.thumb} alt={item.title} loading="lazy" decoding="async" width="480" height={category===0?'600':'360'}/><span class="zoom" aria-hidden="true">↗</span></button><div class="media-caption"><span>{item.title}</span><label><input type="checkbox" data-select={item.id} aria-label={`${c.select}: ${item.title}`}/><span>{c.select}</span></label></div></article>)}</div>{category===3&&<p class="fine-print">{c.resultsNote}</p>}{category===5&&<p class="fine-print">{c.guideNote}</p>}</div>)}
         <div class="media-actions"><div><strong data-selection-count>0 {c.selected}</strong><button type="button" data-select-all>{c.selectAll}</button><button type="button" data-clear>{c.clear}</button></div><div><button type="button" class="winter-button secondary" data-download disabled>{c.download} ↓</button><button type="button" class="winter-button" data-share disabled>{c.share} ↗</button></div></div><p class="media-status" role="status" aria-live="polite" data-status></p>
       </section>

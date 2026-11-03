@@ -345,6 +345,12 @@
       "source": "/lp-assets/dental/videos/dental-laboratory.webp",
       "file": "dental-laboratory.webp",
       "sha256": "b46718df200e28fb02eab78247920b4848b3314aaf6a5959b26e1d3ead390a87"
+    },
+    {
+      "source": "/lp-assets/dental/story/restorations-900.webp",
+      "file": "crown-restorations.webp",
+      "sha256": "3eda3be247295f1fbe4d943a585e09ae437cbf143e348264a6463c4853049571"
     }
-  ]
+  ],
+  "verifiedAgainstLatestSource": "20261102T190720Z-b8c7ea78e677-105b5816"
 }

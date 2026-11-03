@@ -1,5 +1,7 @@
 # build çıktısı
 dist/
+root-dist/
+.ime/
 .output/
 
 # bağımlılıklar
@@ -29,3 +31,7 @@ Thumbs.db
 # Playwright geçici
 .playwright-mcp/
 test-results/
+
+# Python validation artifacts
+__pycache__/
+*.pyc

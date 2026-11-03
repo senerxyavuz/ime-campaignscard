@@ -1,0 +1,14 @@
+{
+  "tool": "built-in image_gen",
+  "created": "2026-11-03",
+  "mode": "generate",
+  "purpose": "Illustrative unbranded airport departure lounge with airplane, suitcase and blank boarding-pass sleeve",
+  "source": "airport-original.png",
+  "constraints": [
+    "Not a real airport photograph",
+    "No airline or airport claim",
+    "No patient or clinical result",
+    "No readable ticket or personal data"
+  ],
+  "prompt": "Use case: photorealistic-natural. Asset type: wide website landing-page travel photograph for IME Clinic's winter dental package, 3:2 landscape. Show a contemporary, airy airport departure lounge with floor-to-ceiling windows, a large unbranded white passenger airplane clearly visible close outside at the gate, jet bridge, a strip of bright blue winter sky and runway. Foreground: one elegant neutral carry-on suitcase and an unbranded blank boarding-pass sleeve on a lounge table; no people close up. The airplane should be unmistakable and occupy a meaningful part of the frame. Modern clean photographic editorial style, natural daylight, vivid turquoise/sky blue accents and a little warm coral from furnishings, realistic materials, inviting winter travel mood. Compose so the airplane remains visible when the image is cropped slightly on the right for a website hero, leave the lower left relatively calm for an HTML ticket overlay. No readable text, no logos, no airline branding, no airport name, no patient or treatment result, no guarantee, no invented certification. This is a clearly illustrative generic airport scene, not a claimed photograph of a specific airport or booked airline."
+}

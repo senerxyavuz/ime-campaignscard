@@ -14,6 +14,8 @@ output = repo / 'public/winter-smile/media'
 output.mkdir(parents=True, exist_ok=True)
 provenance = []
 items = []
+previous_media = repo / 'src/data/winter-media.json'
+generated_items = [item for item in json.loads(previous_media.read_text()).get('items', []) if item.get('id') == 'airport-flight'] if previous_media.exists() else []
 
 def copy(relative, name=None):
     src = source / 'public' / relative.lstrip('/')
@@ -52,9 +54,10 @@ for item in guide['items']:
     labels = {lang:{'title':title} for lang,title in zip(['en','tr','ru','es','it'],guide_names[item['id']])}
     items.append({'id':'guide-'+item['id'], 'category':5, 'src':name, 'thumb':thumb, 'labels':labels})
 
+copy('/lp-assets/dental/story/restorations-900.webp', 'crown-restorations.webp')
 copy('/lp-assets/dental/november/istanbul-bosphorus-1280.webp', 'hero-1280.webp')
 copy('/lp-assets/dental/november/istanbul-bosphorus-640.webp', 'hero-640.webp')
-videos=json.loads((source / 'src/data/dental/videos.json').read_text())['items'][:3]
+videos=json.loads((source / 'src/data/dental/videos.json').read_text())['items']
 for item in videos:
     for variant in item.get('variants', {'original':item}).values():
         variant['localPoster']=copy(variant['poster'])
@@ -64,6 +67,6 @@ for font in ['manrope-latin','manrope-latin-ext','manrope-cyrillic']:
     src=source/'assets-source/implant-page-20261029/media'/f'{font}.woff2'
     shutil.copyfile(src,output/f'{font}.woff2')
 
-(repo/'src/data/winter-media.json').write_text(json.dumps({'items':items,'videos':videos},ensure_ascii=False,indent=2)+'\n')
+(repo/'src/data/winter-media.json').write_text(json.dumps({'items':items+generated_items,'videos':videos},ensure_ascii=False,indent=2)+'\n')
 (repo/'public/winter-smile/provenance.json').write_text(json.dumps({'sourceRelease':'20261029T161132Z-cc833b9f5cd9-6a4453b0','files':provenance},ensure_ascii=False,indent=2)+'\n')
 print(f'Imported {len(items)} images; unchanged bytes verified for {len(provenance)} files.')

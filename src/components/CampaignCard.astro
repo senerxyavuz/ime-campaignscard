@@ -6,6 +6,7 @@ import { useTranslations } from "@/i18n/utils";
 import { getCampaignContent } from "@/data/campaigns";
 import type { Campaign } from "@/data/types";
 import type { Lang } from "@/i18n/ui";
+import { smilePath, smileOrigin } from "@/data/smile-paths.mjs";
 
 interface Props {
   campaign: Campaign;
@@ -19,7 +20,7 @@ const { content, isFallback } = getCampaignContent(campaign, lang);
 // İçerik hiç yoksa (TR bile yoksa) kartı render etme
 if (!content) return Astro.redirect("/");
 
-const href = `${base}${lang}/kampanya/${campaign.slug}/`;
+const href = campaign.slug === 'dental' ? smileOrigin + smilePath(lang) : `${base}${lang}/kampanya/${campaign.slug}/`;
 ---
 
 <article class="campaign-card" data-theme={campaign.theme}>

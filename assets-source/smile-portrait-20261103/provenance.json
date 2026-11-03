@@ -1,0 +1,19 @@
+{
+  "type": "Real stock model photograph; not an IME patient or treatment result",
+  "photographer": "Ron Lach",
+  "source": "https://www.pexels.com/photo/close-up-photo-of-smiling-woman-9253771/",
+  "license": "https://www.pexels.com/license/",
+  "downloaded": "2026-11-03",
+  "sourceSHA256": "6e82041bfdeb1715c8eaf05c7d933e765030c708ad566a73a9b74ebab503ab8e",
+  "processing": "Orientation metadata, proportional resize and WebP encoding only. No retouching, tooth whitening, skin edits, or generated pixels.",
+  "outputs": [
+    {
+      "file": "public/winter-smile/media/natural-smile-640.webp",
+      "sha256": "c03352c161580e7f02572170ba5af6155a17651dba3c66de49df1f3ae6e6c048"
+    },
+    {
+      "file": "public/winter-smile/media/natural-smile-1280.webp",
+      "sha256": "796dacc004e7b7084c10d2304a1566c55693665ccc6369565e16d64e0cc25d28"
+    }
+  ]
+}

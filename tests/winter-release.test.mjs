@@ -48,8 +48,10 @@ test('built pages have current terms, social cards, reachable local assets, and 
   assert.equal(data.items.length,44);
   assert.equal(data.canonical,smileOrigin+smilePath(lang));
   assert.doesNotMatch(html,/\/campaignscard\//);
-  assert.match(html,/airport-flight-1280\.webp/);
-  assert.match(html,/crown-restorations\.webp/);
+  assert.match(html,/airport-flight-640\.webp/);
+  assert.match(html,/natural-smile-1280\.webp/);
+  assert.match(html,/Ron Lach \/ Pexels/);
+  assert.doesNotMatch(html,/crown-restorations\.webp/);
   assert.equal((html.match(/class="showcase-video"/g)||[]).length,6);
   for(const item of data.items){
    for(const src of [item.src,item.thumb]){

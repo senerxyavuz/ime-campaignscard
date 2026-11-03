@@ -64,7 +64,25 @@ const client={...c,items,canonical,lang};
       <div class="view-switch" aria-label={c.title}><a href="#main" data-view-switch="patient" aria-current="page">{c.patient}</a><a href="?view=advisor#advisor" data-view-switch="advisor">{c.advisor}<span aria-hidden="true">↗</span></a></div>
 
       <section class="smile-hero" aria-labelledby="smile-title">
-        <div class="hero-copy"><p class="eyebrow">{c.title}</p><h1 id="smile-title">{c.headline}</h1><p class="hero-lead">{c.lead}</p><div class="hero-price"><div><span>{c.priceLabel}</span><strong>{price}</strong></div><p>{c.priceNote}</p></div><a href="#package" class="winter-button light">{c.explore}<span aria-hidden="true">↗</span></a></div>
+        <div class="hero-copy">
+          <p class="eyebrow">{c.title}</p>
+          <h1 id="smile-title">{c.headline}</h1>
+          <p class="hero-lead">{c.lead}</p>
+          <div class="hero-price">
+            <div>
+              <span>{c.priceLabel}</span>
+              <strong>{price}</strong>
+            </div>
+            <p>{c.priceNote}</p>
+          </div>
+          <div class="hero-actions">
+            <button type="button" class="winter-button hero-whatsapp-cta" data-whatsapp data-whatsapp-text={visual.whatsappText}>
+              <svg class="wa-icon" viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91C2.13 13.66 2.59 15.36 3.45 16.86L2.05 22L7.3 20.63C8.75 21.41 10.38 21.83 12.04 21.83C17.5 21.83 21.95 17.38 21.95 11.92C21.95 9.27 20.92 6.78 19.05 4.91C17.18 3.03 14.69 2 12.04 2M12.05 3.67C14.25 3.67 16.31 4.53 17.87 6.09C19.42 7.65 20.28 9.72 20.28 11.92C20.28 16.46 16.58 20.15 12.04 20.15C10.56 20.15 9.11 19.76 7.85 19.01L7.55 18.83L4.43 19.65L5.26 16.61L5.06 16.29C4.24 14.99 3.81 13.47 3.81 11.91C3.81 7.37 7.5 3.67 12.05 3.67M9.04 7.23C8.83 7.23 8.49 7.31 8.2 7.62C7.92 7.94 7.12 8.7 7.12 10.24C7.12 11.78 8.24 13.27 8.4 13.48C8.56 13.69 10.6 16.84 13.72 18.19C14.46 18.51 15.04 18.7 15.49 18.85C16.24 19.08 16.92 19.05 17.46 18.97C18.06 18.88 19.31 18.21 19.57 17.47C19.83 16.73 19.83 16.09 19.75 15.96C19.67 15.83 19.46 15.75 19.14 15.59C18.82 15.43 17.26 14.66 16.97 14.56C16.68 14.45 16.47 14.4 16.26 14.72C16.05 15.03 15.44 15.75 15.26 15.96C15.07 16.17 14.89 16.19 14.57 16.04C14.25 15.88 13.22 15.54 12 14.45C11.05 13.6 10.41 12.56 10.22 12.24C10.04 11.92 10.2 11.75 10.36 11.59C10.5 11.45 10.68 11.22 10.84 11.03C11 10.85 11.05 10.72 11.16 10.51C11.26 10.3 11.21 10.12 11.13 9.96C11.05 9.8 10.43 8.28 10.17 7.66C9.92 7.05 9.66 7.14 9.47 7.13C9.29 7.12 9.08 7.23 9.04 7.23Z"/></svg>
+              <span>{visual.whatsappCta}</span>
+            </button>
+            <a href="#package" class="winter-button light">{c.explore}<span aria-hidden="true">↓</span></a>
+          </div>
+        </div>
         <figure class="hero-visual"><div class="hero-photo"><img src={asset('natural-smile-1280.webp')} srcset={`${asset('natural-smile-640.webp')} 640w, ${asset('natural-smile-1280.webp')} 1280w`} sizes="(max-width:760px) 100vw, 50vw" alt={visual.portraitAlt} width="1280" height="1920" fetchpriority="high"/></div><figcaption>{visual.modelNote}</figcaption></figure>
       </section>
       <div class="hero-facts">{c.facts.map((text,i)=><div><span class="fact-number">{['20','07','01','↔'][i]}</span><span>{text}</span></div>)}</div>
@@ -93,10 +111,33 @@ const client={...c,items,canonical,lang};
       <details id="advisor" class="advisor-section"><summary><span>{c.advisorKicker}</span><span>{c.advisor} <span aria-hidden="true">↗</span></span></summary><div class="advisor-content"><div class="section-intro"><p class="eyebrow">{c.advisorKicker}</p><h2>{c.advisorTitle}</h2><p>{c.advisorLead}</p></div><div class="advisor-stats">{[[c.priceLabel,price],[c.validity,c.deadline],[c.depositLabel,'€300'],[c.nightsLabel,c.facts[1]]].map(([label,value])=><div><span>{label}</span><strong>{value}</strong></div>)}</div><button type="button" class="winter-button secondary" data-copy-link>{c.shareLink}<span aria-hidden="true">↗</span></button><p class="patient-link">{canonical}</p><h3>{c.advisorRulesTitle}</h3><ol class="advisor-rules">{c.advisorRules.map(rule=><li>{rule}</li>)}</ol><h3>{c.scriptsTitle}</h3><div class="scripts-grid">{c.scripts.map((text,index)=><article><div><h4>{c.scriptNames[index]}</h4><button type="button" data-copy={`script-${index}`}>{c.copy}</button></div><textarea id={`script-${index}`} aria-label={c.scriptNames[index]} readonly rows="8">{text}</textarea></article>)}</div><p class="copy-status" role="status" data-copy-status></p></div></details>
 
       <section id="questions" class="winter-section faq-section" aria-labelledby="faq-title"><div class="section-intro"><p class="eyebrow">{c.faqKicker}</p><h2 id="faq-title">{c.faqTitle}</h2></div><div class="faq-grid">{c.faqs.map(([q,a])=><details><summary>{q}<span aria-hidden="true">+</span></summary><p>{a}</p></details>)}</div></section>
-      <section class="next-section"><div><p class="eyebrow">{c.deadline}</p><h2>{c.nextTitle}</h2><p>{c.nextText}</p></div><a href="#package" class="winter-button light">{c.nextCta} ↗</a></section>
+      <section class="next-section">
+        <div>
+          <p class="eyebrow">{c.deadline}</p>
+          <h2>{c.nextTitle}</h2>
+          <p>{c.nextText}</p>
+        </div>
+        <div class="next-actions">
+          <button type="button" class="winter-button hero-whatsapp-cta" data-whatsapp data-whatsapp-text={visual.whatsappText}>
+            <span>{visual.whatsappCta} 💬</span>
+          </button>
+          <a href="#package" class="winter-button light">{c.nextCta} ↗</a>
+        </div>
+      </section>
     </main>
     <footer class="winter-wrap winter-footer"><img src={`${base}ime-clinic-logo.svg`} alt="IME Clinic" width="125" height="30"/><div><span>{c.footer}</span><small>{visual.modelNote} · <a href="https://www.pexels.com/photo/close-up-photo-of-smiling-woman-9253771/" target="_blank" rel="noopener noreferrer">Ron Lach / Pexels</a></small></div></footer>
-    <div class="mobile-offer"><span>{c.title}<small>{c.deadline}</small></span><a href="#package">{c.nav[0]} ↑</a></div>
+    <div class="mobile-offer">
+      <div class="mobile-offer-info">
+        <span>{c.title}</span>
+        <small>{price} · {c.deadline}</small>
+      </div>
+      <div class="mobile-offer-actions">
+        <button type="button" class="winter-button mobile-wa-btn" data-whatsapp data-whatsapp-text={visual.whatsappText}>
+          <span>💬 WhatsApp</span>
+        </button>
+        <a href="#package" class="mobile-jump">{c.nav[0]} ↑</a>
+      </div>
+    </div>
     <dialog id="image-dialog" aria-labelledby="image-dialog-title"><div class="dialog-head"><h2 id="image-dialog-title"></h2><button type="button" data-close-dialog aria-label={c.close}>×</button></div><div class="image-stage"><button type="button" data-image-prev aria-label="←">←</button><img alt=""/><button type="button" data-image-next aria-label="→">→</button></div><a class="winter-button" data-image-download download>{c.downloadOne} ↓</a></dialog>
     <dialog id="video-dialog" aria-labelledby="video-dialog-title"><div class="dialog-head"><h2 id="video-dialog-title">{c.videoTitle}</h2><button type="button" data-close-dialog aria-label={c.close}>×</button></div><div data-video-container></div></dialog>
     <script id="winter-data" type="application/json" set:html={JSON.stringify(client).replaceAll('<','\\u003c')}/>

@@ -81,6 +81,12 @@ q('[data-copy-link]').addEventListener('click',event=>{
  const patientUrl=new URL(location.pathname,location.origin).href;
  copyText(patientUrl,event.currentTarget as HTMLElement);
 });
+qa<HTMLElement>('[data-whatsapp]').forEach(button=>{
+ button.addEventListener('click',()=>{
+  const text=button.dataset.whatsappText||'Hello IME Clinic, I would like information about The All-Inclusive Smile package.';
+  window.open(`https://api.whatsapp.com/send?phone=905465248334&text=${encodeURIComponent(text)}`,'_blank','noopener,noreferrer');
+ });
+});
 
 const imageDialog=q<HTMLDialogElement>('#image-dialog');
 const videoDialog=q<HTMLDialogElement>('#video-dialog');

@@ -46,6 +46,7 @@ function setView(view:string,updateUrl=true){
  const isAdvisor=view==='advisor';
  document.body.dataset.view=isAdvisor?'advisor':'patient';
  advisor.open=isAdvisor;
+ q<HTMLDetailsElement>("#library").open=isAdvisor||(!updateUrl&&location.hash==="#library");
  qa<HTMLAnchorElement>('[data-view-switch]').forEach(link=>{
    if(link.dataset.viewSwitch===view)link.setAttribute('aria-current','page');else link.removeAttribute('aria-current');
  });
@@ -54,6 +55,7 @@ function setView(view:string,updateUrl=true){
  });
  if(updateUrl){const url=new URL(location.href);if(isAdvisor)url.searchParams.set('view','advisor');else url.searchParams.delete('view');url.hash=isAdvisor?'advisor':'main';history.pushState({},'',url);}
 }
+qa<HTMLAnchorElement>('a[href="#library"]').forEach(link=>link.addEventListener('click',()=>{q<HTMLDetailsElement>('#library').open=true;}));
 setView(new URL(location.href).searchParams.get('view')==='advisor'?'advisor':'patient',false);
 qa<HTMLAnchorElement>('[data-view-switch]').forEach(link=>link.addEventListener('click',event=>{event.preventDefault();const view=link.dataset.viewSwitch!;setView(view);q(view==='advisor'?'#advisor':'#main').scrollIntoView({behavior:matchMedia('(prefers-reduced-motion:reduce)').matches?'instant':'smooth'});}));
 window.addEventListener('popstate',()=>{const lang=new URL(location.href).searchParams.get('lang')||'en';if(lang!==data.lang&&data.routes[lang])loadLanguage(lang,false);else setView(new URL(location.href).searchParams.get('view')==='advisor'?'advisor':'patient',false);},{signal:controller.signal});

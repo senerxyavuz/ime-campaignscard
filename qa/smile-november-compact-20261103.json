@@ -1,0 +1,46 @@
+{
+  "date": "2026-11-03",
+  "assetRevision": "d1f87957b66dc0de",
+  "sourceFingerprint": "86169c797e444802a8756037444a4f233bcd8528ef2c88d7b91f15ebe2caddb8",
+  "scope": "Five existing root smile routes + their own immutable assets",
+  "presentation": {
+    "theme": "November / winter: warm ivory, plum and copper",
+    "hero": "\u20ac3,000 price + 4 inclusions + large 31 December 2026 deadline; minimum \u20ac300 deposit and individual treatment dates stated",
+    "model": "CSS close crop centred on the natural smile, 2560px resized source; no retouching",
+    "media": "Archive collapsed for patients, opens from navigation and automatically in advisor view"
+  },
+  "measurements": {
+    "desktop1280Before": {
+      "pageHeight": 5046,
+      "heroHeight": 503.73,
+      "packageTop": 897.93
+    },
+    "desktop1280After": {
+      "pageHeight": 2967,
+      "heroHeight": 401.87,
+      "packageTop": 507.27
+    },
+    "desktopPageReductionPercent": 41.2,
+    "mobile390": {
+      "pageHeight": 3954,
+      "heroHeight": 604.06,
+      "deadlineTop": 228.28
+    },
+    "languages": "EN/TR/RU/ES/IT tested at 320/390/768/1280: no document overflow; deadline visible early in each language"
+  },
+  "checks": {
+    "astro": "33 files: 0 errors, warnings or hints",
+    "build": "31 portal + 5 root pages",
+    "nodeTests": "3 passed including imported-media SHA256 parity",
+    "publisherTests": "5 passed",
+    "navigation": "In-place language switching; archive fragment navigation opens drawer; manual close and patient/advisor toggle verified after final JS fix",
+    "video": "Real centre MP4 metadata verified (56.033333 seconds), no placeholder source",
+    "download": "New Italian campaign poster ZIP matched source bytes",
+    "console": "No errors during final drawer/view checks",
+    "messages": "No real WhatsApp messages or leads sent"
+  },
+  "sharedSourceStatus": {
+    "release": "20261103T121017Z-406ea1240ac4-f1482daa",
+    "modified": false
+  }
+}

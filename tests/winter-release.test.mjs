@@ -53,7 +53,7 @@ test('published pages preserve the approved offer, working media and patient/adv
   assert.equal(data.canonical,smileOrigin+'/all-inclusive-smile/'+(lang==='en'?'':`?lang=${lang}`));
   assert.equal(data.routes[lang],smilePath(lang));
   assert.deepEqual(data.facts,smileCopy[lang].facts);
-  assert.match(html,/smile-editorial-1280\.webp/);
+  assert.match(html,/smile-editorial-2560\.webp/);
   assert.match(html,/Andrea Piacquadio \/ Pexels/);
   assert.doesNotMatch(html,/crown-restorations\.webp|natural-smile-1280\.webp/);
   assert.equal((html.match(/class="showcase-video"/g)||[]).length,6);
@@ -68,7 +68,7 @@ test('published pages preserve the approved offer, working media and patient/adv
   const artwork=await readFile(`public/winter-smile/art/winter-${lang}-1.jpg`);
   assert.ok(artwork.length>50000&&artwork.length<500000);
   const master=await readFile(`public/winter-smile/art/winter-${lang}-1.svg`,'utf8');
-  assert.match(master,/€3\.000/);assert.match(master,/data:image\/png;base64,/);
+  assert.match(master,/€3\.000/);assert.match(master,/data:image\/(?:png|jpeg);base64,/);
   const old=await readFile(`dist/${lang}/kampanya/dental/index.html`,'utf8');
   assert.match(old,/http-equiv="refresh"/);
   assert.ok(old.includes(smileOrigin+smilePath(lang)));

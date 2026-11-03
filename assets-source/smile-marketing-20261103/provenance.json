@@ -1,0 +1,19 @@
+{
+  "kind": "Real stock model, not an IME patient or treatment outcome",
+  "photographer": "Andrea Piacquadio",
+  "source": "https://www.pexels.com/photo/photo-of-woman-smiling-3767342/",
+  "license": "https://www.pexels.com/license/",
+  "acquired": "2026-11-03",
+  "originalSHA256": "36424d5b9a104d8dbd0270ffee69728d4aec5cc830a4a7ad7b601605a3c5cdc4",
+  "processing": "Proportional resizing, orientation metadata and WebP encoding only. No whitening, facial changes or generated pixels.",
+  "outputs": [
+    {
+      "file": "public/winter-smile/media/smile-editorial-640.webp",
+      "sha256": "ee0354d0dfef4cf1a0b167bcc62c7f86eb2fb1cd83d41c38869e12710338078c"
+    },
+    {
+      "file": "public/winter-smile/media/smile-editorial-1280.webp",
+      "sha256": "e6c55f4c227b431351c258cb5bbb2dd522f63275454e9886e79dbc244f8530db"
+    }
+  ]
+}

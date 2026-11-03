@@ -38,46 +38,33 @@ test('all patient photographs and imported media match the verified landing sour
  assert.equal(new Set(media.items.map(item=>item.id)).size,media.items.length);
 });
 
-test('built pages have single canonical url, clean official imagery, exact component parity, and no data submission',async()=>{
+test('published pages preserve the approved offer, working media and patient/advisor actions',async()=>{
  for(const lang of Object.keys(smileCopy)){
   const html=await readFile(`root-dist${smilePath(lang)}index.html`,'utf8');
-  assert.match(html,/<html lang=/);
-  assert.match(html,/noindex, nofollow/);
-  // Strict single-URL guarantee: canonical is always /all-inclusive-smile/
+  assert.match(html,/<html lang=/);assert.match(html,/2026-12-31/);assert.match(html,/noindex, nofollow/);
   assert.match(html,/<link rel="canonical" href="https:\/\/www\.imeclinic\.com\/all-inclusive-smile\/"/);
-  assert.doesNotMatch(html,/<form\b|2[.,]990|2[.,]590|wa\.me|crm\/|lead\/|<video\b/i);
+  assert.doesNotMatch(html,/<form\b|2[.,]990|2[.,]590|crm\/|lead\/|<video\b|dQw4w9WgXcQ|5-Star|in 5 Days|JCI-accredited|100% included/i);
   assert.doesNotMatch(html,/\/campaignscard\//);
-
-  // Exact component parity matching dental-treatments
-  assert.match(html,/class="_2onN3q_bar"/);
-  assert.match(html,/class="hBw1pG_header"/);
-  assert.match(html,/class="dental-hero dental-sales-hero dental-story-hero"/);
-  assert.match(html,/class="dental-facts"/);
-  assert.match(html,/class="dental-options section"/);
-  assert.match(html,/class="GoTIAa_section section"/);
-  assert.match(html,/class="PPsQba_section section"/);
-  assert.match(html,/class="_5X57Ca_section section"/);
-  assert.match(html,/class="YaK-iq_section section"/);
-  assert.match(html,/class="qibdya_section section"/);
-  assert.match(html,/class="dental-next-step section"/);
-  assert.match(html,/class="S6Hkya_footer"/);
-  assert.match(html,/class="SynduG_bar"/);
-
-  // Clean official imagery in mosaic
-  assert.match(html,/clinic-dental-unit\.webp/);
-  assert.match(html,/crown-restorations\.webp/);
-  assert.match(html,/hero-1280\.webp/);
-
-  // Zero captions, zero disclaimers under or on images
-  assert.doesNotMatch(html,/<figcaption\b|Ron Lach|Pexels/i);
-
-  // Video cards count & Results count
+  assert.match(html,/https:\/\/wa\.me\/905465248334/);
+  assert.match(html,/id="advisor"/);
+  const data=JSON.parse(html.match(/id="winter-data"[^>]*>(.*?)<\/script>/s)[1]);
+  assert.equal(data.items.length,44);
+  assert.equal(data.rootPath,'/all-inclusive-smile/');
+  assert.equal(data.canonical,smileOrigin+'/all-inclusive-smile/'+(lang==='en'?'':`?lang=${lang}`));
+  assert.equal(data.routes[lang],smilePath(lang));
+  assert.deepEqual(data.facts,smileCopy[lang].facts);
+  assert.match(html,/smile-editorial-1280\.webp/);
+  assert.match(html,/Andrea Piacquadio \/ Pexels/);
+  assert.doesNotMatch(html,/crown-restorations\.webp|natural-smile-1280\.webp/);
   assert.equal((html.match(/class="showcase-video"/g)||[]).length,6);
-  assert.equal((html.match(/class="result-card"/g)||[]).length,10);
-
-  // Translations dictionary embedded for instant in-place language switching
-  assert.match(html,/id="smile-translations"[^>]*>\{.*\}<\/script>/s);
-
+  for(const video of media.videos){
+   const source=video.variants?(video.variants[lang]||video.variants.en).src:video.src;
+   assert.ok(html.includes(source),`${lang}: real video missing`);
+  }
+  for(const item of data.items)for(const src of [item.src,item.thumb]){
+   assert.ok(src.startsWith('/lp-assets/all-inclusive-smile/'));
+   await access('root-dist'+src);
+  }
   const artwork=await readFile(`public/winter-smile/art/winter-${lang}-1.jpg`);
   assert.ok(artwork.length>50000&&artwork.length<500000);
   const master=await readFile(`public/winter-smile/art/winter-${lang}-1.svg`,'utf8');

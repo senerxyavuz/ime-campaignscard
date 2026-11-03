@@ -1,0 +1,26 @@
+{
+  "date": "2026-11-03",
+  "assetRevision": "7d1a4249a276f7a0",
+  "sourceFingerprint": "53adaaabf9007ef0a89db0f3b49bf230fe1be2ae9efc662c0c3463cb1650fb52",
+  "scope": "Five existing All-Inclusive Smile routes and their own versioned assets only",
+  "checks": {
+    "astro": "32 files, 0 errors/warnings/hints",
+    "build": "31 portal pages + 5 root pages",
+    "nodeTests": "3 passed; source media SHA parity checked",
+    "publisherTests": "5 passed",
+    "responsive": "EN/TR/RU/ES/IT: 320/768/1024/1440 px, no document overflow; TR additionally 390 px",
+    "languages": "In-place query switching, translated doctor source, advisor state preserved, browser Back verified",
+    "video": "Real dental-centre MP4 played; duration 56.033333 s, readyState 4, currentTime advanced; close removes player",
+    "clinical": "10 unchanged source cases in a horizontal rail; full image dialog opened/closed; cases may include treatment outside campaign",
+    "download": "2 files selected across campaign/clinic tabs; native ZIP download verified against original file SHA256 values",
+    "copy": "Patient-link copy button reports success; localized patient URL omits advisor query",
+    "console": "No error logs during interactive QA",
+    "messages": "WhatsApp href inspected only; no real message/lead submitted"
+  },
+  "sharedSourceStatus": {
+    "release": "20261103T121017Z-406ea1240ac4-f1482daa",
+    "fingerprint": "406ea1240ac4fc82e47f564a0541bc824fe03a3fbf6762fefd49391de33c424f",
+    "modified": false
+  },
+  "visuals": "Andrea Piacquadio real stock model (3767342), credited and labelled as model; proportional encoding only. Original clinical bytes unchanged."
+}

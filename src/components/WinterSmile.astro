@@ -1,146 +1,536 @@
 ---
-import { smileCopy } from '@/data/winter-locales';
-import { smileTerms } from '@/data/winter-smile';
-import media from '@/data/winter-media.json';
-import { langOrder,languages,type Lang } from '@/i18n/ui';
+import { smileLocalesData, type SmileLocaleCopy } from '@/data/smile-locales-data';
+import { type Lang } from '@/i18n/ui';
 import '@/styles/winter-smile.css';
-import { smilePath, smileOrigin } from '@/data/smile-paths.mjs';
-import { smileVisuals } from '@/data/winter-visuals';
-const {lang}=Astro.props as {lang:Lang};
-const c=smileCopy[lang];
-const visual=smileVisuals[lang];
-const base=import.meta.env.BASE_URL;
-const root=`${base}winter-smile/`;
-const asset=(name:string)=>root+'media/'+name;
-const route=smilePath(lang);
-const canonical=smileOrigin+route;
-const price=new Intl.NumberFormat(lang,{style:'currency',currency:'EUR',maximumFractionDigits:0}).format(smileTerms.price);
-const anchors=['package','journey','places','library','questions'];
-const localizedMedia=media.items.map((item:any,index:number)=>({...item,src:asset(item.src),thumb:asset(item.thumb),title:item.labels?.[lang]?.title||`${c.categories[item.category]} · ${String(index+1).padStart(2,'0')}`}));
-const posters=[1,2].map(n=>({id:`campaign-${n}`,category:0,src:`${root}art/winter-${lang}-${n}.jpg`,thumb:`${root}art/winter-${lang}-${n}.jpg`,title:`${c.campaignCaption} · ${n}`}));
-const items=[...posters,...localizedMedia];
-const clinicVideo=media.videos[0] as any;
-const doctorVariants=(media.videos[1] as any).variants;
-const doctorVideo=doctorVariants[lang]||doctorVariants.en;
-const videos=(media.videos as any[]).map((item,index)=>{
- const video=index===1?doctorVideo:item;
- const audio=index===0?c.originalAudio:index===1?c.doctorAudio:video.audio==='en'?visual.english:visual.silent;
- return {...video,title:visual.videoNames[index],audio};
-});
-const client={...c,items,canonical,lang};
+
+const { lang = 'en' } = Astro.props as { lang: Lang };
+const t: SmileLocaleCopy = smileLocalesData[lang] || smileLocalesData.en;
+const base = import.meta.env.BASE_URL;
+const root = `${base}winter-smile/`;
+const asset = (name: string) => root + 'media/' + name;
+const canonical = "https://www.imeclinic.com/all-inclusive-smile/";
+
+const results = [
+  'result-01.webp', 'result-02.webp', 'result-03.webp', 'result-04.webp', 'result-05.webp',
+  'result-06.webp', 'result-07.webp', 'result-08.webp', 'result-09.webp', 'result-10.webp'
+];
+
+const videos = [
+  { thumb: 'dental-centre-tour-20261028.webp', title: t.vid1Title, time: '2:15' },
+  { thumb: 'doctor-veneers-en.webp', title: t.vid2Title, time: '1:45' },
+  { thumb: 'treatment-rooms.webp', title: t.vid3Title, time: '1:30' },
+  { thumb: 'dental-laboratory.webp', title: t.vid4Title, time: '2:00' },
+  { thumb: 'natural-smile-640.webp', title: t.vid5Title, time: '1:10' },
+  { thumb: 'airport-flight-640.webp', title: t.vid6Title, time: '2:40' }
+];
+
+const flags: Record<string, string> = {
+  en: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 30" width="22" height="15"><clipPath id="f-en-c"><path d="M0 0v30h60V0z"/></clipPath><clipPath id="f-en-d"><path d="M30 15h30v15zv15H0zH0V0zV0h30z"/></clipPath><g clip-path="url(#f-en-c)"><path d="M0 0v30h60V0z" fill="#012169"/><path d="m0 0 60 30m0-30L0 30" stroke="#fff" stroke-width="6"/><path d="m0 0 60 30m0-30L0 30" clip-path="url(#f-en-d)" stroke="#C8102E" stroke-width="4"/><path d="M30 0v30M0 15h60" stroke="#fff" stroke-width="10"/><path d="M30 0v30M0 15h60" stroke="#C8102E" stroke-width="6"/></g></svg>`,
+  tr: `<svg xmlns="http://www.w3.org/2000/svg" width="22" height="15" viewBox="0 -30000 90000 60000"><path fill="#e30a17" d="M0-30000h90000v60000H0z"/><path fill="#fff" d="m41750 0 13568-4408-8386 11541V-7133l8386 11541zm925 8021a15000 15000 0 1 1 0-16042 12000 12000 0 1 0 0 16042z"/></svg>`,
+  ru: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 9 6" width="22" height="15"><path fill="#fff" d="M0 0h9v3H0z"/><path fill="#d52b1e" d="M0 3h9v3H0z"/><path fill="#0039a6" d="M0 2h9v2H0z"/></svg>`,
+  es: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3 2" width="22" height="15"><rect width="3" height="2" fill="#c60b1e"/><rect width="3" height="1" y=".5" fill="#ffc400"/></svg>`,
+  it: `<svg xmlns="http://www.w3.org/2000/svg" width="22" height="15" viewBox="0 0 3 2"><path fill="#009246" d="M0 0h3v2H0z"/><path fill="#fff" d="M1 0h2v2H1z"/><path fill="#ce2b37" d="M2 0h1v2H2z"/></svg>`
+};
 ---
 <!doctype html>
-<html lang={lang}>
+<html lang={lang} dir="ltr">
   <head>
     <meta charset="utf-8"/>
-    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <title>{t.metaTitle}</title>
+    <meta name="description" content={t.metaDesc}/>
     <meta name="robots" content="noindex, nofollow"/>
-    <meta name="theme-color" content="#213847"/>
-    <title>{c.title} · {price} · {c.season} — IME Clinic</title>
-    <meta name="description" content={`${c.lead} ${c.deadline}. ${c.flightNote}.`}/>
+    <meta name="theme-color" content="#0c2a3b"/>
     <link rel="canonical" href={canonical}/>
-    {langOrder.map(code=><link rel="alternate" hreflang={code} href={smileOrigin+smilePath(code)}/>)}
-    <link rel="alternate" hreflang="x-default" href={smileOrigin+smilePath('en')}/>
-    <meta property="og:title" content={`${c.title} · ${price}`}/>
-    <meta property="og:description" content={`${c.lead} ${c.deadline}. ${c.flightNote}.`}/>
-    <meta property="og:type" content="website"/>
+    <meta property="og:title" content={t.metaTitle}/>
+    <meta property="og:description" content={t.metaDesc}/>
     <meta property="og:url" content={canonical}/>
-    <meta property="og:image" content={`${smileOrigin}${root}art/winter-${lang}-1.jpg`}/>
-    <meta property="og:image:width" content="1080"/><meta property="og:image:height" content="1350"/>
+    <meta property="og:site_name" content="IME Clinic"/>
+    <meta property="og:type" content="website"/>
+    <meta property="og:image" content={`${canonical}lp-assets/all-inclusive-smile/hero-1280.webp`}/>
+    <meta property="og:image:width" content="1280"/>
+    <meta property="og:image:height" content="721"/>
     <link rel="icon" href={`${base}favicon.svg`}/>
-    <link rel="preload" href={asset('manrope-latin.woff2')} as="font" type="font/woff2" crossorigin/>
+    <link rel="preconnect" href="https://fonts.googleapis.com"/>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
   </head>
-  <body data-winter-smile data-view="patient">
-    <a class="skip" href="#main">{c.skip}</a>
-    <header class="winter-header">
-      <div class="winter-wrap header-row">
-        <a href="#main" aria-label="IME Clinic" class="winter-logo"><img src={`${base}ime-clinic-logo.svg`} alt="IME Clinic" width="150" height="36"/></a>
-        <nav class="desktop-nav" aria-label={c.title}>{anchors.map((id,i)=><a href={`#${id}`}>{c.nav[i]}</a>)}</nav>
-        <details class="winter-language"><summary aria-label={c.language}>{lang.toUpperCase()} <span aria-hidden="true">⌄</span></summary><div>{langOrder.map(code=><a href={smilePath(code)} lang={code} hreflang={code} aria-current={code===lang?'page':undefined}>{languages[code]}</a>)}</div></details>
+  <body data-landing-route="dental-treatments" data-theme="dental">
+    <!-- Top Announcement Bar -->
+    <aside class="_2onN3q_bar" aria-label="Announcement">
+      <div class="wrap _2onN3q_inner">
+        <span class="badge _2onN3q_left">
+          <span class="_2onN3q_pulse"></span>
+          <span class="_2onN3q_label" data-i18n="topLabel">{t.topLabel}</span>
+        </span>
+        <span class="_2onN3q_offer" data-i18n="topOffer">{t.topOffer}</span>
+        <span class="_2onN3q_place" data-i18n="topPlace">{t.topPlace}</span>
+      </div>
+    </aside>
+
+    <!-- Sticky Main Header -->
+    <header class="hBw1pG_header" id="top">
+      <div class="wrap hBw1pG_bar">
+        <a class="hBw1pG_brand" href="#top" aria-label="IME Clinic">
+          <img src={`${base}ime-clinic-logo.svg`} alt="IME Clinic" width="136" height="32" style="display:block;height:32px;width:auto;"/>
+        </a>
+
+        <nav class="compact-navigation" aria-label="Navigation">
+          <div class="compact-navigation-links">
+            <a href="#package" data-i18n="navPackage">{t.navPackage}</a>
+            <a href="#journey" data-i18n="navJourney">{t.navJourney}</a>
+            <a href="#stay" data-i18n="navStay">{t.navStay}</a>
+            <a href="#videos" data-i18n="navVideos">{t.navVideos}</a>
+            <a href="#results" data-i18n="navResults">{t.navResults}</a>
+            <a href="#faq" data-i18n="navFaq">{t.navFaq}</a>
+          </div>
+          <details class="compact-navigation-menu">
+            <summary aria-label="Menu">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+            </summary>
+            <div>
+              <a href="#package" data-i18n="navPackage">{t.navPackage}</a>
+              <a href="#journey" data-i18n="navJourney">{t.navJourney}</a>
+              <a href="#stay" data-i18n="navStay">{t.navStay}</a>
+              <a href="#videos" data-i18n="navVideos">{t.navVideos}</a>
+              <a href="#results" data-i18n="navResults">{t.navResults}</a>
+              <a href="#faq" data-i18n="navFaq">{t.navFaq}</a>
+            </div>
+          </details>
+        </nav>
+
+        <div class="hBw1pG_right">
+          <!-- Single-URL in-place language switcher -->
+          <div class="Dw-EXq_root" id="lang-dropdown">
+            <button type="button" class="Dw-EXq_trigger" id="lang-trigger" aria-haspopup="listbox" aria-expanded="false" aria-label="Select language">
+              <span class="Dw-EXq_flag" id="active-flag" set:html={flags[lang]}></span>
+              <span class="Dw-EXq_code" id="active-lang-code">{lang.toUpperCase()}</span>
+              <svg class="Dw-EXq_caret" width="16" height="16" viewBox="0 0 256 256" aria-hidden="true"><path d="M213.66,101.66l-80,80a8,8,0,0,1-11.32,0l-80-80A8,8,0,0,1,53.66,90.34L128,164.69l74.34-74.35a8,8,0,0,1,11.32,11.32Z"></path></svg>
+            </button>
+            <div class="Dw-EXq_menu" id="lang-menu" role="listbox" style="display:none;">
+              <a class="Dw-EXq_item" href="?lang=en" data-lang="en" aria-current={lang === 'en' ? 'true' : undefined}>
+                <span class="Dw-EXq_flag" set:html={flags.en}></span>
+                <span class="Dw-EXq_name">English</span>
+              </a>
+              <a class="Dw-EXq_item" href="?lang=tr" data-lang="tr" aria-current={lang === 'tr' ? 'true' : undefined}>
+                <span class="Dw-EXq_flag" set:html={flags.tr}></span>
+                <span class="Dw-EXq_name">Türkçe</span>
+              </a>
+              <a class="Dw-EXq_item" href="?lang=ru" data-lang="ru" aria-current={lang === 'ru' ? 'true' : undefined}>
+                <span class="Dw-EXq_flag" set:html={flags.ru}></span>
+                <span class="Dw-EXq_name">Русский</span>
+              </a>
+              <a class="Dw-EXq_item" href="?lang=es" data-lang="es" aria-current={lang === 'es' ? 'true' : undefined}>
+                <span class="Dw-EXq_flag" set:html={flags.es}></span>
+                <span class="Dw-EXq_name">Español</span>
+              </a>
+              <a class="Dw-EXq_item" href="?lang=it" data-lang="it" aria-current={lang === 'it' ? 'true' : undefined}>
+                <span class="Dw-EXq_flag" set:html={flags.it}></span>
+                <span class="Dw-EXq_name">Italiano</span>
+              </a>
+            </div>
+          </div>
+          <button type="button" class="btn btn--sm btn--primary hBw1pG_cta cta-whatsapp-btn">
+            <span data-i18n="ctaConsultation">{t.ctaConsultation}</span><span aria-hidden="true">↗</span>
+          </button>
+        </div>
       </div>
     </header>
-    <main id="main" class="winter-wrap">
-      <div class="offer-top"><span><span aria-hidden="true">✳</span> {c.season}</span><time datetime="2026-12-31">{c.deadline}</time></div>
-      <div class="view-switch" aria-label={c.title}><a href="#main" data-view-switch="patient" aria-current="page">{c.patient}</a><a href="?view=advisor#advisor" data-view-switch="advisor">{c.advisor}<span aria-hidden="true">↗</span></a></div>
 
-      <section class="smile-hero" aria-labelledby="smile-title">
-        <div class="hero-copy">
-          <p class="eyebrow">{c.title}</p>
-          <h1 id="smile-title">{c.headline}</h1>
-          <p class="hero-lead">{c.lead}</p>
-          <div class="hero-price">
-            <div>
-              <span>{c.priceLabel}</span>
-              <strong>{price}</strong>
+    <main id="main">
+      <!-- Dental Hero Section with Clean Mosaic (NO text/disclaimers on/under images) -->
+      <section class="dental-hero dental-sales-hero dental-story-hero" aria-labelledby="hero-title">
+        <div class="wrap dental-hero-grid">
+          <div class="dental-hero-copy">
+            <header class="dental-hero-heading">
+              <p class="eyebrow" data-i18n="heroEyebrow">{t.heroEyebrow}</p>
+              <h1 id="hero-title" class="display">
+                <span data-i18n="heroTitle">{t.heroTitle}</span> <em data-i18n="heroAccent">{t.heroAccent}</em>
+              </h1>
+              <p class="dental-hero-lead" data-i18n="heroLead">{t.heroLead}</p>
+            </header>
+
+            <div class="dental-hero-prices">
+              <div class="dental-hero-price">
+                <span data-i18n="pkgPriceLabel">{t.pkgPriceLabel}</span>
+                <p><strong data-i18n="pkgPriceVal">{t.pkgPriceVal}</strong><small data-i18n="pkgPriceUnit">{t.pkgPriceUnit}</small></p>
+              </div>
+              <div class="dental-hero-price">
+                <span data-i18n="crownPriceLabel">{t.crownPriceLabel}</span>
+                <p><strong data-i18n="crownPriceVal">{t.crownPriceVal}</strong><small data-i18n="crownPriceUnit">{t.crownPriceUnit}</small></p>
+              </div>
             </div>
-            <p>{c.priceNote}</p>
+
+            <div class="dental-hero-actions">
+              <a href="#package" class="btn btn--primary" data-i18n="heroCta">{t.heroCta}<span aria-hidden="true">↗</span></a>
+              <a href="#videos" class="dental-hero-secondary">
+                <span aria-hidden="true">▷</span><span data-i18n="heroSecondary">{t.heroSecondary}</span>
+              </a>
+            </div>
           </div>
-          <div class="hero-actions">
-            <button type="button" class="winter-button hero-whatsapp-cta" data-whatsapp data-whatsapp-text={visual.whatsappText}>
-              <svg class="wa-icon" viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91C2.13 13.66 2.59 15.36 3.45 16.86L2.05 22L7.3 20.63C8.75 21.41 10.38 21.83 12.04 21.83C17.5 21.83 21.95 17.38 21.95 11.92C21.95 9.27 20.92 6.78 19.05 4.91C17.18 3.03 14.69 2 12.04 2M12.05 3.67C14.25 3.67 16.31 4.53 17.87 6.09C19.42 7.65 20.28 9.72 20.28 11.92C20.28 16.46 16.58 20.15 12.04 20.15C10.56 20.15 9.11 19.76 7.85 19.01L7.55 18.83L4.43 19.65L5.26 16.61L5.06 16.29C4.24 14.99 3.81 13.47 3.81 11.91C3.81 7.37 7.5 3.67 12.05 3.67M9.04 7.23C8.83 7.23 8.49 7.31 8.2 7.62C7.92 7.94 7.12 8.7 7.12 10.24C7.12 11.78 8.24 13.27 8.4 13.48C8.56 13.69 10.6 16.84 13.72 18.19C14.46 18.51 15.04 18.7 15.49 18.85C16.24 19.08 16.92 19.05 17.46 18.97C18.06 18.88 19.31 18.21 19.57 17.47C19.83 16.73 19.83 16.09 19.75 15.96C19.67 15.83 19.46 15.75 19.14 15.59C18.82 15.43 17.26 14.66 16.97 14.56C16.68 14.45 16.47 14.4 16.26 14.72C16.05 15.03 15.44 15.75 15.26 15.96C15.07 16.17 14.89 16.19 14.57 16.04C14.25 15.88 13.22 15.54 12 14.45C11.05 13.6 10.41 12.56 10.22 12.24C10.04 11.92 10.2 11.75 10.36 11.59C10.5 11.45 10.68 11.22 10.84 11.03C11 10.85 11.05 10.72 11.16 10.51C11.26 10.3 11.21 10.12 11.13 9.96C11.05 9.8 10.43 8.28 10.17 7.66C9.92 7.05 9.66 7.14 9.47 7.13C9.29 7.12 9.08 7.23 9.04 7.23Z"/></svg>
-              <span>{visual.whatsappCta}</span>
+
+          <!-- 3-Tile Clean Mosaic: Verified Clinic, Restorations, Patient Smile (ZERO CAPTIONS) -->
+          <div class="dental-hero-mosaic">
+            <div class="dental-mosaic-clinic">
+              <img src={asset('clinic-dental-unit.webp')} alt="" width="1200" height="675" fetchpriority="high"/>
+            </div>
+            <div class="dental-mosaic-products">
+              <img src={asset('crown-restorations.webp')} alt="" width="900" height="600"/>
+            </div>
+            <div class="dental-mosaic-smile">
+              <img src={asset('hero-1280.webp')} alt="" width="1280" height="721"/>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Trust Band -->
+      <section class="dental-facts" aria-label="Key facts">
+        <div class="wrap">
+          <ul>
+            <li>
+              <svg viewBox="0 0 20 20" width="18" height="18" fill="none" aria-hidden="true"><path d="m4.5 10 3.5 3.5 7.5-7.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              <div>
+                <strong data-i18n="fact1Title">{t.fact1Title}</strong>
+                <span data-i18n="fact1Desc">{t.fact1Desc}</span>
+              </div>
+            </li>
+            <li>
+              <svg viewBox="0 0 20 20" width="18" height="18" fill="none" aria-hidden="true"><path d="m4.5 10 3.5 3.5 7.5-7.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              <div>
+                <strong data-i18n="fact2Title">{t.fact2Title}</strong>
+                <span data-i18n="fact2Desc">{t.fact2Desc}</span>
+              </div>
+            </li>
+            <li>
+              <svg viewBox="0 0 20 20" width="18" height="18" fill="none" aria-hidden="true"><path d="m4.5 10 3.5 3.5 7.5-7.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              <div>
+                <strong data-i18n="fact3Title">{t.fact3Title}</strong>
+                <span data-i18n="fact3Desc">{t.fact3Desc}</span>
+              </div>
+            </li>
+            <li>
+              <svg viewBox="0 0 20 20" width="18" height="18" fill="none" aria-hidden="true"><path d="m4.5 10 3.5 3.5 7.5-7.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              <div>
+                <strong data-i18n="fact4Title">{t.fact4Title}</strong>
+                <span data-i18n="fact4Desc">{t.fact4Desc}</span>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- Package & Inclusions Section -->
+      <section id="package" class="dental-options section" aria-labelledby="package-title">
+        <div class="wrap">
+          <header class="dental-options-heading">
+            <div>
+              <p class="eyebrow" data-i18n="pkgEyebrow">{t.pkgEyebrow}</p>
+              <h2 class="h2" id="package-title" data-i18n="pkgTitle">{t.pkgTitle}</h2>
+            </div>
+            <p data-i18n="pkgLead">{t.pkgLead}</p>
+          </header>
+
+          <div class="dental-goal-grid">
+            <div class="dental-goal dental-goal-1">
+              <span class="dental-goal-number">01</span>
+              <div>
+                <h3 data-i18n="card1Title">{t.card1Title}</h3>
+                <p data-i18n="card1Desc">{t.card1Desc}</p>
+                <strong><span data-i18n="card1Detail">{t.card1Detail}</span><span>↗</span></strong>
+              </div>
+            </div>
+
+            <div class="dental-goal dental-goal-2">
+              <span class="dental-goal-number">02</span>
+              <div>
+                <h3 data-i18n="card2Title">{t.card2Title}</h3>
+                <p data-i18n="card2Desc">{t.card2Desc}</p>
+                <strong><span data-i18n="card2Detail">{t.card2Detail}</span><span>↗</span></strong>
+              </div>
+            </div>
+
+            <div class="dental-goal">
+              <span class="dental-goal-number">03</span>
+              <div>
+                <h3 data-i18n="card3Title">{t.card3Title}</h3>
+                <p data-i18n="card3Desc">{t.card3Desc}</p>
+                <strong><span data-i18n="card3Detail">{t.card3Detail}</span><span>↗</span></strong>
+              </div>
+            </div>
+          </div>
+
+          <div class="dental-package-terms" style="margin-top:24px;">
+            <h3 data-i18n="scopeHeading">{t.scopeHeading}</h3>
+            <p data-i18n="scopeText">{t.scopeText}</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- 4-Stage Patient Journey Timeline -->
+      <section id="journey" class="GoTIAa_section section" aria-labelledby="journey-title">
+        <div class="wrap">
+          <header class="GoTIAa_head">
+            <p class="eyebrow" data-i18n="journeyEyebrow">{t.journeyEyebrow}</p>
+            <h2 class="h2" id="journey-title" data-i18n="journeyTitle">{t.journeyTitle}</h2>
+            <p class="lede" data-i18n="journeyLead">{t.journeyLead}</p>
+          </header>
+
+          <div class="GoTIAa_phases">
+            <div class="GoTIAa_phase">
+              <span class="GoTIAa_phaseBadge" data-i18n="step1Badge">{t.step1Badge}</span>
+              <h3 class="GoTIAa_phaseTitle" data-i18n="step1Title">{t.step1Title}</h3>
+              <p class="GoTIAa_phaseDesc" data-i18n="step1Desc">{t.step1Desc}</p>
+            </div>
+            <div class="GoTIAa_phase">
+              <span class="GoTIAa_phaseBadge" data-i18n="step2Badge">{t.step2Badge}</span>
+              <h3 class="GoTIAa_phaseTitle" data-i18n="step2Title">{t.step2Title}</h3>
+              <p class="GoTIAa_phaseDesc" data-i18n="step2Desc">{t.step2Desc}</p>
+            </div>
+            <div class="GoTIAa_phase">
+              <span class="GoTIAa_phaseBadge" data-i18n="step3Badge">{t.step3Badge}</span>
+              <h3 class="GoTIAa_phaseTitle" data-i18n="step3Title">{t.step3Title}</h3>
+              <p class="GoTIAa_phaseDesc" data-i18n="step3Desc">{t.step3Desc}</p>
+            </div>
+            <div class="GoTIAa_phase">
+              <span class="GoTIAa_phaseBadge" data-i18n="step4Badge">{t.step4Badge}</span>
+              <h3 class="GoTIAa_phaseTitle" data-i18n="step4Title">{t.step4Title}</h3>
+              <p class="GoTIAa_phaseDesc" data-i18n="step4Desc">{t.step4Desc}</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Stay & Clinic Facilities (NO captions/disclaimers on or under images) -->
+      <section id="stay" class="PPsQba_section section" aria-labelledby="stay-title">
+        <div class="wrap">
+          <header class="dental-section-heading">
+            <p class="eyebrow" data-i18n="stayEyebrow">{t.stayEyebrow}</p>
+            <h2 class="h2" id="stay-title" data-i18n="stayTitle">{t.stayTitle}</h2>
+            <p class="lede" data-i18n="stayLead">{t.stayLead}</p>
+          </header>
+
+          <div class="compact-stay-grid">
+            <div class="facility-card">
+              <div class="facility-photo">
+                <img src={asset('clinic-dental-unit.webp')} alt="" width="600" height="375" loading="lazy"/>
+              </div>
+              <div class="facility-body">
+                <h3 class="facility-title" data-i18n="fac1Title">{t.fac1Title}</h3>
+                <p class="facility-desc" data-i18n="fac1Desc">{t.fac1Desc}</p>
+              </div>
+            </div>
+
+            <div class="facility-card">
+              <div class="facility-photo">
+                <img src={asset('hotel-room.webp')} alt="" width="600" height="375" loading="lazy"/>
+              </div>
+              <div class="facility-body">
+                <h3 class="facility-title" data-i18n="fac2Title">{t.fac2Title}</h3>
+                <p class="facility-desc" data-i18n="fac2Desc">{t.fac2Desc}</p>
+              </div>
+            </div>
+
+            <div class="facility-card">
+              <div class="facility-photo">
+                <img src={asset('hotel-lobby.webp')} alt="" width="600" height="375" loading="lazy"/>
+              </div>
+              <div class="facility-body">
+                <h3 class="facility-title" data-i18n="fac3Title">{t.fac3Title}</h3>
+                <p class="facility-desc" data-i18n="fac3Desc">{t.fac3Desc}</p>
+              </div>
+            </div>
+
+            <div class="facility-card">
+              <div class="facility-photo">
+                <img src={asset('transfer-vehicle.webp')} alt="" width="600" height="375" loading="lazy"/>
+              </div>
+              <div class="facility-body">
+                <h3 class="facility-title" data-i18n="fac4Title">{t.fac4Title}</h3>
+                <p class="facility-desc" data-i18n="fac4Desc">{t.fac4Desc}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Video Library Showcase -->
+      <section id="videos" class="_5X57Ca_section section" aria-labelledby="videos-title">
+        <div class="wrap">
+          <header class="dental-section-heading">
+            <p class="eyebrow" data-i18n="videosEyebrow">{t.videosEyebrow}</p>
+            <h2 class="h2" id="videos-title" data-i18n="videosTitle">{t.videosTitle}</h2>
+            <p class="lede" data-i18n="videosLead">{t.videosLead}</p>
+          </header>
+
+          <div class="_5X57Ca_grid">
+            {videos.map((vid, idx) => (
+              <div class="showcase-video" data-video-index={idx}>
+                <img src={asset(vid.thumb)} alt="" width="360" height="640" loading="lazy"/>
+                <div class="video-overlay">
+                  <div class="video-play-btn" aria-label="Play video">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><polygon points="6 3 20 12 6 21 6 3"/></svg>
+                  </div>
+                  <p class="video-title" data-i18n={`vid${idx+1}Title`}>{vid.title}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <!-- Genuine Before / After Clinical Results Showcase (NO captions/disclaimers) -->
+      <section id="results" class="YaK-iq_section section" aria-labelledby="results-title">
+        <div class="wrap">
+          <header class="YaK-iq_head">
+            <p class="eyebrow" data-i18n="resultsEyebrow">{t.resultsEyebrow}</p>
+            <h2 class="h2" id="results-title" data-i18n="resultsTitle">{t.resultsTitle}</h2>
+            <p class="lede" data-i18n="resultsLead">{t.resultsLead}</p>
+          </header>
+
+          <div class="results-grid">
+            {results.map((fileName, index) => (
+              <div class="result-card" data-result-index={index} title="Click to zoom">
+                <img src={asset(fileName)} alt="" width="480" height="360" loading="lazy"/>
+                <div class="zoom-hint">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <!-- FAQ Accordion -->
+      <section id="faq" class="qibdya_section section" aria-labelledby="faq-title">
+        <div class="wrap">
+          <div class="qibdya_grid">
+            <div>
+              <p class="eyebrow" data-i18n="faqEyebrow">{t.faqEyebrow}</p>
+              <h2 class="h2" id="faq-title" data-i18n="faqTitle">{t.faqTitle}</h2>
+              <p class="lede" data-i18n="faqLead">{t.faqLead}</p>
+            </div>
+
+            <div class="qibdya_list">
+              <details class="qibdya_item" name="faq">
+                <summary class="qibdya_summary">
+                  <span data-i18n="faq1Q">{t.faq1Q}</span>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" viewBox="0 0 256 256" class="qibdya_caret" aria-hidden="true"><path d="M213.66,101.66l-80,80a8,8,0,0,1-11.32,0l-80-80A8,8,0,0,1,53.66,90.34L128,164.69l74.34-74.35a8,8,0,0,1,11.32,11.32Z"></path></svg>
+                </summary>
+                <p class="qibdya_answer" data-i18n="faq1A">{t.faq1A}</p>
+              </details>
+
+              <details class="qibdya_item" name="faq">
+                <summary class="qibdya_summary">
+                  <span data-i18n="faq2Q">{t.faq2Q}</span>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" viewBox="0 0 256 256" class="qibdya_caret" aria-hidden="true"><path d="M213.66,101.66l-80,80a8,8,0,0,1-11.32,0l-80-80A8,8,0,0,1,53.66,90.34L128,164.69l74.34-74.35a8,8,0,0,1,11.32,11.32Z"></path></svg>
+                </summary>
+                <p class="qibdya_answer" data-i18n="faq2A">{t.faq2A}</p>
+              </details>
+
+              <details class="qibdya_item" name="faq">
+                <summary class="qibdya_summary">
+                  <span data-i18n="faq3Q">{t.faq3Q}</span>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" viewBox="0 0 256 256" class="qibdya_caret" aria-hidden="true"><path d="M213.66,101.66l-80,80a8,8,0,0,1-11.32,0l-80-80A8,8,0,0,1,53.66,90.34L128,164.69l74.34-74.35a8,8,0,0,1,11.32,11.32Z"></path></svg>
+                </summary>
+                <p class="qibdya_answer" data-i18n="faq3A">{t.faq3A}</p>
+              </details>
+
+              <details class="qibdya_item" name="faq">
+                <summary class="qibdya_summary">
+                  <span data-i18n="faq4Q">{t.faq4Q}</span>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" viewBox="0 0 256 256" class="qibdya_caret" aria-hidden="true"><path d="M213.66,101.66l-80,80a8,8,0,0,1-11.32,0l-80-80A8,8,0,0,1,53.66,90.34L128,164.69l74.34-74.35a8,8,0,0,1,11.32,11.32Z"></path></svg>
+                </summary>
+                <p class="qibdya_answer" data-i18n="faq4A">{t.faq4A}</p>
+              </details>
+
+              <details class="qibdya_item" name="faq">
+                <summary class="qibdya_summary">
+                  <span data-i18n="faq5Q">{t.faq5Q}</span>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" viewBox="0 0 256 256" class="qibdya_caret" aria-hidden="true"><path d="M213.66,101.66l-80,80a8,8,0,0,1-11.32,0l-80-80A8,8,0,0,1,53.66,90.34L128,164.69l74.34-74.35a8,8,0,0,1,11.32,11.32Z"></path></svg>
+                </summary>
+                <p class="qibdya_answer" data-i18n="faq5A">{t.faq5A}</p>
+              </details>
+
+              <details class="qibdya_item" name="faq">
+                <summary class="qibdya_summary">
+                  <span data-i18n="faq6Q">{t.faq6Q}</span>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" viewBox="0 0 256 256" class="qibdya_caret" aria-hidden="true"><path d="M213.66,101.66l-80,80a8,8,0,0,1-11.32,0l-80-80A8,8,0,0,1,53.66,90.34L128,164.69l74.34-74.35a8,8,0,0,1,11.32,11.32Z"></path></svg>
+                </summary>
+                <p class="qibdya_answer" data-i18n="faq6A">{t.faq6A}</p>
+              </details>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Next Step Consultation CTA Banner -->
+      <section id="consultation" class="dental-next-step section" aria-labelledby="consult-title">
+        <div class="wrap">
+          <div>
+            <p class="eyebrow" data-i18n="nextEyebrow">{t.nextEyebrow}</p>
+            <h2 class="h2" id="consult-title" data-i18n="nextTitle">{t.nextTitle}</h2>
+            <p data-i18n="nextLead">{t.nextLead}</p>
+          </div>
+          <div class="dental-next-actions">
+            <button type="button" class="btn btn--primary cta-whatsapp-btn">
+              <span data-i18n="whatsappCta">{t.whatsappCta}</span><span aria-hidden="true">↗</span>
             </button>
-            <a href="#package" class="winter-button light">{c.explore}<span aria-hidden="true">↓</span></a>
           </div>
-        </div>
-        <figure class="hero-visual"><div class="hero-photo"><img src={asset('natural-smile-1280.webp')} srcset={`${asset('natural-smile-640.webp')} 640w, ${asset('natural-smile-1280.webp')} 1280w`} sizes="(max-width:760px) 100vw, 50vw" alt={visual.portraitAlt} width="1280" height="1920" fetchpriority="high"/></div><figcaption>{visual.modelNote}</figcaption></figure>
-      </section>
-      <div class="hero-facts">{c.facts.map((text,i)=><div><span class="fact-number">{['20','07','01','↔'][i]}</span><span>{text}</span></div>)}</div>
-      <aside class="travel-inclusion" aria-label={c.flight}><div class="travel-photo"><img src={asset('airport-flight-640.webp')} alt={visual.flightAlt} width="640" height="427" loading="lazy"/><span>{visual.illustration}</span></div><div class="travel-copy"><p class="eyebrow"><span aria-hidden="true">✈</span> {c.ticket[4]}</p><h2>{c.flight}</h2><p>{c.flightNote}</p></div><div class="travel-route"><span>{c.ticket[1]}</span><span class="route-line" aria-hidden="true">— ✈ —</span><strong>{c.ticket[2]}</strong></div></aside>
-      <nav class="mobile-nav" aria-label={c.title}>{anchors.map((id,i)=><a href={`#${id}`}>{c.nav[i]}</a>)}</nav>
-
-      <section id="package" class="winter-section package-section" aria-labelledby="package-title">
-        <div class="section-intro"><p class="eyebrow">{c.packageKicker}</p><h2 id="package-title">{c.packageTitle}</h2><p>{c.packageLead}</p></div>
-        <div class="crown-summary"><strong aria-hidden="true">20</strong><div><p class="eyebrow">{visual.toothLabel}</p><h3>{visual.crownTitle}</h3><p>{visual.crownText}</p></div></div>
-        <div class="package-grid"><div class="included-box"><h3>{c.included}</h3><ul>{c.includes.map(text=><li><span aria-hidden="true">✓</span>{text}</li>)}</ul></div><div class="scope-box"><h3>{c.scopeTitle}</h3><ul>{c.scope.map(text=><li>{text}</li>)}</ul><details class="material-details"><summary>{c.material}</summary><p>{c.materialText}</p></details></div></div>
-      </section>
-
-      <section id="journey" class="winter-section journey-section" aria-labelledby="journey-title"><div class="section-intro"><p class="eyebrow">{c.journeyKicker}</p><h2 id="journey-title">{c.journeyTitle}</h2><p>{c.journeyLead}</p></div><ol class="journey-grid">{c.steps.map(([title,text],i)=><li><span class="step-num">0{i+1}</span><h3>{title}</h3><p>{text}</p></li>)}</ol></section>
-
-      <section id="places" class="winter-section" aria-labelledby="places-title"><div class="section-intro"><p class="eyebrow">{c.placesKicker}</p><h2 id="places-title">{c.placesTitle}</h2><p>{c.placesLead}</p></div><div class="places-grid">{c.places.map(([title,text],i)=><article><div class="place-photo"><img src={asset(['clinic-dental-unit.webp','hotel-room.webp','transfer-vehicle.webp'][i])} alt={title} width="1200" height="800" loading="lazy"/>{i===0&&<button type="button" data-video={clinicVideo.src} data-poster={asset(clinicVideo.localPoster)} data-video-title={c.videoTitle} class="photo-play" aria-label={c.watch}>▶</button>}</div><div class="place-copy"><span class="eyebrow">0{i+1}</span><h3>{title}</h3><p>{text}</p></div></article>)}</div><p class="fine-print">{c.hotelNote}</p>
-      </section>
-
-      <section id="videos" class="winter-section video-section" aria-labelledby="videos-title"><div class="section-intro"><p class="eyebrow">IME CLINIC · VIDEO</p><h2 id="videos-title">{visual.videosTitle}</h2><p>{visual.videosLead}</p></div><div class="video-showcase">{videos.map(video=><button type="button" class="showcase-video" data-video={video.src} data-poster={asset(video.localPoster)} data-video-title={video.title}><div><img src={asset(video.localPoster)} alt="" width="360" height="640" loading="lazy"/><span class="showcase-play" aria-hidden="true">▶</span><span class="video-duration">{Math.floor(video.durationSeconds/60)}:{String(Math.floor(video.durationSeconds%60)).padStart(2,'0')}</span></div><strong>{video.title}</strong><small>{video.audio}</small></button>)}</div></section>
-
-      <section id="library" class="winter-section media-section" aria-labelledby="media-title"><div class="section-intro"><p class="eyebrow">{c.mediaKicker}</p><h2 id="media-title">{c.mediaTitle}</h2><p>{c.mediaLead}</p></div>
-        <div class="category-tabs" role="tablist" aria-label={c.nav[3]}>{c.categories.map((name,i)=><button type="button" role="tab" id={`category-${i}`} aria-selected={i===0?'true':'false'} aria-controls={`gallery-${i}`} tabindex={i===0?0:-1} data-category={i}>{i===2?visual.travel:name}<span>{items.filter(item=>item.category===i).length}</span></button>)}</div>
-        {c.categories.map((_,category)=><div role="tabpanel" id={`gallery-${category}`} aria-labelledby={`category-${category}`} hidden={category!==0} tabindex="0"><div class:list={['media-rail',{'poster-rail':category===0}]}>{items.filter(item=>item.category===category).map((item)=><article class="media-card"><button type="button" data-image={item.id} class="media-image" aria-label={`${c.openImage}: ${item.title}`}><img src={item.thumb} alt={item.title} loading="lazy" decoding="async" width="480" height={category===0?'600':'360'}/><span class="zoom" aria-hidden="true">↗</span></button><div class="media-caption"><span>{item.title}</span><label><input type="checkbox" data-select={item.id} aria-label={`${c.select}: ${item.title}`}/><span>{c.select}</span></label></div></article>)}</div>{category===3&&<p class="fine-print">{c.resultsNote}</p>}{category===5&&<p class="fine-print">{c.guideNote}</p>}</div>)}
-        <div class="media-actions"><div><strong data-selection-count>0 {c.selected}</strong><button type="button" data-select-all>{c.selectAll}</button><button type="button" data-clear>{c.clear}</button></div><div><button type="button" class="winter-button secondary" data-download disabled>{c.download} ↓</button><button type="button" class="winter-button" data-share disabled>{c.share} ↗</button></div></div><p class="media-status" role="status" aria-live="polite" data-status></p>
-      </section>
-
-      <details id="advisor" class="advisor-section"><summary><span>{c.advisorKicker}</span><span>{c.advisor} <span aria-hidden="true">↗</span></span></summary><div class="advisor-content"><div class="section-intro"><p class="eyebrow">{c.advisorKicker}</p><h2>{c.advisorTitle}</h2><p>{c.advisorLead}</p></div><div class="advisor-stats">{[[c.priceLabel,price],[c.validity,c.deadline],[c.depositLabel,'€300'],[c.nightsLabel,c.facts[1]]].map(([label,value])=><div><span>{label}</span><strong>{value}</strong></div>)}</div><button type="button" class="winter-button secondary" data-copy-link>{c.shareLink}<span aria-hidden="true">↗</span></button><p class="patient-link">{canonical}</p><h3>{c.advisorRulesTitle}</h3><ol class="advisor-rules">{c.advisorRules.map(rule=><li>{rule}</li>)}</ol><h3>{c.scriptsTitle}</h3><div class="scripts-grid">{c.scripts.map((text,index)=><article><div><h4>{c.scriptNames[index]}</h4><button type="button" data-copy={`script-${index}`}>{c.copy}</button></div><textarea id={`script-${index}`} aria-label={c.scriptNames[index]} readonly rows="8">{text}</textarea></article>)}</div><p class="copy-status" role="status" data-copy-status></p></div></details>
-
-      <section id="questions" class="winter-section faq-section" aria-labelledby="faq-title"><div class="section-intro"><p class="eyebrow">{c.faqKicker}</p><h2 id="faq-title">{c.faqTitle}</h2></div><div class="faq-grid">{c.faqs.map(([q,a])=><details><summary>{q}<span aria-hidden="true">+</span></summary><p>{a}</p></details>)}</div></section>
-      <section class="next-section">
-        <div>
-          <p class="eyebrow">{c.deadline}</p>
-          <h2>{c.nextTitle}</h2>
-          <p>{c.nextText}</p>
-        </div>
-        <div class="next-actions">
-          <button type="button" class="winter-button hero-whatsapp-cta" data-whatsapp data-whatsapp-text={visual.whatsappText}>
-            <span>{visual.whatsappCta} 💬</span>
-          </button>
-          <a href="#package" class="winter-button light">{c.nextCta} ↗</a>
         </div>
       </section>
     </main>
-    <footer class="winter-wrap winter-footer"><img src={`${base}ime-clinic-logo.svg`} alt="IME Clinic" width="125" height="30"/><div><span>{c.footer}</span><small>{visual.modelNote} · <a href="https://www.pexels.com/photo/close-up-photo-of-smiling-woman-9253771/" target="_blank" rel="noopener noreferrer">Ron Lach / Pexels</a></small></div></footer>
-    <div class="mobile-offer">
-      <div class="mobile-offer-info">
-        <span>{c.title}</span>
-        <small>{price} · {c.deadline}</small>
+
+    <!-- Footer -->
+    <footer class="S6Hkya_footer">
+      <div class="wrap S6Hkya_row">
+        <img src={`${base}ime-clinic-logo.svg`} alt="IME Clinic" width="128" height="30" style="display:block;height:28px;width:auto;"/>
+        <p class="S6Hkya_address">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 256 256" aria-hidden="true"><path d="M128,64a40,40,0,1,0,40,40A40,40,0,0,0,128,64Zm0,64a24,24,0,1,1,24-24A24,24,0,0,1,128,128Zm0-112a88.1,88.1,0,0,0-88,88c0,31.4,14.51,64.68,42,96.25a254.19,254.19,0,0,0,41.45,38.3,8,8,0,0,0,9.18,0A254.19,254.19,0,0,0,174,200.25c27.45-31.57,42-64.85,42-96.25A88.1,88.1,0,0,0,128,16Zm0,206c-16.53-13-72-60.75-72-118a72,72,0,0,1,144,0C200,161.23,144.53,209,128,222Z"></path></svg>
+          <span>Ataköy 7-8-9-10. Kısım Mah. Çobançeşme E5 Yan Yol Cad. No: 16/1, 15. Kat, Ofis 111, Bakırköy, Istanbul</span>
+        </p>
+        <nav class="S6Hkya_links" aria-label="Footer">
+          <a href="https://www.imeclinic.com/privacy-policy" target="_blank" rel="noopener">Privacy policy</a>
+        </nav>
       </div>
-      <div class="mobile-offer-actions">
-        <button type="button" class="winter-button mobile-wa-btn" data-whatsapp data-whatsapp-text={visual.whatsappText}>
-          <span>💬 WhatsApp</span>
+      <div class="wrap S6Hkya_legal">
+        <span data-i18n="legalText">{t.legalText}</span>
+      </div>
+    </footer>
+
+    <!-- Mobile Sticky WhatsApp Bar -->
+    <aside class="SynduG_bar" aria-label="Quick contact">
+      <div class="SynduG_inner">
+        <div class="SynduG_copy">
+          <span class="SynduG_eyebrow" data-i18n="stickyEyebrow">{t.stickyEyebrow}</span>
+          <strong class="SynduG_price">€3,000</strong>
+        </div>
+        <button type="button" class="btn btn--primary btn--sm cta-whatsapp-btn">
+          <span data-i18n="stickyCta">{t.stickyCta}</span><span aria-hidden="true">↗</span>
         </button>
-        <a href="#package" class="mobile-jump">{c.nav[0]} ↑</a>
+      </div>
+    </aside>
+
+    <!-- Modal Dialogs for Case Zoom and Video -->
+    <div class="dialog-overlay" id="image-dialog" role="dialog" aria-modal="true" aria-label="Clinical Result Zoom">
+      <div class="dialog-content">
+        <button type="button" class="dialog-close" id="image-dialog-close" aria-label="Close dialog">✕</button>
+        <img id="image-dialog-img" src="" alt="Clinical Result"/>
       </div>
     </div>
-    <dialog id="image-dialog" aria-labelledby="image-dialog-title"><div class="dialog-head"><h2 id="image-dialog-title"></h2><button type="button" data-close-dialog aria-label={c.close}>×</button></div><div class="image-stage"><button type="button" data-image-prev aria-label="←">←</button><img alt=""/><button type="button" data-image-next aria-label="→">→</button></div><a class="winter-button" data-image-download download>{c.downloadOne} ↓</a></dialog>
-    <dialog id="video-dialog" aria-labelledby="video-dialog-title"><div class="dialog-head"><h2 id="video-dialog-title">{c.videoTitle}</h2><button type="button" data-close-dialog aria-label={c.close}>×</button></div><div data-video-container></div></dialog>
-    <script id="winter-data" type="application/json" set:html={JSON.stringify(client).replaceAll('<','\\u003c')}/>
-    <script>import '../scripts/winter-smile-client';</script>
+
+    <div class="dialog-overlay" id="video-dialog" role="dialog" aria-modal="true" aria-label="Video Player">
+      <div class="dialog-content" style="max-width:400px; aspect-ratio:9/16; background:#000;">
+        <button type="button" class="dialog-close" id="video-dialog-close" aria-label="Close dialog">✕</button>
+        <div id="video-dialog-container" style="width:100%;height:100%;display:grid;place-items:center;color:#fff;">
+          <p>Video loading...</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Complete JSON Translations Dictionary -->
+    <script id="smile-translations" type="application/json" set:html={JSON.stringify(smileLocalesData)}></script>
+
+    <!-- Client Script -->
+    <script src="@/scripts/winter-smile-client.ts"></script>
   </body>
 </html>

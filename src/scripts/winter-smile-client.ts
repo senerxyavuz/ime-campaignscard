@@ -26,6 +26,7 @@ async function loadLanguage(lang:string,updateUrl=true){
   if(lang==='en')url.searchParams.delete('lang');else url.searchParams.set('lang',lang);
   if(updateUrl)history.pushState({},'',url);
   mount();
+  if(updateUrl)document.querySelector<HTMLElement>(".winter-language summary")?.focus({preventScroll:true});
  }catch{if(revision===languageRequest)location.assign(path+location.search+location.hash);}
 }
 function mount(){
@@ -66,10 +67,18 @@ let deckIndex=0;
 const deckSlides=qa<HTMLElement>('[data-deck-slide]');
 function showDeck(index:number){
  deckIndex=(index+deckSlides.length)%deckSlides.length;
- deckSlides.forEach((slide,i)=>{const offset=(i-deckIndex+deckSlides.length)%deckSlides.length;slide.dataset.position=offset===0?'active':offset===1?'previous':'next';slide.setAttribute('aria-hidden',String(offset!==0));});
+ deckSlides.forEach((slide,i)=>{const offset=(i-deckIndex+deckSlides.length)%deckSlides.length;slide.dataset.position=offset===0?'active':offset===1?'next':offset===deckSlides.length-1?'previous':'queued';slide.setAttribute('aria-hidden',String(offset!==0));});
  qa<HTMLButtonElement>('[data-deck-dot]').forEach((button,i)=>button.setAttribute('aria-pressed',String(i===deckIndex)));
- q('[data-deck-status]').textContent=qa<HTMLButtonElement>('[data-deck-dot]')[deckIndex].getAttribute('aria-label');
+ const slide=deckSlides[deckIndex];
+ q('[data-deck-label]').textContent=slide.dataset.label||'';
+ q('[data-deck-caption]').textContent=slide.dataset.caption||'';
+ q('[data-deck-description]').textContent=slide.dataset.description||'';
+ const notice=q<HTMLElement>('[data-deck-notice]');notice.textContent=slide.dataset.notice||'';notice.hidden=!slide.dataset.notice;
+ const context=q<HTMLAnchorElement>('[data-deck-context]');context.href=slide.dataset.target||'#package';
+ if(slide.dataset.stay!==undefined)context.dataset.stayTarget=slide.dataset.stay;else delete context.dataset.stayTarget;
+ q('[data-deck-status]').textContent=slide.dataset.caption||'';
 }
+q<HTMLAnchorElement>('[data-deck-context]').addEventListener('click',event=>{const index=(event.currentTarget as HTMLElement).dataset.stayTarget;if(index!==undefined)showStay(Number(index));});
 q('[data-deck-prev]').addEventListener('click',()=>showDeck(deckIndex-1));
 q('[data-deck-next]').addEventListener('click',()=>showDeck(deckIndex+1));
 qa<HTMLButtonElement>('[data-deck-dot]').forEach(button=>button.addEventListener('click',()=>showDeck(Number(button.dataset.deckDot))));
@@ -171,9 +180,25 @@ for(const dialog of [imageDialog,videoDialog]){
   event.preventDefault();
   const lang=link.getAttribute('lang')!;
   q<HTMLDetailsElement>('.winter-language').open=false;
+  q<HTMLElement>('.winter-language summary').focus({preventScroll:true});
   if(lang!==data.lang)loadLanguage(lang);
  }));
- q('.winter-language').addEventListener('keydown',event=>{if((event as KeyboardEvent).key==='Escape'){q<HTMLDetailsElement>('.winter-language').open=false;q<HTMLElement>('.winter-language summary').focus();}});
+ const languageMenu=q<HTMLDetailsElement>('.winter-language');
+ const languageSummary=q<HTMLElement>('.winter-language summary');
+ const languageLinks=qa<HTMLAnchorElement>('.winter-language a');
+ languageMenu.addEventListener('keydown',event=>{
+  if(event.key==='Escape'){event.preventDefault();event.stopPropagation();languageMenu.open=false;languageSummary.focus();return;}
+  if(!['ArrowDown','ArrowUp','Home','End'].includes(event.key))return;
+  event.preventDefault();languageMenu.open=true;
+  const current=languageLinks.indexOf(document.activeElement as HTMLAnchorElement);let next=current;
+  if(event.key==='Home')next=0;else if(event.key==='End')next=languageLinks.length-1;
+  else if(current<0)next=event.key==='ArrowUp'?languageLinks.length-1:Math.max(0,languageLinks.findIndex(a=>a.getAttribute('aria-current')==='page'));
+  else next=(current+(event.key==='ArrowDown'?1:-1)+languageLinks.length)%languageLinks.length;
+  languageLinks[next].focus();
+ });
+ languageMenu.addEventListener('focusout',event=>{if(event.relatedTarget&&!languageMenu.contains(event.relatedTarget as Node))languageMenu.open=false;});
+ document.addEventListener('pointerdown',event=>{if(languageMenu.open&&!languageMenu.contains(event.target as Node)){if(languageMenu.contains(document.activeElement))languageSummary.focus({preventScroll:true});languageMenu.open=false;}},{signal:controller.signal});
+
  const requested=new URL(location.href).searchParams.get('lang');
  if(requested&&requested!==data.lang&&data.routes[requested])loadLanguage(requested,false);
 }

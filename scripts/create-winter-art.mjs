@@ -9,7 +9,7 @@ await mkdir(new URL('art/',dir),{recursive:true});
 // resvg embeds JPEG/PNG; encode the resized source as a high-quality JPEG, without retouching.
 const pic = await sharp(await readFile(new URL('media/smile-editorial-2560.webp',dir))).jpeg({quality:95}).toBuffer();
 const clinic = await sharp(await readFile(new URL('media/airport-flight-1280.webp',dir))).jpeg({quality:95}).toBuffer();
-const logo = await readFile(new URL('../ime-clinic-logo.svg',dir));
+const logo = await readFile(new URL('../assets-source/body-design-reference-20261104/ime-logo.svg',import.meta.url));
 const esc=s=>s.replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;');
 const lines=(text,max=32)=>{
  const out=[];let line='';for(const word of text.split(' ')){if((line+' '+word).length>max&&line){out.push(line);line=word}else line+=(line?' ':'')+word}if(line)out.push(line);return out;
@@ -29,17 +29,17 @@ for(const [lang,c] of Object.entries(smileCopy)){
   const features=[c.facts[0],c.facts[1],c.facts[2],c.facts[3]];
   const rows=features.map((s,i)=>`<text x="105" y="${1020+i*49}" font-size="29" fill="#f3f3ee">${esc(s)}</text><circle cx="79" cy="${1010+i*49}" r="4" fill="#edcaa4"/>`).join('');
   const svg=`<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="1080" height="1350" viewBox="0 0 1080 1350">
-  <defs><clipPath id="photo"><rect x="40" y="355" width="1000" height="410" rx="24"/></clipPath><linearGradient id="bg" x2="1" y2="1"><stop stop-color="#422831"/><stop offset="1" stop-color="#422831"/></linearGradient></defs>
+  <defs><filter id="forest-logo"><feColorMatrix type="matrix" values="0 0 0 0 .157 0 0 0 0 .239 0 0 0 0 .212 0 0 0 1 0"/></filter><clipPath id="photo"><rect x="40" y="355" width="1000" height="410" rx="24"/></clipPath><linearGradient id="bg" x2="1" y2="1"><stop stop-color="#283d36"/><stop offset="1" stop-color="#283d36"/></linearGradient></defs>
   <rect width="1080" height="1350" fill="url(#bg)"/><circle cx="1060" cy="50" r="310" fill="#edcaa4" opacity=".06"/>
-  <rect x="60" y="46" width="260" height="69" rx="12" fill="white"/><image x="77" y="64" width="227" height="38" xlink:href="data:image/svg+xml;base64,${logo.toString('base64')}"/>
+  <rect x="60" y="46" width="260" height="69" rx="12" fill="white"/><image filter="url(#forest-logo)" x="77" y="64" width="227" height="38" xlink:href="data:image/svg+xml;base64,${logo.toString('base64')}"/>
   <g font-family="DejaVu Sans,Arial,sans-serif"><text x="70" y="165" font-size="24" fill="#edcaa4">${esc(campaign.season)}</text>
   <text x="70" y="246" font-weight="700" font-size="56" fill="white">${title}</text>
   <image x="${photoX}" y="${photoY}" width="${photoWidth}" height="${photoHeight}" preserveAspectRatio="xMidYMid slice" clip-path="url(#photo)" xlink:href="data:image/jpeg;base64,${photo.toString('base64')}"/>
-  <rect x="40" y="729" width="1000" height="36" fill="#422831" opacity=".72"/><text x="65" y="753" font-size="17" fill="white">${esc(photoNote)}</text>
+  <rect x="40" y="729" width="1000" height="36" fill="#283d36" opacity=".72"/><text x="65" y="753" font-size="17" fill="white">${esc(photoNote)}</text>
   <text x="70" y="835" font-size="26" fill="#e4bb91">${esc(c.priceLabel)}</text><text x="65" y="952" font-size="120" font-weight="700" fill="white">€3.000</text>
-  <rect x="598" y="858" width="410" height="92" rx="15" fill="#edcaa4"/><text x="625" y="897" font-size="22" fill="#422831">${esc(c.ticket[3])}</text><text x="625" y="930" font-size="27" font-weight="700" fill="#422831">€300 · ${esc(c.ticket[0])}</text>
+  <rect x="598" y="858" width="410" height="92" rx="15" fill="#edcaa4"/><text x="625" y="897" font-size="22" fill="#283d36">${esc(c.ticket[3])}</text><text x="625" y="930" font-size="27" font-weight="700" fill="#283d36">€300 · ${esc(c.ticket[0])}</text>
   ${rows}<text x="70" y="1194" font-size="18" fill="#dfc6ae">${esc(c.flightNote)}</text>
-  <rect x="40" y="1210" width="1000" height="109" rx="12" fill="#f1dfc7"/><text x="68" y="1244" font-size="20" fill="#70432f">${esc(campaign.ends)}</text><text x="68" y="1294" font-size="42" font-weight="700" fill="#422831">${esc(expiry)}</text>
+  <rect x="40" y="1210" width="1000" height="109" rx="12" fill="#fffcf7"/><text x="68" y="1244" font-size="20" fill="#a84e2b">${esc(campaign.ends)}</text><text x="68" y="1294" font-size="42" font-weight="700" fill="#283d36">${esc(expiry)}</text>
   <text x="70" y="1344" font-size="14" fill="#dfc6ae">${esc(campaign.deadlineNote)}</text></g></svg>`;
   const name=`winter-${lang}-${variant+1}`;
   await writeFile(new URL(`art/${name}.svg`,dir),svg);

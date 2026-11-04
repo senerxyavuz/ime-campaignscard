@@ -1,0 +1,51 @@
+{
+  "reference": "https://www.imeclinic.com/body-contouring/",
+  "sourceRelease": "20261103T121017Z-406ea1240ac4-f1482daa",
+  "tokens": {
+    "background": "#fffcf7",
+    "backgroundSoft": "#f7efe4",
+    "ink": "#372b26",
+    "forest": "#283d36",
+    "bronze": "#a84e2b",
+    "displayFont": "Cormorant Garamond",
+    "bodyFont": "Manrope"
+  },
+  "fonts": [
+    {
+      "source": "public/lp-assets/_next/static/media/7a6acee73a8e31e5-s.p.2m3i3oz1-wblr.woff2",
+      "file": "cormorant-italic-cyrillic.woff2",
+      "sha256": "3549e271a2b2c62bfbe36de9c38f5692f36e578fc7ca94c1a531536a813c682c"
+    },
+    {
+      "source": "public/lp-assets/_next/static/media/9ec34dfaa94f6f87-s.p.12p1wp2iov977.woff2",
+      "file": "cormorant-italic-latin-ext.woff2",
+      "sha256": "bfdb4ad2867021604e176256132595f0f66c4fca464afd9b42c8eea1b468e31b"
+    },
+    {
+      "source": "public/lp-assets/_next/static/media/a575348c6bcdca86-s.p.11yk12lfce9cq.woff2",
+      "file": "cormorant-italic-latin.woff2",
+      "sha256": "938e91d95067a818a244f5ee6567cbdc13bb6c3c3b7de160b3e90fd8daf8afe5"
+    },
+    {
+      "source": "public/lp-assets/_next/static/media/817e533297d91a37-s.p.1sq7s-u68dts7.woff2",
+      "file": "cormorant-normal-cyrillic.woff2",
+      "sha256": "aadd174e117fb019f6da65687eeeb0accfe823736a6eb4c771a010b1c1222348"
+    },
+    {
+      "source": "public/lp-assets/_next/static/media/c56e2f8b7dcc1901-s.p.3d7jz5b7vsrv4.woff2",
+      "file": "cormorant-normal-latin-ext.woff2",
+      "sha256": "d79559afd66f4d858a5572c01873d04716aad1c8cd022c37d1a810740eff86ef"
+    },
+    {
+      "source": "public/lp-assets/_next/static/media/96cf155e359290ce-s.p.23ep72p29q6zo.woff2",
+      "file": "cormorant-normal-latin.woff2",
+      "sha256": "53205cf81200f21bd07a711c1ff238c216fd43244b48ae1c4fd35a2bb65bd8c4"
+    }
+  ],
+  "logoSHA256": "2a09730bc4e89bca842dfe2c819901542f872f52a0277ce3403e064dfc927425",
+  "logoOutput": {
+    "file": "public/winter-smile/media/ime-logo-forest.webp",
+    "sha256": "19b39f3ecb889e6b63402a31f0800319a53aa95b8d64e99b240184b989153098",
+    "rendering": "Lossless proportional WebP of the existing SVG; alpha mask coloured #283d36 in the UI, matching the body landing logo component."
+  }
+}

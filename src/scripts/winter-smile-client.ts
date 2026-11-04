@@ -59,7 +59,31 @@ qa<HTMLAnchorElement>('a[href="#library"]').forEach(link=>link.addEventListener(
 setView(new URL(location.href).searchParams.get('view')==='advisor'?'advisor':'patient',false);
 qa<HTMLAnchorElement>('[data-view-switch]').forEach(link=>link.addEventListener('click',event=>{event.preventDefault();const view=link.dataset.viewSwitch!;setView(view);q(view==='advisor'?'#advisor':'#main').scrollIntoView({behavior:matchMedia('(prefers-reduced-motion:reduce)').matches?'instant':'smooth'});}));
 window.addEventListener('popstate',()=>{const lang=new URL(location.href).searchParams.get('lang')||'en';if(lang!==data.lang&&data.routes[lang])loadLanguage(lang,false);else setView(new URL(location.href).searchParams.get('view')==='advisor'?'advisor':'patient',false);},{signal:controller.signal});
-document.addEventListener('click',event=>{qa<HTMLDetailsElement>('.winter-language[open]').forEach(el=>{if(!el.contains(event.target as Node))el.open=false;});},{signal:controller.signal});
+document.addEventListener('click',event=>{qa<HTMLDetailsElement>('.winter-language[open],.winter-menu[open]').forEach(el=>{if(!el.contains(event.target as Node))el.open=false;});},{signal:controller.signal});
+
+// The same compact image deck and stay tabs used by the body landing design.
+let deckIndex=0;
+const deckSlides=qa<HTMLElement>('[data-deck-slide]');
+function showDeck(index:number){
+ deckIndex=(index+deckSlides.length)%deckSlides.length;
+ deckSlides.forEach((slide,i)=>{const offset=(i-deckIndex+deckSlides.length)%deckSlides.length;slide.dataset.position=offset===0?'active':offset===1?'previous':'next';slide.setAttribute('aria-hidden',String(offset!==0));});
+ qa<HTMLButtonElement>('[data-deck-dot]').forEach((button,i)=>button.setAttribute('aria-pressed',String(i===deckIndex)));
+ q('[data-deck-status]').textContent=qa<HTMLButtonElement>('[data-deck-dot]')[deckIndex].getAttribute('aria-label');
+}
+q('[data-deck-prev]').addEventListener('click',()=>showDeck(deckIndex-1));
+q('[data-deck-next]').addEventListener('click',()=>showDeck(deckIndex+1));
+qa<HTMLButtonElement>('[data-deck-dot]').forEach(button=>button.addEventListener('click',()=>showDeck(Number(button.dataset.deckDot))));
+q('.deck-controls').addEventListener('keydown',event=>{const key=(event as KeyboardEvent).key;if(key!=='ArrowLeft'&&key!=='ArrowRight')return;event.preventDefault();showDeck(deckIndex+(key==='ArrowRight'?1:-1));qa<HTMLButtonElement>('[data-deck-dot]')[deckIndex].focus();});
+function showStay(index:number,focus=false){
+ qa<HTMLButtonElement>('[data-stay-tab]').forEach((button,i)=>{const active=i===index;button.setAttribute('aria-selected',String(active));button.tabIndex=active?0:-1;if(active&&focus)button.focus();});
+ qa<HTMLElement>('.places-grid>[role=tabpanel]').forEach((panel,i)=>panel.hidden=i!==index);
+}
+qa<HTMLButtonElement>('[data-stay-tab]').forEach(button=>{
+ button.addEventListener('click',()=>showStay(Number(button.dataset.stayTab)));
+ button.addEventListener('keydown',event=>{const i=Number(button.dataset.stayTab);const max=qa('[data-stay-tab]').length;let next=i;if(event.key==='ArrowRight')next=(i+1)%max;else if(event.key==='ArrowLeft')next=(i+max-1)%max;else if(event.key==='Home')next=0;else if(event.key==='End')next=max-1;else return;event.preventDefault();showStay(next,true);});
+});
+qa<HTMLAnchorElement>('.winter-menu a').forEach(link=>link.addEventListener('click',()=>q<HTMLDetailsElement>('.winter-menu').open=false));
+q('.winter-menu').addEventListener('keydown',event=>{if((event as KeyboardEvent).key==='Escape'){q<HTMLDetailsElement>('.winter-menu').open=false;q<HTMLElement>('.winter-menu summary').focus();}});
 
 const selected=new Set<string>();
 let category=0;
@@ -89,7 +113,7 @@ q('[data-clear]').addEventListener('click',()=>{selected.clear();updateSelection
 function setCategory(next:number,focus=false){
  category=next;
  qa<HTMLButtonElement>('[data-category]').forEach(button=>{const active=Number(button.dataset.category)===category;button.setAttribute('aria-selected',String(active));button.tabIndex=active?0:-1;if(active&&focus){button.focus();button.scrollIntoView({block:'nearest',inline:'nearest'});}});
- qa<HTMLElement>('[role=tabpanel]').forEach((panel,index)=>panel.hidden=index!==category);
+ qa<HTMLElement>('.media-hub [role=tabpanel]').forEach((panel,index)=>panel.hidden=index!==category);
 }
 qa<HTMLButtonElement>('[data-category]').forEach(button=>{
  button.addEventListener('click',()=>setCategory(Number(button.dataset.category)));

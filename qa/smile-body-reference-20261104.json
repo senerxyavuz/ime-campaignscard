@@ -1,0 +1,35 @@
+{
+  "date": "2026-11-04",
+  "reference": "https://www.imeclinic.com/body-contouring/",
+  "assetRevision": "8322f6f67336ae5f",
+  "sourceFingerprint": "86cb89e8fadd27ebde4250a8bb86baa265232015aca38a39e38c293cfd5988f4",
+  "scope": "Five existing All-Inclusive Smile routes and their versioned assets; the reference body page is read-only",
+  "design": {
+    "palette": {
+      "cream": "#fffcf7",
+      "forest": "#283d36",
+      "bronze": "#a84e2b"
+    },
+    "fonts": "Same local Cormorant Garamond normal/italic + Manrope, including Cyrillic and extended Latin",
+    "components": "Announcement band, monochrome logo mask, compact menu, layered 3-image deck with controls, benefit band, stay tabs, rounded package and phase cards",
+    "campaign": "\u20ac3,000, patient flight up to \u20ac300, 7 hotel nights, 1 companion accommodation, transfers, 31 December 2026 deposit deadline preserved"
+  },
+  "checks": {
+    "astro": "33 files: 0 errors/warnings/hints",
+    "build": "31 portal + 5 root pages",
+    "nodeTests": "3 passed, including original imported-media SHA256 parity",
+    "publisherTests": "5 passed",
+    "responsive": "EN/TR/RU/ES/IT at 320, 390, 768 and 1280: no document overflow; all have 3 deck cards, 3 stay tabs, ISO date 2026-12-31",
+    "deck": "Next/dot selection and ArrowLeft keyboard navigation verified, focus lands on selected dot",
+    "stayTabs": "Hotel tab, ArrowRight to transfers and focus verified; gallery category change leaves stay selection intact",
+    "mobileMenu": "Escape restores focus to summary; section click closes menu",
+    "video": "Real clinic MP4 played, 56.033333 seconds, readyState 4 and playback time advanced; close removes player",
+    "zip": "Downloaded new Italian creative ZIP matches its source JPEG bytes",
+    "console": "No error logs during final interaction checks",
+    "messages": "No WhatsApp messages or leads submitted"
+  },
+  "sharedSource": {
+    "release": "20261103T121017Z-406ea1240ac4-f1482daa",
+    "modified": false
+  }
+}

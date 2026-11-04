@@ -1,132 +1,143 @@
 ---
-import { smileCopy } from '@/data/winter-locales';
+import { smileText, type SmileLang } from '@/data/winter-i18n';
 import { smileTerms } from '@/data/winter-smile';
 import media from '@/data/winter-media.json';
-import { langOrder,languages,type Lang } from '@/i18n/ui';
 import '@/styles/winter-smile.css';
 import '@/styles/winter-smile-parity.css';
-import { smilePath, smileOrigin } from '@/data/smile-paths.mjs';
-import { smileVisuals } from '@/data/winter-visuals';
-import { winterCampaign } from '@/data/winter-campaign';
-import { winterRefine, smileContactFooter } from '@/data/winter-refine';
-import { winterExperience } from '@/data/winter-experience';
-import { smileLanguageOrder,smileLanguageFlags } from '@/data/winter-languages';
-const {lang}=Astro.props as {lang:Lang};
-const c=smileCopy[lang];
-const visual=smileVisuals[lang];
-const campaign=winterCampaign[lang];
-const refine=winterRefine[lang];
-const lowerFirst=(text:string)=>text.charAt(0).toLocaleLowerCase(lang)+text.slice(1);
-const experience=winterExperience[lang];
-const stayPhotos=[["clinic-dental-consultation.webp","clinic-dental-unit-green.webp"],["hotel-room-2.webp","hotel-entrance.webp"],["transfer-vehicle.webp"]];
-const expiry=new Intl.DateTimeFormat(lang==="en"?"en-GB":lang,{day:"2-digit",month:"long",year:"numeric",timeZone:"UTC"}).format(new Date(smileTerms.expires+"T00:00:00Z"));
-const kicker=(text:string)=>text.replace(/^\d+\s*\/\s*/, "");
+import { smilePath, smileOrigin, smileLocales } from '@/data/smile-paths.mjs';
+import { smileLanguageOrder, smileLanguageNames, smileLanguageFlags } from '@/data/winter-languages';
+
+const {lang}=Astro.props as {lang:SmileLang};
+const t=smileText[lang];
+const rtl=lang==='ar';
 const base=import.meta.env.BASE_URL;
 const root=`${base}winter-smile/`;
 const asset=(name:string)=>root+'media/'+name;
-const deckSlides=[{src:'smile-editorial-2560.webp',alt:visual.portraitAlt,kind:'smile',target:'#package',stay:undefined},{src:'transfer-vehicle.webp',alt:experience.placeAlts[2][0],kind:'transfer',target:'#places',stay:2},{src:'hotel-room-2.webp',alt:experience.placeAlts[1][0],kind:'hotel',target:'#places',stay:1},{src:'clinic-dental-consultation.webp',alt:experience.placeAlts[0][0],kind:'clinic',target:'#places',stay:0}].map((slide,i)=>({...slide,...experience.slides[i]}));
-const canonical=smileOrigin+smilePath('en');
-const price=new Intl.NumberFormat(lang,{style:'currency',currency:'EUR',maximumFractionDigits:0}).format(smileTerms.price);
-const anchors=['package','journey','places','results','library','questions'];
-const navLabels=[c.nav[0],c.nav[1],c.nav[2],visual.resultsNav,c.nav[3],c.nav[4]];
+const labels=t.assetLabels as Record<string,string>;
+const pageUrl=(code:string)=>smileOrigin+smilePath(code);
+
+// Hero deck: goal, then clinic, stay and arrival.
+const deckSlides=[
+ {src:'smile-editorial-2560.webp',alt:t.portraitAlt,kind:'smile',target:'#package',note:t.modelNote},
+ {src:'clinic-dental-unit-green.webp',alt:labels['clinic-dental-unit-green'],kind:'clinic',target:'#places',note:''},
+ {src:'hotel-lobby.webp',alt:labels['hotel-lobby'],kind:'hotel',target:'#places',note:''},
+ {src:'transfer-vehicle.webp',alt:labels['transfer-vehicle'],kind:'transfer',target:'#places',note:''},
+].map((slide,i)=>({...slide,...t.slides[i]}));
+
+const anchors=['package','results','videos','places','journey','questions'];
 const mediaCounts:number[]=[];
-const localizedMedia=media.items.map((item:any)=>{const number=(mediaCounts[item.category]||0)+1;mediaCounts[item.category]=number;return {...item,src:asset(item.src),thumb:asset(item.thumb),title:(refine.documents as Record<string,string>)[item.id]||item.labels?.[lang]?.title||`${item.category===3?c.resultCaption:c.categories[item.category]} · ${String(number).padStart(2,'0')}`};});
-const posters=[1,2].map(n=>({id:`campaign-${n}`,category:0,src:`${root}art/winter-${lang}-${n}.jpg`,thumb:`${root}art/winter-${lang}-${n}.jpg`,title:`${c.campaignCaption} · ${n}`}));
+const localizedMedia=media.items.map((item:any)=>{const number=(mediaCounts[item.category]||0)+1;mediaCounts[item.category]=number;return {...item,src:asset(item.src),thumb:asset(item.thumb),title:labels[item.id]||`${t.resultCaption} · ${String(number).padStart(2,'0')}`};});
+const posters=[1,2].map(n=>({id:`campaign-${n}`,category:0,src:`${root}art/winter-${lang}-${n}.jpg`,thumb:`${root}art/winter-${lang}-${n}.jpg`,title:`${t.campaignCaption} · ${n}`}));
 const items=[...posters,...localizedMedia];
+
+const results=localizedMedia.filter((item:any)=>item.category===3);
+const guide=localizedMedia.filter((item:any)=>item.category===5);
+const documents=localizedMedia.filter((item:any)=>item.id==='ime-document-ushas'||item.id==='ime-document-tursab');
+
 const clinicVideo=media.videos[0] as any;
 const doctorVariants=(media.videos[1] as any).variants;
 const doctorVideo=doctorVariants[lang]||doctorVariants.en;
-const videos=(media.videos as any[]).map((item,index)=>{
- const video=index===1?doctorVideo:item;
- const audio=index===0?c.originalAudio:index===1?c.doctorAudio:video.audio==='en'?visual.english:visual.silent;
- return {...video,title:visual.videoNames[index],audio};
+// Patients first: display order London, USA, centre, dentist, laboratory, rooms.
+const videos=[4,3,0,1,2,5].map((source,index)=>{
+ const video=source===1?doctorVideo:(media.videos as any[])[source];
+ const audio=source===0?t.originalAudio:source===1?t.doctorAudio:video.audio==='en'?t.english:t.silent;
+ // The centre tour's own frame shows a cut-off building sign, so its card uses a treatment-room photo.
+ return {...video,title:t.videoNames[index],audio,thumbnail:source===0?'clinic-dental-unit.webp':video.localPoster};
 });
-const patientLink=smileOrigin+smilePath('en')+(lang==='en'?'':`?lang=${lang}`);
-const contactUrl='https://wa.me/905465248334?text='+encodeURIComponent(visual.contactMessage);
-const client={...c,items,canonical:patientLink,lang,routes:Object.fromEntries(langOrder.map(code=>[code,smilePath(code)])),rootPath:smilePath('en')};
+
+const patientLink=pageUrl(lang);
+const contactUrl='https://wa.me/905465248334?text='+encodeURIComponent(t.contactMessage);
+const client={items,lang,routes:Object.fromEntries(smileLocales.map((code:string)=>[code,smilePath(code)])),rootPath:smilePath('en'),title:t.title,selected:t.selected,working:t.working,downloadError:t.downloadError,shareFallback:t.shareFallback,empty:t.empty,copied:t.copied,copyError:t.copyError,categories:t.categories,tokenName:t.tokenName,tokenAdvisor:t.tokenAdvisor,videoTitle:t.videoDialogTitle};
+const whatsappIcon='<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 256 256" aria-hidden="true"><path d="M187.58,144.84l-32-16a8,8,0,0,0-8,.5l-14.69,9.8a40.55,40.55,0,0,1-16-16l9.8-14.69a8,8,0,0,0,.5-8l-16-32A8,8,0,0,0,104,64a40,40,0,0,0-40,40,88.1,88.1,0,0,0,88,88,40,40,0,0,0,40-40A8,8,0,0,0,187.58,144.84ZM152,176a72.08,72.08,0,0,1-72-72A24,24,0,0,1,99.29,80.46l11.48,23L101,118a8,8,0,0,0-.73,7.51,56.47,56.47,0,0,0,30.15,30.15A8,8,0,0,0,138,155l14.61-9.74,23,11.48A24,24,0,0,1,152,176ZM128,24A104,104,0,0,0,36.18,176.88L24.83,210.93a16,16,0,0,0,20.24,20.24l34.05-11.35A104,104,0,1,0,128,24Zm0,192a87.87,87.87,0,0,1-44.06-11.81,8,8,0,0,0-6.54-.67L40,216,52.47,178.6a8,8,0,0,0-.66-6.54A88,88,0,1,1,128,216Z"/></svg>';
+const bandIcons=[
+ '<path d="M12 6c-1.7-1.300-3.200-1.800-4.700-1.200C5.400 5.500 4.800 7.500 5.100 9.600c.3 2 1 3.200 1.400 5 .5 2 .7 5.400 2.300 5.400 1.300 0 1.300-2.200 1.600-3.500.2-1 .7-1.700 1.600-1.700s1.400.7 1.600 1.700c.3 1.300.3 3.500 1.600 3.500 1.600 0 1.800-3.400 2.300-5.400.4-1.800 1.100-3 1.400-5 .3-2.100-.3-4.100-2.200-4.800C15.200 4.200 13.700 4.700 12 6z"/>',
+ '<path d="M10.500 13.500 3.500 11 5 9.500l6.500.5L16 5.500c1-1 2.500-1.500 3-1s0 2-1 3L13.500 12l.5 6.500-1.500 1.500-2-6.500zm0 0L7 17H4.500L4 16.500"/>',
+ '<path d="M3 18.500V6.500M3 15h18v3.500M21 15v-2.500a3 3 0 0 0-3-3h-7V15"/><circle cx="7" cy="11.500" r="1.800"/>',
+ '<path d="M4 16.500v-3.200l1.900-4.800A2 2 0 0 1 7.800 7.200h8.400a2 2 0 0 1 1.900 1.300l1.900 4.800v3.200M4 13.300h16M4 16.500h16M6 16.500v1.800M18 16.500v1.800"/>',
+];
 ---
 <!doctype html>
-<html lang={lang}>
+<html lang={lang} dir={rtl?'rtl':'ltr'}>
   <head>
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="robots" content="noindex, nofollow"/>
-    <meta name="theme-color" content="#283d36"/>
-    <title>{c.title} · {price} · {campaign.season} — IME Clinic</title>
-    <meta name="description" content={`${c.lead} ${c.deadline}. ${c.flightNote}.`}/>
-    <link rel="canonical" href={canonical}/>
-    {langOrder.map(code=><link rel="alternate" hreflang={code} href={smileOrigin+smilePath(code)}/>)}
-    <link rel="alternate" hreflang="x-default" href={smileOrigin+smilePath('en')}/>
-    <meta property="og:title" content={`${c.title} · ${price}`}/>
-    <meta property="og:description" content={`${c.lead} ${c.deadline}. ${c.flightNote}.`}/>
+    <meta name="theme-color" content="#234944"/>
+    <title>{t.metaTitle}</title>
+    <meta name="description" content={t.metaDescription}/>
+    <link rel="canonical" href={patientLink}/>
+    {smileLanguageOrder.map(code=><link rel="alternate" hreflang={code} href={pageUrl(code)}/>)}
+    <link rel="alternate" hreflang="x-default" href={pageUrl('en')}/>
+    <meta property="og:title" content={t.metaTitle}/>
+    <meta property="og:description" content={t.metaDescription}/>
     <meta property="og:type" content="website"/>
-    <meta property="og:url" content={canonical}/>
-    <meta property="og:image" content={`${smileOrigin}${root}art/winter-${lang}-1.jpg`}/>
-    <meta property="og:image:width" content="1080"/><meta property="og:image:height" content="1350"/>
+    <meta property="og:url" content={patientLink}/>
+    <meta property="og:image" content={`${smileOrigin}${root}art/og-${lang}.jpg`}/>
+    <meta property="og:image:width" content="1200"/><meta property="og:image:height" content="630"/>
     <link rel="icon" href={`${base}favicon.svg`}/>
-    <link rel="preload" href={asset('manrope-latin.woff2')} as="font" type="font/woff2" crossorigin/>
+    <link rel="preload" href={asset(rtl?'noto-arabic.woff2':'manrope-latin.woff2')} as="font" type="font/woff2" crossorigin/>
   </head>
   <body data-winter-smile data-view="patient">
-    <a class="skip" href="#main">{c.skip}</a>
-    <aside class="campaign-announcement"><div class="winter-wrap"><span class="announcement-pill">{campaign.season}</span><p>{campaign.summary}</p><div class="view-switch" aria-label={c.title}><a href="#main" data-view-switch="patient" aria-current="page">{c.patient}</a><a href="?view=advisor#advisor" data-view-switch="advisor">{c.advisor}<span aria-hidden="true">↗</span></a></div></div></aside>
+    <a class="skip" href="#main">{t.skip}</a>
+    <aside class="campaign-announcement"><div class="winter-wrap"><span class="announcement-pill">{t.season}</span><p>{t.summary}</p><div class="view-switch" aria-label={t.title}><a href="#main" data-view-switch="patient" aria-current="page">{t.patient}</a><a href="?view=advisor#advisor" data-view-switch="advisor">{t.advisor}<span aria-hidden="true">↗</span></a></div></div></aside>
     <header class="winter-header">
       <div class="winter-wrap header-row">
         <a href="#main" aria-label="IME Clinic" class="winter-logo"><span class="winter-logo-mark" style={`--logo-image:url(${asset('ime-logo-forest.webp')})`} role="img" aria-label="IME Clinic"></span></a>
-
-        <details class="winter-menu"><summary aria-label={campaign.menu}><svg viewBox="0 0 24 24" width="22" height="22" fill="none" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></summary><div>{anchors.map((id,i)=><a href={`#${id}`}>{navLabels[i]}</a>)}</div></details>
-        <details class="winter-language"><summary aria-label={c.language}><span class="language-flag" aria-hidden="true" set:html={smileLanguageFlags[lang]}/><span>{lang.toUpperCase()}</span><svg class="language-caret" viewBox="0 0 16 16" width="14" height="14" aria-hidden="true"><path d="m4 6 4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></summary><div>{smileLanguageOrder.map(code=><a href={smilePath(code)} lang={code} hreflang={code} aria-current={code===lang?'page':undefined}><span class="language-flag" aria-hidden="true" set:html={smileLanguageFlags[code]}/><span>{languages[code]}</span>{code===lang&&<span class="language-check" aria-hidden="true">✓</span>}</a>)}</div></details>
-        <nav class="desktop-nav" aria-label={c.title}>{anchors.map((id,i)=><a href={`#${id}`}>{navLabels[i]}</a>)}</nav>
+        <details class="winter-menu"><summary aria-label={t.menu}><svg viewBox="0 0 24 24" width="22" height="22" fill="none" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></summary><div>{anchors.map((id,i)=><a href={`#${id}`}>{t.nav[i]}</a>)}</div></details>
+        <details class="winter-language"><summary aria-label={t.language}><span class="language-flag" aria-hidden="true" set:html={smileLanguageFlags[lang]}/><span>{lang.toUpperCase()}</span><svg class="language-caret" viewBox="0 0 16 16" width="14" height="14" aria-hidden="true"><path d="m4 6 4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></summary><div>{smileLanguageOrder.map(code=><a href={smilePath(code)} lang={code} hreflang={code} dir={code==='ar'?'rtl':'ltr'} aria-current={code===lang?'page':undefined}><span class="language-flag" aria-hidden="true" set:html={smileLanguageFlags[code]}/><span>{smileLanguageNames[code]}</span>{code===lang&&<span class="language-check" aria-hidden="true">✓</span>}</a>)}</div></details>
+        <nav class="desktop-nav" aria-label={t.title}>{anchors.map((id,i)=><a href={`#${id}`}>{t.nav[i]}</a>)}</nav>
       </div>
     </header>
     <main id="main">
       <section class="smile-hero winter-wrap" aria-labelledby="smile-title">
         <div class="hero-copy">
-          <div class="hero-head"><p class="eyebrow">{c.title} · {campaign.season}</p><h1 id="smile-title"><span>{campaign.headline.split('\n')[0]}</span><em>{campaign.headline.split('\n')[1]}</em></h1><p class="hero-lead">{c.lead}</p></div>
-          <div class="hero-chips"><span>✓ {campaign.features[1][1]}</span><span>✓ {campaign.features[2][0]} {lowerFirst(campaign.features[2][1])}</span></div>
-          <div class="hero-price"><strong>{price}</strong><div><span>{c.priceLabel}</span><p>{c.priceNote}</p></div></div>
-          <div class="hero-deadline"><span class="deadline-icon" aria-hidden="true">31</span><div><p>{campaign.ends}</p><time datetime={smileTerms.expires}>{expiry}</time><small>{campaign.deadlineNote}</small></div></div>
-          <div class="hero-actions"><a href="#package" class="hero-details">{c.explore}<span aria-hidden="true">↓</span></a><a href={contactUrl} class="winter-button light" target="_blank" rel="noopener noreferrer">{visual.contactCta}<span aria-hidden="true">↗</span></a></div>
+          <div class="hero-head"><p class="eyebrow">{t.title} · {t.season}</p><h1 id="smile-title"><span>{t.headline.split('\n')[0]}</span><em>{t.headline.split('\n')[1]}</em></h1><p class="hero-lead">{t.lead}</p></div>
+          <div class="hero-price"><strong>{t.price}</strong><div><span>{t.priceLabel}</span><p>{t.priceNote}</p></div></div>
+          <div class="hero-chips">{t.chips.map(text=><span>✓ {text}</span>)}</div>
+          <div class="hero-actions"><a href={contactUrl} class="winter-button light" target="_blank" rel="noopener noreferrer"><Fragment set:html={whatsappIcon}/>{t.contactCta}</a><a href="#package" class="hero-details">{t.explore}<span aria-hidden="true">↓</span></a></div>
+          <div class="hero-deadline"><span class="deadline-icon" aria-hidden="true">31</span><div><p>{t.ends}</p><time datetime={smileTerms.expires}>{t.expiry}</time><small>{t.deadlineNote}</small></div></div>
         </div>
         <div class="hero-visual">
-          <div class="hero-deck" aria-label={c.title}>{deckSlides.map((slide,index)=><figure class:list={['deck-card',{'deck-smile':slide.kind==='smile'}]} data-deck-slide={index} data-position={index===0?'active':index===1?'next':index===deckSlides.length-1?'previous':'queued'} data-caption={slide.title} data-description={slide.text} data-label={slide.label} data-notice={slide.note} data-target={slide.target} data-stay={slide.stay} aria-hidden={index!==0?'true':undefined}><img src={asset(slide.src)} alt={slide.alt} width="1200" height="800" fetchpriority={index===0?'high':undefined}/></figure>)}</div>
-          <div class="deck-caption"><div class="deck-caption-heading"><span data-deck-label>{deckSlides[0].label}</span><a href={deckSlides[0].target} data-deck-context>{experience.details} ↗</a></div><strong data-deck-caption>{deckSlides[0].title}</strong><p data-deck-description>{deckSlides[0].text}</p><small data-deck-notice>{deckSlides[0].note}</small></div>
-          <div class="deck-controls"><button type="button" data-deck-prev aria-label={campaign.previous}>←</button><div>{deckSlides.map((slide,index)=><button type="button" class="deck-dot" data-deck-dot={index} aria-label={slide.label} aria-pressed={index===0?'true':'false'}><span class="sr-only">{slide.label}</span></button>)}</div><button type="button" data-deck-next aria-label={campaign.next}>→</button></div><span class="sr-only" data-deck-status role="status"></span>
+          <div class="hero-deck" aria-label={t.title}>{deckSlides.map((slide,index)=><figure class:list={['deck-card',{'deck-smile':slide.kind==='smile'}]} data-deck-slide={index} data-position={index===0?'active':index===1?'next':index===deckSlides.length-1?'previous':'queued'} data-caption={slide.title} data-description={slide.text} data-label={slide.label} data-notice={slide.note} data-target={slide.target} aria-hidden={index!==0?'true':undefined}><img src={asset(slide.src)} alt={slide.alt} width="1200" height="800" fetchpriority={index===0?'high':undefined}/></figure>)}</div>
+          <div class="deck-caption"><div class="deck-caption-heading"><span data-deck-label>{deckSlides[0].label}</span><a href={deckSlides[0].target} data-deck-context>{t.details} ↗</a></div><strong data-deck-caption>{deckSlides[0].title}</strong><p data-deck-description>{deckSlides[0].text}</p><small data-deck-notice>{deckSlides[0].note}</small></div>
+          <div class="deck-controls"><button type="button" data-deck-prev aria-label={t.previous}>←</button><div>{deckSlides.map((slide,index)=><button type="button" class="deck-dot" data-deck-dot={index} aria-label={slide.label} aria-pressed={index===0?'true':'false'}><span class="sr-only">{slide.label}</span></button>)}</div><button type="button" data-deck-next aria-label={t.next}>→</button></div><span class="sr-only" data-deck-status role="status"></span>
         </div>
       </section>
-      <div class="facts-band"><ul class="hero-inclusions winter-wrap">{campaign.features.map(([value,label],i)=><li><span aria-hidden={/^\d+$/.test(value)?undefined:'true'}>{value}</span><div><strong>{label}</strong><small>{refine.bandNotes[i]}</small></div></li>)}</ul></div>
+      <div class="facts-band"><ul class="hero-inclusions winter-wrap">{t.band.map(([title,note],i)=><li><span class="band-icon" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" set:html={bandIcons[i]}/></span><div><strong>{title}</strong><small>{note}</small></div></li>)}</ul></div>
       <div class="winter-wrap">
       <section id="package" class="winter-section package-section" aria-labelledby="package-title">
-        <div class="section-intro"><div><p class="eyebrow">{kicker(c.packageKicker)}</p><h2 id="package-title">{campaign.packageTitle}</h2></div><p>{c.packageLead}</p></div>
-        <div class="package-grid"><div class="included-box"><ul>{c.includes.map(text=><li><span aria-hidden="true">✓</span>{text}</li>)}</ul></div><div class="scope-box"><h3>{c.scopeTitle}</h3><ul>{c.scope.map(text=><li>{text}</li>)}</ul><details class="material-details"><summary>{c.material}</summary><p>{c.materialText}</p></details></div></div>
+        <div class="section-intro"><div><p class="eyebrow">{t.packageKicker}</p><h2 id="package-title">{t.packageTitle}</h2></div><p>{t.packageLead}</p></div>
+        <div class="package-grid"><div class="included-box">{t.includeTitles.map((heading,group)=><div class="include-group"><h3>{heading}</h3><ul>{t.includes.slice(group*4,group*4+4).map(text=><li><span aria-hidden="true">✓</span>{text}</li>)}</ul></div>)}</div><div class="scope-box"><h3>{t.scopeTitle}</h3><p class="scope-separate">{t.separate}</p><ul>{t.scope.map(text=><li>{text}</li>)}</ul><details class="material-details"><summary>{t.material}</summary><p>{t.materialText}</p></details></div></div>
       </section>
 
-      <section id="journey" class="winter-section journey-section" aria-labelledby="journey-title"><div class="section-intro"><p class="eyebrow">{kicker(c.journeyKicker)}</p><h2 id="journey-title">{campaign.journeyTitle}</h2><p>{c.journeyLead}</p></div><ol class="journey-grid">{c.steps.map(([title,text],i)=><li><span class="step-num">0{i+1}</span><h3>{title}</h3><p>{text}</p></li>)}</ol><div class="photo-guide"><div><h3>{c.categories[5]}</h3><p>{c.guideNote}</p></div><div class="photo-guide-grid">{localizedMedia.filter((item:any)=>item.category===5).map((item:any)=><button type="button" data-image={item.id} aria-label={`${c.openImage}: ${item.title}`}><img src={item.thumb} alt={item.title} width="480" height="360" loading="lazy"/><span>{item.title}</span></button>)}</div></div></section>
+      <section id="results" class="winter-section results-section" aria-labelledby="results-title"><div class="section-intro"><p class="eyebrow">{t.resultsKicker}</p><h2 id="results-title">{t.resultsTitle}</h2><p>{t.caseNote}</p></div><div class="results-rail" data-results>{results.map((item:any)=><button type="button" class="clinical-case" data-image={item.id} aria-label={`${t.openImage}: ${item.title}`}><span class="case-photo"><img src={item.src} alt={item.title} width="600" height="800" loading="lazy"/><em class="case-after">{t.afterLabel}</em><em class="case-before">{t.beforeLabel}</em></span><span class="case-caption">{item.title}<span aria-hidden="true">↗</span></span></button>)}</div><button type="button" class="results-more" data-results-more hidden>{t.seeAll}</button></section>
 
-      <section id="places" class="winter-section" aria-labelledby="places-title"><div class="section-intro"><p class="eyebrow">{kicker(c.placesKicker)}</p><h2 id="places-title">{campaign.placesTitle}</h2><p>{c.placesLead}</p></div><div class="stay-tabs" role="tablist" aria-label={campaign.placesTitle}>{campaign.stayTabs.map((label,i)=><button type="button" id={`stay-tab-${i}`} role="tab" aria-selected={i===0?'true':'false'} aria-controls={`stay-panel-${i}`} tabindex={i===0?0:-1} data-stay-tab={i}>{label}</button>)}</div><div class="places-grid">{c.places.map(([title,text],i)=><article role="tabpanel" id={`stay-panel-${i}`} aria-labelledby={`stay-tab-${i}`} hidden={i!==0}><div class="place-copy"><span class="eyebrow">{campaign.stayTabs[i]}</span><h3>{title}</h3><p>{text}</p></div><div class="place-photo" data-photo-count={stayPhotos[i].length}>{stayPhotos[i].map((src,index)=><img src={asset(src)} alt={experience.placeAlts[i][index]} width="1200" height="800" loading="lazy"/>)}{i===0&&<button type="button" data-video={clinicVideo.src} data-poster={asset(clinicVideo.localPoster)} data-video-title={c.videoTitle} class="photo-play" aria-label={c.watch}>▶</button>}</div></article>)}</div><p class="fine-print">{c.hotelNote}</p>
+      <section id="videos" class="winter-section video-section" aria-labelledby="videos-title"><div class="section-intro"><p class="eyebrow">{t.videosKicker}</p><h2 id="videos-title">{t.videosTitle}</h2><p>{t.videosLead}</p></div><div class="video-showcase">{videos.map(video=><div class="video-card"><button type="button" class="showcase-video" data-video={video.src} data-poster={asset(video.localPoster)} data-video-title={video.title}><div><img src={asset(video.thumbnail)} alt="" width="360" height="640" loading="lazy"/><span class="showcase-play" aria-hidden="true">▶</span><span class="video-duration">{Math.floor(video.durationSeconds/60)}:{String(Math.floor(video.durationSeconds%60)).padStart(2,'0')}</span></div><strong>{video.title}</strong><small>{video.audio}</small></button><button type="button" class="video-copy" data-copy-url={video.src}>{t.copyVideoLink}</button></div>)}</div></section>
+
+      <section id="places" class="winter-section" aria-labelledby="places-title"><div class="section-intro"><p class="eyebrow">{t.placesKicker}</p><h2 id="places-title">{t.placesTitle}</h2><p>{t.placesLead}</p></div><div class="places-grid">{t.places.map(([title,text],i)=><article><div class="place-photo"><img src={asset(['clinic-hospital-exterior.webp','hotel-lobby.webp','transfer-vehicle.webp'][i])} alt={t.placeAlts[i]} width="1200" height="800" loading="lazy"/>{i===0&&<button type="button" data-video={clinicVideo.src} data-poster={asset(clinicVideo.localPoster)} data-video-title={t.videoDialogTitle} class="photo-play" aria-label={t.watch}>▶</button>}</div><div class="place-copy"><span class="eyebrow">{t.placeLabels[i]}</span><h3>{title}</h3><p>{text}</p>{i===1&&<p class="fine-print">{t.hotelNote}</p>}</div></article>)}</div>
       </section>
 
-      <section id="videos" class="winter-section video-section" aria-labelledby="videos-title"><div class="section-intro"><p class="eyebrow">IME CLINIC · VIDEO</p><h2 id="videos-title">{campaign.videosTitle}</h2><p>{visual.videosLead}</p></div><div class="video-showcase">{videos.map(video=><button type="button" class="showcase-video" data-video={video.src} data-poster={asset(video.localPoster)} data-video-title={video.title}><div><img src={asset(video.localPoster)} alt="" width="360" height="640" loading="lazy"/><span class="showcase-play" aria-hidden="true">▶</span><span class="video-duration">{Math.floor(video.durationSeconds/60)}:{String(Math.floor(video.durationSeconds%60)).padStart(2,'0')}</span></div><strong>{video.title}</strong><small>{video.audio}</small></button>)}</div></section>
+      <section id="journey" class="winter-section journey-section" aria-labelledby="journey-title"><div class="section-intro"><p class="eyebrow">{t.journeyKicker}</p><h2 id="journey-title">{t.journeyTitle}</h2><p>{t.journeyLead}</p></div><ol class="journey-grid">{t.steps.map(([title,text],i)=><li><span class="step-num">0{i+1}</span><h3>{title}</h3><p>{text}</p></li>)}</ol></section>
 
-      <section id="results" class="winter-section results-section" aria-labelledby="results-title"><div class="section-intro"><p class="eyebrow">IME CLINIC · {visual.resultsNav}</p><h2 id="results-title">{visual.resultsTitle}</h2><p>{visual.caseNote}</p></div><div class="results-rail">{localizedMedia.filter((item:any)=>item.category===3).map((item:any)=><button type="button" class="clinical-case" data-image={item.id} aria-label={`${c.openImage}: ${item.title}`}><img src={item.src} alt={item.title} width="640" height="480" loading="lazy"/><span>{item.title}<span aria-hidden="true">↗</span></span></button>)}</div></section>
+      <section id="documents" class="winter-section documents-section" aria-labelledby="documents-title"><div><h2 id="documents-title">{t.documentsTitle}</h2><p>{t.documentsLead}</p></div><div class="documents-grid">{documents.map((item:any)=><button type="button" data-image={item.id} aria-label={`${t.openImage}: ${item.title}`}><img src={item.thumb} alt={item.title} width="160" height="220" loading="lazy"/><span>{item.title}</span></button>)}</div></section>
 
-      <section id="documents" class="winter-section documents-section" aria-labelledby="documents-title"><h2 id="documents-title">{refine.documentsTitle}</h2><div class="documents-grid">{localizedMedia.filter((item:any)=>item.id.startsWith('ime-document-')).map((item:any)=><button type="button" data-image={item.id} aria-label={`${c.openImage}: ${item.title}`}><img src={item.thumb} alt={item.title} width="160" height="220" loading="lazy"/><span>{item.title}</span></button>)}</div></section>
+      <section id="questions" class="winter-section faq-section" aria-labelledby="faq-title"><div class="section-intro"><p class="eyebrow">{t.faqKicker}</p><h2 id="faq-title">{t.faqTitle}</h2></div><div class="faq-grid">{t.faqs.map(([q,a])=><details><summary>{q}<span aria-hidden="true">+</span></summary><p>{a}</p></details>)}</div></section>
 
-      <details id="library" class="media-section media-hub"><summary><span><strong id="media-title">{campaign.libraryTitle}</strong><small>{campaign.libraryHint}</small></span><span aria-hidden="true">+</span></summary><div class="media-hub-content">
-        <div class="category-tabs" role="tablist" aria-label={c.nav[3]}>{c.categories.map((name,i)=><button type="button" role="tab" id={`category-${i}`} aria-selected={i===0?'true':'false'} aria-controls={`gallery-${i}`} tabindex={i===0?0:-1} data-category={i}>{i===2?visual.travel:name}<span>{items.filter(item=>item.category===i).length}</span></button>)}</div>
-        {c.categories.map((_,category)=><div role="tabpanel" id={`gallery-${category}`} aria-labelledby={`category-${category}`} hidden={category!==0} tabindex="0"><div class:list={['media-rail',{'poster-rail':category===0}]}>{items.filter(item=>item.category===category).map((item)=><article class="media-card"><button type="button" data-image={item.id} class="media-image" aria-label={`${c.openImage}: ${item.title}`}><img src={item.thumb} alt={item.title} loading="lazy" decoding="async" width="480" height={category===0?'600':'360'}/><span class="zoom" aria-hidden="true">↗</span></button><div class="media-caption"><span>{item.title}</span><label><input type="checkbox" data-select={item.id} aria-label={`${c.select}: ${item.title}`}/><span>{c.select}</span></label></div></article>)}</div>{category===3&&<p class="fine-print">{visual.caseNote}</p>}{category===5&&<p class="fine-print">{c.guideNote}</p>}</div>)}
-        <div class="media-actions"><div><strong data-selection-count>0 {c.selected}</strong><button type="button" data-select-all>{c.selectAll}</button><button type="button" data-clear>{c.clear}</button></div><div><button type="button" class="winter-button secondary" data-download disabled>{c.download} ↓</button><button type="button" class="winter-button" data-share disabled>{c.share} ↗</button></div></div><p class="media-status" role="status" aria-live="polite" data-status></p></div>
+      <details id="advisor" class="advisor-section" open={false}><summary><span>{t.advisorKicker}</span><span>{t.advisor}</span></summary><div class="advisor-content"><div class="section-intro"><p class="eyebrow">{t.advisorKicker}</p><h2>{t.advisorTitle}</h2><p>{t.advisorLead}</p></div><div class="advisor-stats">{[t.price,t.expiry,t.advisorDepositValue,t.advisorStayValue].map((value,i)=><div><span>{t.advisorStats[i]}</span><strong>{value}</strong></div>)}</div><h3>{t.linksTitle}</h3><p class="advisor-hint">{t.linksHint}</p><div class="patient-links">{smileLanguageOrder.map(code=><button type="button" data-copy-url={pageUrl(code)} lang={code}><span class="language-flag" aria-hidden="true" set:html={smileLanguageFlags[code]}/><span>{smileLanguageNames[code]}</span></button>)}</div><h3>{t.advisorRulesTitle}</h3><ol class="advisor-rules">{t.advisorRules.map(rule=><li>{rule}</li>)}</ol><h3>{t.scriptsTitle}</h3><div class="script-names"><label>{t.nameLabel}<input type="text" data-name-input autocomplete="off"/></label><label>{t.advisorNameLabel}<input type="text" data-advisor-input autocomplete="off"/></label></div><div class="scripts-grid">{t.scripts.map((text,index)=>{const filled=text.replaceAll('{link}',patientLink);return <article><div><h4>{t.scriptNames[index]}</h4><button type="button" data-copy={`script-${index}`}>{t.copy}</button></div><textarea id={`script-${index}`} data-template={filled} aria-label={t.scriptNames[index]} readonly rows="8">{filled}</textarea></article>;})}</div><p class="copy-status" role="status" data-copy-status></p></div></details>
+
+      <details id="library" class="media-section media-hub"><summary><span><strong id="media-title">{t.mediaTitle}</strong><small>{t.mediaHint}</small></span><span aria-hidden="true">+</span></summary><div class="media-hub-content">
+        <div class="category-tabs" role="tablist" aria-label={t.mediaTitle}>{t.categories.map((name,i)=><button type="button" role="tab" id={`category-${i}`} aria-selected={i===0?'true':'false'} aria-controls={`gallery-${i}`} tabindex={i===0?0:-1} data-category={i}>{name}<span>{items.filter(item=>item.category===i).length}</span></button>)}</div>
+        {t.categories.map((_,category)=><div role="tabpanel" id={`gallery-${category}`} aria-labelledby={`category-${category}`} hidden={category!==0} tabindex="0"><div class:list={['media-rail',{'poster-rail':category===0}]}>{items.filter(item=>item.category===category).map((item)=><article class="media-card"><button type="button" data-image={item.id} class="media-image" aria-label={`${t.openImage}: ${item.title}`}><img src={item.thumb} alt={item.title} loading="lazy" decoding="async" width="480" height={category===0?'600':'360'}/><span class="zoom" aria-hidden="true">↗</span></button><div class="media-caption"><span>{item.title}</span><label><input type="checkbox" data-select={item.id} aria-label={`${t.select}: ${item.title}`}/><span>{t.select}</span></label></div></article>)}</div>{category===3&&<p class="fine-print">{t.caseNote}</p>}{category===5&&<p class="fine-print">{t.guideNote}</p>}</div>)}
+        <div class="media-actions"><div><strong data-selection-count>{t.selected}: 0</strong><button type="button" data-select-all>{t.selectAll}</button><button type="button" data-clear>{t.clear}</button></div><div><button type="button" class="winter-button secondary" data-download disabled>{t.download} ↓</button><button type="button" class="winter-button" data-share disabled>{t.share} ↗</button></div></div><p class="media-status" role="status" aria-live="polite" data-status></p></div>
       </details>
 
-      <details id="advisor" class="advisor-section"><summary><span>{c.advisorKicker}</span><span>{c.advisor} <span aria-hidden="true">↗</span></span></summary><div class="advisor-content"><div class="section-intro"><p class="eyebrow">{c.advisorKicker}</p><h2>{c.advisorTitle}</h2><p>{c.advisorLead}</p></div><div class="advisor-stats">{[[c.priceLabel,price],[c.validity,c.deadline],[c.depositLabel,'€300'],[c.nightsLabel,c.facts[1]]].map(([label,value])=><div><span>{label}</span><strong>{value}</strong></div>)}</div><button type="button" class="winter-button secondary" data-copy-link>{c.shareLink}<span aria-hidden="true">↗</span></button><p class="patient-link">{patientLink}</p><h3>{c.advisorRulesTitle}</h3><ol class="advisor-rules">{c.advisorRules.map(rule=><li>{rule}</li>)}</ol><h3>{c.scriptsTitle}</h3><div class="scripts-grid">{c.scripts.map((text,index)=><article><div><h4>{c.scriptNames[index]}</h4><button type="button" data-copy={`script-${index}`}>{c.copy}</button></div><textarea id={`script-${index}`} aria-label={c.scriptNames[index]} readonly rows="8">{text}</textarea></article>)}</div><p class="copy-status" role="status" data-copy-status></p></div></details>
-
-      <section id="questions" class="winter-section faq-section" aria-labelledby="faq-title"><div class="section-intro"><p class="eyebrow">{kicker(c.faqKicker)}</p><h2 id="faq-title">{c.faqTitle}</h2></div><div class="faq-grid">{c.faqs.map(([q,a])=><details><summary>{q}<span aria-hidden="true">+</span></summary><p>{a}</p></details>)}</div></section>
-      <section id="consultation" class="next-section"><div><p class="eyebrow">{c.deadline}</p><h2>{c.nextTitle}</h2><p>{visual.contactText}</p></div><a href={contactUrl} class="winter-button light" target="_blank" rel="noopener noreferrer">{visual.contactCta}<span aria-hidden="true">↗</span><small>WhatsApp</small></a></section>
+      <section id="consultation" class="next-section" aria-labelledby="next-title"><div class="next-copy"><p class="eyebrow">{t.depositBy}</p><h2 id="next-title">{t.nextTitle}</h2><p>{t.nextText}</p><a href={contactUrl} class="winter-button light" target="_blank" rel="noopener noreferrer"><Fragment set:html={whatsappIcon}/>{t.contactCta}</a></div><div class="next-guide"><div class="photo-guide-grid">{guide.map((item:any)=><button type="button" data-image={item.id} aria-label={`${t.openImage}: ${item.title}`}><img src={item.thumb} alt={item.title} width="480" height="360" loading="lazy"/><span>{item.title}</span></button>)}</div><p>{t.guideNote}</p></div></section>
       </div>
     </main>
-    <footer class="smile-footer"><div class="winter-wrap smile-footer-row"><span class="winter-logo-mark" style={`--logo-image:url(${asset('ime-logo-forest.webp')})`} role="img" aria-label="IME Clinic"></span><p class="smile-footer-address"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 256 256" aria-hidden="true"><path d="M128,64a40,40,0,1,0,40,40A40,40,0,0,0,128,64Zm0,64a24,24,0,1,1,24-24A24,24,0,0,1,128,128Zm0-112a88.1,88.1,0,0,0-88,88c0,31.4,14.51,64.68,42,96.25a254.19,254.19,0,0,0,41.45,38.3,8,8,0,0,0,9.18,0A254.19,254.19,0,0,0,174,200.25c27.45-31.57,42-64.85,42-96.25A88.1,88.1,0,0,0,128,16Zm0,206c-16.53-13-72-60.75-72-118a72,72,0,0,1,144,0C200,161.23,144.53,209,128,222Z"></path></svg><span>{smileContactFooter.address}</span></p><a class="smile-footer-privacy" href={smileContactFooter.privacyUrl} target="_blank" rel="noopener noreferrer">{refine.privacy}</a></div><div class="winter-wrap smile-footer-legal"><p>{refine.legal}</p><p>{visual.modelNote} · <a href="https://www.pexels.com/photo/photo-of-woman-smiling-3767342/" target="_blank" rel="noopener noreferrer">Andrea Piacquadio / Pexels</a></p></div></footer>
-    <div class="mobile-offer"><span>{c.title}<small>{c.deadline}</small></span><a href={contactUrl} target="_blank" rel="noopener noreferrer">{visual.contactCta} ↗</a></div>
-    <dialog id="image-dialog" aria-labelledby="image-dialog-title"><div class="dialog-head"><h2 id="image-dialog-title"></h2><button type="button" data-close-dialog aria-label={c.close}>×</button></div><div class="image-stage"><button type="button" data-image-prev aria-label="←">←</button><img alt=""/><button type="button" data-image-next aria-label="→">→</button></div><a class="winter-button" data-image-download download>{c.downloadOne} ↓</a></dialog>
-    <dialog id="video-dialog" aria-labelledby="video-dialog-title"><div class="dialog-head"><h2 id="video-dialog-title">{c.videoTitle}</h2><button type="button" data-close-dialog aria-label={c.close}>×</button></div><div data-video-container></div></dialog>
+    <footer class="smile-footer"><div class="winter-wrap smile-footer-row"><span class="winter-logo-mark" style={`--logo-image:url(${asset('ime-logo-forest.webp')})`} role="img" aria-label="IME Clinic"></span><p class="smile-footer-address"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 256 256" aria-hidden="true"><path d="M128,64a40,40,0,1,0,40,40A40,40,0,0,0,128,64Zm0,64a24,24,0,1,1,24-24A24,24,0,0,1,128,128Zm0-112a88.1,88.1,0,0,0-88,88c0,31.4,14.51,64.68,42,96.25a254.19,254.19,0,0,0,41.45,38.3,8,8,0,0,0,9.18,0A254.19,254.19,0,0,0,174,200.25c27.45-31.57,42-64.85,42-96.25A88.1,88.1,0,0,0,128,16Zm0,206c-16.53-13-72-60.75-72-118a72,72,0,0,1,144,0C200,161.23,144.53,209,128,222Z"></path></svg><span dir="ltr">Ataköy 7-8-9-10. Kısım Mah. Çobançeşme E5 Yan Yol Cad. No: 16/1, 15. Kat, Ofis 111, Bakırköy, Istanbul</span></p><a class="smile-footer-privacy" href="https://www.imeclinic.com/privacy-policy" target="_blank" rel="noopener noreferrer">{t.privacy}</a></div><div class="winter-wrap smile-footer-legal"><p>{t.legal}</p><p>{t.modelNote} · <a href="https://www.pexels.com/photo/photo-of-woman-smiling-3767342/" target="_blank" rel="noopener noreferrer">Andrea Piacquadio / Pexels</a></p></div></footer>
+    <div class="mobile-offer"><span><b>{t.price}</b> · {t.title}<small>{t.depositBy}</small></span><a href={contactUrl} target="_blank" rel="noopener noreferrer" aria-label={t.contactCta}><Fragment set:html={whatsappIcon}/>{t.contactCta}</a></div>
+    <dialog id="image-dialog" aria-labelledby="image-dialog-title"><div class="dialog-head"><h2 id="image-dialog-title"></h2><button type="button" data-close-dialog aria-label={t.close}>×</button></div><div class="image-stage"><button type="button" data-image-prev aria-label={t.previous}>←</button><img alt=""/><button type="button" data-image-next aria-label={t.next}>→</button></div><a class="winter-button" data-image-download download>{t.downloadOne} ↓</a></dialog>
+    <dialog id="video-dialog" aria-labelledby="video-dialog-title"><div class="dialog-head"><h2 id="video-dialog-title">{t.videoDialogTitle}</h2><button type="button" data-close-dialog aria-label={t.close}>×</button></div><div data-video-container></div></dialog>
     <script id="winter-data" type="application/json" set:html={JSON.stringify(client).replaceAll('<','\\u003c')}/>
     <script>import '../scripts/winter-smile-client';</script>
   </body>

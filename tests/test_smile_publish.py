@@ -13,7 +13,7 @@ class SmilePublishTests(unittest.TestCase):
         self.temp=tempfile.TemporaryDirectory();self.base=Path(self.temp.name).resolve()
         self.ns={};exec(compile(CODE,'smile-remote.py','exec'),self.ns)
         self.root=self.base/'web';self.root.mkdir()
-        for locale in ['tr','ru','es','it']:(self.root/locale).mkdir()
+        for locale in ['tr','ru','pt','es','it','fr','de','ar','pl']:(self.root/locale).mkdir()
         self.ns.update(ROOT=self.root,BACKUPS=self.base/'backups',SHARED_LOCK=self.base/'locks/publish.lock')
         (self.root/'index.php').write_text('main site untouched')
     def tearDown(self):self.temp.cleanup()

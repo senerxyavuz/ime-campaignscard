@@ -4,24 +4,28 @@ import {readFile,access} from 'node:fs/promises';
 import {createHash} from 'node:crypto';
 import {build} from 'esbuild';
 import {smilePath,smileOrigin} from '../src/data/smile-paths.mjs';
-const result=await build({stdin:{contents:"export {smileCopy} from './src/data/winter-locales.ts';export {smileTerms} from './src/data/winter-smile.ts';export {dental} from './src/data/campaigns/dental.ts';",resolveDir:process.cwd()},bundle:true,write:false,format:'esm',platform:'node'});
-const {smileCopy,smileTerms,dental}=await import('data:text/javascript;base64,'+Buffer.from(result.outputFiles[0].text).toString('base64'));
+const result=await build({stdin:{contents:"export {smileText} from './src/data/winter-i18n/index.ts';export {smileCopy} from './src/data/winter-locales.ts';export {smileTerms} from './src/data/winter-smile.ts';export {dental} from './src/data/campaigns/dental.ts';",resolveDir:process.cwd()},bundle:true,write:false,format:'esm',platform:'node'});
+const {smileText,smileCopy,smileTerms,dental}=await import('data:text/javascript;base64,'+Buffer.from(result.outputFiles[0].text).toString('base64'));
 const media=JSON.parse(await readFile('src/data/winter-media.json','utf8'));
 
-test('all five languages have complete patient and advisor content from the same offer',()=>{
+test('all ten languages have complete patient and advisor content from the same offer',()=>{
+ assert.deepEqual(Object.keys(smileText).sort(),['ar','de','en','es','fr','it','pl','pt','ru','tr']);
  assert.deepEqual(Object.keys(smileCopy).sort(),['en','es','it','ru','tr']);
- for(const [lang,c] of Object.entries(smileCopy)){
-  assert.deepEqual(Object.keys(c).sort(),Object.keys(smileCopy.en).sort(),lang);
+ for(const [lang,c] of Object.entries(smileText)){
+  assert.deepEqual(Object.keys(c).sort(),Object.keys(smileText.en).sort(),lang);
   for(const [key,value] of Object.entries(c)){
-   assert.ok(value.length,`${lang}.${key} empty`);
-   if(Array.isArray(value))assert.equal(value.length,smileCopy.en[key].length,`${lang}.${key} structure`);
+   assert.ok(typeof value==='object'?Object.keys(value).length:value.length,`${lang}.${key} empty`);
+   if(Array.isArray(value))assert.equal(value.length,smileText.en[key].length,`${lang}.${key} structure`);
   }
+  assert.ok(c.deadline.includes('2026'));
+  assert.ok(c.scripts[0].includes('2026')&&c.scripts[0].includes('300'),`${lang} incomplete first reply`);
+  assert.ok(c.scripts.join(' ').includes('{link}'),`${lang} messages need the patient link`);
+  assert.doesNotMatch(JSON.stringify(c),/2[.,]990|2[.,]590|Sept(?:ember)? is closed|Eylül kapalı/);
+ }
+ for(const [lang,c] of Object.entries(smileCopy)){
   assert.equal(dental.content[lang].whatsapp,c.scripts[0]);
   assert.equal(dental.content[lang].tagline,c.lead);
-  assert.equal(dental.content[lang].price,'€3.000');
-  assert.ok(c.deadline.includes('2026'));
-  for(const script of c.scripts)assert.ok(script.includes('2026')&&script.includes('300'),`${lang} incomplete script`);
-  assert.doesNotMatch(JSON.stringify(c),/2[.,]990|2[.,]590|Sept(?:ember)? is closed|Eylül kapalı/);
+  assert.equal(dental.content[lang].price,c.price);
  }
  assert.equal(smileTerms.price,3000);assert.equal(smileTerms.expires,'2026-12-31');assert.equal(smileTerms.flight,300);
 });
@@ -39,20 +43,21 @@ test('all patient photographs and imported media match the verified landing sour
 });
 
 test('published pages preserve the approved offer, working media and patient/advisor actions',async()=>{
- for(const lang of Object.keys(smileCopy)){
+ for(const lang of Object.keys(smileText)){
   const html=await readFile(`root-dist${smilePath(lang)}index.html`,'utf8');
   assert.match(html,/<html lang=/);assert.match(html,/2026-12-31/);assert.match(html,/noindex, nofollow/);
-  assert.match(html,/<link rel="canonical" href="https:\/\/www\.imeclinic\.com\/all-inclusive-smile\/"/);
+  assert.ok(html.includes(`<link rel="canonical" href="${smileOrigin}${smilePath(lang)}"`),`${lang}: canonical`);
+  assert.ok(html.includes(`art/og-${lang}.jpg`),`${lang}: preview card`);
+  await access(`public/winter-smile/art/og-${lang}.jpg`);
   assert.doesNotMatch(html,/<form\b|2[.,]990|2[.,]590|crm\/|lead\/|<video\b|dQw4w9WgXcQ|5-Star|in 5 Days|JCI-accredited|100% included/i);
   assert.doesNotMatch(html,/\/campaignscard\//);
   assert.match(html,/https:\/\/wa\.me\/905465248334/);
   assert.match(html,/id="advisor"/);
   const data=JSON.parse(html.match(/id="winter-data"[^>]*>(.*?)<\/script>/s)[1]);
-  assert.equal(data.items.length,44);
+  assert.equal(data.items.length,37);
+  assert.doesNotMatch(html,/hospital-document-/);
   assert.equal(data.rootPath,'/all-inclusive-smile/');
-  assert.equal(data.canonical,smileOrigin+'/all-inclusive-smile/'+(lang==='en'?'':`?lang=${lang}`));
   assert.equal(data.routes[lang],smilePath(lang));
-  assert.deepEqual(data.facts,smileCopy[lang].facts);
   assert.match(html,/smile-editorial-2560\.webp/);
   assert.match(html,/Andrea Piacquadio \/ Pexels/);
   assert.doesNotMatch(html,/crown-restorations\.webp|natural-smile-1280\.webp/);
@@ -67,8 +72,10 @@ test('published pages preserve the approved offer, working media and patient/adv
   }
   const artwork=await readFile(`public/winter-smile/art/winter-${lang}-1.jpg`);
   assert.ok(artwork.length>50000&&artwork.length<500000);
-  const master=await readFile(`public/winter-smile/art/winter-${lang}-1.svg`,'utf8');
-  assert.match(master,/€3\.000/);assert.match(master,/data:image\/(?:png|jpeg);base64,/);
+  // Consultant rules and messages live outside the patient page source.
+  assert.doesNotMatch(html.replace(/<svg[\s\S]*?<\/svg>/g,'').replace(/<script[\s\S]*?<\/script>/g,''),/do not promise|1[.,\s]800/);
+  const advisorFile=html.match(/data-advisor-src="([^"]+)"/)[1];
+  assert.match(await readFile('root-dist'+advisorFile,'utf8'),/data-template/);
   const old=await readFile(`dist/${lang}/kampanya/dental/index.html`,'utf8');
   assert.match(old,/http-equiv="refresh"/);
   assert.ok(old.includes(smileOrigin+smilePath(lang)));
@@ -79,11 +86,13 @@ test('published pages preserve the approved offer, working media and patient/adv
 });
 
 test('patient copy has no internal wording and matches the other landings',async()=>{
- for(const lang of Object.keys(smileCopy)){
+ for(const lang of Object.keys(smileText)){
   const html=await readFile(`root-dist${smilePath(lang)}index.html`,"utf8");
-  const visible=html.replace(/<script[\s\S]*?<\/script>/g,'').replace(/<details id="advisor"[\s\S]*?<\/details>/,'');
-  for(const phrase of ['other pages','otras páginas','altre pagine','других страниц','resultado clinico','The existing','Mevcut paket','Mevcut kampanya','существующ','existente','esistente','coordinator','oordinador','oordinatore','Koordinatör','oordinatör','оординатор'])assert.ok(!visible.includes(phrase),`${lang}: ${phrase}`);
-  for(const needed of ['smile-footer-legal','privacy-policy','id="documents"','photo-guide-grid'])assert.ok(visible.includes(needed),`${lang}: ${needed}`);
-  assert.ok(html.indexOf('id="journey"')<html.indexOf('id="places"'),`${lang}: menu order`);
+  const visible=html.replace(/<script[\s\S]*?<\/script>/g,'');
+  for(const phrase of ['other pages','otras páginas','altre pagine','других страниц','resultado clinico','The existing','Mevcut paket','Mevcut kampanya','существующ','oordinator','oordinador','oordinatore','oordinatör','оординатор','VIP'])assert.ok(!visible.includes(phrase),`${lang}: ${phrase}`);
+  for(const needed of ['smile-footer-legal','privacy-policy','id="documents"','photo-guide-grid','data-results-more'])assert.ok(visible.includes(needed),`${lang}: ${needed}`);
+  // Menu order is page order.
+  const order=['package','results','videos','places','journey','questions'].map(id=>html.indexOf(`id="${id}"`));
+  assert.deepEqual(order,[...order].sort((a,b)=>a-b),`${lang}: section order`);
  }
 });

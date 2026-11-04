@@ -1,4 +1,4 @@
-"""Publish only the five authorised root smile routes and their versioned assets."""
+"""Publish only the authorised root smile routes and their versioned assets."""
 import argparse
 import datetime
 import hashlib

@@ -8,9 +8,9 @@ export const dental: Campaign = {
   content: Object.fromEntries(Object.entries(smileCopy).map(([lang,c])=>[lang,{
     name:c.title, specialtyTag:c.season, cardHospital:c.places[0][0],
     hospitalNote:c.places[0][0], tagline:c.lead,
-    price:'€3.000', priceNote:c.priceNote,
-    dates:{ad:c.season,deposit:c.deadline,treatment:c.scope[3],stay:c.facts[1]},
-    packageItems:[...c.includes], notIncluded:[c.scope[0],c.scope[1]],
+    price:c.price, priceNote:c.priceNote,
+    dates:{ad:c.season,deposit:c.deadline,treatment:c.scope[1],stay:c.advisorStayValue},
+    packageItems:[...c.includes], notIncluded:[c.separate],
     advantages:c.places.map(([title,body])=>({title,body})),
     rules:c.advisorRules.map((text,i)=>({badge:`R${i+1}`,text})),
     whatsapp:c.scripts[0], faq:c.faqs.map(([q,a])=>({q,a})),

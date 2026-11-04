@@ -17,14 +17,14 @@ async function loadLanguage(lang:string,updateUrl=true){
   dispose();
   document.body.replaceWith(document.importNode(next.body,true));
   document.documentElement.lang=lang;
+  document.documentElement.dir=next.documentElement.dir;
   document.title=next.title;
-  for(const selector of ['meta[name="description"]','meta[property="og:title"]','meta[property="og:description"]','meta[property="og:image"]']){
+  for(const selector of ['meta[name="description"]','meta[property="og:title"]','meta[property="og:description"]','meta[property="og:image"]','meta[property="og:url"]']){
    const value=next.querySelector(selector)?.getAttribute('content');
    if(value)document.querySelector(selector)?.setAttribute('content',value);
   }
-  const url=new URL(location.href);url.pathname=current.rootPath;
-  if(lang==='en')url.searchParams.delete('lang');else url.searchParams.set('lang',lang);
-  if(updateUrl)history.pushState({},'',url);
+  const url=new URL(location.href);url.pathname=path;url.searchParams.delete('lang');
+  if(updateUrl)history.pushState({},'',url);else if(url.href!==location.href)history.replaceState({},'',url);
   mount();
   if(updateUrl)document.querySelector<HTMLElement>(".winter-language summary")?.focus({preventScroll:true});
  }catch{if(revision===languageRequest)location.assign(path+location.search+location.hash);}
@@ -40,13 +40,21 @@ const items:MediaItem[]=data.items;
 const q=<T extends Element=HTMLElement>(selector:string)=>document.querySelector<T>(selector)!;
 const qa=<T extends Element=HTMLElement>(selector:string)=>Array.from(document.querySelectorAll<T>(selector));
 const status=q('[data-status]');
-const copyStatus=q('[data-copy-status]');
 const advisor=q<HTMLDetailsElement>('#advisor');
 
+async function loadAdvisor(){
+ const source=advisor.dataset.advisorSrc;if(!source)return;
+ delete advisor.dataset.advisorSrc;
+ const response=await fetch(new URL(source,location.origin),{credentials:'same-origin'}).catch(()=>null);
+ if(response?.ok)advisor.innerHTML=await response.text();
+ advisor.open=document.body.dataset.view==='advisor';
+ if(location.hash==='#advisor')advisor.scrollIntoView();
+}
 function setView(view:string,updateUrl=true){
  const isAdvisor=view==='advisor';
  document.body.dataset.view=isAdvisor?'advisor':'patient';
  advisor.open=isAdvisor;
+ if(isAdvisor)loadAdvisor();
  q<HTMLDetailsElement>("#library").open=isAdvisor||(!updateUrl&&location.hash==="#library");
  qa<HTMLAnchorElement>('[data-view-switch]').forEach(link=>{
    if(link.dataset.viewSwitch===view)link.setAttribute('aria-current','page');else link.removeAttribute('aria-current');
@@ -59,10 +67,10 @@ function setView(view:string,updateUrl=true){
 qa<HTMLAnchorElement>('a[href="#library"]').forEach(link=>link.addEventListener('click',()=>{q<HTMLDetailsElement>('#library').open=true;}));
 setView(new URL(location.href).searchParams.get('view')==='advisor'?'advisor':'patient',false);
 qa<HTMLAnchorElement>('[data-view-switch]').forEach(link=>link.addEventListener('click',event=>{event.preventDefault();const view=link.dataset.viewSwitch!;setView(view);q(view==='advisor'?'#advisor':'#main').scrollIntoView({behavior:matchMedia('(prefers-reduced-motion:reduce)').matches?'instant':'smooth'});}));
-window.addEventListener('popstate',()=>{const lang=new URL(location.href).searchParams.get('lang')||'en';if(lang!==data.lang&&data.routes[lang])loadLanguage(lang,false);else setView(new URL(location.href).searchParams.get('view')==='advisor'?'advisor':'patient',false);},{signal:controller.signal});
+window.addEventListener('popstate',()=>{const lang=new URL(location.href).searchParams.get('lang')||Object.keys(data.routes).find(code=>data.routes[code]===location.pathname)||data.lang;if(lang!==data.lang&&data.routes[lang])loadLanguage(lang,false);else setView(new URL(location.href).searchParams.get('view')==='advisor'?'advisor':'patient',false);},{signal:controller.signal});
 document.addEventListener('click',event=>{qa<HTMLDetailsElement>('.winter-language[open],.winter-menu[open]').forEach(el=>{if(!el.contains(event.target as Node))el.open=false;});},{signal:controller.signal});
 
-// The same compact image deck and stay tabs used by the body landing design.
+// The same compact image deck used by the body landing design.
 let deckIndex=0;
 const deckSlides=qa<HTMLElement>('[data-deck-slide]');
 function showDeck(index:number){
@@ -75,22 +83,17 @@ function showDeck(index:number){
  q('[data-deck-description]').textContent=slide.dataset.description||'';
  const notice=q<HTMLElement>('[data-deck-notice]');notice.textContent=slide.dataset.notice||'';notice.hidden=!slide.dataset.notice;
  const context=q<HTMLAnchorElement>('[data-deck-context]');context.href=slide.dataset.target||'#package';
- if(slide.dataset.stay!==undefined)context.dataset.stayTarget=slide.dataset.stay;else delete context.dataset.stayTarget;
  q('[data-deck-status]').textContent=slide.dataset.caption||'';
 }
-q<HTMLAnchorElement>('[data-deck-context]').addEventListener('click',event=>{const index=(event.currentTarget as HTMLElement).dataset.stayTarget;if(index!==undefined)showStay(Number(index));});
 q('[data-deck-prev]').addEventListener('click',()=>showDeck(deckIndex-1));
 q('[data-deck-next]').addEventListener('click',()=>showDeck(deckIndex+1));
 qa<HTMLButtonElement>('[data-deck-dot]').forEach(button=>button.addEventListener('click',()=>showDeck(Number(button.dataset.deckDot))));
 q('.deck-controls').addEventListener('keydown',event=>{const key=(event as KeyboardEvent).key;if(key!=='ArrowLeft'&&key!=='ArrowRight')return;event.preventDefault();showDeck(deckIndex+(key==='ArrowRight'?1:-1));qa<HTMLButtonElement>('[data-deck-dot]')[deckIndex].focus();});
-function showStay(index:number,focus=false){
- qa<HTMLButtonElement>('[data-stay-tab]').forEach((button,i)=>{const active=i===index;button.setAttribute('aria-selected',String(active));button.tabIndex=active?0:-1;if(active&&focus)button.focus();});
- qa<HTMLElement>('.places-grid>[role=tabpanel]').forEach((panel,i)=>panel.hidden=i!==index);
-}
-qa<HTMLButtonElement>('[data-stay-tab]').forEach(button=>{
- button.addEventListener('click',()=>showStay(Number(button.dataset.stayTab)));
- button.addEventListener('keydown',event=>{const i=Number(button.dataset.stayTab);const max=qa('[data-stay-tab]').length;let next=i;if(event.key==='ArrowRight')next=(i+1)%max;else if(event.key==='ArrowLeft')next=(i+max-1)%max;else if(event.key==='Home')next=0;else if(event.key==='End')next=max-1;else return;event.preventDefault();showStay(next,true);});
-});
+// Phones show four examples first; without script all ten stay visible.
+const resultsRail=q('[data-results]');
+const resultsMore=q<HTMLButtonElement>('[data-results-more]');
+resultsRail.classList.add('results-collapsed');resultsMore.hidden=false;
+resultsMore.addEventListener('click',()=>{resultsRail.classList.remove('results-collapsed');resultsMore.hidden=true;});
 qa<HTMLAnchorElement>('.winter-menu a').forEach(link=>link.addEventListener('click',()=>q<HTMLDetailsElement>('.winter-menu').open=false));
 q('.winter-menu').addEventListener('keydown',event=>{if((event as KeyboardEvent).key==='Escape'){q<HTMLDetailsElement>('.winter-menu').open=false;q<HTMLElement>('.winter-menu summary').focus();}});
 
@@ -102,7 +105,7 @@ let preparation:Promise<File[]>|null=null;
 const downloadButton=q<HTMLButtonElement>('[data-download]');
 const shareButton=q<HTMLButtonElement>('[data-share]');
 function updateSelection(){
- q('[data-selection-count]').textContent=`${selected.size} ${data.selected}`;
+ q('[data-selection-count]').textContent=`${data.selected}: ${selected.size}`;
  qa<HTMLInputElement>('[data-select]').forEach(input=>input.checked=selected.has(input.dataset.select!));
  downloadButton.disabled=!selected.size;shareButton.disabled=true;
  const current=++generation;prepared=null;preparation=null;status.textContent='';
@@ -141,14 +144,21 @@ shareButton.addEventListener('click',async()=>{
  try{if(navigator.canShare?.({files:prepared})&&navigator.share)await navigator.share({files:prepared,title:data.title});else status.textContent=data.shareFallback;}catch(error){if((error as Error).name!=='AbortError')status.textContent=data.shareFallback;}
 });
 async function copyText(text:string,button:HTMLElement){
- try{await navigator.clipboard.writeText(text);const original=button.textContent;button.textContent=data.copied;copyStatus.textContent=data.copied;setTimeout(()=>button.textContent=original,2200);}catch{copyStatus.textContent=data.copyError;}
+ const copyStatus=document.querySelector('[data-copy-status]');
+ try{await navigator.clipboard.writeText(text);const original=button.innerHTML;button.textContent=data.copied;if(copyStatus)copyStatus.textContent=data.copied;setTimeout(()=>button.innerHTML=original,2200);}catch{if(copyStatus)copyStatus.textContent=data.copyError;}
 }
-qa('[data-copy]').forEach(button=>button.addEventListener('click',()=>copyText(q<HTMLTextAreaElement>('#'+button.dataset.copy).value,button)));
-q('[data-copy-link]').addEventListener('click',event=>{
- // Share the patient view without the advisor query or anchor, including on preview.
- const url=new URL(data.rootPath,location.origin);if(data.lang!=='en')url.searchParams.set('lang',data.lang);const patientUrl=url.href;
- copyText(patientUrl,event.currentTarget as HTMLElement);
-});
+document.addEventListener('click',event=>{
+ const button=(event.target as Element).closest<HTMLElement>('[data-copy],[data-copy-url]');if(!button)return;
+ if(button.dataset.copyUrl)copyText(button.dataset.copyUrl,button);
+ else copyText(q<HTMLTextAreaElement>('#'+button.dataset.copy).value,button);
+},{signal:controller.signal});
+// Patient and consultant names fill the ready-made messages.
+document.addEventListener('input',event=>{
+ if(!(event.target as Element).matches('[data-name-input],[data-advisor-input]'))return;
+ const name=document.querySelector<HTMLInputElement>('[data-name-input]')?.value.trim();
+ const own=document.querySelector<HTMLInputElement>('[data-advisor-input]')?.value.trim();
+ qa<HTMLTextAreaElement>('textarea[data-template]').forEach(area=>{let text=area.dataset.template!;if(name)text=text.replaceAll(data.tokenName,name);if(own)text=text.replaceAll(data.tokenAdvisor,own);area.value=text;});
+},{signal:controller.signal});
 
 const imageDialog=q<HTMLDialogElement>('#image-dialog');
 const videoDialog=q<HTMLDialogElement>('#video-dialog');
@@ -173,9 +183,6 @@ for(const dialog of [imageDialog,videoDialog]){
  dialog.addEventListener('close',()=>{if(dialog===videoDialog){const video=dialog.querySelector('video');video?.pause();video?.removeAttribute('src');video?.load();q('[data-video-container]').replaceChildren();}opener?.focus();});
 }
 
- const canonicalUrl=new URL(location.href);canonicalUrl.pathname=data.rootPath;
- if(data.lang==='en')canonicalUrl.searchParams.delete('lang');else canonicalUrl.searchParams.set('lang',data.lang);
- if(location.pathname!==data.rootPath)history.replaceState({},'',canonicalUrl);
  qa<HTMLAnchorElement>('.winter-language a').forEach(link=>link.addEventListener('click',event=>{
   event.preventDefault();
   const lang=link.getAttribute('lang')!;

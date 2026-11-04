@@ -12,7 +12,7 @@
     "astro": "astro",
     "check": "astro check",
     "test": "node --test tests/*.test.mjs",
-    "prepare:winter-art": "node scripts/create-winter-art.mjs",
+    "prepare:winter-art": "node scripts/render-winter-art.mjs",
     "build:portal": "astro build"
   },
   "dependencies": {

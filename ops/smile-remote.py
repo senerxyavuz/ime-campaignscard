@@ -14,7 +14,7 @@ import tempfile
 ROOT=Path('/opt/imeclinic-web')
 BACKUPS=Path('/opt/imeclinic-backups/all-inclusive-smile')
 SHARED_LOCK=Path('/opt/imeclinic-backups/landings/.publish.lock')
-ROUTES=('all-inclusive-smile','tr/all-inclusive-smile','ru/all-inclusive-smile','es/all-inclusive-smile','it/all-inclusive-smile')
+ROUTES=('all-inclusive-smile','tr/all-inclusive-smile','ru/all-inclusive-smile','pt/all-inclusive-smile','es/all-inclusive-smile','it/all-inclusive-smile','fr/all-inclusive-smile','de/all-inclusive-smile','ar/all-inclusive-smile','pl/all-inclusive-smile')
 ASSET_SCOPE='lp-assets/all-inclusive-smile'
 os.umask(0o022)
 
@@ -60,7 +60,7 @@ def collect():
 def validate_payload(payload):
     files=payload['files']
     expected={route+'/'+name for route in ROUTES for name in ('index.html','.htaccess')}
-    if not expected.issubset(files):raise RuntimeError('Incomplete five-route release')
+    if not expected.issubset(files):raise RuntimeError('Incomplete route release')
     if any(not allowed(name) or not re.fullmatch('[a-f0-9]{64}',sha) for name,sha in files.items()):raise RuntimeError('Invalid release manifest')
     if len(files)>250:raise RuntimeError('Too many release files')
 

@@ -36,8 +36,14 @@ for(const [folder,files,destination] of [['winter-smile',mediaFiles,''],['_astro
 for(const file of ['ime-clinic-logo.svg','favicon.svg'])await copyFile(path.join(dist,file),path.join(output,assetRoot,file));
 for(const locale of smileLocales){
  const original=path.join(dist,locale,'kampanya/dental/index.html');
- const html=rewrite(await readFile(original,'utf8'));
+ let html=rewrite(await readFile(original,'utf8'));
  if(html.includes('/campaignscard/'))throw Error('Portal path leaked into root landing');
+ // The advisor desk is served as a separate file that only advisor view fetches.
+ const advisorMatch=html.match(/<details id="advisor"([^>]*)>([\s\S]*?)<\/details>/);
+ if(!advisorMatch)throw Error('Advisor desk not found');
+ const advisorName=`advisor-${locale}-${createHash('sha256').update(advisorMatch[2]).digest('hex').slice(0,10)}.html`;
+ await writeFile(path.join(output,assetRoot,advisorName),advisorMatch[2]);
+ html=html.replace(advisorMatch[0],`<details id="advisor"${advisorMatch[1]} data-advisor-src="${assetRoot}${advisorName}"></details>`);
  const destination=path.join(output,smilePath(locale));
  await mkdir(destination,{recursive:true});
  await writeFile(path.join(destination,'index.html'),html);
@@ -51,4 +57,4 @@ const files={};
 for(const file of await walk(output))files[file]=createHash('sha256').update(await readFile(path.join(output,file))).digest('hex');
 await mkdir(path.join(project,'.ime'),{recursive:true});
 await writeFile(path.join(project,'.ime/root-smile-build.json'),JSON.stringify({revision,sourceFingerprint:await smileSourceFingerprint(),assetRoot,routes:smileLocales.map(smilePath),files},null,2)+'\n');
-console.log(`Exported 5 root landing pages + ${mediaFiles.length} media files to root-dist (${revision}).`);
+console.log(`Exported ${smileLocales.length} root landing pages + ${mediaFiles.length} media files to root-dist (${revision}).`);

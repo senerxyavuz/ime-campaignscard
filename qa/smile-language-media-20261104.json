@@ -1,0 +1,77 @@
+{
+  "date": "2026-11-04",
+  "reference": "https://www.imeclinic.com/body-contouring/",
+  "assetRevision": "a92a65005f0627b2",
+  "sourceFingerprint": "108b12c7098bca7f732497f95fcfba90b3cf1fba13eeb603badeac41fcc00382",
+  "scope": "The five existing All-Inclusive Smile routes and their immutable assets only",
+  "languages": {
+    "supported": [
+      "en",
+      "ru",
+      "es",
+      "it",
+      "tr"
+    ],
+    "pattern": "SVG flag + language code, native names, current check; same common-language ordering as public landings",
+    "behavior": "In-place language switching keeps the root URL and restores focus; current-language click, arrows, Home, End and Escape verified"
+  },
+  "design": {
+    "palette": {
+      "paper": "#fbfcf8",
+      "dentalTeal": "#234944",
+      "copper": "#9b6243"
+    },
+    "typography": "Existing shared Cormorant Garamond and Manrope",
+    "components": "Same announcement/header, deck, benefit band, scoped stay tabs and rounded cards as the reference",
+    "hero": "Four captioned scenes: smile planning, arrival transfers, 7-night hotel stay, dental appointments; deposit deadline beside price",
+    "stayPhotos": "Two complementary clinic and hotel photographs; original transfer-service photo; horizontally scrolling mobile photo panels",
+    "creatives": "Two per language; labelled model close-up or original transfer photograph with coordinated travel headline"
+  },
+  "checks": {
+    "astro": "35 files, 0 errors/warnings/hints",
+    "build": "31 portal pages and 5 root routes",
+    "nodeTests": "3 passed, including original imported-media SHA256 parity",
+    "publisherTests": "5 passed",
+    "responsive": "All five languages at 320, 390, 768 and 1280 px: document scrollWidth equals viewport width",
+    "language": "Five UI switches update title, html lang, selected SVG flag and root ?lang; focus restored",
+    "deck": "All four dots update active/next/previous/queued positions, caption, notice and context; arrival context opens transfer tab",
+    "tabs": "Hotel tab renders room and entrance photos; mobile photo panel scrollWidth 626 at clientWidth 352; gallery categories preserve stay selection",
+    "mobileMenu": "Section click closes menu",
+    "video": "Original 56.033333-second clinic MP4 played, readyState 4, currentTime 7.469171; closing removes player and restores focus",
+    "zip": "Two Turkish creatives downloaded through native browser ZIP action, both match source JPEG SHA256",
+    "advisor": "Archive and advisor desk open; all 44 media items retained; patient URL preserves ?lang=tr without advisor params",
+    "console": "No error logs during final interactions",
+    "transmissions": "No WhatsApp message, form or lead submitted"
+  },
+  "commercialScope": "Unchanged: €3,000, 20 crowns, patient return flight up to €300, 7 nights, 1 companion accommodation, transfers, minimum €300 deposit by 31 December 2026 after confirmed plan; treatment dates individual",
+  "sharedSource": {
+    "release": "20261103T121017Z-406ea1240ac4-f1482daa",
+    "modified": false
+  },
+  "sourcePhotos": [
+    {
+      "file": "smile-editorial-2560.webp",
+      "sha256": "11e7a67d69aaa8e341389cfff9bf05be4ceb3f20c6c83020797d58ea4f5d0fae"
+    },
+    {
+      "file": "clinic-dental-consultation.webp",
+      "sha256": "5499273f11bb9d998518de048e00ce785b66eb383c360c4f84669fa6c9af9e4a"
+    },
+    {
+      "file": "clinic-dental-unit-green.webp",
+      "sha256": "e2f8e4448a94a421d9db65b74b0bfb1fd3ef0d0dd339df8b04d31998bed58363"
+    },
+    {
+      "file": "hotel-room-2.webp",
+      "sha256": "03b49f849db3c6238f65d2ca421b5b3c22048caae39e8b3827bf3406b079008e"
+    },
+    {
+      "file": "hotel-entrance.webp",
+      "sha256": "f8a0fcd0e824c36148779a2cff6c2d9556e0070792f7ebc188a256be50f205ec"
+    },
+    {
+      "file": "transfer-vehicle.webp",
+      "sha256": "1ca82f03e21cc08adb68d778596bc17f12f6d641c52f051d863cfbe2337e7e71"
+    }
+  ]
+}

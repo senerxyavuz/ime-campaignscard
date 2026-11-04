@@ -1,0 +1,324 @@
+/* Brings All-Inclusive Smile level with the Body Contouring landing: same type
+   scale, section rhythm, full-width bands and footer. Loaded after winter-smile.css. */
+body{font-size:17px;overflow-x:clip}
+
+/* Patients never see the internal desk; advisors reach it with ?view=advisor#advisor. */
+body[data-view=patient] .view-switch,
+body[data-view=patient] .advisor-section{display:none}
+
+.eyebrow{font-size:12px;letter-spacing:.14em;color:var(--accent)}
+
+/* Top bar and header */
+.campaign-announcement{font-size:14px}
+.campaign-announcement>.winter-wrap{min-height:42px}
+.campaign-announcement p{font-size:14.4px;font-weight:500}
+.announcement-pill{font-size:12px;padding:5px 10px;letter-spacing:.04em}
+.view-switch{font-size:12.5px}
+.view-switch a{padding:4px 9px}
+.header-row{display:grid;grid-template-columns:auto 1fr auto;min-height:60px;gap:24px}
+.winter-logo{grid-column:1;grid-row:1;margin:0}
+.desktop-nav{grid-column:2;grid-row:1;justify-content:center;gap:26px;font-size:15.5px;font-weight:500}
+.winter-language{grid-column:3;grid-row:1}
+.winter-language summary{font-size:14px;padding:10px 14px}
+.winter-language>div{top:50px}
+.winter-language a,.winter-menu a{font-size:15px}
+.winter-logo-mark{width:118px;height:30px}
+
+/* Hero */
+.smile-hero{grid-template-columns:1.05fr 1fr;gap:56px;padding-block:44px 40px}
+.hero-head .eyebrow{font-size:12px;margin-bottom:16px}
+.hero-head h1{font-size:clamp(40px,4.4vw,60.8px);line-height:1.03}
+.hero-lead{font-size:18px;line-height:1.5;color:#5d534b;margin-top:18px}
+.hero-chips{gap:8px;margin-top:18px}
+.hero-chips span{font-size:14px;padding:6px 11px}
+.hero-price{margin:22px 0 20px;gap:18px}
+.hero-price>strong{font-size:52px}
+.hero-price>div{padding-left:18px;max-width:34ch}
+.hero-price span{font-size:16px}
+.hero-price p{font-size:14px;line-height:1.45}
+.hero-actions .winter-button,.hero-details{font-size:14.4px;min-height:46px;padding:12px 18px;font-weight:700}
+.hero-deck,.deck-card{height:340px}
+.hero-deadline p{font-size:11.5px}
+.hero-deadline small{font-size:12.5px;line-height:1.45}
+
+/* Facts band: every item gets a line of explanation, as on Body Contouring */
+.hero-inclusions{margin-block:0}
+.hero-inclusions li{align-items:flex-start;padding:20px 22px}
+.hero-inclusions li>span{width:38px;height:38px}
+.hero-inclusions strong{display:block;font-size:15px;line-height:1.35;font-weight:700}
+.hero-inclusions small{display:block;font-size:13px;line-height:1.45;color:#c3cfc8;margin-top:4px}
+
+/* Section rhythm with full-width sand bands */
+.winter-section{padding-block:56px;border-bottom:0;position:relative;isolation:isolate}
+#package::before,#places::before,#results::before{content:"";position:absolute;inset:0 calc(50% - 50vw);background:var(--ice);z-index:-1}
+.section-intro{margin-bottom:26px;column-gap:48px}
+.section-intro>.eyebrow,.section-intro>div .eyebrow{margin-bottom:12px}
+.section-intro h2{font-size:42.4px;line-height:1.08}
+.section-intro>p:last-child:not(.eyebrow){font-size:17px;line-height:1.55;color:#5d534b}
+h3{font-size:18.4px;font-weight:800;letter-spacing:-.02em}
+
+/* Package */
+.package-grid{gap:20px}
+.included-box,.scope-box{padding:28px;border-radius:16px}
+.included-box ul{gap:16px 26px}
+.included-box li{font-size:16px;line-height:1.5;gap:10px}
+.scope-box h3{font-size:18.4px}
+.scope-box li{font-size:15px;line-height:1.5;margin-bottom:8px}
+.material-details{font-size:15px;padding-top:12px}
+.material-details p{font-size:14.5px;line-height:1.55}
+
+/* Clinic, hotel and transfers */
+.stay-tabs{display:inline-flex;max-width:100%;gap:4px;padding:5px;margin-bottom:18px;background:#fff;border:1px solid var(--line);border-radius:12px}
+.stay-tabs button{font-size:15px;font-weight:700;padding:10px 20px;min-height:44px;border-radius:8px}
+.places-grid article{border-radius:16px}
+.place-photo{height:340px}
+.photo-play{width:52px;height:52px;font-size:15px}
+.place-copy{padding:32px 0 32px 32px}
+.place-copy .eyebrow{font-size:12px}
+.place-copy h3{font-size:30px;line-height:1.1;letter-spacing:-.012em;margin:10px 0 12px}
+.place-copy p{font-size:16px;line-height:1.6}
+.fine-print{font-size:12.5px;line-height:1.5;margin-top:12px}
+/* The hotel note belongs to the hotel tab only */
+.places-grid:has(#stay-panel-1[hidden])+.fine-print{display:none}
+
+/* Videos */
+.video-showcase{gap:14px}
+.showcase-video>div{border-radius:12px}
+.showcase-video img{height:auto;aspect-ratio:3/4}
+.showcase-play{width:38px;height:38px;font-size:12px}
+.video-duration{font-size:12px;padding:2px 6px}
+.showcase-video>strong{font-size:14.5px;line-height:1.35;margin-top:10px}
+.showcase-video>small{font-size:12.5px;line-height:1.35}
+
+/* Clinical examples: all ten visible, no hidden rail */
+.results-rail{grid-auto-flow:row;grid-auto-columns:auto;grid-template-columns:repeat(5,minmax(0,1fr));gap:14px;overflow:visible;padding-bottom:0}
+.clinical-case{border-radius:12px}
+.clinical-case img{height:auto;aspect-ratio:3/4;object-fit:cover;background:#f7efe4}
+.clinical-case>span{font-size:12.5px;padding:10px 12px;align-items:center}
+
+/* Journey and photo guide */
+.journey-grid{gap:16px}
+.journey-grid li{padding:22px;border-radius:16px;background:#fff}
+.step-num{font-size:12px;letter-spacing:.08em}
+.journey-grid h3{font-size:18.4px;margin:10px 0}
+.journey-grid p{font-size:15.5px;line-height:1.55}
+.photo-guide{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.4fr);gap:32px;align-items:center;margin-top:20px;padding:26px 28px;border-radius:16px;background:var(--forest);color:#f6f1e8}
+.photo-guide h3{font-size:22px;letter-spacing:-.02em}
+.photo-guide p{font-size:15px;line-height:1.55;color:#c3cfc8;margin-top:8px}
+.photo-guide-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.photo-guide-grid button{padding:0;border:0;background:transparent;color:inherit;text-align:left;min-width:0}
+.photo-guide-grid img{width:100%;height:auto;aspect-ratio:4/3;object-fit:cover;border-radius:10px}
+.photo-guide-grid span{display:block;font-size:12.5px;line-height:1.35;margin-top:7px;color:#e0e7df}
+
+/* Official documents */
+.documents-section{padding-block:40px 8px}
+.documents-section h2{font-size:30px;line-height:1.1;margin-bottom:16px}
+.documents-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.documents-grid button{display:flex;align-items:center;gap:16px;padding:10px;background:#fff;border:1px solid var(--line);border-radius:14px;text-align:left;font-size:15.5px;font-weight:700;line-height:1.3;min-width:0}
+.documents-grid img{width:76px;height:100px;object-fit:cover;object-position:top;border-radius:8px;border:1px solid var(--line);flex:none}
+
+/* Media library */
+.media-hub{border-radius:14px;margin-top:28px}
+.media-hub>summary{padding:20px 24px}
+.media-hub>summary strong{font-size:18.4px}
+.media-hub>summary small{font-size:14px}
+.media-hub-content{padding:20px 24px}
+.category-tabs button{font-size:14px;min-height:44px;padding:10px 14px}
+.category-tabs button>span{font-size:12px}
+.media-caption,.media-caption label{font-size:13px}
+.media-actions strong,.media-actions>div:first-child>button{font-size:14px}
+.media-actions .winter-button{font-size:14px}
+.media-status,.copy-status{font-size:13.5px}
+
+/* Advisor desk (advisor view only) */
+.advisor-section{border-radius:14px}
+.advisor-section>summary{font-size:15px;padding:18px 24px}
+.advisor-section>summary>span:first-child{font-size:12px}
+.advisor-content{padding:26px}
+.advisor-stats span{font-size:12.5px}
+.advisor-stats strong{font-size:16px}
+.advisor-content .winter-button{font-size:14px}
+.patient-link{font-size:13px}
+.advisor-rules{font-size:15px;line-height:1.5}
+.scripts-grid h4{font-size:15px}
+.scripts-grid button{font-size:13px;min-height:38px}
+.scripts-grid textarea{font-size:14px;line-height:1.55;min-height:260px}
+
+/* Questions */
+.faq-section{padding-bottom:40px}
+.faq-grid{gap:0 40px}
+.faq-grid summary{font-size:16px;font-weight:700;padding:15px 0;line-height:1.4}
+.faq-grid summary>span{font-size:22px;color:var(--accent)}
+.faq-grid p{font-size:15.5px;line-height:1.6;padding-bottom:18px}
+
+/* Closing call to action */
+.next-section{padding:40px 44px;border-radius:16px;margin:12px 0 56px}
+.next-section .eyebrow{font-size:12px}
+.next-section h2{font-size:42.4px;line-height:1.08}
+.next-section p:last-child{font-size:16.5px;line-height:1.55}
+.next-section .winter-button{font-size:15px;padding:14px 20px;min-height:50px}
+.next-section .winter-button small{font-size:12.5px;text-align:center}
+
+/* Footer */
+.smile-footer{background:#1c2e28;color:#e0e7df;padding-block:22px 24px}
+.smile-footer-row{display:flex;align-items:center;gap:32px}
+.smile-footer .winter-logo-mark{background:#fff;flex:none}
+.smile-footer-address{display:flex;align-items:center;gap:8px;font-size:14px;line-height:1.4;margin-right:auto}
+.smile-footer-address svg{flex:none;color:#d8b38c}
+.smile-footer-privacy{font-size:14px;font-weight:700;flex:none}
+.smile-footer-privacy:hover,.smile-footer-legal a:hover{text-decoration:underline}
+.smile-footer-legal{border-top:1px solid #ffffff22;margin-top:14px;padding-top:14px;font-size:12.5px;line-height:1.55;color:#aab8b1}
+.smile-footer-legal p+p{margin-top:6px}
+.smile-footer-legal a{text-decoration:underline;text-underline-offset:3px}
+
+/* Dialogs */
+.dialog-head h2{font-size:17px}
+.image-stage+.winter-button{font-size:14px}
+
+/* Mid-size screens: the six-item menu needs more room than the logo row allows */
+@media(max-width:1100px){
+ .desktop-nav{display:none}
+ .winter-menu{display:block;grid-column:2;grid-row:1;justify-self:end}
+ .winter-menu>div{right:0;top:46px}
+ .smile-hero{gap:32px}
+ .hero-head h1{font-size:clamp(38px,4.6vw,48px)}
+ .hero-lead{font-size:16.5px}
+ .hero-price>strong{font-size:44px}
+ .hero-chips span{font-size:13px}
+ .hero-deck,.deck-card{height:280px}
+ .hero-deadline time{font-size:23px}
+ .section-intro h2{font-size:36px}
+ .hero-inclusions li{padding:16px 14px;gap:10px}
+ .hero-inclusions strong{font-size:14px}
+ .hero-inclusions small{font-size:12.5px}
+ .results-rail{grid-template-columns:repeat(4,minmax(0,1fr))}
+ .journey-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .photo-guide{grid-template-columns:1fr;gap:18px}
+}
+
+@media(max-width:760px){
+ body{font-size:16px}
+ .eyebrow,.section-intro>.eyebrow,.section-intro>div .eyebrow,.hero-head .eyebrow{font-size:11px;letter-spacing:.12em}
+ .campaign-announcement p{font-size:13px;line-height:1.4}
+ .announcement-pill{font-size:11px;padding:4px 8px}
+ .view-switch{font-size:12px}
+ .header-row{display:flex;min-height:58px;gap:10px}
+ .winter-logo{margin-right:auto}
+ .winter-language summary{font-size:13px;padding:9px 11px}
+ .winter-language>div{top:46px}
+ .winter-menu{order:2}
+ .winter-language{order:3}
+ .winter-menu>div{right:-74px}
+ .winter-menu summary{padding:10px}
+
+ .smile-hero{padding-block:24px 22px}
+ .hero-head h1{font-size:34px}
+ .hero-lead{font-size:16px;line-height:1.5;margin-top:12px}
+ .hero-chips{gap:6px;margin-top:14px}
+ .hero-chips span{font-size:13px;padding:5px 9px}
+ .hero-price{margin:18px 0 16px;gap:14px}
+ .hero-price>strong{font-size:42px}
+ .hero-price>div{padding-left:14px}
+ .hero-price span{font-size:14.5px}
+ .hero-price p{font-size:12.5px}
+ .hero-actions{gap:8px}
+ .hero-actions .winter-button,.hero-details{flex:1;font-size:13.5px;min-height:46px;padding:10px 12px;gap:6px;text-align:center}
+ .hero-visual{margin-top:26px}
+ .hero-deck,.deck-card{height:230px}
+ .hero-deadline p{font-size:11px}
+ .hero-deadline time{font-size:22px}
+ .hero-deadline small{font-size:12px}
+ .deck-controls>button{min-height:44px;min-width:44px}
+ .deck-dot{min-height:44px}
+
+ .hero-inclusions li,.hero-inclusions li:first-child{padding:14px 12px;gap:9px}
+ .hero-inclusions li>span{width:30px;height:30px;font-size:15px}
+ .hero-inclusions strong{font-size:13.5px}
+ .hero-inclusions small{font-size:12px}
+
+ .winter-section{padding-block:40px}
+ .section-intro{margin-bottom:20px}
+ .section-intro h2{font-size:30px}
+ .section-intro>p:last-child:not(.eyebrow){font-size:16px;margin-top:10px}
+ h3{font-size:17.5px}
+
+ .included-box,.scope-box{padding:20px;border-radius:14px}
+ .included-box ul{gap:12px}
+ .included-box li{font-size:15.5px}
+ .scope-box li{font-size:14.5px}
+ .material-details{font-size:14.5px}
+ .material-details p{font-size:14px}
+
+ .stay-tabs{display:flex;margin-bottom:14px}
+ .stay-tabs button{flex:1;font-size:14px;padding:9px 8px;min-height:44px}
+ .place-copy{padding:20px}
+ .place-copy h3{font-size:26px}
+ .place-copy p{font-size:15.5px}
+ .place-photo{height:220px}
+ .fine-print{font-size:12px}
+
+ .video-showcase{grid-auto-columns:46%;gap:12px}
+ .showcase-video>strong{font-size:13.5px}
+ .showcase-video>small{font-size:12px}
+ .showcase-play{width:36px;height:36px}
+ .video-duration{font-size:11.5px}
+
+ .results-rail{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+ .clinical-case>span{font-size:12px;padding:8px 10px}
+
+ /* Treatment stages stay open on phones, never behind a sideways rail */
+ .journey-grid{display:grid;grid-auto-flow:row;grid-template-columns:1fr;grid-auto-columns:auto;gap:12px;overflow:visible;padding-bottom:0}
+ .journey-grid li{padding:18px}
+ .journey-grid h3{font-size:17.5px;margin:8px 0}
+ .journey-grid p{font-size:15px}
+ .photo-guide{padding:20px;border-radius:14px;margin-top:14px}
+ .photo-guide h3{font-size:20px}
+ .photo-guide p{font-size:14.5px}
+ .photo-guide-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+
+ .documents-section{padding-block:32px 4px}
+ .documents-section h2{font-size:26px}
+ .documents-grid{grid-template-columns:1fr;gap:8px}
+ .documents-grid button{font-size:15px}
+ .documents-grid img{width:54px;height:72px}
+
+ .media-hub{margin-top:20px}
+ .media-hub>summary{padding:16px 18px}
+ .media-hub>summary strong{font-size:16.5px}
+ .media-hub>summary small{font-size:13px}
+ .media-hub-content{padding:16px}
+ .category-tabs button{font-size:13px;min-height:44px}
+ .media-caption,.media-caption label{font-size:12.5px}
+ .media-actions .winter-button{font-size:13.5px}
+
+ .advisor-section>summary{font-size:14px;padding:16px 18px}
+ .advisor-section>summary>span:first-child{font-size:11.5px}
+ .advisor-content{padding:18px}
+ .advisor-stats span{font-size:12px}
+ .advisor-stats strong{font-size:14px}
+ .advisor-rules{font-size:14.5px}
+ .scripts-grid textarea{font-size:14px}
+
+ .faq-grid summary{font-size:15.5px;padding:15px 0}
+ .faq-grid p{font-size:15px}
+
+ .next-section{padding:26px 22px;margin:8px 0 36px;border-radius:14px}
+ .next-section .eyebrow{font-size:11px}
+ .next-section h2{font-size:30px}
+ .next-section p:last-child{font-size:15.5px}
+ .next-section .winter-button{font-size:15px}
+ .next-section .winter-button small{font-size:12.5px}
+
+ .smile-footer{padding-block:20px 92px}
+ .smile-footer-row{flex-wrap:wrap;gap:12px 16px}
+ .smile-footer .winter-logo-mark{width:105px;height:26px;margin-right:auto}
+ .smile-footer-privacy{font-size:13.5px}
+ .smile-footer-address{order:3;width:100%;font-size:13px;align-items:flex-start}
+ .smile-footer-legal{font-size:12px}
+
+ .mobile-offer{padding-block:10px max(10px,env(safe-area-inset-bottom))}
+ .mobile-offer>span{font-size:13px;line-height:1.35}
+ .mobile-offer small{font-size:12px}
+ .mobile-offer>a{font-size:13.5px;padding:12px 14px}
+ .dialog-head h2{font-size:15px}
+}

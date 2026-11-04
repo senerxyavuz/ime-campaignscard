@@ -4,14 +4,18 @@ import { smileTerms } from '@/data/winter-smile';
 import media from '@/data/winter-media.json';
 import { langOrder,languages,type Lang } from '@/i18n/ui';
 import '@/styles/winter-smile.css';
+import '@/styles/winter-smile-parity.css';
 import { smilePath, smileOrigin } from '@/data/smile-paths.mjs';
 import { smileVisuals } from '@/data/winter-visuals';
 import { winterCampaign } from '@/data/winter-campaign';
+import { winterRefine, smileContactFooter } from '@/data/winter-refine';
 const {lang}=Astro.props as {lang:Lang};
 const c=smileCopy[lang];
 const visual=smileVisuals[lang];
 const campaign=winterCampaign[lang];
-const expiry=new Intl.DateTimeFormat(lang,{day:"2-digit",month:"long",year:"numeric",timeZone:"UTC"}).format(new Date(smileTerms.expires+"T00:00:00Z"));
+const refine=winterRefine[lang];
+const lowerFirst=(text:string)=>text.charAt(0).toLocaleLowerCase(lang)+text.slice(1);
+const expiry=new Intl.DateTimeFormat(lang==="en"?"en-GB":lang,{day:"2-digit",month:"long",year:"numeric",timeZone:"UTC"}).format(new Date(smileTerms.expires+"T00:00:00Z"));
 const kicker=(text:string)=>text.replace(/^\d+\s*\/\s*/, "");
 const base=import.meta.env.BASE_URL;
 const root=`${base}winter-smile/`;
@@ -22,7 +26,7 @@ const price=new Intl.NumberFormat(lang,{style:'currency',currency:'EUR',maximumF
 const anchors=['package','journey','places','results','library','questions'];
 const navLabels=[c.nav[0],c.nav[1],c.nav[2],visual.resultsNav,c.nav[3],c.nav[4]];
 const mediaCounts:number[]=[];
-const localizedMedia=media.items.map((item:any)=>{const number=(mediaCounts[item.category]||0)+1;mediaCounts[item.category]=number;return {...item,src:asset(item.src),thumb:asset(item.thumb),title:item.labels?.[lang]?.title||`${item.category===3?c.resultCaption:c.categories[item.category]} · ${String(number).padStart(2,'0')}`};});
+const localizedMedia=media.items.map((item:any)=>{const number=(mediaCounts[item.category]||0)+1;mediaCounts[item.category]=number;return {...item,src:asset(item.src),thumb:asset(item.thumb),title:(refine.documents as Record<string,string>)[item.id]||item.labels?.[lang]?.title||`${item.category===3?c.resultCaption:c.categories[item.category]} · ${String(number).padStart(2,'0')}`};});
 const posters=[1,2].map(n=>({id:`campaign-${n}`,category:0,src:`${root}art/winter-${lang}-${n}.jpg`,thumb:`${root}art/winter-${lang}-${n}.jpg`,title:`${c.campaignCaption} · ${n}`}));
 const items=[...posters,...localizedMedia];
 const clinicVideo=media.videos[0] as any;
@@ -73,8 +77,8 @@ const client={...c,items,canonical:patientLink,lang,routes:Object.fromEntries(la
     <main id="main">
       <section class="smile-hero winter-wrap" aria-labelledby="smile-title">
         <div class="hero-copy">
-          <div class="hero-head"><p class="eyebrow">{c.title} · {campaign.season}</p><h1 id="smile-title"><span>{campaign.headline.split('\n')[0]}</span><em>{campaign.headline.split('\n')[1]}</em></h1><p class="hero-lead">{campaign.summary}</p></div>
-          <div class="hero-chips"><span>✓ {campaign.features[1][1]}</span><span>✓ {campaign.features[2][0]} {campaign.features[2][1]}</span></div>
+          <div class="hero-head"><p class="eyebrow">{c.title} · {campaign.season}</p><h1 id="smile-title"><span>{campaign.headline.split('\n')[0]}</span><em>{campaign.headline.split('\n')[1]}</em></h1><p class="hero-lead">{c.lead}</p></div>
+          <div class="hero-chips"><span>✓ {campaign.features[1][1]}</span><span>✓ {campaign.features[2][0]} {lowerFirst(campaign.features[2][1])}</span></div>
           <div class="hero-price"><strong>{price}</strong><div><span>{c.priceLabel}</span><p>{c.priceNote}</p></div></div>
           <div class="hero-actions"><a href="#package" class="hero-details">{c.explore}<span aria-hidden="true">↓</span></a><a href={contactUrl} class="winter-button light" target="_blank" rel="noopener noreferrer">{visual.contactCta}<span aria-hidden="true">↗</span></a></div>
         </div>
@@ -84,21 +88,23 @@ const client={...c,items,canonical:patientLink,lang,routes:Object.fromEntries(la
           <div class="deck-controls"><button type="button" data-deck-prev aria-label={campaign.previous}>←</button><div>{deckSlides.map((slide,index)=><button type="button" class="deck-dot" data-deck-dot={index} aria-label={slide.title} aria-pressed={index===0?'true':'false'}><span class="sr-only">{slide.title}</span></button>)}</div><button type="button" data-deck-next aria-label={campaign.next}>→</button></div><span class="sr-only" data-deck-status role="status"></span>
         </div>
       </section>
-      <div class="facts-band"><ul class="hero-inclusions winter-wrap">{campaign.features.map(([value,label])=><li><span aria-hidden={/^\d+$/.test(value)?undefined:'true'}>{value}</span><strong>{label}</strong></li>)}</ul></div>
+      <div class="facts-band"><ul class="hero-inclusions winter-wrap">{campaign.features.map(([value,label],i)=><li><span aria-hidden={/^\d+$/.test(value)?undefined:'true'}>{value}</span><div><strong>{label}</strong><small>{refine.bandNotes[i]}</small></div></li>)}</ul></div>
       <div class="winter-wrap">
       <section id="package" class="winter-section package-section" aria-labelledby="package-title">
         <div class="section-intro"><div><p class="eyebrow">{kicker(c.packageKicker)}</p><h2 id="package-title">{campaign.packageTitle}</h2></div><p>{c.packageLead}</p></div>
         <div class="package-grid"><div class="included-box"><ul>{c.includes.map(text=><li><span aria-hidden="true">✓</span>{text}</li>)}</ul></div><div class="scope-box"><h3>{c.scopeTitle}</h3><ul>{c.scope.map(text=><li>{text}</li>)}</ul><details class="material-details"><summary>{c.material}</summary><p>{c.materialText}</p></details></div></div>
       </section>
 
+      <section id="journey" class="winter-section journey-section" aria-labelledby="journey-title"><div class="section-intro"><p class="eyebrow">{kicker(c.journeyKicker)}</p><h2 id="journey-title">{campaign.journeyTitle}</h2><p>{c.journeyLead}</p></div><ol class="journey-grid">{c.steps.map(([title,text],i)=><li><span class="step-num">0{i+1}</span><h3>{title}</h3><p>{text}</p></li>)}</ol><div class="photo-guide"><div><h3>{c.categories[5]}</h3><p>{c.guideNote}</p></div><div class="photo-guide-grid">{localizedMedia.filter((item:any)=>item.category===5).map((item:any)=><button type="button" data-image={item.id} aria-label={`${c.openImage}: ${item.title}`}><img src={item.thumb} alt={item.title} width="480" height="360" loading="lazy"/><span>{item.title}</span></button>)}</div></div></section>
+
       <section id="places" class="winter-section" aria-labelledby="places-title"><div class="section-intro"><p class="eyebrow">{kicker(c.placesKicker)}</p><h2 id="places-title">{campaign.placesTitle}</h2><p>{c.placesLead}</p></div><div class="stay-tabs" role="tablist" aria-label={campaign.placesTitle}>{campaign.stayTabs.map((label,i)=><button type="button" id={`stay-tab-${i}`} role="tab" aria-selected={i===0?'true':'false'} aria-controls={`stay-panel-${i}`} tabindex={i===0?0:-1} data-stay-tab={i}>{label}</button>)}</div><div class="places-grid">{c.places.map(([title,text],i)=><article role="tabpanel" id={`stay-panel-${i}`} aria-labelledby={`stay-tab-${i}`} hidden={i!==0}><div class="place-copy"><span class="eyebrow">{campaign.stayTabs[i]}</span><h3>{title}</h3><p>{text}</p></div><div class="place-photo"><img src={asset(['clinic-dental-unit.webp','hotel-room.webp','transfer-vehicle.webp'][i])} alt={title} width="1200" height="800" loading="lazy"/>{i===0&&<button type="button" data-video={clinicVideo.src} data-poster={asset(clinicVideo.localPoster)} data-video-title={c.videoTitle} class="photo-play" aria-label={c.watch}>▶</button>}</div></article>)}</div><p class="fine-print">{c.hotelNote}</p>
       </section>
 
       <section id="videos" class="winter-section video-section" aria-labelledby="videos-title"><div class="section-intro"><p class="eyebrow">IME CLINIC · VIDEO</p><h2 id="videos-title">{campaign.videosTitle}</h2><p>{visual.videosLead}</p></div><div class="video-showcase">{videos.map(video=><button type="button" class="showcase-video" data-video={video.src} data-poster={asset(video.localPoster)} data-video-title={video.title}><div><img src={asset(video.localPoster)} alt="" width="360" height="640" loading="lazy"/><span class="showcase-play" aria-hidden="true">▶</span><span class="video-duration">{Math.floor(video.durationSeconds/60)}:{String(Math.floor(video.durationSeconds%60)).padStart(2,'0')}</span></div><strong>{video.title}</strong><small>{video.audio}</small></button>)}</div></section>
 
-      <section id="results" class="winter-section results-section" aria-labelledby="results-title"><div class="section-intro"><p class="eyebrow">IME CLINIC · {visual.resultsNav}</p><h2 id="results-title">{campaign.resultsTitle}</h2><p>{visual.caseNote}</p></div><div class="results-rail">{localizedMedia.filter((item:any)=>item.category===3).map((item:any)=><button type="button" class="clinical-case" data-image={item.id} aria-label={`${c.openImage}: ${item.title}`}><img src={item.src} alt={item.title} width="640" height="480" loading="lazy"/><span>{item.title}<span aria-hidden="true">↗</span></span></button>)}</div></section>
+      <section id="results" class="winter-section results-section" aria-labelledby="results-title"><div class="section-intro"><p class="eyebrow">IME CLINIC · {visual.resultsNav}</p><h2 id="results-title">{visual.resultsTitle}</h2><p>{visual.caseNote}</p></div><div class="results-rail">{localizedMedia.filter((item:any)=>item.category===3).map((item:any)=><button type="button" class="clinical-case" data-image={item.id} aria-label={`${c.openImage}: ${item.title}`}><img src={item.src} alt={item.title} width="640" height="480" loading="lazy"/><span>{item.title}<span aria-hidden="true">↗</span></span></button>)}</div></section>
 
-      <section id="journey" class="winter-section journey-section" aria-labelledby="journey-title"><div class="section-intro"><p class="eyebrow">{kicker(c.journeyKicker)}</p><h2 id="journey-title">{campaign.journeyTitle}</h2><p>{c.journeyLead}</p></div><ol class="journey-grid">{c.steps.map(([title,text],i)=><li><span class="step-num">0{i+1}</span><h3>{title}</h3><p>{text}</p></li>)}</ol></section>
+      <section id="documents" class="winter-section documents-section" aria-labelledby="documents-title"><h2 id="documents-title">{refine.documentsTitle}</h2><div class="documents-grid">{localizedMedia.filter((item:any)=>item.id.startsWith('ime-document-')).map((item:any)=><button type="button" data-image={item.id} aria-label={`${c.openImage}: ${item.title}`}><img src={item.thumb} alt={item.title} width="160" height="220" loading="lazy"/><span>{item.title}</span></button>)}</div></section>
 
       <details id="library" class="media-section media-hub"><summary><span><strong id="media-title">{campaign.libraryTitle}</strong><small>{campaign.libraryHint}</small></span><span aria-hidden="true">+</span></summary><div class="media-hub-content">
         <div class="category-tabs" role="tablist" aria-label={c.nav[3]}>{c.categories.map((name,i)=><button type="button" role="tab" id={`category-${i}`} aria-selected={i===0?'true':'false'} aria-controls={`gallery-${i}`} tabindex={i===0?0:-1} data-category={i}>{i===2?visual.travel:name}<span>{items.filter(item=>item.category===i).length}</span></button>)}</div>
@@ -112,7 +118,7 @@ const client={...c,items,canonical:patientLink,lang,routes:Object.fromEntries(la
       <section id="consultation" class="next-section"><div><p class="eyebrow">{c.deadline}</p><h2>{c.nextTitle}</h2><p>{visual.contactText}</p></div><a href={contactUrl} class="winter-button light" target="_blank" rel="noopener noreferrer">{visual.contactCta}<span aria-hidden="true">↗</span><small>WhatsApp</small></a></section>
       </div>
     </main>
-    <footer class="winter-wrap winter-footer"><span class="winter-logo-mark" style={`--logo-image:url(${asset('ime-logo-forest.webp')})`} role="img" aria-label="IME Clinic"></span><div><span>{c.footer}</span><small>{visual.modelNote} · <a href="https://www.pexels.com/photo/photo-of-woman-smiling-3767342/" target="_blank" rel="noopener noreferrer">Andrea Piacquadio / Pexels</a></small></div></footer>
+    <footer class="smile-footer"><div class="winter-wrap smile-footer-row"><span class="winter-logo-mark" style={`--logo-image:url(${asset('ime-logo-forest.webp')})`} role="img" aria-label="IME Clinic"></span><p class="smile-footer-address"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 256 256" aria-hidden="true"><path d="M128,64a40,40,0,1,0,40,40A40,40,0,0,0,128,64Zm0,64a24,24,0,1,1,24-24A24,24,0,0,1,128,128Zm0-112a88.1,88.1,0,0,0-88,88c0,31.4,14.51,64.68,42,96.25a254.19,254.19,0,0,0,41.45,38.3,8,8,0,0,0,9.18,0A254.19,254.19,0,0,0,174,200.25c27.45-31.57,42-64.85,42-96.25A88.1,88.1,0,0,0,128,16Zm0,206c-16.53-13-72-60.75-72-118a72,72,0,0,1,144,0C200,161.23,144.53,209,128,222Z"></path></svg><span>{smileContactFooter.address}</span></p><a class="smile-footer-privacy" href={smileContactFooter.privacyUrl} target="_blank" rel="noopener noreferrer">{refine.privacy}</a></div><div class="winter-wrap smile-footer-legal"><p>{refine.legal}</p><p>{visual.modelNote} · <a href="https://www.pexels.com/photo/photo-of-woman-smiling-3767342/" target="_blank" rel="noopener noreferrer">Andrea Piacquadio / Pexels</a></p></div></footer>
     <div class="mobile-offer"><span>{c.title}<small>{c.deadline}</small></span><a href={contactUrl} target="_blank" rel="noopener noreferrer">{visual.contactCta} ↗</a></div>
     <dialog id="image-dialog" aria-labelledby="image-dialog-title"><div class="dialog-head"><h2 id="image-dialog-title"></h2><button type="button" data-close-dialog aria-label={c.close}>×</button></div><div class="image-stage"><button type="button" data-image-prev aria-label="←">←</button><img alt=""/><button type="button" data-image-next aria-label="→">→</button></div><a class="winter-button" data-image-download download>{c.downloadOne} ↓</a></dialog>
     <dialog id="video-dialog" aria-labelledby="video-dialog-title"><div class="dialog-head"><h2 id="video-dialog-title">{c.videoTitle}</h2><button type="button" data-close-dialog aria-label={c.close}>×</button></div><div data-video-container></div></dialog>

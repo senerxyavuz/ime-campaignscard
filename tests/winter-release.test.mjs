@@ -77,3 +77,13 @@ test('published pages preserve the approved offer, working media and patient/adv
  // All unrelated campaign URLs remain in the release.
  for(const lang of Object.keys(smileCopy))for(const slug of ['yuz-germe','smart-lens','rinoplasti','implant'])await access(`dist/${lang}/kampanya/${slug}/index.html`);
 });
+
+test('patient copy has no internal wording and matches the other landings',async()=>{
+ for(const lang of Object.keys(smileCopy)){
+  const html=await readFile(`root-dist${smilePath(lang)}index.html`,"utf8");
+  const visible=html.replace(/<script[\s\S]*?<\/script>/g,'').replace(/<details id="advisor"[\s\S]*?<\/details>/,'');
+  for(const phrase of ['other pages','otras páginas','altre pagine','других страниц','resultado clinico','The existing','Mevcut paket','Mevcut kampanya','существующ','existente','esistente','coordinator','oordinador','oordinatore','Koordinatör','oordinatör','оординатор'])assert.ok(!visible.includes(phrase),`${lang}: ${phrase}`);
+  for(const needed of ['smile-footer-legal','privacy-policy','id="documents"','photo-guide-grid'])assert.ok(visible.includes(needed),`${lang}: ${needed}`);
+  assert.ok(html.indexOf('id="journey"')<html.indexOf('id="places"'),`${lang}: menu order`);
+ }
+});

@@ -20,8 +20,10 @@ body[data-view=patient] .advisor-section{display:none}
 .desktop-nav{grid-column:2;grid-row:1;justify-content:center;gap:26px;font-size:15.5px;font-weight:500}
 .winter-language{grid-column:3;grid-row:1}
 .winter-language summary{font-size:14px;padding:10px 14px}
-.winter-language>div{top:50px}
+.winter-language>div{top:52px;min-width:200px}
 .winter-language a,.winter-menu a{font-size:15px}
+.winter-language summary{min-height:44px}
+.language-flag{width:24px;height:16px}
 .winter-logo-mark{width:118px;height:30px}
 
 /* Hero */
@@ -40,6 +42,14 @@ body[data-view=patient] .advisor-section{display:none}
 .hero-deck,.deck-card{height:340px}
 .hero-deadline p{font-size:11.5px}
 .hero-deadline small{font-size:12.5px;line-height:1.45}
+
+/* Hero caption (journey slides) */
+.deck-caption{padding:14px 18px;margin-top:-10px}
+.deck-caption-heading>span{font-size:12px}
+.deck-caption-heading>a{font-size:13.5px}
+.deck-caption>strong{font-size:19px;line-height:1.3;margin-top:5px}
+.deck-caption>p{font-size:14.5px;line-height:1.45;margin-top:4px}
+.deck-caption>small{font-size:12px;margin-top:4px}
 
 /* Facts band: every item gets a line of explanation, as on Body Contouring */
 .hero-inclusions{margin-block:0}
@@ -160,7 +170,7 @@ h3{font-size:18.4px;font-weight:800;letter-spacing:-.02em}
 .next-section .winter-button small{font-size:12.5px;text-align:center}
 
 /* Footer */
-.smile-footer{background:#1c2e28;color:#e0e7df;padding-block:22px 24px}
+.smile-footer{background:#173b36;color:#e0e7df;padding-block:22px 24px}
 .smile-footer-row{display:flex;align-items:center;gap:32px}
 .smile-footer .winter-logo-mark{background:#fff;flex:none}
 .smile-footer-address{display:flex;align-items:center;gap:8px;font-size:14px;line-height:1.4;margin-right:auto}
@@ -228,6 +238,12 @@ h3{font-size:18.4px;font-weight:800;letter-spacing:-.02em}
  .hero-deadline p{font-size:11px}
  .hero-deadline time{font-size:22px}
  .hero-deadline small{font-size:12px}
+ .deck-caption{padding:12px 14px}
+ .deck-caption-heading>span{font-size:11px}
+ .deck-caption-heading>a{font-size:12.5px}
+ .deck-caption>strong{font-size:16px}
+ .deck-caption>p{font-size:13.5px}
+ .deck-caption>small{font-size:11.5px}
  .deck-controls>button{min-height:44px;min-width:44px}
  .deck-dot{min-height:44px}
 
@@ -254,7 +270,7 @@ h3{font-size:18.4px;font-weight:800;letter-spacing:-.02em}
  .place-copy{padding:20px}
  .place-copy h3{font-size:26px}
  .place-copy p{font-size:15.5px}
- .place-photo{height:220px}
+ .place-photo,.place-photo[data-photo-count="2"]{height:220px}
  .fine-print{font-size:12px}
 
  .video-showcase{grid-auto-columns:46%;gap:12px}

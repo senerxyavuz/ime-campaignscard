@@ -33,3 +33,8 @@ Root publication covers ten routes: set `IME_SSH_IDENTITY` to the existing autho
 Validation: `npm run check`, `npm run build`, `npm test`, and `python3 -m unittest discover -s tests -p 'test_*.py' -v`. Browser QA covers 320/390/768/1024/1440 px in all five languages, selection across categories, a downloaded ZIP matched to source bytes, and real video playback/close behavior. Publisher tests cover scoped bootstrap/update, backups, stale state, symlinks, races and incomplete route claims.
 
 The language menu matches the sister landings: the same nine languages in the same order, three columns (two on phones). Turkish is not listed or marked with hreflang, but `/tr/all-inclusive-smile/` stays published for consultants. The hero is kept to about one screen, like the sister landings (roughly 480-515 px at 1440 wide, 615-710 px at 390 wide), so details such as the deposit terms and the extras belong in the package section, not the hero.
+
+
+## 5 November2026 — French Smile commercial alignment
+
+Only French copy uses unnumbered participation in return-flight costs, conditions confirmed with coordination, and first physical arrival in Istanbul on/before31December2026 inclusive. No deposit deadline/rule remains in French. The approved four French originals replace only French campaign posters byte-for-byte. French WhatsApp is +902129095620. Other languages and their offers remain unchanged. Current deployed source baseline was cc09d3fd7f7c, descended from fetched origin/main. Task publication is restricted to the French HTML, its unchanged route headers and hash-addressed assets; other route hashes must remain identical. No CRM/form submission or outbound message.

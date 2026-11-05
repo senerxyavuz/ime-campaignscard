@@ -27,7 +27,7 @@ const deckSlides=[
 const anchors=['package','results','videos','places','journey','questions'];
 const mediaCounts:number[]=[];
 const localizedMedia=media.items.map((item:any)=>{const number=(mediaCounts[item.category]||0)+1;mediaCounts[item.category]=number;return {...item,src:asset(item.src),thumb:asset(item.thumb),title:labels[item.id]||`${t.resultCaption} · ${String(number).padStart(2,'0')}`};});
-const posters=[1,2].map(n=>({id:`campaign-${n}`,category:0,src:`${root}art/winter-${lang}-${n}.jpg`,thumb:`${root}art/winter-${lang}-${n}.jpg`,title:`${t.campaignCaption} · ${n}`}));
+const posters=lang==='fr'?['03','05','01','02'].map(id=>({id:`campaign-fr-${id}`,category:0,src:`${root}art/fr-approved/${id}-ime-fr.png`,thumb:`${root}art/fr-approved/${id}-ime-fr.png`,title:`${t.campaignCaption} · ${id}`})):[1,2].map(n=>({id:`campaign-${n}`,category:0,src:`${root}art/winter-${lang}-${n}.jpg`,thumb:`${root}art/winter-${lang}-${n}.jpg`,title:`${t.campaignCaption} · ${n}`}));
 const items=[...posters,...localizedMedia];
 
 const results=localizedMedia.filter((item:any)=>item.category===3);
@@ -46,7 +46,7 @@ const videos=[4,3,0,1,2,5].map((source,index)=>{
 });
 
 const patientLink=pageUrl(lang);
-const contactUrl='https://wa.me/905465248334?text='+encodeURIComponent(t.contactMessage);
+const contactUrl='https://wa.me/'+(lang==='fr'?'902129095620':'905465248334')+'?text='+encodeURIComponent(t.contactMessage);
 const client={items,lang,routes:Object.fromEntries(smileLocales.map((code:string)=>[code,smilePath(code)])),rootPath:smilePath('en'),title:t.title,selected:t.selected,working:t.working,downloadError:t.downloadError,shareFallback:t.shareFallback,empty:t.empty,copied:t.copied,copyError:t.copyError,categories:t.categories,tokenName:t.tokenName,tokenAdvisor:t.tokenAdvisor,videoTitle:t.videoDialogTitle};
 const whatsappIcon='<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 256 256" aria-hidden="true"><path d="M187.58,144.84l-32-16a8,8,0,0,0-8,.5l-14.69,9.8a40.55,40.55,0,0,1-16-16l9.8-14.69a8,8,0,0,0,.5-8l-16-32A8,8,0,0,0,104,64a40,40,0,0,0-40,40,88.1,88.1,0,0,0,88,88,40,40,0,0,0,40-40A8,8,0,0,0,187.58,144.84ZM152,176a72.08,72.08,0,0,1-72-72A24,24,0,0,1,99.29,80.46l11.48,23L101,118a8,8,0,0,0-.73,7.51,56.47,56.47,0,0,0,30.15,30.15A8,8,0,0,0,138,155l14.61-9.74,23,11.48A24,24,0,0,1,152,176ZM128,24A104,104,0,0,0,36.18,176.88L24.83,210.93a16,16,0,0,0,20.24,20.24l34.05-11.35A104,104,0,1,0,128,24Zm0,192a87.87,87.87,0,0,1-44.06-11.81,8,8,0,0,0-6.54-.67L40,216,52.47,178.6a8,8,0,0,0-.66-6.54A88,88,0,1,1,128,216Z"/></svg>';
 const bandIcons=[
@@ -72,8 +72,8 @@ const bandIcons=[
     <meta property="og:description" content={t.metaDescription}/>
     <meta property="og:type" content="website"/>
     <meta property="og:url" content={patientLink}/>
-    <meta property="og:image" content={`${smileOrigin}${root}art/og-${lang}.jpg`}/>
-    <meta property="og:image:width" content="1200"/><meta property="og:image:height" content="630"/>
+    <meta property="og:image" content={smileOrigin+root+(lang==='fr'?'art/fr-approved/03-ime-fr.png':`art/og-${lang}.jpg`)}/>
+    <meta property="og:image:width" content={lang==='fr'?'1080':'1200'}/><meta property="og:image:height" content={lang==='fr'?'1350':'630'}/>
     <link rel="icon" href={`${base}favicon.svg`}/>
     <link rel="preload" href={asset(rtl?'noto-arabic.woff2':'manrope-latin.woff2')} as="font" type="font/woff2" crossorigin/>
   </head>

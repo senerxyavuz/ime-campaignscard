@@ -18,7 +18,7 @@ test('all ten languages have complete patient and advisor content from the same 
    if(Array.isArray(value))assert.equal(value.length,smileText.en[key].length,`${lang}.${key} structure`);
   }
   assert.ok(c.deadline.includes('2026'));
-  assert.ok(c.scripts[0].includes('2026')&&c.scripts[0].includes('300'),`${lang} incomplete first reply`);
+  assert.ok(c.scripts[0].includes('2026')&&(lang==='fr'?c.scripts[0].includes('première arrivée physique'):c.scripts[0].includes('300')),`${lang} incomplete first reply`);
   assert.ok(c.scripts.join(' ').includes('{link}'),`${lang} messages need the patient link`);
   assert.doesNotMatch(JSON.stringify(c),/2[.,]990|2[.,]590|Sept(?:ember)? is closed|Eylül kapalı/);
  }
@@ -47,14 +47,14 @@ test('published pages preserve the approved offer, working media and patient/adv
   const html=await readFile(`root-dist${smilePath(lang)}index.html`,'utf8');
   assert.match(html,/<html lang=/);assert.match(html,/2026-12-31/);assert.match(html,/noindex, nofollow/);
   assert.ok(html.includes(`<link rel="canonical" href="${smileOrigin}${smilePath(lang)}"`),`${lang}: canonical`);
-  assert.ok(html.includes(`art/og-${lang}.jpg`),`${lang}: preview card`);
+  assert.ok(html.includes(lang==='fr'?'art/fr-approved/03-ime-fr.png':`art/og-${lang}.jpg`),`${lang}: preview card`);
   await access(`public/winter-smile/art/og-${lang}.jpg`);
   assert.doesNotMatch(html,/<form\b|2[.,]990|2[.,]590|crm\/|lead\/|<video\b|dQw4w9WgXcQ|5-Star|in 5 Days|JCI-accredited|100% included/i);
   assert.doesNotMatch(html,/\/campaignscard\//);
-  assert.match(html,/https:\/\/wa\.me\/905465248334/);
+  assert.ok(html.includes('https://wa.me/'+(lang==='fr'?'902129095620':'905465248334')));
   assert.match(html,/id="advisor"/);
   const data=JSON.parse(html.match(/id="winter-data"[^>]*>(.*?)<\/script>/s)[1]);
-  assert.equal(data.items.length,37);
+  assert.equal(data.items.length,lang==='fr'?39:37);
   assert.doesNotMatch(html,/hospital-document-/);
   assert.equal(data.rootPath,'/all-inclusive-smile/');
   assert.equal(data.routes[lang],smilePath(lang));
@@ -104,4 +104,19 @@ test('the language menu lists the same nine languages as the sister landings, wi
   assert.deepEqual([...menu.matchAll(/<a [^>]*hreflang="(\w+)"/g)].map(m=>m[1]),['en','ru','pt','es','it','fr','de','ar','pl'],lang);
   assert.doesNotMatch(html,/hreflang="tr"/,lang);
  }
+});
+
+
+test('French Smile has unnumbered flight participation and physical-arrival terms without deposit rules',async()=>{
+ const c=smileText.fr;
+ assert.doesNotMatch(JSON.stringify(c),/(?:300|400)\s*€|acompte/i);
+ assert.match(c.deadlineNote,/première arrivée physique à Istanbul/);
+ assert.match(c.deadlineNote,/31 décembre 2026 inclus/);
+ assert.match(c.band[1][0],/Participation aux vols aller-retour/);
+ assert.match(c.faqs[4][1],/modalités sont à confirmer/i);
+ const html=await readFile('root-dist/fr/all-inclusive-smile/index.html','utf8');
+ assert.ok(html.includes('art/fr-approved/03-ime-fr.png'));
+ assert.ok(html.includes('https://wa.me/902129095620'));
+ const advisor=html.match(/data-advisor-src="([^"]+)"/)[1];
+ assert.doesNotMatch(await readFile('root-dist'+advisor,'utf8'),/(?:300|400)\s*€|acompte/i);
 });

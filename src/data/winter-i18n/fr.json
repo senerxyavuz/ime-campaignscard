@@ -1,11 +1,11 @@
 {
-  "metaTitle": "20 couronnes en zircone, vol et hôtel · 3 000 € | IME Clinic",
-  "metaDescription": "Istanbul : 20 couronnes en zircone, vol aller-retour jusqu’à 300 €, 7 nuits d’hôtel avec un accompagnant, transferts. Valable jusqu’au 31 décembre 2026.",
+  "metaTitle": "20 couronnes en zircone · Forfait Smile 3 000 € | IME Clinic",
+  "metaDescription": "Istanbul : 20 couronnes en zircone, 7 nuits d’hôtel et transferts. Participation aux vols aller-retour. Première arrivée au plus tard le 31 décembre 2026 inclus.",
   "title": "Le Sourire tout compris",
   "season": "Automne · Hiver 2026",
   "price": "3 000 €",
-  "deadline": "Valable jusqu’au 31 décembre 2026",
-  "depositBy": "Bloquez ce prix au plus tard le 31 décembre 2026",
+  "deadline": "Votre première arrivée physique à Istanbul doit avoir lieu au plus tard le 31 décembre 2026 inclus.",
+  "depositBy": "Première arrivée à Istanbul au plus tard le 31 décembre 2026 inclus",
   "summary": "Votre plan de soins, votre vol et votre séjour à Istanbul, coordonnés.",
   "skip": "Aller au contenu",
   "language": "Langue",
@@ -21,21 +21,21 @@
     "Votre parcours",
     "Vos questions"
   ],
-  "headline": "20 couronnes en zircone, vol et hôtel.\nUn seul forfait, un seul plan écrit.",
+  "headline": "20 couronnes en zircone.\nVotre séjour à Istanbul, coordonné.",
   "lead": "Un dentiste examine d’abord vos photos et vous remet un plan écrit. Vous venez ensuite à Istanbul, avec un accompagnant si vous le souhaitez ; votre séjour et vos transferts sont organisés autour de vos rendez-vous.",
   "chips": [
     "Extractions et dévitalisation si besoin clinique",
     "Consultation médicale en ligne avant le départ"
   ],
   "priceLabel": "Prix du forfait",
-  "priceNote": "Par patient · 7 nuits d’hôtel, transferts et vol aller-retour jusqu’à 300 € inclus",
+  "priceNote": "Par patient · 7 nuits d’hôtel, transferts et participation aux vols aller-retour",
   "perPatient": "Par patient",
-  "ends": "Bloquez ce prix au plus tard le",
+  "ends": "Première arrivée à Istanbul au plus tard le",
   "expiry": "31 décembre 2026",
-  "deadlineNote": "Acompte d’au moins 300 €, à verser uniquement après confirmation de votre plan écrit. Les dates du traitement sont convenues au cas par cas.",
+  "deadlineNote": "Votre première arrivée physique à Istanbul doit avoir lieu au plus tard le 31 décembre 2026 inclus.",
   "explore": "Voir ce qui est inclus",
   "contactCta": "Recevoir mon plan écrit",
-  "contactMessage": "Bonjour IME Clinic, je souhaite recevoir un plan écrit pour le forfait « Le Sourire tout compris » à 3 000 €.",
+  "contactMessage": "Bonjour IME Clinic, je souhaite recevoir les détails du forfait Smile à 3 000 € : 20 couronnes en zircone, 7 nuits d’hôtel, transferts et participation aux vols aller-retour. Ma première arrivée à Istanbul serait au plus tard le 31 décembre 2026.",
   "details": "Voir les détails",
   "slides": [
     {
@@ -67,8 +67,8 @@
       "Teinte et forme définies avec votre dentiste"
     ],
     [
-      "Vol aller-retour jusqu’à 300 €",
-      "Par patient · tout dépassement est à régler séparément"
+      "Participation aux vols aller-retour",
+      "Modalités à confirmer avec notre équipe de coordination"
     ],
     [
       "7 nuits d’hôtel",
@@ -81,7 +81,7 @@
   ],
   "packageKicker": "Une offre claire",
   "packageTitle": "Ce que comprend votre forfait à 3 000 €",
-  "packageLead": "Vous comparez avec un devis pour les couronnes seules ? Ce forfait couvre aussi les extractions et la dévitalisation si cliniquement nécessaires, les radiographies, une consultation médicale en ligne, un vol aller-retour jusqu’à 300 €, 7 nuits d’hôtel, l’hébergement d’un accompagnant et les transferts.",
+  "packageLead": "Vous comparez avec un devis pour les couronnes seules ? Ce forfait couvre aussi les extractions et la dévitalisation si cliniquement nécessaires, les radiographies, une consultation médicale en ligne, une participation au coût des vols aller-retour, 7 nuits d’hôtel, l’hébergement d’un accompagnant et les transferts.",
   "includeTitles": [
     "Vos soins dentaires",
     "Votre voyage"
@@ -91,17 +91,17 @@
     "Extractions et dévitalisation, si cliniquement nécessaires",
     "Radiographies, consultation et plan de soins",
     "Consultation médicale en ligne avant votre départ",
-    "Billet d’avion aller-retour jusqu’à 300 €",
+    "Participation au coût des vols aller-retour",
     "7 nuits d’hôtel, catégorie 4 étoiles minimum",
     "Hébergement d’un accompagnant",
     "Transferts aéroport et clinique"
   ],
   "scopeTitle": "Avant de réserver",
-  "separate": "À régler séparément : les implants, le coût du vol au-delà de 300 €, le vol de votre accompagnant, les visas et l’assurance voyage.",
+  "separate": "À régler séparément : les implants, le vol de votre accompagnant, les visas et l’assurance voyage.",
   "scope": [
     "Un dentiste vous remet un plan écrit avant la réservation ; l’examen sur place à Istanbul le finalise.",
-    "L’offre est valable jusqu’au 31 décembre 2026. Les dates du traitement sont convenues au cas par cas.",
-    "Avant de verser un acompte, demandez à votre conseiller les conditions d’acompte et d’annulation par écrit.",
+    "Votre première arrivée physique à Istanbul doit avoir lieu au plus tard le 31 décembre 2026 inclus.",
+    "Avant de confirmer votre séjour, demandez à votre conseiller les conditions de réservation et d’annulation par écrit.",
     "Demandez à votre conseiller ce que comprend votre réservation d’hôtel, par exemple les repas."
   ],
   "material": "Matériau et entretien",
@@ -169,8 +169,8 @@
       "Transmettez à votre conseiller les photos et documents dentaires dont vous disposez. Après votre consultation en ligne, vous recevez votre plan écrit de soins et de voyage."
     ],
     [
-      "Bloquez votre prix",
-      "Votre plan écrit vous convient ? Versez un acompte d’au moins 300 € au plus tard le 31 décembre 2026, puis fixons ensemble vos dates de traitement."
+      "Planifiez votre première arrivée",
+      "Votre première arrivée physique à Istanbul doit avoir lieu au plus tard le 31 décembre 2026 inclus."
     ],
     [
       "Arrivée à Istanbul",
@@ -192,11 +192,11 @@
   "faqs": [
     [
       "Que comprennent exactement les 3 000 € ?",
-      "20 couronnes en zircone, la consultation et les radiographies, les extractions ou la dévitalisation si cliniquement nécessaires, un billet d’avion aller-retour jusqu’à 300 €, 7 nuits d’hôtel avec l’hébergement d’un accompagnant, ainsi que les transferts aéroport et clinique. Votre plan écrit confirme le traitement prévu pour vous."
+      "20 couronnes en zircone, la consultation et les radiographies, les extractions ou la dévitalisation si cliniquement nécessaires, une participation au coût des vols aller-retour, 7 nuits d’hôtel avec l’hébergement d’un accompagnant, ainsi que les transferts aéroport et clinique. Votre plan écrit confirme le traitement prévu pour vous."
     ],
     [
       "Combien de couronnes me faudra-t-il ?",
-      "Votre dentiste détermine le nombre de couronnes adapté après avoir étudié vos dents. Si votre plan ne prévoit pas 20 couronnes, votre conseiller vous confirme le prix par écrit avant tout acompte."
+      "Votre dentiste détermine le nombre de couronnes adapté après avoir étudié vos dents. Si votre plan ne prévoit pas 20 couronnes, votre conseiller vous confirme le prix par écrit avant votre décision."
     ],
     [
       "Faut-il tailler mes dents naturelles ?",
@@ -207,16 +207,16 @@
       "Prévoyez 7 nuits pour des couronnes en zircone. Votre dentiste confirme les dates dans votre plan."
     ],
     [
-      "Mon vol est-il vraiment inclus ?",
-      "Oui. Le billet d’avion aller-retour est pris en charge jusqu’à 300 € par patient ; tout dépassement est à votre charge. L’itinéraire, les dates et les modalités de réservation sont confirmés avec votre conseiller avant l’achat du billet."
+      "Comment fonctionne la participation aux vols ?",
+      "Une participation au coût des vols aller-retour est prévue. Les modalités sont à confirmer avec notre équipe de coordination."
     ],
     [
       "Puis-je venir avec quelqu’un ?",
       "Oui. L’hébergement d’un accompagnant est inclus pour le séjour de 7 nuits. La prise en charge du vol concerne uniquement le patient ; le vol de l’accompagnant est donc à régler séparément."
     ],
     [
-      "Quand cette offre prend-elle fin ?",
-      "L’offre est valable jusqu’au 31 décembre 2026. Un acompte d’au moins 300 € versé au plus tard à cette date bloque le prix une fois votre plan de soins confirmé. Les dates du traitement sont convenues séparément."
+      "Quelle est la date limite pour votre première arrivée ?",
+      "Votre première arrivée physique à Istanbul doit avoir lieu au plus tard le 31 décembre 2026 inclus."
     ],
     [
       "Où ont lieu mes soins ?",
@@ -240,7 +240,7 @@
     ]
   ],
   "nextTitle": "Commencez par 4 photos.",
-  "nextText": "Envoyez vos photos, effectuez votre consultation en ligne et recevez un plan écrit. Aucun acompte tant que votre plan n’est pas confirmé.",
+  "nextText": "Contactez notre équipe de coordination pour votre plan de soins et votre projet de voyage. Votre première arrivée physique à Istanbul doit avoir lieu au plus tard le 31 décembre 2026 inclus.",
   "guideNote": "Guide photo à titre d’illustration : sourire de face, côté droit avec les dents en contact, dents du bas vues d’en haut et dents du haut vues d’en bas. Écrivez-nous d’abord sur WhatsApp ; votre conseiller vous expliquera comment transmettre vos photos.",
   "openImage": "Voir l’image",
   "downloadOne": "Télécharger l’image",
@@ -254,23 +254,23 @@
   "advisorStats": [
     "Prix du forfait",
     "Validité de la campagne",
-    "Acompte minimum",
+    "Première arrivée à Istanbul",
     "Séjour à l’hôtel"
   ],
-  "advisorDepositValue": "300 €",
+  "advisorDepositValue": "31 décembre 2026 inclus",
   "advisorStayValue": "7 nuits d’hôtel",
   "linksTitle": "Liens patients",
   "linksHint": "Copiez le lien dans la langue du patient. Il ouvre la page destinée au patient et affiche le bon aperçu sur WhatsApp.",
   "advisorRulesTitle": "Avant de confirmer une réservation",
   "advisorRules": [
     "Annoncez le prix du forfait en euros : 3 000 €.",
-    "Un acompte d’au moins 300 € versé au plus tard le 31 décembre 2026 bloque le prix une fois le plan de traitement confirmé. N’envoyez le message sur l’acompte qu’après avoir complété les coordonnées de paiement et les conditions.",
-    "Avant la réservation, expliquez la prise en charge du vol aller-retour jusqu’à 300 € : le patient règle tout dépassement, et le vol de l’accompagnant est à régler séparément.",
+    "Votre première arrivée physique à Istanbul doit avoir lieu au plus tard le 31 décembre 2026 inclus.",
+    "Une participation au coût des vols aller-retour est prévue. Les modalités sont à confirmer avec notre équipe de coordination.",
     "Confirmez les 7 nuits d’hôtel, l’hébergement d’un accompagnant et tous les transferts dans la réservation écrite.",
     "Établissez si besoin un devis séparé pour les implants ; consignez par écrit le traitement convenu et tous les coûts supplémentaires.",
     "Confirmez les dates du traitement au cas par cas.",
     "Le matériau Ivoclar et la garantie de 15 ans ne sont confirmés que dans le plan écrit ; ne promettez aucun résultat clinique.",
-    "Si le patient compare avec le prix de 1 800 € pour 20 couronnes : ce prix concerne les couronnes, et le voyage n’est pas inclus. Le forfait à 3 000 € ajoute 7 nuits d’hôtel avec l’hébergement d’un accompagnant, les transferts et un billet d’avion aller-retour jusqu’à 300 €."
+    "Si le patient compare avec le prix de 1 800 € pour 20 couronnes : ce prix concerne les couronnes, et le voyage n’est pas inclus. Le forfait à 3 000 € ajoute 7 nuits d’hôtel avec l’hébergement d’un accompagnant, les transferts et une participation au coût des vols aller-retour."
   ],
   "scriptsTitle": "Messages prêts à l’emploi",
   "nameLabel": "Nom du patient",
@@ -282,16 +282,16 @@
     "Demande de photos",
     "Vol et réservation",
     "Comparaison de prix",
-    "Acompte",
+    "Planifier l’arrivée",
     "Relance"
   ],
   "scripts": [
-    "Bonjour [Nom], je suis [Conseiller], d’IME Clinic. Notre forfait « Le Sourire tout compris » : 3 000 € si vous bloquez le prix avec un acompte au plus tard le 31 décembre 2026. Il comprend 20 couronnes en zircone, un billet d’avion aller-retour jusqu’à 300 €, 7 nuits d’hôtel avec l’hébergement d’un accompagnant et les transferts. Les implants, le vol de votre accompagnant, le coût du vol au-delà de 300 €, les visas et l’assurance voyage sont à régler séparément. Détails : {link} Puis-je vous demander les 4 photos nécessaires à votre consultation en ligne ?",
+    "Bonjour [Nom], je suis [Conseiller], d’IME Clinic. Notre forfait Smile à 3 000 € comprend 20 couronnes en zircone, 7 nuits d’hôtel et les transferts. Une participation au coût des vols aller-retour est prévue. Les modalités sont à confirmer avec notre équipe de coordination. Votre première arrivée physique à Istanbul doit avoir lieu au plus tard le 31 décembre 2026 inclus. Détails : {link}",
     "Merci de m’envoyer 4 photos prises à la lumière du jour, sans filtre : 1) sourire de face, 2) côté droit, dents en contact, 3) dents du bas vues d’en haut, 4) dents du haut vues d’en bas. Joignez-y les radiographies dont vous disposez déjà. Les photos aident à préparer votre plan ; elles ne remplacent pas un examen.",
-    "Le forfait couvre un billet d’avion aller-retour jusqu’à 300 € par patient ; tout dépassement est à votre charge. Le vol de votre accompagnant est à régler séparément. Avant la réservation, nous confirmons par écrit votre aéroport de départ, vos dates, le coût du vol, l’hôtel et la chambre, l’accompagnant et les transferts. Merci d’attendre le plan de voyage convenu avant tout achat de billet.",
-    "Le prix de 1 800 € concerne uniquement les 20 couronnes ; le voyage n’est pas inclus. Le forfait à 3 000 € ajoute 7 nuits d’hôtel avec l’hébergement d’un accompagnant, les transferts et un billet d’avion aller-retour jusqu’à 300 €.",
-    "Votre plan est confirmé. Pour bloquer le prix de 3 000 €, merci de verser un acompte d’au moins 300 € au plus tard le 31 décembre 2026. [Modalités de paiement] [Conditions d’acompte et d’annulation]",
-    "Bonjour [Nom], voici votre forfait « Le Sourire tout compris » : 3 000 € pour 20 couronnes en zircone, un billet d’avion aller-retour jusqu’à 300 €, 7 nuits d’hôtel avec l’hébergement d’un accompagnant et les transferts. Pour commencer, envoyez-moi vos 4 photos. Un acompte d’au moins 300 € versé au plus tard le 31 décembre 2026 bloque le prix une fois votre plan confirmé. {link}"
+    "Une participation au coût des vols aller-retour est prévue. Les modalités sont à confirmer avec notre équipe de coordination. Avant la réservation, nous confirmons par écrit vos dates, l’hôtel, la chambre et les transferts.",
+    "Le prix de 1 800 € concerne uniquement les 20 couronnes ; le voyage n’est pas inclus. Le forfait à 3 000 € ajoute 7 nuits d’hôtel avec l’hébergement d’un accompagnant, les transferts et une participation au coût des vols aller-retour.",
+    "Votre plan est confirmé. Préparons votre première arrivée à Istanbul au plus tard le 31 décembre 2026 inclus. Les détails de votre séjour sont à confirmer avec notre équipe de coordination.",
+    "Bonjour [Nom], voici le forfait Smile à 3 000 € : 20 couronnes en zircone, 7 nuits d’hôtel et les transferts. Une participation au coût des vols aller-retour est prévue. Les modalités sont à confirmer avec notre équipe de coordination. Votre première arrivée physique à Istanbul doit avoir lieu au plus tard le 31 décembre 2026 inclus. {link}"
   ],
   "copy": "Copier",
   "copied": "Copié",
@@ -345,6 +345,6 @@
   "working": "Préparation des fichiers…",
   "empty": "Sélectionnez au moins une image.",
   "posterTitle2": "Vos couronnes, votre vol et votre hôtel en un seul plan.",
-  "posterFlight": "Billet d’avion aller-retour jusqu’à 300 €",
-  "posterSeparate": "À régler séparément : implants, coût du vol au-delà de 300 €, vol de l’accompagnant, visas, assurance"
+  "posterFlight": "Participation aux vols aller-retour",
+  "posterSeparate": "À régler séparément : les implants, le vol de votre accompagnant, les visas et l’assurance voyage."
 }

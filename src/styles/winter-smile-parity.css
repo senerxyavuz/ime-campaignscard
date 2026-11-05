@@ -23,41 +23,49 @@ body[data-view=advisor] .mobile-offer{display:none!important}
 .winter-logo{grid-column:1;grid-row:1;margin:0}
 .desktop-nav{grid-column:2;grid-row:1;justify-content:center;gap:26px;font-size:15.5px;font-weight:500}
 .winter-language{grid-column:3;grid-row:1}
-.winter-language summary{font-size:14px;padding:10px 14px;min-height:44px}
-.winter-language>div{top:52px;min-width:200px;max-height:min(70vh,520px);overflow:auto}
-.winter-language a,.winter-menu a{font-size:15px}
-.language-flag{width:24px;height:16px}
+/* Language menu: same grid, sizes and states as the sister landings. */
+.winter-language summary{gap:7px;font-size:13px;font-weight:800;letter-spacing:.06em;padding:0 12px;min-height:44px;border-radius:10px;background:#fff}
+.winter-language>div{top:calc(100% + 8px);right:auto;left:auto;inset-inline-end:0;z-index:60;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:4px;width:476px;min-width:0;padding:10px;border-color:#e5d9cc;border-radius:14px;box-shadow:0 2px 4px #372b2612,0 26px 50px -20px #372b264d}
+.winter-language a{gap:9px;min-height:42px;padding:8px 10px;border-radius:10px;font-size:14px;font-weight:700;color:var(--ink)}
+.winter-language a:hover{background:var(--ice)}
+.winter-language a[aria-current]{font-weight:700;background:color-mix(in srgb,var(--accent) 12%,transparent);color:#86502f}
+.winter-language a>span:nth-child(2){flex:auto;min-width:0;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
+.language-check{flex:none;margin:0;color:inherit}
+.language-caret{transition:transform .2s ease}
+.winter-language[open] .language-caret{transform:rotate(180deg)}
+.winter-menu a{font-size:15px}
+.language-flag{width:22px;height:16px;border-radius:3px}
 .winter-logo-mark{width:118px;height:30px}
 
-/* Hero */
-.smile-hero{grid-template-columns:1.05fr 1fr;gap:56px;padding-block:44px 40px;align-items:center}
-.hero-head .eyebrow{font-size:12px;margin-bottom:16px}
-.hero-head h1{font-size:clamp(40px,4.2vw,58px);line-height:1.03}
-.hero-lead{font-size:18px;line-height:1.5;color:#5d534b;margin-top:18px}
-.hero-price{margin:22px 0 16px;gap:18px}
-.hero-price>strong{font-size:52px}
-.hero-price>div{padding-left:18px;max-width:36ch}
-.hero-price span{font-size:16px}
-.hero-price p{font-size:15px;line-height:1.45;color:#5d534b}
-.hero-chips{gap:8px;margin-top:0}
-.hero-chips span{font-size:14px;padding:6px 11px}
-.hero-actions{margin-top:20px;flex-wrap:wrap}
+/* Hero: about one screen, like the sister landings */
+.smile-hero{grid-template-columns:1.3fr 1fr;gap:44px;padding-block:36px;align-items:center}
+.hero-head .eyebrow{font-size:12px;margin-bottom:14px}
+.hero-head h1{font-size:clamp(34px,3.35vw,48px);line-height:1.08;text-wrap:balance}
+.hero-lead{font-size:17.6px;line-height:1.5;color:#5d534b;margin-top:14px}
+.hero-price{margin:18px 0;gap:18px}
+.hero-price>strong{font-size:50px}
+.hero-price>div{padding-left:18px;max-width:40ch}
+.hero-price span{font-size:15.5px}
+.hero-price p{font-size:14.5px;line-height:1.4;color:#5d534b}
+.hero-actions{margin-top:0;flex-wrap:wrap}
 .hero-actions .winter-button,.hero-details{font-size:15px;min-height:50px;padding:12px 20px;font-weight:700}
 .winter-button svg,.mobile-offer svg{flex:none}
-.hero-deadline{margin:16px 0 0;width:100%}
-.hero-deadline p{font-size:12px}
-.hero-deadline small{font-size:15px;line-height:1.45;color:#5d534b}
-.hero-deck,.deck-card{height:420px}
+.hero-by{display:flex;align-items:center;gap:8px;margin-top:12px;font-size:14.5px;line-height:1.35;color:#5d534b}
+.hero-by svg{flex:none;color:var(--accent)}
+.hero-by time{font-weight:800;color:#86502f}
+.hero-deck,.deck-card{height:350px}
 /* Show the whole face: the earlier close crop cut through the eyes. */
 .deck-smile img{transform:scale(1.55);transform-origin:52% 58%;object-position:52% 50%}
 
-/* Hero caption */
-.deck-caption{padding:14px 18px;margin-top:-10px}
-.deck-caption-heading>span{font-size:12px}
-.deck-caption-heading>a{font-size:13.5px}
-.deck-caption>strong{font-size:19px;line-height:1.3;margin-top:5px}
-.deck-caption>p{font-size:14.5px;line-height:1.45;margin-top:4px}
-.deck-caption>small{font-size:12.5px;margin-top:4px}
+/* Hero caption: a small card over the photo, like the surgeon card on the sister landings */
+.deck-caption{display:grid;grid-template-columns:minmax(0,1fr) auto;column-gap:12px;align-items:center;width:calc(100% - 72px);margin:-44px auto 0;padding:9px 14px;border-radius:12px;box-shadow:0 10px 22px -12px #372b2666}
+.deck-caption-heading{display:contents}
+.deck-caption-heading>span,.deck-caption>p{display:none}
+.deck-caption-heading>a{grid-column:2;grid-row:1/span 2;font-size:13px;white-space:nowrap}
+.deck-caption>strong{grid-column:1;font-size:15px;line-height:1.3;margin:0}
+.deck-caption>small{grid-column:1;font-size:12px;line-height:1.35;margin-top:2px}
+.deck-caption>small:empty{display:none}
+.deck-controls{margin-top:8px}
 
 /* Facts band */
 .hero-inclusions{margin-block:0}
@@ -211,12 +219,12 @@ h3{font-size:18.4px;font-weight:800;letter-spacing:-.02em}
  .winter-menu{display:block;grid-column:2;grid-row:1;justify-self:end}
  .winter-menu>div{right:0;top:46px}
  .smile-hero{gap:32px}
- .hero-head h1{font-size:clamp(36px,4.4vw,46px)}
- .hero-lead{font-size:16.5px}
+ .hero-head h1{font-size:clamp(32px,3.8vw,40px)}
+ .hero-lead{font-size:16px}
  .hero-price>strong{font-size:44px}
- .hero-chips span{font-size:13px}
- .hero-deck,.deck-card{height:300px}
- .hero-deadline time{font-size:23px}
+ .hero-deck,.deck-card{height:270px}
+ .deck-caption{grid-template-columns:minmax(0,1fr);width:calc(100% - 40px)}
+ .deck-caption-heading>a{display:none}
  .section-intro h2{font-size:36px}
  .hero-inclusions li{padding:16px 14px;gap:10px}
  .hero-inclusions strong{font-size:14px}
@@ -239,37 +247,30 @@ h3{font-size:18.4px;font-weight:800;letter-spacing:-.02em}
  .view-switch{font-size:12px}
  .header-row{display:flex;min-height:58px;gap:10px}
  .winter-logo{margin-inline-end:auto}
- .winter-language summary{font-size:13px;padding:9px 11px}
- .winter-language>div{top:46px}
  .winter-menu{order:2}
  .winter-language{order:3}
  .winter-menu>div{right:-74px}
  .winter-menu summary{padding:10px}
 
- .smile-hero{padding-block:22px 22px}
- .hero-head h1{font-size:34px;line-height:1.05}
- .hero-lead{font-size:16px;line-height:1.5;margin-top:12px}
- .hero-price{margin:16px 0 14px;gap:14px}
- .hero-price>strong{font-size:44px}
- .hero-price>div{padding-left:14px}
- .hero-price span{font-size:15px}
- .hero-price p{font-size:13.5px}
- .hero-chips{gap:6px}
- .hero-chips span{font-size:13.5px;padding:5px 9px}
- .hero-actions{gap:8px;margin-top:16px}
- .hero-actions .winter-button,.hero-details{width:100%;flex:1 1 100%;font-size:15.5px;min-height:50px;padding:10px 14px;gap:8px;text-align:center}
- .hero-deadline{margin:14px 0 0;padding:12px}
- .hero-deadline p{font-size:11.5px}
- .hero-deadline time{font-size:22px}
- .hero-deadline small{font-size:14.5px}
- .hero-visual{margin-top:24px}
- .hero-deck,.deck-card{height:260px}
- .deck-caption{padding:12px 14px}
- .deck-caption-heading>span{font-size:11.5px}
- .deck-caption-heading>a{font-size:12.5px}
- .deck-caption>strong{font-size:16px}
- .deck-caption>p{font-size:14px}
- .deck-caption>small{font-size:12px}
+ .smile-hero{padding-block:18px 8px}
+ .hero-head h1{font-size:29px;line-height:1.08}
+ .hero-lead{font-size:15.5px;line-height:1.45;margin-top:10px}
+ .hero-price{margin:14px 0;gap:12px}
+ .hero-price>strong{font-size:40px}
+ .hero-price>div{padding-left:12px}
+ .hero-price span{font-size:14.5px}
+ .hero-price p{font-size:13px;line-height:1.35}
+ .hero-actions{gap:8px;margin-top:0}
+ .hero-actions .winter-button{width:100%;flex:1 1 100%;font-size:15.5px;min-height:50px;padding:10px 14px;gap:8px;text-align:center}
+ .hero-details{display:none}
+ /* The sticky offer bar already shows the date on phones. */
+ .hero-by{display:none}
+ .hero-visual{margin-top:16px}
+ .hero-deck,.deck-card{height:200px}
+ .deck-caption{width:calc(100% - 24px);margin-top:-34px;padding:7px 12px;border-radius:10px}
+ .deck-caption>strong{font-size:14px}
+ .deck-caption>small{font-size:11.5px}
+ .deck-controls{margin-top:2px}
  .deck-controls>button{min-height:44px;min-width:44px}
  .deck-dot{min-height:44px}
 
@@ -364,6 +365,16 @@ h3{font-size:18.4px;font-weight:800;letter-spacing:-.02em}
  .dialog-head h2{font-size:15px}
 }
 
+/* Phones: the language menu spans the header, in two columns, like the sister landings */
+@media(max-width:520px){
+ .winter-language{position:static}
+ .winter-language>div{inset-inline:18px;width:auto;grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media(max-width:360px){
+ .language-check{display:none}
+ .hero-head h1{font-size:27px}
+}
+
 /* Arabic: right-to-left layout and an Arabic typeface throughout */
 html[dir=rtl]{font-family:'Noto Sans Arabic',Manrope,Arial,sans-serif}
 html[dir=rtl] h1,html[dir=rtl] h2,html[dir=rtl] .place-copy h3{font-family:'Noto Sans Arabic',Manrope,Arial,sans-serif;font-weight:700;letter-spacing:0;line-height:1.3}
@@ -373,8 +384,8 @@ html[dir=rtl] .hero-price>div{padding-left:0;padding-right:18px;border-left:0;bo
 html[dir=rtl] .hero-inclusions li{border-left:0;border-right:1px solid #ffffff25}
 html[dir=rtl] .hero-inclusions li:first-child{padding-left:22px;padding-right:0;border-right:0}
 html[dir=rtl] .view-switch{margin-left:0;margin-right:auto}
-html[dir=rtl] .winter-language>div{right:auto;left:0}
 html[dir=rtl] .winter-menu>div{right:auto;left:0}
+html[dir=rtl] .hero-head h1{font-size:clamp(28px,2.9vw,42px);line-height:1.22}
 html[dir=rtl] .scope-box ul{padding-left:0;padding-right:16px}
 html[dir=rtl] .advisor-rules{padding-left:0;padding-right:20px}
 html[dir=rtl] .deck-controls>button{transform:scaleX(-1)}
@@ -385,7 +396,8 @@ html[dir=rtl] .media-image .zoom{right:auto;left:8px}
 html[dir=rtl] .showcase-video{text-align:right}
 html[dir=rtl] .clinical-case{text-align:right}
 @media(max-width:760px){
- html[dir=rtl] .hero-price>div{padding-right:14px}
+ html[dir=rtl] .hero-price>div{padding-right:12px}
+ html[dir=rtl] .hero-head h1{font-size:26px}
  html[dir=rtl] .hero-inclusions li,html[dir=rtl] .hero-inclusions li:first-child{padding:14px 12px;border-right:0}
  html[dir=rtl] .hero-inclusions li:nth-child(even){border-left:0;border-right:1px solid #ffffff25}
  html[dir=rtl] .winter-menu>div{left:-74px}

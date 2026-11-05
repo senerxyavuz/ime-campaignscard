@@ -96,3 +96,12 @@ test('patient copy has no internal wording and matches the other landings',async
   assert.deepEqual(order,[...order].sort((a,b)=>a-b),`${lang}: section order`);
  }
 });
+
+test('the language menu lists the same nine languages as the sister landings, without Turkish',async()=>{
+ for(const lang of ['en','ar','tr']){
+  const html=await readFile(`root-dist${smilePath(lang)}index.html`,'utf8');
+  const menu=html.match(/<details class="winter-language">[\s\S]*?<\/details>/)[0];
+  assert.deepEqual([...menu.matchAll(/<a [^>]*hreflang="(\w+)"/g)].map(m=>m[1]),['en','ru','pt','es','it','fr','de','ar','pl'],lang);
+  assert.doesNotMatch(html,/hreflang="tr"/,lang);
+ }
+});
